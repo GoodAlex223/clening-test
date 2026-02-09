@@ -65,4 +65,4 @@ To find a specific archived plan:
 
 ---
 
-*Archived plans serve as historical reference for decisions and patterns.*
+_Archived plans serve as historical reference for decisions and patterns._

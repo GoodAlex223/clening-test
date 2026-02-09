@@ -45,9 +45,9 @@ mv docs/planning/plans/YYYY-MM-DD_task.md docs/archive/plans/
 ## Current Plans
 
 | Plan | Task | Status | Started |
-|------|------|--------|---------|
+| ---- | ---- | ------ | ------- |
 
 ---
 
-*Template: [../../../.claude/TEMPLATES/plan.md](../../../.claude/TEMPLATES/plan.md)*
-*Archive: [../../archive/plans/](../../archive/plans/)*
+_Template: [../../../.claude/TEMPLATES/plan.md](../../../.claude/TEMPLATES/plan.md)_
+_Archive: [../../archive/plans/](../../archive/plans/)_

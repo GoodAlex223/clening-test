@@ -20,6 +20,7 @@ Milestones track major deliverables. Each milestone maps to a Roadmap phase and 
 **Status**: Not Started
 
 **Definition of Done**:
+
 - [ ] Astro project initialized with TypeScript + Tailwind
 - [ ] All 6 page routes created (empty shells)
 - [ ] Content Collections defined with Zod schemas
@@ -36,6 +37,7 @@ Milestones track major deliverables. Each milestone maps to a Roadmap phase and 
 **Status**: Not Started
 
 **Definition of Done**:
+
 - [ ] Minimal Zen layout implemented for all 6 pages
 - [ ] All content collections rendered with real data
 - [ ] Mobile-responsive (320px to 1920px)
@@ -52,6 +54,7 @@ Milestones track major deliverables. Each milestone maps to a Roadmap phase and 
 **Status**: Not Started
 
 **Definition of Done**:
+
 - [ ] Bold Spark theme — all 6 pages implemented
 - [ ] Trust Shield theme — all 6 pages implemented
 - [ ] Bubbly Clean theme — all 6 pages implemented
@@ -68,6 +71,7 @@ Milestones track major deliverables. Each milestone maps to a Roadmap phase and 
 **Status**: Not Started
 
 **Definition of Done**:
+
 - [ ] Noir Luxe theme — all 6 pages implemented
 - [ ] All 5 themes switchable and rendering correctly
 - [ ] Accessibility audit passing (WCAG 2.1 AA)
@@ -84,6 +88,7 @@ Milestones track major deliverables. Each milestone maps to a Roadmap phase and 
 **Status**: Not Started
 
 **Definition of Done**:
+
 - [ ] Deployed to Vercel with custom domain
 - [ ] README with screenshots of all 5 themes
 - [ ] Cross-browser tested (Chrome, Firefox, Safari, Edge)
@@ -96,13 +101,13 @@ Milestones track major deliverables. Each milestone maps to a Roadmap phase and 
 
 ## Milestone Timeline
 
-| Milestone | Target | Status |
-|-----------|--------|--------|
-| M1: Project Scaffolding | Phase 1, Week 1 | Not Started |
-| M2: First Theme (Minimal Zen) | Phase 1 End | Not Started |
-| M3: Three More Themes | Phase 2 End | Not Started |
-| M4: All Themes + Polish | Phase 3 End | Not Started |
-| M5: Launch Ready | Phase 4 End | Not Started |
+| Milestone                     | Target          | Status      |
+| ----------------------------- | --------------- | ----------- |
+| M1: Project Scaffolding       | Phase 1, Week 1 | Not Started |
+| M2: First Theme (Minimal Zen) | Phase 1 End     | Not Started |
+| M3: Three More Themes         | Phase 2 End     | Not Started |
+| M4: All Themes + Polish       | Phase 3 End     | Not Started |
+| M5: Launch Ready              | Phase 4 End     | Not Started |
 
 ---
 
@@ -120,5 +125,5 @@ Milestones track major deliverables. Each milestone maps to a Roadmap phase and 
 
 ---
 
-*See [ROADMAP.md](ROADMAP.md) for release context.*
-*See [TODO.md](TODO.md) for tactical tasks toward milestones.*
+_See [ROADMAP.md](ROADMAP.md) for release context._
+_See [TODO.md](TODO.md) for tactical tasks toward milestones._

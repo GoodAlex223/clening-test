@@ -14,21 +14,7 @@ Active tasks and backlog for CleanSpark.
 
 <!-- Currently active tasks. Limit to 1-3 at a time. -->
 
-### T-001: Project Scaffolding
-
-**Priority**: P0 — Critical
-**Milestone**: M1
-**Plan**: [plans/2026-02-09_project-scaffolding.md](plans/2026-02-09_project-scaffolding.md)
-
-- [ ] Initialize Astro project with `pnpm create astro@latest`
-- [ ] Configure TypeScript (strict mode)
-- [ ] Install and configure Tailwind CSS 4.x
-- [ ] Set up ESLint + Prettier
-- [ ] Configure `astro.config.mjs`
-- [ ] Create `tsconfig.json` with path aliases
-- [ ] Set up `.env` with `PUBLIC_SITE_URL` and `PUBLIC_DEFAULT_THEME`
-- [ ] Create `.gitignore` for Astro project
-- [ ] Verify dev server starts cleanly
+_No tasks currently in progress._
 
 ---
 

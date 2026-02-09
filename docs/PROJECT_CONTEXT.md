@@ -16,18 +16,18 @@ CleanSpark is a multi-theme cleaning business MVP website serving as a developer
 
 ### Decision Log
 
-| Date | Decision | Rationale | Alternatives Considered |
-|------|----------|-----------|------------------------|
-| 2026-02-09 | Astro as framework | Not in portfolio yet; perfect for content sites; islands architecture | Next.js (already used), SvelteKit, Nuxt, vanilla HTML |
-| 2026-02-09 | TypeScript strict mode | Type safety for theme system; portfolio standard | JavaScript (less impressive) |
-| 2026-02-09 | Tailwind CSS 4.x | Utility-first, theme-friendly, fast prototyping | CSS Modules, Sass, vanilla CSS |
-| 2026-02-09 | Full layout swap (not CSS themes) | Designs differ in layout/UX/animations, not just colors | CSS variable theming (too limited) |
-| 2026-02-09 | Cookie-based theme persistence | Server-readable, no flash of wrong theme | localStorage (FOUC risk), URL params (not persistent) |
-| 2026-02-09 | Content Collections with Zod | Type-safe at build time, clean content-design separation | JSON imports (no validation), headless CMS (overkill for MVP) |
-| 2026-02-09 | 6-page structure | Enough to showcase layouts without being bloated | Single page (too simple), 10+ pages (too much for MVP) |
-| 2026-02-09 | pnpm as package manager | Fast, disk-efficient, strict dependencies | npm (slower), yarn (no advantage) |
-| 2026-02-09 | Vercel for deployment | Free tier, Astro-native support, instant deploys | Netlify (also viable), GitHub Pages (limited) |
-| 2026-02-09 | 5 design themes | Maximum variety for portfolio impact | 3 (minimum), 7 (diminishing returns) |
+| Date       | Decision                          | Rationale                                                             | Alternatives Considered                                       |
+| ---------- | --------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------- |
+| 2026-02-09 | Astro as framework                | Not in portfolio yet; perfect for content sites; islands architecture | Next.js (already used), SvelteKit, Nuxt, vanilla HTML         |
+| 2026-02-09 | TypeScript strict mode            | Type safety for theme system; portfolio standard                      | JavaScript (less impressive)                                  |
+| 2026-02-09 | Tailwind CSS 4.x                  | Utility-first, theme-friendly, fast prototyping                       | CSS Modules, Sass, vanilla CSS                                |
+| 2026-02-09 | Full layout swap (not CSS themes) | Designs differ in layout/UX/animations, not just colors               | CSS variable theming (too limited)                            |
+| 2026-02-09 | Cookie-based theme persistence    | Server-readable, no flash of wrong theme                              | localStorage (FOUC risk), URL params (not persistent)         |
+| 2026-02-09 | Content Collections with Zod      | Type-safe at build time, clean content-design separation              | JSON imports (no validation), headless CMS (overkill for MVP) |
+| 2026-02-09 | 6-page structure                  | Enough to showcase layouts without being bloated                      | Single page (too simple), 10+ pages (too much for MVP)        |
+| 2026-02-09 | pnpm as package manager           | Fast, disk-efficient, strict dependencies                             | npm (slower), yarn (no advantage)                             |
+| 2026-02-09 | Vercel for deployment             | Free tier, Astro-native support, instant deploys                      | Netlify (also viable), GitHub Pages (limited)                 |
+| 2026-02-09 | 5 design themes                   | Maximum variety for portfolio impact                                  | 3 (minimum), 7 (diminishing returns)                          |
 
 ### Major Architectural Decisions
 
@@ -67,23 +67,23 @@ CleanSpark is a multi-theme cleaning business MVP website serving as a developer
 
 ### Code Patterns
 
-| Pattern | When to Use | Example |
-|---------|-------------|---------|
-| Theme-prefixed components | Theme-specific UI | `MinimalHero.astro`, `BoldHero.astro` |
-| Content prop drilling | Pass content data to theme components | `<MinimalHero services={services} />` |
-| Interactive islands | Only for components needing JS | `<ThemeSwitcher client:load />` |
-| Layout delegation | Pages resolve theme and delegate to layout | `const Layout = resolveLayout(theme)` |
-| Zod schema validation | All content collection definitions | `z.object({ name: z.string(), ... })` |
+| Pattern                   | When to Use                                | Example                               |
+| ------------------------- | ------------------------------------------ | ------------------------------------- |
+| Theme-prefixed components | Theme-specific UI                          | `MinimalHero.astro`, `BoldHero.astro` |
+| Content prop drilling     | Pass content data to theme components      | `<MinimalHero services={services} />` |
+| Interactive islands       | Only for components needing JS             | `<ThemeSwitcher client:load />`       |
+| Layout delegation         | Pages resolve theme and delegate to layout | `const Layout = resolveLayout(theme)` |
+| Zod schema validation     | All content collection definitions         | `z.object({ name: z.string(), ... })` |
 
 ### Anti-Patterns
 
-| Anti-Pattern | Why Avoid | Better Alternative |
-|--------------|-----------|-------------------|
-| Content inside theme components | Couples content to design, 5× maintenance | Use Content Collections, pass via props |
-| Global JavaScript | Defeats Astro's zero-JS philosophy | Use `client:load` islands sparingly |
-| Shared layout with conditionals | `if (theme === 'bold')` becomes unmaintainable | Separate layout per theme |
-| Inline styles for theming | Hard to maintain, no tooling support | Tailwind utilities + theme config |
-| Stock photos | Looks generic, undermines portfolio | Use high-quality Unsplash/Pexels with consistent style |
+| Anti-Pattern                    | Why Avoid                                      | Better Alternative                                     |
+| ------------------------------- | ---------------------------------------------- | ------------------------------------------------------ |
+| Content inside theme components | Couples content to design, 5× maintenance      | Use Content Collections, pass via props                |
+| Global JavaScript               | Defeats Astro's zero-JS philosophy             | Use `client:load` islands sparingly                    |
+| Shared layout with conditionals | `if (theme === 'bold')` becomes unmaintainable | Separate layout per theme                              |
+| Inline styles for theming       | Hard to maintain, no tooling support           | Tailwind utilities + theme config                      |
+| Stock photos                    | Looks generic, undermines portfolio            | Use high-quality Unsplash/Pexels with consistent style |
 
 ---
 
@@ -91,14 +91,14 @@ CleanSpark is a multi-theme cleaning business MVP website serving as a developer
 
 ### Naming
 
-| Element | Convention | Example |
-|---------|------------|---------|
-| Theme IDs | lowercase single word | `minimal`, `bold`, `trust`, `bubbly`, `noir` |
-| Theme display names | Title Case, two words | "Minimal Zen", "Bold Spark" |
-| Component files | PascalCase .astro | `HeroSection.astro` |
-| Theme component prefix | Theme name + component | `MinimalHero.astro` |
-| Content files | kebab-case .md or .json | `deep-cleaning.md` |
-| Utility functions | camelCase .ts | `resolveTheme.ts` |
+| Element                | Convention              | Example                                      |
+| ---------------------- | ----------------------- | -------------------------------------------- |
+| Theme IDs              | lowercase single word   | `minimal`, `bold`, `trust`, `bubbly`, `noir` |
+| Theme display names    | Title Case, two words   | "Minimal Zen", "Bold Spark"                  |
+| Component files        | PascalCase .astro       | `HeroSection.astro`                          |
+| Theme component prefix | Theme name + component  | `MinimalHero.astro`                          |
+| Content files          | kebab-case .md or .json | `deep-cleaning.md`                           |
+| Utility functions      | camelCase .ts           | `resolveTheme.ts`                            |
 
 ### File Organization
 
@@ -137,27 +137,27 @@ src/
 
 ### Glossary
 
-| Term | Definition |
-|------|------------|
-| Theme | A complete visual design system (layout, colors, typography, animations) |
-| Design token | A named value (color, font, spacing) that defines a theme's visual language |
-| Island | An interactive component that hydrates on the client (Astro concept) |
-| Content Collection | Astro's built-in system for type-safe structured content |
-| FOUC | Flash of Unstyled Content — brief display of wrong theme before JS loads |
-| CTA | Call to Action — buttons/sections prompting user action |
-| Above the fold | Content visible without scrolling on initial page load |
+| Term               | Definition                                                                  |
+| ------------------ | --------------------------------------------------------------------------- |
+| Theme              | A complete visual design system (layout, colors, typography, animations)    |
+| Design token       | A named value (color, font, spacing) that defines a theme's visual language |
+| Island             | An interactive component that hydrates on the client (Astro concept)        |
+| Content Collection | Astro's built-in system for type-safe structured content                    |
+| FOUC               | Flash of Unstyled Content — brief display of wrong theme before JS loads    |
+| CTA                | Call to Action — buttons/sections prompting user action                     |
+| Above the fold     | Content visible without scrolling on initial page load                      |
 
 ### Business Rules (Cleaning Website)
 
-| Rule | Description | Source |
-|------|-------------|--------|
-| CTA above the fold | "Get a Quote" or "Book Now" must be visible without scrolling | Industry best practice |
-| Trust signals early | Testimonials, certifications, ratings within first 2 scrolls | Conversion research |
-| Benefits over features | "More free time for family" not "2-hour cleaning" | Content strategy best practice |
-| Service area visibility | Show map or area list prominently | Local SEO requirement |
-| Real photos preferred | Team photos > stock images for trust | UX research |
-| Mobile-first navigation | Max 5-7 nav items, no complex dropdowns | Mobile UX best practice |
-| Transparent pricing | Show pricing structure clearly, even if "starting from" | Conversion optimization |
+| Rule                    | Description                                                   | Source                         |
+| ----------------------- | ------------------------------------------------------------- | ------------------------------ |
+| CTA above the fold      | "Get a Quote" or "Book Now" must be visible without scrolling | Industry best practice         |
+| Trust signals early     | Testimonials, certifications, ratings within first 2 scrolls  | Conversion research            |
+| Benefits over features  | "More free time for family" not "2-hour cleaning"             | Content strategy best practice |
+| Service area visibility | Show map or area list prominently                             | Local SEO requirement          |
+| Real photos preferred   | Team photos > stock images for trust                          | UX research                    |
+| Mobile-first navigation | Max 5-7 nav items, no complex dropdowns                       | Mobile UX best practice        |
+| Transparent pricing     | Show pricing structure clearly, even if "starting from"       | Conversion optimization        |
 
 ---
 
@@ -166,14 +166,14 @@ src/
 ### Technical Debt
 
 | Issue | Impact | Remediation Plan | Priority |
-|-------|--------|------------------|----------|
+| ----- | ------ | ---------------- | -------- |
 
 _No technical debt yet — project not started._
 
 ### Workarounds
 
 | Issue | Workaround | Permanent Fix Needed |
-|-------|------------|---------------------|
+| ----- | ---------- | -------------------- |
 
 _No workarounds yet._
 
@@ -194,6 +194,7 @@ _To be populated after implementation begins._
 ### Insights
 
 **From research (2026-02-09)**:
+
 - Best cleaning websites focus on trust-building elements (testimonials, certifications) above the fold
 - Color palettes that work: white (cleanliness), blue (freshness), green (eco-friendly), or bold alternatives
 - 2026 design trend: warm neutrals over sterile white, typography as hero element
@@ -202,6 +203,6 @@ _To be populated after implementation begins._
 
 ---
 
-*Updated after each significant task completion.*
-*See [ARCHITECTURE.md](ARCHITECTURE.md) for system design.*
-*See [planning/TODO.md](planning/TODO.md) for active tasks.*
+_Updated after each significant task completion._
+_See [ARCHITECTURE.md](ARCHITECTURE.md) for system design._
+_See [planning/TODO.md](planning/TODO.md) for active tasks._

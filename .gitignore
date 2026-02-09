@@ -1,3 +1,37 @@
-# Claude Code auto-memory
+# Build outputs
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.production
+.env.local
+
+# Testing
+coverage/
+playwright-report/
+test-results/
+.playwright/
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Misc
+*.tsbuildinfo
+
+# Claude Code
 .claude/auto-memory/dirty-files
 .mcp.json
