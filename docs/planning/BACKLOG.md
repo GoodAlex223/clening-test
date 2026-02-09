@@ -116,6 +116,13 @@ Areas requiring investigation before implementation.
 - [ ] Add content schema unit tests (Vitest) — validate sample data against Zod schemas programmatically, test edge cases like empty arrays and boundary ratings
 - [ ] Add image optimization pipeline — integrate Astro `<Image>` with sharp for responsive sizes and WebP/AVIF when real photos replace placeholder paths
 
+### 2026-02-09 From: T-002 Code Review
+
+**Origin**: PR #2 code review
+
+- [ ] Fix DONE.md relative path pattern for T-001 entry — same `../../archive/` bug exists in the T-001 plan link (should be `../archive/`)
+- [ ] Add CI/CD workflow (GitHub Actions) — no checks configured yet; add linting, type checking, and build verification on PRs
+
 ---
 
 ## Rejected Ideas
