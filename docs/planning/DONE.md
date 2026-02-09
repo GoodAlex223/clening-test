@@ -47,7 +47,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-09 — T-002: Content Collections & Schemas
 
-**Plan**: [docs/archive/plans/2026-02-09_content-collections.md](../../archive/plans/2026-02-09_content-collections.md)
+**Plan**: [docs/archive/plans/2026-02-09_content-collections.md](../archive/plans/2026-02-09_content-collections.md)
 **Summary**: Implemented Astro 5 Content Layer API with 5 Zod-validated collections, realistic cleaning business content, and typed site config. Migrated from `src/content/` to `src/data/` following Astro 5 conventions.
 
 **Key Changes**:
