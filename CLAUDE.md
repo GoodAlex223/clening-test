@@ -3,6 +3,7 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 <!-- AUTO-MANAGED: project-description -->
+
 ## Overview
 
 **CleanSpark** — A multi-theme cleaning business MVP website built as a developer portfolio piece. Features 5 radically different design themes with real-time switching. Built with Astro 5.x + TypeScript + Tailwind CSS 4.x.
@@ -13,6 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 <!-- END AUTO-MANAGED -->
 
 <!-- AUTO-MANAGED: build-commands -->
+
 ## Build & Development Commands
 
 ```bash
@@ -31,6 +33,7 @@ pnpm test             # All tests
 <!-- END AUTO-MANAGED -->
 
 <!-- AUTO-MANAGED: architecture -->
+
 ## Architecture
 
 - **Multi-theme system**: 5 complete layout systems (Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap, not CSS variable themes
@@ -43,6 +46,7 @@ pnpm test             # All tests
 <!-- END AUTO-MANAGED -->
 
 <!-- AUTO-MANAGED: conventions -->
+
 ## Code Conventions
 
 - Components: PascalCase `.astro` files, theme-prefixed (`MinimalHero.astro`)
@@ -55,6 +59,7 @@ pnpm test             # All tests
 <!-- END AUTO-MANAGED -->
 
 <!-- AUTO-MANAGED: patterns -->
+
 ## Detected Patterns
 
 - **Theme isolation**: Each theme's components and layouts are fully independent
@@ -65,6 +70,7 @@ pnpm test             # All tests
 <!-- END AUTO-MANAGED -->
 
 <!-- MANUAL -->
+
 ## Custom Notes
 
 - **MCP setup**: Copy `.mcp.json.example` to `.mcp.json` and set `MEMORY_FILE_PATH` to your local memory file path. Configured servers: memory, context7, playwright.

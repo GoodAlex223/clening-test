@@ -18,6 +18,7 @@ Completed tasks with implementation details and learnings.
 **Summary**: Complete project planning — tech stack selection, architecture design, 5 theme specifications, task breakdown, milestone definitions, and all documentation structure.
 
 **Key Changes**:
+
 - Decided on Astro + TypeScript + Tailwind CSS (new stack for portfolio)
 - Designed multi-theme architecture with full layout swap (not CSS-only)
 - Defined 5 design themes: Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe
@@ -27,6 +28,22 @@ Completed tasks with implementation details and learnings.
 - Filled all planning documentation
 
 **Spawned Tasks**: 12 tasks in TODO.md, 15+ ideas in BACKLOG.md
+
+### 2026-02-09 — T-001: Project Scaffolding
+
+**Plan**: [plans/2026-02-09_project-scaffolding.md](plans/2026-02-09_project-scaffolding.md)
+**Summary**: Scaffolded Astro 5.17.1 project with Tailwind CSS 4.x, ESLint v9, TypeScript strict mode, Prettier, Vitest, and Playwright. Full directory structure for 5 themes and 6 content collections.
+
+**Key Changes**:
+
+- Astro 5.17.1 with static output, @tailwindcss/vite for Tailwind v4 CSS-first config
+- ESLint v9 flat config with typescript-eslint + eslint-plugin-astro
+- TypeScript strict mode with 8 path aliases
+- Vitest + Playwright testing configs
+- BaseLayout, index page, global CSS, favicon, env files
+- 21 directories scaffolded with .gitkeep files
+
+**Spawned Tasks**: 4 items added to BACKLOG.md
 
 ---
 

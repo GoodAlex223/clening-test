@@ -14,17 +14,17 @@ Project-specific configuration. Universal rules are in [CLAUDE.md](CLAUDE.md).
 
 ### Tech Stack
 
-| Component | Technology |
-|-----------|------------|
-| Language | TypeScript 5.x |
-| Framework | Astro 5.x |
-| Styling | Tailwind CSS 4.x |
-| Animations | CSS animations + View Transitions API |
-| Icons | Lucide Icons (via astro-icon) |
-| Deployment | Vercel (static) |
-| Package Manager | pnpm |
-| Linting | ESLint + Prettier |
-| Testing | Playwright (E2E) + Vitest (unit) |
+| Component       | Technology                            |
+| --------------- | ------------------------------------- |
+| Language        | TypeScript 5.x                        |
+| Framework       | Astro 5.x                             |
+| Styling         | Tailwind CSS 4.x                      |
+| Animations      | CSS animations + View Transitions API |
+| Icons           | Lucide Icons (via astro-icon)         |
+| Deployment      | Vercel (static)                       |
+| Package Manager | pnpm                                  |
+| Linting         | ESLint + Prettier                     |
+| Testing         | Playwright (E2E) + Vitest (unit)      |
 
 ### Why Astro
 
@@ -39,43 +39,43 @@ Project-specific configuration. Universal rules are in [CLAUDE.md](CLAUDE.md).
 
 ## Project Structure
 
-| Component | Location | Purpose |
-|-----------|----------|---------|
-| Entry Point | `src/pages/` | Astro pages (file-based routing) |
-| Layouts | `src/layouts/` | 5 theme layout systems |
-| Components | `src/components/` | Shared + theme-specific components |
-| Themes | `src/themes/` | Theme configuration, tokens, styles |
-| Content | `src/content/` | Content Collections (services, testimonials, etc.) |
-| Assets | `src/assets/` | Images, fonts, icons |
-| Styles | `src/styles/` | Global styles, Tailwind config |
-| Public | `public/` | Static assets (favicon, robots.txt) |
-| Tests | `tests/` | E2E and unit tests |
-| Config | `astro.config.mjs` | Astro configuration |
+| Component   | Location           | Purpose                                            |
+| ----------- | ------------------ | -------------------------------------------------- |
+| Entry Point | `src/pages/`       | Astro pages (file-based routing)                   |
+| Layouts     | `src/layouts/`     | 5 theme layout systems                             |
+| Components  | `src/components/`  | Shared + theme-specific components                 |
+| Themes      | `src/themes/`      | Theme configuration, tokens, styles                |
+| Content     | `src/content/`     | Content Collections (services, testimonials, etc.) |
+| Assets      | `src/assets/`      | Images, fonts, icons                               |
+| Styles      | `src/styles/`      | Global styles, Tailwind config                     |
+| Public      | `public/`          | Static assets (favicon, robots.txt)                |
+| Tests       | `tests/`           | E2E and unit tests                                 |
+| Config      | `astro.config.mjs` | Astro configuration                                |
 
 ---
 
 ## Pages (6)
 
-| Page | Route | Purpose |
-|------|-------|---------|
-| Home | `/` | Hero, services overview, testimonials, CTA, trust indicators |
-| Services | `/services` | Detailed service cards, process steps, what's included |
-| About | `/about` | Company story, team, certifications, values |
-| Pricing | `/pricing` | Pricing tiers, comparison, quote form |
-| Gallery | `/gallery` | Before/after photos, filterable by service type |
-| Contact | `/contact` | Contact form, map, service areas, booking |
+| Page     | Route       | Purpose                                                      |
+| -------- | ----------- | ------------------------------------------------------------ |
+| Home     | `/`         | Hero, services overview, testimonials, CTA, trust indicators |
+| Services | `/services` | Detailed service cards, process steps, what's included       |
+| About    | `/about`    | Company story, team, certifications, values                  |
+| Pricing  | `/pricing`  | Pricing tiers, comparison, quote form                        |
+| Gallery  | `/gallery`  | Before/after photos, filterable by service type              |
+| Contact  | `/contact`  | Contact form, map, service areas, booking                    |
 
 ---
 
 ## 5 Design Themes
 
-| # | Theme Name | Visual Identity | Key Characteristics |
-|---|------------|-----------------|---------------------|
-| 1 | **Minimal Zen** | Warm neutrals, Cloud Dancer white | Whitespace-heavy, subtle micro-interactions, oversized clean sans-serif, Apple-like simplicity |
-| 2 | **Bold Spark** | Neo-mint + electric orange | Parallax scrolling, large expressive type, diagonal sections, dopamine design, dynamic motion |
-| 3 | **Trust Shield** | Professional navy + slate grey | Traditional grid, trust badges, formal serif headings, structured sections, corporate tone |
-| 4 | **Bubbly Clean** | Soft pastels + rounded shapes | Custom illustrations, handwritten accents, bouncy CSS animations, friendly casual tone |
-| 5 | **Noir Luxe** | Dark charcoal + champagne gold | Elegant serif typography, sophisticated fade-ins, grain texture overlay, premium high-end feel |
+| #   | Theme Name       | Visual Identity                   | Key Characteristics                                                                            |
+| --- | ---------------- | --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| 1   | **Minimal Zen**  | Warm neutrals, Cloud Dancer white | Whitespace-heavy, subtle micro-interactions, oversized clean sans-serif, Apple-like simplicity |
+| 2   | **Bold Spark**   | Neo-mint + electric orange        | Parallax scrolling, large expressive type, diagonal sections, dopamine design, dynamic motion  |
+| 3   | **Trust Shield** | Professional navy + slate grey    | Traditional grid, trust badges, formal serif headings, structured sections, corporate tone     |
+| 4   | **Bubbly Clean** | Soft pastels + rounded shapes     | Custom illustrations, handwritten accents, bouncy CSS animations, friendly casual tone         |
+| 5   | **Noir Luxe**    | Dark charcoal + champagne gold    | Elegant serif typography, sophisticated fade-ins, grain texture overlay, premium high-end feel |
 
 Each theme is a **complete layout system** — different component structures, animations, typography, color schemes, and UX patterns. Not just CSS variable swaps.
 
@@ -132,12 +132,12 @@ pnpm test
 
 ## Critical Systems (Tier Classification)
 
-| Tier | Description | Examples | Modification Rules |
-|------|-------------|----------|-------------------|
-| 1 | Critical | Theme switching engine, routing | Requires explicit user approval |
-| 2 | Important | Layout systems, content collections | Requires plan review |
-| 3 | Standard | Individual components, pages | Standard workflow |
-| 4 | Low-risk | Documentation, static content, tests | Proceed with normal care |
+| Tier | Description | Examples                             | Modification Rules              |
+| ---- | ----------- | ------------------------------------ | ------------------------------- |
+| 1    | Critical    | Theme switching engine, routing      | Requires explicit user approval |
+| 2    | Important   | Layout systems, content collections  | Requires plan review            |
+| 3    | Standard    | Individual components, pages         | Standard workflow               |
+| 4    | Low-risk    | Documentation, static content, tests | Proceed with normal care        |
 
 ---
 
@@ -145,15 +145,15 @@ pnpm test
 
 ### Naming Conventions
 
-| Element | Convention | Example |
-|---------|------------|---------|
-| Components | PascalCase | `HeroSection.astro` |
-| Theme components | `{Theme}{Component}` | `MinimalHero.astro`, `BoldHero.astro` |
-| Layouts | `{Theme}Layout.astro` | `MinimalLayout.astro` |
-| CSS classes | Tailwind utilities + BEM for custom | `theme-minimal__hero` |
-| Pages | kebab-case | `services.astro` |
-| Content files | kebab-case | `deep-cleaning.md` |
-| Theme tokens | camelCase in config | `primaryColor`, `headingFont` |
+| Element          | Convention                          | Example                               |
+| ---------------- | ----------------------------------- | ------------------------------------- |
+| Components       | PascalCase                          | `HeroSection.astro`                   |
+| Theme components | `{Theme}{Component}`                | `MinimalHero.astro`, `BoldHero.astro` |
+| Layouts          | `{Theme}Layout.astro`               | `MinimalLayout.astro`                 |
+| CSS classes      | Tailwind utilities + BEM for custom | `theme-minimal__hero`                 |
+| Pages            | kebab-case                          | `services.astro`                      |
+| Content files    | kebab-case                          | `deep-cleaning.md`                    |
+| Theme tokens     | camelCase in config                 | `primaryColor`, `headingFont`         |
 
 ### Code Patterns
 
@@ -175,26 +175,26 @@ pnpm test
 
 ### APIs
 
-| Service | Purpose | Docs Location |
-|---------|---------|---------------|
-| None (MVP) | Static site, no backend APIs | — |
+| Service    | Purpose                      | Docs Location |
+| ---------- | ---------------------------- | ------------- |
+| None (MVP) | Static site, no backend APIs | —             |
 
 ### Configuration
 
-| Variable | Purpose | Location |
-|----------|---------|----------|
-| `PUBLIC_SITE_URL` | Base URL for SEO | `.env` |
-| `PUBLIC_DEFAULT_THEME` | Default theme name | `.env` |
+| Variable               | Purpose            | Location |
+| ---------------------- | ------------------ | -------- |
+| `PUBLIC_SITE_URL`      | Base URL for SEO   | `.env`   |
+| `PUBLIC_DEFAULT_THEME` | Default theme name | `.env`   |
 
 ---
 
 ## Language Standards
 
-| Language | Policy |
-|----------|--------|
+| Language   | Policy                            |
+| ---------- | --------------------------------- |
 | TypeScript | `.claude/LANGUAGES/typescript.md` |
 
 ---
 
-*For universal Claude Code rules, see [CLAUDE.md](CLAUDE.md).*
-*For documentation index, see [docs/README.md](docs/README.md).*
+_For universal Claude Code rules, see [CLAUDE.md](CLAUDE.md)._
+_For documentation index, see [docs/README.md](docs/README.md)._

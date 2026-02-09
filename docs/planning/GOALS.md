@@ -79,16 +79,16 @@ Things we explicitly are NOT trying to do:
 
 Limitations we're working within:
 
-| Constraint | Description | Impact |
-|------------|-------------|--------|
-| Static only | No server-side rendering at runtime | Forms must use client-side validation only or external services |
-| No budget | Free-tier tools only | Vercel free tier, free fonts, free icons |
-| Portfolio context | Must be visually impressive in README/screenshots | Design quality is as important as code quality |
-| Single developer | No team, no review process | Self-review via Claude Code, automated testing critical |
-| Time-boxed | MVP, not a full product | Cut scope before quality |
+| Constraint        | Description                                       | Impact                                                          |
+| ----------------- | ------------------------------------------------- | --------------------------------------------------------------- |
+| Static only       | No server-side rendering at runtime               | Forms must use client-side validation only or external services |
+| No budget         | Free-tier tools only                              | Vercel free tier, free fonts, free icons                        |
+| Portfolio context | Must be visually impressive in README/screenshots | Design quality is as important as code quality                  |
+| Single developer  | No team, no review process                        | Self-review via Claude Code, automated testing critical         |
+| Time-boxed        | MVP, not a full product                           | Cut scope before quality                                        |
 
 ---
 
-*See [ROADMAP.md](ROADMAP.md) for release planning.*
-*See [MILESTONES.md](MILESTONES.md) for key dates.*
-*See [TODO.md](TODO.md) for tactical execution.*
+_See [ROADMAP.md](ROADMAP.md) for release planning._
+_See [MILESTONES.md](MILESTONES.md) for key dates._
+_See [TODO.md](TODO.md) for tactical execution._

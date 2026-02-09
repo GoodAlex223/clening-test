@@ -27,12 +27,12 @@ Plans are archived in `plans/` subdirectory after completion.
 See: [plans/README.md](plans/README.md)
 
 | Plan | Original Task | Archived Date |
-|------|---------------|---------------|
+| ---- | ------------- | ------------- |
 
 ### Deprecated Documentation
 
 | Document | Superseded By | Archived Date |
-|----------|---------------|---------------|
+| -------- | ------------- | ------------- |
 
 ---
 
@@ -80,4 +80,4 @@ Archived documents may be useful for:
 
 ---
 
-*Parent: [../README.md](../README.md)*
+_Parent: [../README.md](../README.md)_

@@ -67,6 +67,7 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 | Theme Config | Design tokens, fonts, colors per theme | `src/themes/` |
 
 **Key Interfaces**:
+
 - Every theme layout MUST accept the same props: `{ title, description, theme }`
 - Every theme component receives content data via Astro props (not fetched internally)
 - ThemeSwitcher is a shared interactive island (client:load)
@@ -86,6 +87,7 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 | Site Config | Company info, contact, areas served | `src/content/config/` |
 
 **Key Interfaces**:
+
 - All content uses Astro Content Collections with Zod schemas
 - Content is type-safe at build time
 - Markdown/MDX for rich text fields, JSON for structured data
@@ -145,40 +147,40 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 
 ### Content Entities
 
-| Entity | Description | Key Fields |
-|--------|-------------|------------|
-| Service | Cleaning service offering | name, slug, description, icon, features[], category |
-| Testimonial | Customer review | name, text, rating, photo, service, date |
-| TeamMember | Staff profile | name, role, photo, bio |
-| GalleryItem | Before/after photo set | before, after, service, description |
-| PricingTier | Pricing plan | name, price, frequency, features[], highlighted |
-| SiteConfig | Company information | name, phone, email, address, areas[], hours |
+| Entity      | Description               | Key Fields                                          |
+| ----------- | ------------------------- | --------------------------------------------------- |
+| Service     | Cleaning service offering | name, slug, description, icon, features[], category |
+| Testimonial | Customer review           | name, text, rating, photo, service, date            |
+| TeamMember  | Staff profile             | name, role, photo, bio                              |
+| GalleryItem | Before/after photo set    | before, after, service, description                 |
+| PricingTier | Pricing plan              | name, price, frequency, features[], highlighted     |
+| SiteConfig  | Company information       | name, phone, email, address, areas[], hours         |
 
 ### Theme Configuration Shape
 
 ```typescript
 interface ThemeConfig {
-  name: string;              // "minimal" | "bold" | "trust" | "bubbly" | "noir"
-  displayName: string;       // "Minimal Zen"
+  name: string // "minimal" | "bold" | "trust" | "bubbly" | "noir"
+  displayName: string // "Minimal Zen"
   colors: {
-    primary: string;
-    secondary: string;
-    accent: string;
-    background: string;
-    text: string;
-    muted: string;
-  };
+    primary: string
+    secondary: string
+    accent: string
+    background: string
+    text: string
+    muted: string
+  }
   fonts: {
-    heading: string;         // Google Font family
-    body: string;
-    accent?: string;         // Optional decorative font
-  };
-  borderRadius: string;      // "0" to "2rem"
+    heading: string // Google Font family
+    body: string
+    accent?: string // Optional decorative font
+  }
+  borderRadius: string // "0" to "2rem"
   animations: {
-    pageTransition: string;  // CSS animation name
-    sectionReveal: string;
-    hoverEffect: string;
-  };
+    pageTransition: string // CSS animation name
+    sectionReveal: string
+    hoverEffect: string
+  }
 }
 ```
 
@@ -188,17 +190,17 @@ interface ThemeConfig {
 
 ### Libraries (Planned)
 
-| Library | Version | Purpose |
-|---------|---------|---------|
-| astro | 5.x | Core framework |
-| @astrojs/tailwind | latest | Tailwind CSS integration |
-| @astrojs/check | latest | TypeScript checking |
-| tailwindcss | 4.x | Utility-first CSS |
-| astro-icon | latest | Icon components (Lucide) |
-| @fontsource/* | latest | Self-hosted Google Fonts |
-| sharp | latest | Image optimization |
-| playwright | latest | E2E testing |
-| vitest | latest | Unit testing |
+| Library           | Version | Purpose                  |
+| ----------------- | ------- | ------------------------ |
+| astro             | 5.x     | Core framework           |
+| @astrojs/tailwind | latest  | Tailwind CSS integration |
+| @astrojs/check    | latest  | TypeScript checking      |
+| tailwindcss       | 4.x     | Utility-first CSS        |
+| astro-icon        | latest  | Icon components (Lucide) |
+| @fontsource/\*    | latest  | Self-hosted Google Fonts |
+| sharp             | latest  | Image optimization       |
+| playwright        | latest  | E2E testing              |
+| vitest            | latest  | Unit testing             |
 
 ---
 
@@ -206,20 +208,20 @@ interface ThemeConfig {
 
 ### Environment Variables
 
-| Variable | Purpose | Required |
-|----------|---------|----------|
-| `PUBLIC_SITE_URL` | Base URL for canonical tags, sitemap | Yes |
-| `PUBLIC_DEFAULT_THEME` | Fallback theme if no cookie | No (defaults to "minimal") |
+| Variable               | Purpose                              | Required                   |
+| ---------------------- | ------------------------------------ | -------------------------- |
+| `PUBLIC_SITE_URL`      | Base URL for canonical tags, sitemap | Yes                        |
+| `PUBLIC_DEFAULT_THEME` | Fallback theme if no cookie          | No (defaults to "minimal") |
 
 ### Configuration Files
 
-| File | Purpose |
-|------|---------|
-| `astro.config.mjs` | Astro framework config |
-| `tailwind.config.ts` | Tailwind CSS config |
-| `tsconfig.json` | TypeScript config |
-| `.prettierrc` | Code formatting rules |
-| `.eslintrc.cjs` | Linting rules |
+| File                 | Purpose                |
+| -------------------- | ---------------------- |
+| `astro.config.mjs`   | Astro framework config |
+| `tailwind.config.ts` | Tailwind CSS config    |
+| `tsconfig.json`      | TypeScript config      |
+| `.prettierrc`        | Code formatting rules  |
+| `.eslintrc.cjs`      | Linting rules          |
 
 ---
 
@@ -228,6 +230,7 @@ interface ThemeConfig {
 ### 1. Full Layout Swap (not CSS-only themes)
 
 Each theme has its **own layout component tree**, not just different CSS variables. This is because the 5 designs differ in:
+
 - Section ordering and structure
 - Animation patterns
 - Component composition
@@ -237,6 +240,7 @@ Each theme has its **own layout component tree**, not just different CSS variabl
 ### 2. Content Collections for Business Data
 
 All cleaning business content (services, prices, testimonials) lives in **Astro Content Collections**, completely decoupled from visual design. This means:
+
 - Content changes don't require touching any theme code
 - Type-safe content access with Zod schemas
 - Easy to add/remove services without design knowledge
@@ -248,6 +252,7 @@ Theme choice stored in a cookie (not localStorage) so the server (or edge) can r
 ### 4. Progressive Enhancement
 
 All content is server-rendered static HTML. JavaScript only loads for:
+
 - ThemeSwitcher (interactive island)
 - Contact form validation (interactive island)
 - Gallery filter (interactive island)
@@ -255,5 +260,5 @@ All content is server-rendered static HTML. JavaScript only loads for:
 
 ---
 
-*See [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) for decisions and patterns.*
-*See [planning/TODO.md](planning/TODO.md) for planned architectural changes.*
+_See [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) for decisions and patterns._
+_See [planning/TODO.md](planning/TODO.md) for planned architectural changes._

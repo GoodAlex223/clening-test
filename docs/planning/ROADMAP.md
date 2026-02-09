@@ -28,6 +28,7 @@ CleanSpark becomes a standout portfolio piece that demonstrates deep frontend ar
 **Status**: Not Started
 
 **Goals**:
+
 - [x] Project planning and documentation
 - [ ] Astro project scaffolding with TypeScript + Tailwind
 - [ ] Content Collections with Zod schemas (services, testimonials, team, gallery, pricing)
@@ -45,6 +46,7 @@ CleanSpark becomes a standout portfolio piece that demonstrates deep frontend ar
 **Status**: Not Started
 
 **Goals**:
+
 - [ ] **Bold Spark** theme — all 6 pages with parallax, dynamic motion
 - [ ] **Trust Shield** theme — all 6 pages with corporate grid, trust badges
 - [ ] **Bubbly Clean** theme — all 6 pages with illustrations, bouncy animations
@@ -59,6 +61,7 @@ CleanSpark becomes a standout portfolio piece that demonstrates deep frontend ar
 **Status**: Not Started
 
 **Goals**:
+
 - [ ] **Noir Luxe** theme — all 6 pages with dark elegance, grain overlay
 - [ ] Accessibility audit (WCAG 2.1 AA on all themes)
 - [ ] Performance optimization (image lazy loading, font subsetting)
@@ -74,6 +77,7 @@ CleanSpark becomes a standout portfolio piece that demonstrates deep frontend ar
 **Status**: Not Started
 
 **Goals**:
+
 - [ ] Deploy to Vercel
 - [ ] Custom domain setup
 - [ ] README with screenshots of all 5 themes
@@ -105,6 +109,6 @@ CleanSpark becomes a standout portfolio piece that demonstrates deep frontend ar
 
 ---
 
-*See [TODO.md](TODO.md) for current tactical tasks.*
-*See [MILESTONES.md](MILESTONES.md) for key dates.*
-*See [BACKLOG.md](BACKLOG.md) for unprioritized ideas.*
+_See [TODO.md](TODO.md) for current tactical tasks._
+_See [MILESTONES.md](MILESTONES.md) for key dates._
+_See [BACKLOG.md](BACKLOG.md) for unprioritized ideas._

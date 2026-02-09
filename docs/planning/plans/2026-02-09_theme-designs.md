@@ -22,27 +22,27 @@ All themes render the same 6 pages with identical business content.
 
 ### Color Palette
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `background` | `#FAF9F7` | Page background (warm off-white) |
-| `surface` | `#FFFFFF` | Cards, elevated surfaces |
-| `text` | `#2D2D2D` | Primary text (soft black) |
-| `textMuted` | `#6B6B6B` | Secondary text |
-| `primary` | `#1A1A2E` | Deep navy — headings, accents |
-| `accent` | `#E8D5B5` | Warm sand — subtle highlights, borders |
-| `cta` | `#1A1A2E` | Button background |
-| `ctaText` | `#FAF9F7` | Button text |
+| Token        | Hex       | Usage                                  |
+| ------------ | --------- | -------------------------------------- |
+| `background` | `#FAF9F7` | Page background (warm off-white)       |
+| `surface`    | `#FFFFFF` | Cards, elevated surfaces               |
+| `text`       | `#2D2D2D` | Primary text (soft black)              |
+| `textMuted`  | `#6B6B6B` | Secondary text                         |
+| `primary`    | `#1A1A2E` | Deep navy — headings, accents          |
+| `accent`     | `#E8D5B5` | Warm sand — subtle highlights, borders |
+| `cta`        | `#1A1A2E` | Button background                      |
+| `ctaText`    | `#FAF9F7` | Button text                            |
 
 ### Typography
 
-| Element | Font | Weight | Size (Desktop) |
-|---------|------|--------|----------------|
-| H1 (Hero) | Inter | 300 (Light) | 4rem / 64px |
-| H2 (Section) | Inter | 400 (Regular) | 2.5rem / 40px |
-| H3 (Card) | Inter | 500 (Medium) | 1.5rem / 24px |
-| Body | Inter | 400 | 1rem / 16px |
-| Small/Caption | Inter | 400 | 0.875rem / 14px |
-| CTA Button | Inter | 500 | 1rem / 16px |
+| Element       | Font  | Weight        | Size (Desktop)  |
+| ------------- | ----- | ------------- | --------------- |
+| H1 (Hero)     | Inter | 300 (Light)   | 4rem / 64px     |
+| H2 (Section)  | Inter | 400 (Regular) | 2.5rem / 40px   |
+| H3 (Card)     | Inter | 500 (Medium)  | 1.5rem / 24px   |
+| Body          | Inter | 400           | 1rem / 16px     |
+| Small/Caption | Inter | 400           | 0.875rem / 14px |
+| CTA Button    | Inter | 500           | 1rem / 16px     |
 
 ### Layout Patterns
 
@@ -55,17 +55,18 @@ All themes render the same 6 pages with identical business content.
 
 ### Animation Behavior
 
-| Element | Animation | Timing |
-|---------|-----------|--------|
-| Sections | Fade-in on scroll | `opacity 0→1, translateY 20px→0, 600ms ease` |
-| Buttons | Subtle background shift on hover | `200ms ease` |
-| Nav links | Underline slide from left | `300ms ease` |
-| Images | Fade-in from opacity 0 | `400ms ease` |
-| Page transition | Crossfade (View Transitions) | `300ms` |
+| Element         | Animation                        | Timing                                       |
+| --------------- | -------------------------------- | -------------------------------------------- |
+| Sections        | Fade-in on scroll                | `opacity 0→1, translateY 20px→0, 600ms ease` |
+| Buttons         | Subtle background shift on hover | `200ms ease`                                 |
+| Nav links       | Underline slide from left        | `300ms ease`                                 |
+| Images          | Fade-in from opacity 0           | `400ms ease`                                 |
+| Page transition | Crossfade (View Transitions)     | `300ms`                                      |
 
 ### Page-Specific Layout
 
 **Home**:
+
 ```
 [Nav - horizontal centered]
 [Hero - fullscreen, centered text, single CTA button]
@@ -77,6 +78,7 @@ All themes render the same 6 pages with identical business content.
 ```
 
 **Services**:
+
 ```
 [Nav]
 [Page header - large title, subtitle]
@@ -95,28 +97,28 @@ All themes render the same 6 pages with identical business content.
 
 ### Color Palette
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `background` | `#FEFFFE` | Clean white base |
-| `surface` | `#F0FFF4` | Light mint tinted cards |
-| `text` | `#1A1A1A` | Pure black text |
-| `textMuted` | `#4A5568` | Secondary text |
-| `primary` | `#38D9A9` | Neo-mint — main brand color |
-| `secondary` | `#FF6B35` | Electric orange — accent |
-| `accent` | `#FFD93D` | Warm yellow — highlights |
-| `cta` | `#FF6B35` | Orange CTA buttons |
-| `ctaText` | `#FFFFFF` | White button text |
+| Token        | Hex       | Usage                       |
+| ------------ | --------- | --------------------------- |
+| `background` | `#FEFFFE` | Clean white base            |
+| `surface`    | `#F0FFF4` | Light mint tinted cards     |
+| `text`       | `#1A1A1A` | Pure black text             |
+| `textMuted`  | `#4A5568` | Secondary text              |
+| `primary`    | `#38D9A9` | Neo-mint — main brand color |
+| `secondary`  | `#FF6B35` | Electric orange — accent    |
+| `accent`     | `#FFD93D` | Warm yellow — highlights    |
+| `cta`        | `#FF6B35` | Orange CTA buttons          |
+| `ctaText`    | `#FFFFFF` | White button text           |
 
 ### Typography
 
-| Element | Font | Weight | Size (Desktop) |
-|---------|------|--------|----------------|
-| H1 (Hero) | Space Grotesk | 700 (Bold) | 5rem / 80px |
-| H2 (Section) | Space Grotesk | 600 | 3rem / 48px |
-| H3 (Card) | Space Grotesk | 600 | 1.5rem / 24px |
-| Body | DM Sans | 400 | 1.125rem / 18px |
-| Small/Caption | DM Sans | 400 | 0.875rem / 14px |
-| CTA Button | Space Grotesk | 600 | 1.125rem / 18px |
+| Element       | Font          | Weight     | Size (Desktop)  |
+| ------------- | ------------- | ---------- | --------------- |
+| H1 (Hero)     | Space Grotesk | 700 (Bold) | 5rem / 80px     |
+| H2 (Section)  | Space Grotesk | 600        | 3rem / 48px     |
+| H3 (Card)     | Space Grotesk | 600        | 1.5rem / 24px   |
+| Body          | DM Sans       | 400        | 1.125rem / 18px |
+| Small/Caption | DM Sans       | 400        | 0.875rem / 14px |
+| CTA Button    | Space Grotesk | 600        | 1.125rem / 18px |
 
 ### Layout Patterns
 
@@ -129,19 +131,20 @@ All themes render the same 6 pages with identical business content.
 
 ### Animation Behavior
 
-| Element | Animation | Timing |
-|---------|-----------|--------|
-| Hero text | Slide in from left, stagger each line | `800ms spring` |
-| Cards | Scale up + shadow on hover | `200ms ease-out` |
-| Sections | Slide from alternating sides | `600ms ease` |
-| Diagonal dividers | Subtle parallax on scroll | CSS `transform` |
-| CTAs | Bounce on hover + color shift | `300ms` |
-| Numbers/stats | Count-up animation on scroll | `1000ms` |
-| Page transition | Slide left/right (View Transitions) | `400ms` |
+| Element           | Animation                             | Timing           |
+| ----------------- | ------------------------------------- | ---------------- |
+| Hero text         | Slide in from left, stagger each line | `800ms spring`   |
+| Cards             | Scale up + shadow on hover            | `200ms ease-out` |
+| Sections          | Slide from alternating sides          | `600ms ease`     |
+| Diagonal dividers | Subtle parallax on scroll             | CSS `transform`  |
+| CTAs              | Bounce on hover + color shift         | `300ms`          |
+| Numbers/stats     | Count-up animation on scroll          | `1000ms`         |
+| Page transition   | Slide left/right (View Transitions)   | `400ms`          |
 
 ### Page-Specific Layout
 
 **Home**:
+
 ```
 [Nav - bold, logo left, mint underlines]
 [Hero - split: text left (huge headline) + image right, diagonal bottom edge]
@@ -161,30 +164,30 @@ All themes render the same 6 pages with identical business content.
 
 ### Color Palette
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `background` | `#F8F9FA` | Light grey background |
-| `surface` | `#FFFFFF` | White cards |
-| `text` | `#212529` | Near-black text |
-| `textMuted` | `#6C757D` | Grey secondary text |
-| `primary` | `#1B4965` | Deep navy blue |
-| `secondary` | `#5FA8D3` | Mid blue — links, accents |
-| `accent` | `#62B6CB` | Light blue — highlights |
-| `cta` | `#1B4965` | Navy CTA buttons |
-| `ctaText` | `#FFFFFF` | White button text |
-| `success` | `#28A745` | Checkmarks, trust badges |
-| `border` | `#DEE2E6` | Card borders, dividers |
+| Token        | Hex       | Usage                     |
+| ------------ | --------- | ------------------------- |
+| `background` | `#F8F9FA` | Light grey background     |
+| `surface`    | `#FFFFFF` | White cards               |
+| `text`       | `#212529` | Near-black text           |
+| `textMuted`  | `#6C757D` | Grey secondary text       |
+| `primary`    | `#1B4965` | Deep navy blue            |
+| `secondary`  | `#5FA8D3` | Mid blue — links, accents |
+| `accent`     | `#62B6CB` | Light blue — highlights   |
+| `cta`        | `#1B4965` | Navy CTA buttons          |
+| `ctaText`    | `#FFFFFF` | White button text         |
+| `success`    | `#28A745` | Checkmarks, trust badges  |
+| `border`     | `#DEE2E6` | Card borders, dividers    |
 
 ### Typography
 
-| Element | Font | Weight | Size (Desktop) |
-|---------|------|--------|----------------|
-| H1 (Hero) | Merriweather | 700 (Bold) | 3.5rem / 56px |
-| H2 (Section) | Merriweather | 700 | 2.25rem / 36px |
-| H3 (Card) | Merriweather | 700 | 1.25rem / 20px |
-| Body | Source Sans 3 | 400 | 1rem / 16px |
-| Small/Caption | Source Sans 3 | 400 | 0.875rem / 14px |
-| CTA Button | Source Sans 3 | 600 | 1rem / 16px |
+| Element       | Font          | Weight     | Size (Desktop)  |
+| ------------- | ------------- | ---------- | --------------- |
+| H1 (Hero)     | Merriweather  | 700 (Bold) | 3.5rem / 56px   |
+| H2 (Section)  | Merriweather  | 700        | 2.25rem / 36px  |
+| H3 (Card)     | Merriweather  | 700        | 1.25rem / 20px  |
+| Body          | Source Sans 3 | 400        | 1rem / 16px     |
+| Small/Caption | Source Sans 3 | 400        | 0.875rem / 14px |
+| CTA Button    | Source Sans 3 | 600        | 1rem / 16px     |
 
 ### Layout Patterns
 
@@ -197,14 +200,14 @@ All themes render the same 6 pages with identical business content.
 
 ### Animation Behavior
 
-| Element | Animation | Timing |
-|---------|-----------|--------|
-| Sections | Fade in (minimal) | `400ms ease` |
-| Cards | Lift on hover (translateY -4px) | `200ms ease` |
-| Trust badges | Subtle glow on scroll-in | `600ms` |
-| Checkmarks | Draw-in SVG animation | `400ms` |
-| Counter stats | Count up on visibility | `800ms` |
-| Page transition | Simple fade (View Transitions) | `200ms` |
+| Element         | Animation                       | Timing       |
+| --------------- | ------------------------------- | ------------ |
+| Sections        | Fade in (minimal)               | `400ms ease` |
+| Cards           | Lift on hover (translateY -4px) | `200ms ease` |
+| Trust badges    | Subtle glow on scroll-in        | `600ms`      |
+| Checkmarks      | Draw-in SVG animation           | `400ms`      |
+| Counter stats   | Count up on visibility          | `800ms`      |
+| Page transition | Simple fade (View Transitions)  | `200ms`      |
 
 ### Unique Elements
 
@@ -222,32 +225,32 @@ All themes render the same 6 pages with identical business content.
 
 ### Color Palette
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `background` | `#FFF9F0` | Warm cream |
-| `surface` | `#FFFFFF` | White cards |
-| `text` | `#3D3D3D` | Soft dark text |
-| `textMuted` | `#7A7A7A` | Light grey text |
-| `primary` | `#7C3AED` | Soft purple |
-| `secondary` | `#06B6D4` | Cyan blue |
-| `accent` | `#F472B6` | Pink — highlights, hearts |
-| `cta` | `#7C3AED` | Purple CTA buttons |
-| `ctaText` | `#FFFFFF` | White button text |
-| `bubble1` | `#C4F5FC` | Light cyan bubble |
-| `bubble2` | `#F5E6FF` | Light purple bubble |
-| `bubble3` | `#FFE4F0` | Light pink bubble |
+| Token        | Hex       | Usage                     |
+| ------------ | --------- | ------------------------- |
+| `background` | `#FFF9F0` | Warm cream                |
+| `surface`    | `#FFFFFF` | White cards               |
+| `text`       | `#3D3D3D` | Soft dark text            |
+| `textMuted`  | `#7A7A7A` | Light grey text           |
+| `primary`    | `#7C3AED` | Soft purple               |
+| `secondary`  | `#06B6D4` | Cyan blue                 |
+| `accent`     | `#F472B6` | Pink — highlights, hearts |
+| `cta`        | `#7C3AED` | Purple CTA buttons        |
+| `ctaText`    | `#FFFFFF` | White button text         |
+| `bubble1`    | `#C4F5FC` | Light cyan bubble         |
+| `bubble2`    | `#F5E6FF` | Light purple bubble       |
+| `bubble3`    | `#FFE4F0` | Light pink bubble         |
 
 ### Typography
 
-| Element | Font | Weight | Size (Desktop) |
-|---------|------|--------|----------------|
-| H1 (Hero) | Fredoka One | 400 | 4rem / 64px |
-| H2 (Section) | Fredoka One | 400 | 2.5rem / 40px |
-| H3 (Card) | Nunito | 700 | 1.375rem / 22px |
-| Body | Nunito | 400 | 1rem / 16px |
-| Small/Caption | Nunito | 400 | 0.875rem / 14px |
-| CTA Button | Nunito | 700 | 1rem / 16px |
-| Handwritten accent | Caveat | 400 | 1.25rem / 20px |
+| Element            | Font        | Weight | Size (Desktop)  |
+| ------------------ | ----------- | ------ | --------------- |
+| H1 (Hero)          | Fredoka One | 400    | 4rem / 64px     |
+| H2 (Section)       | Fredoka One | 400    | 2.5rem / 40px   |
+| H3 (Card)          | Nunito      | 700    | 1.375rem / 22px |
+| Body               | Nunito      | 400    | 1rem / 16px     |
+| Small/Caption      | Nunito      | 400    | 0.875rem / 14px |
+| CTA Button         | Nunito      | 700    | 1rem / 16px     |
+| Handwritten accent | Caveat      | 400    | 1.25rem / 20px  |
 
 ### Layout Patterns
 
@@ -260,15 +263,15 @@ All themes render the same 6 pages with identical business content.
 
 ### Animation Behavior
 
-| Element | Animation | Timing |
-|---------|-----------|--------|
-| Hero text | Bounce-in from bottom | `600ms cubic-bezier(.68,-.55,.27,1.55)` |
-| Cards | Wiggle on hover (slight rotate) | `200ms` |
-| Floating bubbles | Slow float up/down (CSS infinite) | `3-5s ease-in-out` |
-| Stars/sparkles | Twinkle (opacity pulse) | `1.5s infinite` |
-| Buttons | Jelly squish on click | `150ms` |
-| Section reveal | Pop-in with slight overshoot | `500ms spring` |
-| Page transition | Morph/scale (View Transitions) | `400ms` |
+| Element          | Animation                         | Timing                                  |
+| ---------------- | --------------------------------- | --------------------------------------- |
+| Hero text        | Bounce-in from bottom             | `600ms cubic-bezier(.68,-.55,.27,1.55)` |
+| Cards            | Wiggle on hover (slight rotate)   | `200ms`                                 |
+| Floating bubbles | Slow float up/down (CSS infinite) | `3-5s ease-in-out`                      |
+| Stars/sparkles   | Twinkle (opacity pulse)           | `1.5s infinite`                         |
+| Buttons          | Jelly squish on click             | `150ms`                                 |
+| Section reveal   | Pop-in with slight overshoot      | `500ms spring`                          |
+| Page transition  | Morph/scale (View Transitions)    | `400ms`                                 |
 
 ### Unique Elements
 
@@ -287,30 +290,30 @@ All themes render the same 6 pages with identical business content.
 
 ### Color Palette
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `background` | `#0F0F0F` | Deep charcoal (near black) |
-| `surface` | `#1A1A1A` | Slightly lighter cards |
-| `text` | `#E8E6E3` | Warm off-white text |
-| `textMuted` | `#8A8A8A` | Medium grey text |
-| `primary` | `#C9A96E` | Champagne gold — brand color |
-| `secondary` | `#D4AF37` | Brighter gold — accents |
-| `accent` | `#8B7355` | Muted bronze |
-| `cta` | `#C9A96E` | Gold CTA buttons |
-| `ctaText` | `#0F0F0F` | Dark button text |
-| `border` | `#2A2A2A` | Subtle borders |
-| `glow` | `rgba(201,169,110,0.15)` | Gold glow effect |
+| Token        | Hex                      | Usage                        |
+| ------------ | ------------------------ | ---------------------------- |
+| `background` | `#0F0F0F`                | Deep charcoal (near black)   |
+| `surface`    | `#1A1A1A`                | Slightly lighter cards       |
+| `text`       | `#E8E6E3`                | Warm off-white text          |
+| `textMuted`  | `#8A8A8A`                | Medium grey text             |
+| `primary`    | `#C9A96E`                | Champagne gold — brand color |
+| `secondary`  | `#D4AF37`                | Brighter gold — accents      |
+| `accent`     | `#8B7355`                | Muted bronze                 |
+| `cta`        | `#C9A96E`                | Gold CTA buttons             |
+| `ctaText`    | `#0F0F0F`                | Dark button text             |
+| `border`     | `#2A2A2A`                | Subtle borders               |
+| `glow`       | `rgba(201,169,110,0.15)` | Gold glow effect             |
 
 ### Typography
 
-| Element | Font | Weight | Size (Desktop) |
-|---------|------|--------|----------------|
-| H1 (Hero) | Playfair Display | 400 (Regular) | 4.5rem / 72px |
-| H2 (Section) | Playfair Display | 400 | 2.75rem / 44px |
-| H3 (Card) | Playfair Display | 600 | 1.5rem / 24px |
-| Body | Lato | 300 (Light) | 1rem / 16px |
-| Small/Caption | Lato | 300 | 0.875rem / 14px |
-| CTA Button | Lato | 400 | 0.875rem / 14px, letter-spacing 2px, uppercase |
+| Element       | Font             | Weight        | Size (Desktop)                                 |
+| ------------- | ---------------- | ------------- | ---------------------------------------------- |
+| H1 (Hero)     | Playfair Display | 400 (Regular) | 4.5rem / 72px                                  |
+| H2 (Section)  | Playfair Display | 400           | 2.75rem / 44px                                 |
+| H3 (Card)     | Playfair Display | 600           | 1.5rem / 24px                                  |
+| Body          | Lato             | 300 (Light)   | 1rem / 16px                                    |
+| Small/Caption | Lato             | 300           | 0.875rem / 14px                                |
+| CTA Button    | Lato             | 400           | 0.875rem / 14px, letter-spacing 2px, uppercase |
 
 ### Layout Patterns
 
@@ -323,16 +326,16 @@ All themes render the same 6 pages with identical business content.
 
 ### Animation Behavior
 
-| Element | Animation | Timing |
-|---------|-----------|--------|
-| Everything | Slow, elegant, never rushed | — |
-| Hero text | Fade up letter-by-letter (stagger) | `1200ms ease` |
-| Sections | Smooth fade-in from opacity 0 | `800ms ease` |
-| Gold lines | Draw from left to right | `600ms ease` |
-| Cards | Gold border glow intensifies on hover | `400ms ease` |
-| Images | Grayscale → color on hover | `600ms ease` |
-| Background | Subtle grain texture overlay (CSS) | Static |
-| Page transition | Smooth fade (View Transitions) | `500ms` |
+| Element         | Animation                             | Timing        |
+| --------------- | ------------------------------------- | ------------- |
+| Everything      | Slow, elegant, never rushed           | —             |
+| Hero text       | Fade up letter-by-letter (stagger)    | `1200ms ease` |
+| Sections        | Smooth fade-in from opacity 0         | `800ms ease`  |
+| Gold lines      | Draw from left to right               | `600ms ease`  |
+| Cards           | Gold border glow intensifies on hover | `400ms ease`  |
+| Images          | Grayscale → color on hover            | `600ms ease`  |
+| Background      | Subtle grain texture overlay (CSS)    | Static        |
+| Page transition | Smooth fade (View Transitions)        | `500ms`       |
 
 ### Unique Elements
 
@@ -349,21 +352,22 @@ All themes render the same 6 pages with identical business content.
 
 Each theme needs these components. Implementations differ completely.
 
-| Component | Minimal Zen | Bold Spark | Trust Shield | Bubbly Clean | Noir Luxe |
-|-----------|-------------|------------|-------------|-------------|-----------|
-| **Nav** | Horizontal text centered | Bold left-aligned + mint accents | Traditional dropdown | Rounded pills floating | Split centered transparent |
-| **Hero** | Centered text, minimal | Split-screen, diagonal | Image left, text right | Bouncy text, bubbles | Cinematic fade-in, centered |
-| **Service Card** | Icon + text, minimal border | Bold border, bright shadow | Bordered, checkmarks | Rounded, pastel gradient | Dark card, gold border |
-| **Testimonial** | Simple quote block | Large colored quote | Star-rated card | Bubble-shaped card | Italic serif, gold quotes |
-| **CTA** | Centered text + button | Full-width orange block | Navy banner + trust icons | Purple pill with sparkles | Gold outlined uppercase |
-| **Footer** | 3-col minimal text | 4-col mint background | 4-col navy background | Wavy purple gradient | Centered minimal gold |
-| **Pricing** | Clean comparison table | Bold cards, orange highlight | Feature checklist style | Rounded cards, fun icons | Elegant cards, gold accents |
+| Component        | Minimal Zen                 | Bold Spark                       | Trust Shield              | Bubbly Clean              | Noir Luxe                   |
+| ---------------- | --------------------------- | -------------------------------- | ------------------------- | ------------------------- | --------------------------- |
+| **Nav**          | Horizontal text centered    | Bold left-aligned + mint accents | Traditional dropdown      | Rounded pills floating    | Split centered transparent  |
+| **Hero**         | Centered text, minimal      | Split-screen, diagonal           | Image left, text right    | Bouncy text, bubbles      | Cinematic fade-in, centered |
+| **Service Card** | Icon + text, minimal border | Bold border, bright shadow       | Bordered, checkmarks      | Rounded, pastel gradient  | Dark card, gold border      |
+| **Testimonial**  | Simple quote block          | Large colored quote              | Star-rated card           | Bubble-shaped card        | Italic serif, gold quotes   |
+| **CTA**          | Centered text + button      | Full-width orange block          | Navy banner + trust icons | Purple pill with sparkles | Gold outlined uppercase     |
+| **Footer**       | 3-col minimal text          | 4-col mint background            | 4-col navy background     | Wavy purple gradient      | Centered minimal gold       |
+| **Pricing**      | Clean comparison table      | Bold cards, orange highlight     | Feature checklist style   | Rounded cards, fun icons  | Elegant cards, gold accents |
 
 ---
 
 ### Execution Log
 
 #### 2026-02-09 — PHASE: Planning
+
 - All 5 theme specifications documented with colors, typography, layout, and animation details
 - Cross-theme component matrix created for consistency tracking
 - Design research incorporated from cleaning website best practices and 2026 design trends
