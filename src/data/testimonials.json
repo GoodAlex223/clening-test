@@ -1,0 +1,118 @@
+[
+  {
+    "id": "sarah-martinez",
+    "name": "Sarah Martinez",
+    "photo": "/images/testimonials/sarah-martinez.jpg",
+    "text": "CleanSpark transformed my home after our kitchen renovation. The team scrubbed every bit of drywall dust and left the place gleaming. I've tried other cleaning services before, but nobody comes close to this level of detail. Absolutely recommending them to everyone I know.",
+    "rating": 5,
+    "service": "Deep Cleaning",
+    "location": "Capitol Hill, Seattle",
+    "date": "2025-11-22",
+    "verified": true,
+    "featured": true
+  },
+  {
+    "id": "michael-chen",
+    "name": "Michael Chen",
+    "photo": "/images/testimonials/michael-chen.jpg",
+    "text": "Our office has never looked better. The team is professional, thorough, and respectful of our workspace. They work around our schedule and always deliver consistent quality. We've been using CleanSpark for our 4,000 sq ft office for over a year now — wouldn't switch for anything.",
+    "rating": 5,
+    "service": "Office Cleaning",
+    "location": "Downtown Seattle",
+    "date": "2025-11-18",
+    "verified": true,
+    "featured": true
+  },
+  {
+    "id": "emily-johnson",
+    "name": "Emily Johnson",
+    "text": "I was so stressed about move-out cleaning for my apartment. CleanSpark handled everything — inside the oven, the fridge, every cabinet, even the window tracks. I got my full $1,200 deposit back! Worth every penny and then some.",
+    "rating": 5,
+    "service": "Move-In/Move-Out Cleaning",
+    "location": "Fremont, Seattle",
+    "date": "2025-11-10",
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": "david-thompson",
+    "name": "David Thompson",
+    "photo": "/images/testimonials/david-thompson.jpg",
+    "text": "Weekly cleaning service has been a game-changer for our family of five. With three kids and a dog, our house used to feel like a constant battle. Now we come home every Thursday to a spotless home that smells amazing. The same crew knows exactly how we like things. Highly recommend!",
+    "rating": 5,
+    "service": "Regular House Cleaning",
+    "location": "Ballard, Seattle",
+    "date": "2025-10-30",
+    "verified": true,
+    "featured": true
+  },
+  {
+    "id": "jessica-lee",
+    "name": "Jessica Lee",
+    "text": "The window cleaning service made such a difference! I didn't realize how much grime had built up until natural light started flooding our living room again. The team was efficient, friendly, and incredibly detail-oriented. Even cleaned the tracks, which were embarrassingly dirty.",
+    "rating": 5,
+    "service": "Window Cleaning",
+    "location": "Queen Anne, Seattle",
+    "date": "2025-10-25",
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": "robert-kim",
+    "name": "Robert Kim",
+    "photo": "/images/testimonials/robert-kim.jpg",
+    "text": "Post-construction cleanup after our basement remodel was a huge job. The contractor left dust everywhere — in the vents, on every surface, even rooms that were supposed to be sealed off. CleanSpark handled it all in one day. Paint splatters, drywall dust, debris. Couldn't have asked for better service.",
+    "rating": 5,
+    "service": "Post-Construction Cleanup",
+    "location": "Bellevue",
+    "date": "2025-10-15",
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": "amanda-brooks",
+    "name": "Amanda Brooks",
+    "photo": "/images/testimonials/amanda-brooks.jpg",
+    "text": "Thought we'd have to replace our living room carpet after years of kids and pets. CleanSpark's carpet cleaning brought it back to life! Stains I thought were permanent just vanished. The color is brighter, it smells fresh, and it feels softer underfoot. Saved us thousands in replacement costs.",
+    "rating": 5,
+    "service": "Carpet & Upholstery Cleaning",
+    "location": "Redmond",
+    "date": "2025-09-28",
+    "verified": true,
+    "featured": true
+  },
+  {
+    "id": "carlos-rivera",
+    "name": "Carlos Rivera",
+    "text": "Reliable, punctual, and thorough. We've been using CleanSpark for six months now for biweekly cleaning. They've never missed an appointment, never cut corners, and they always go the extra mile. Our house has never been cleaner on a consistent basis.",
+    "rating": 4,
+    "service": "Regular House Cleaning",
+    "location": "West Seattle",
+    "date": "2025-09-12",
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": "priya-patel",
+    "name": "Priya Patel",
+    "text": "We hired CleanSpark for a deep clean before our holiday party, and every guest commented on how beautiful our home looked. The team paid attention to things I wouldn't have even thought of — the tops of door frames, behind the toilet, inside light fixtures. Just impeccable work.",
+    "rating": 5,
+    "service": "Deep Cleaning",
+    "location": "Kirkland",
+    "date": "2025-08-20",
+    "verified": true,
+    "featured": false
+  },
+  {
+    "id": "james-wright",
+    "name": "James Wright",
+    "photo": "/images/testimonials/james-wright.jpg",
+    "text": "As a property manager, I need cleaning crews I can trust with tenant turnovers. CleanSpark has handled over 20 move-out cleans for me and every single unit has passed inspection on the first try. They're my go-to for every property in my portfolio.",
+    "rating": 5,
+    "service": "Move-In/Move-Out Cleaning",
+    "location": "Mercer Island",
+    "date": "2025-08-05",
+    "verified": true,
+    "featured": true
+  }
+]

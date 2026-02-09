@@ -1,0 +1,74 @@
+[
+  {
+    "id": "essential",
+    "name": "Essential",
+    "tagline": "The basics, done brilliantly.",
+    "price": 99,
+    "priceUnit": "per visit",
+    "frequency": "Weekly or Biweekly",
+    "features": [
+      { "text": "All rooms dusted and vacuumed", "included": true },
+      { "text": "Kitchen counters and appliances wiped", "included": true },
+      { "text": "Bathrooms scrubbed and sanitized", "included": true },
+      { "text": "Floors mopped throughout", "included": true },
+      { "text": "Trash emptied and liners replaced", "included": true },
+      { "text": "Beds made and linens straightened", "included": true },
+      { "text": "Inside appliances (oven, fridge)", "included": false },
+      { "text": "Interior window cleaning", "included": false },
+      { "text": "Baseboards and light fixtures", "included": false },
+      { "text": "Organizing and decluttering", "included": false }
+    ],
+    "highlighted": false,
+    "displayOrder": 1,
+    "ctaText": "Book Essential",
+    "ctaUrl": "/contact"
+  },
+  {
+    "id": "premium",
+    "name": "Premium",
+    "tagline": "Our most popular plan.",
+    "price": 179,
+    "priceUnit": "per visit",
+    "frequency": "Weekly or Biweekly",
+    "features": [
+      { "text": "Everything in Essential", "included": true },
+      { "text": "Inside appliances (oven, fridge)", "included": true },
+      { "text": "Interior window cleaning", "included": true },
+      { "text": "Baseboards and light fixtures", "included": true },
+      { "text": "Cabinet fronts wiped down", "included": true },
+      { "text": "Door frames and handles sanitized", "included": true },
+      { "text": "Air vent dusting", "included": true },
+      { "text": "Organizing and decluttering", "included": false },
+      { "text": "Laundry (wash, dry, fold)", "included": false },
+      { "text": "Fridge interior organization", "included": false }
+    ],
+    "highlighted": true,
+    "displayOrder": 2,
+    "ctaText": "Book Premium",
+    "ctaUrl": "/contact"
+  },
+  {
+    "id": "ultimate",
+    "name": "Ultimate",
+    "tagline": "The white-glove experience.",
+    "price": 299,
+    "priceUnit": "per visit",
+    "frequency": "Weekly or Biweekly",
+    "features": [
+      { "text": "Everything in Premium", "included": true },
+      { "text": "Organizing and decluttering", "included": true },
+      { "text": "Laundry (wash, dry, fold)", "included": true },
+      { "text": "Fridge interior organization", "included": true },
+      { "text": "Closet organization", "included": true },
+      { "text": "Pantry tidying", "included": true },
+      { "text": "Linen changes", "included": true },
+      { "text": "Pet area cleaning", "included": true },
+      { "text": "Plant watering", "included": true },
+      { "text": "Priority scheduling", "included": true }
+    ],
+    "highlighted": false,
+    "displayOrder": 3,
+    "ctaText": "Book Ultimate",
+    "ctaUrl": "/contact"
+  }
+]

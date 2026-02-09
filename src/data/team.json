@@ -1,0 +1,56 @@
+[
+  {
+    "id": "elena-vasquez",
+    "name": "Elena Vasquez",
+    "role": "Founder & CEO",
+    "photo": "/images/team/elena-vasquez.jpg",
+    "bio": "Elena founded CleanSpark in 2019 with a simple belief: everyone deserves a clean space, and every cleaner deserves fair pay and respect. With 12 years in the cleaning industry — from hands-on work to managing teams of 50+ — she built CleanSpark to be the company she always wished existed. Under her leadership, CleanSpark has grown from a solo operation to Seattle's most-reviewed residential cleaning service.",
+    "certifications": ["ISSA Cleaning Industry Management Standard", "OSHA Safety Certified"],
+    "yearsExperience": 12,
+    "displayOrder": 1,
+    "featured": true
+  },
+  {
+    "id": "marcus-taylor",
+    "name": "Marcus Taylor",
+    "role": "Operations Manager",
+    "photo": "/images/team/marcus-taylor.jpg",
+    "bio": "Marcus keeps CleanSpark running like clockwork. He manages scheduling, quality control, and team training to ensure every client gets the same exceptional experience. Before joining CleanSpark, he spent 8 years in hospitality management at a boutique hotel chain, where he developed his obsession with spotless spaces and operational efficiency.",
+    "certifications": ["Six Sigma Green Belt", "First Aid & CPR Certified"],
+    "yearsExperience": 8,
+    "displayOrder": 2,
+    "featured": true
+  },
+  {
+    "id": "sofia-nguyen",
+    "name": "Sofia Nguyen",
+    "role": "Lead Cleaning Specialist",
+    "photo": "/images/team/sofia-nguyen.jpg",
+    "bio": "Sofia leads our most experienced cleaning team and sets the quality standard for the entire company. She's the one who trains new hires, develops our cleaning checklists, and handles our most complex deep cleaning projects. Clients regularly request her team by name — and with a 4.98 average rating across 500+ cleans, it's easy to see why.",
+    "certifications": ["Green Cleaning Specialist", "Carpet & Upholstery Technician (IICRC)"],
+    "yearsExperience": 6,
+    "displayOrder": 3,
+    "featured": true
+  },
+  {
+    "id": "rachel-morgan",
+    "name": "Rachel Morgan",
+    "role": "Client Experience Manager",
+    "photo": "/images/team/rachel-morgan.jpg",
+    "bio": "Rachel is the friendly voice you hear when you call CleanSpark. She handles bookings, answers questions, and resolves any concerns with warmth and efficiency. Her background in customer success at a tech startup taught her that great service means anticipating needs before they become problems. If you've ever received a follow-up text asking how your clean went, that's Rachel.",
+    "yearsExperience": 5,
+    "displayOrder": 4,
+    "featured": true
+  },
+  {
+    "id": "daniel-okafor",
+    "name": "Daniel Okafor",
+    "role": "Commercial Accounts Lead",
+    "photo": "/images/team/daniel-okafor.jpg",
+    "bio": "Daniel manages all of CleanSpark's commercial clients, from small startups to multi-floor office buildings. He conducts site assessments, builds custom cleaning plans, and ensures our business clients get consistent, reliable service. His previous experience in facilities management gives him a deep understanding of what businesses need to keep their spaces professional and productive.",
+    "certifications": ["BSCAI Registered Building Service Manager"],
+    "yearsExperience": 7,
+    "displayOrder": 5,
+    "featured": false
+  }
+]
