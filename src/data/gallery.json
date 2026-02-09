@@ -1,0 +1,82 @@
+[
+  {
+    "id": "kitchen-deep-clean",
+    "before": "/images/gallery/kitchen-before.jpg",
+    "after": "/images/gallery/kitchen-after.jpg",
+    "service": "Deep Cleaning",
+    "room": "Kitchen",
+    "description": "Heavy grease buildup on stovetop and counters transformed to a sparkling kitchen. Grout between tiles scrubbed white, appliance exteriors polished, and cabinet fronts degreased.",
+    "featured": true,
+    "displayOrder": 1
+  },
+  {
+    "id": "bathroom-tile-restoration",
+    "before": "/images/gallery/bathroom-before.jpg",
+    "after": "/images/gallery/bathroom-after.jpg",
+    "service": "Deep Cleaning",
+    "room": "Bathroom",
+    "description": "Shower tile grout restored from dark grey to its original white. Hard water stains removed from glass door, fixtures descaled, and floor tiles deep-scrubbed.",
+    "featured": true,
+    "displayOrder": 2
+  },
+  {
+    "id": "living-room-carpet",
+    "before": "/images/gallery/carpet-before.jpg",
+    "after": "/images/gallery/carpet-after.jpg",
+    "service": "Carpet & Upholstery Cleaning",
+    "room": "Living Room",
+    "description": "High-traffic carpet with years of ground-in dirt and pet stains. Hot water extraction brought back the original color and removed all visible staining.",
+    "featured": true,
+    "displayOrder": 3
+  },
+  {
+    "id": "office-workspace",
+    "before": "/images/gallery/office-before.jpg",
+    "after": "/images/gallery/office-after.jpg",
+    "service": "Office Cleaning",
+    "room": "Open Office",
+    "description": "Cluttered, dusty open-plan office with coffee stains on desks and debris under workstations. Transformed into a clean, organized workspace ready for Monday morning.",
+    "featured": false,
+    "displayOrder": 4
+  },
+  {
+    "id": "post-reno-basement",
+    "before": "/images/gallery/basement-before.jpg",
+    "after": "/images/gallery/basement-after.jpg",
+    "service": "Post-Construction Cleanup",
+    "room": "Basement",
+    "description": "Newly finished basement covered in drywall dust, paint splatters, and construction debris. Our three-phase cleanup left the space move-in ready and dust-free.",
+    "featured": true,
+    "displayOrder": 5
+  },
+  {
+    "id": "move-out-apartment",
+    "before": "/images/gallery/apartment-before.jpg",
+    "after": "/images/gallery/apartment-after.jpg",
+    "service": "Move-In/Move-Out Cleaning",
+    "room": "Studio Apartment",
+    "description": "Empty studio apartment with years of wear — scuffed floors, grimy appliances, and stained counters. Deep cleaned to pass landlord inspection and secure the full deposit return.",
+    "featured": false,
+    "displayOrder": 6
+  },
+  {
+    "id": "exterior-windows",
+    "before": "/images/gallery/windows-before.jpg",
+    "after": "/images/gallery/windows-after.jpg",
+    "service": "Window Cleaning",
+    "room": "Exterior",
+    "description": "Two years of Pacific Northwest weather buildup on exterior windows. Professional squeegee cleaning revealed views that had been hiding behind a film of grime and water spots.",
+    "featured": false,
+    "displayOrder": 7
+  },
+  {
+    "id": "sofa-upholstery",
+    "before": "/images/gallery/sofa-before.jpg",
+    "after": "/images/gallery/sofa-after.jpg",
+    "service": "Carpet & Upholstery Cleaning",
+    "room": "Living Room",
+    "description": "Family sectional sofa with pet hair, food stains, and body oil buildup. Low-moisture extraction restored the fabric color and eliminated embedded odors.",
+    "featured": false,
+    "displayOrder": 8
+  }
+]
