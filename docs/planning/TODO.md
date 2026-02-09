@@ -22,22 +22,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-002: Content Collections & Schemas
-
-**Priority**: P0 — Critical
-**Milestone**: M1
-**Depends on**: T-001
-
-- [ ] Define Zod schema for Services collection
-- [ ] Define Zod schema for Testimonials collection
-- [ ] Define Zod schema for Team collection
-- [ ] Define Zod schema for Gallery collection
-- [ ] Define Zod schema for Pricing collection
-- [ ] Define site config schema (company info, areas, hours)
-- [ ] Create sample content entries (at least 1 per collection)
-- [ ] Write realistic cleaning business content (6+ services, 8+ testimonials, 4+ team members, 3 pricing tiers)
-- [ ] Verify all schemas compile and validate
-
 ### T-003: Theme Engine Core
 
 **Priority**: P0 — Critical

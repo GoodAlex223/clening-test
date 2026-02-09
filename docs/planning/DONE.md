@@ -45,6 +45,22 @@ Completed tasks with implementation details and learnings.
 
 **Spawned Tasks**: 4 items added to BACKLOG.md
 
+### 2026-02-09 — T-002: Content Collections & Schemas
+
+**Plan**: [docs/archive/plans/2026-02-09_content-collections.md](../../archive/plans/2026-02-09_content-collections.md)
+**Summary**: Implemented Astro 5 Content Layer API with 5 Zod-validated collections, realistic cleaning business content, and typed site config. Migrated from `src/content/` to `src/data/` following Astro 5 conventions.
+
+**Key Changes**:
+
+- Created `src/content.config.ts` with 5 collection schemas (services/glob, testimonials/team/gallery/pricing/file)
+- Wrote 7 service Markdown files with professional marketing copy (3 residential, 1 commercial, 3 specialty)
+- Created JSON data: 10 testimonials, 5 team members, 8 gallery items, 3 pricing tiers
+- Added `src/lib/site-config.ts` with typed company info, contact details, SEO defaults
+- Migrated `src/content/` → `src/data/`, updated tsconfig path alias `@content/*` → `@data/*`
+- Key discovery: Astro 5 Content Layer API is a complete rewrite from v4 (loaders, new config location)
+
+**Spawned Tasks**: 2 items added to BACKLOG.md
+
 ---
 
 ## Notes

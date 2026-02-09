@@ -109,6 +109,13 @@ Areas requiring investigation before implementation.
 - [ ] Update scaffolding plan table (Step 1.3) to reflect actual config files — table references `tailwind.config.ts` and `.eslintrc.cjs` but implementation uses CSS-first Tailwind v4 and `eslint.config.js`
 - [ ] Document Tailwind v4 CSS-first `@theme` approach for multi-theme system — plan assumes traditional config file but v4 uses CSS directives instead
 
+### 2026-02-09 From: T-002 Content Collections
+
+**Origin**: docs/archive/plans/2026-02-09_content-collections.md
+
+- [ ] Add content schema unit tests (Vitest) — validate sample data against Zod schemas programmatically, test edge cases like empty arrays and boundary ratings
+- [ ] Add image optimization pipeline — integrate Astro `<Image>` with sharp for responsive sizes and WebP/AVIF when real photos replace placeholder paths
+
 ---
 
 ## Rejected Ideas
