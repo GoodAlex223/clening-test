@@ -102,6 +102,13 @@ Areas requiring investigation before implementation.
 - [ ] Add `.editorconfig` for cross-editor consistency (tabs/spaces, line endings)
 - [ ] Consider adding Husky + lint-staged for pre-commit hooks (referenced in PROJECT.md but not configured)
 
+### 2026-02-09 From: T-001 Code Review
+
+**Origin**: PR #1 code review
+
+- [ ] Update scaffolding plan table (Step 1.3) to reflect actual config files — table references `tailwind.config.ts` and `.eslintrc.cjs` but implementation uses CSS-first Tailwind v4 and `eslint.config.js`
+- [ ] Document Tailwind v4 CSS-first `@theme` approach for multi-theme system — plan assumes traditional config file but v4 uses CSS directives instead
+
 ---
 
 ## Rejected Ideas
