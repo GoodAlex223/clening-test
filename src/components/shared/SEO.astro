@@ -1,0 +1,95 @@
+---
+/**
+ * SEO — shared head metadata component.
+ *
+ * Renders Open Graph, Twitter Card, canonical URL, JSON-LD (LocalBusiness),
+ * and theme-color meta tag. Used inside theme layouts via BaseLayout's
+ * `<slot name="head" />`.
+ */
+import { siteConfig } from '@lib/site-config'
+import type { ThemeConfig } from '@themes/types'
+
+interface Props {
+  /** Page title — applied to siteConfig.seo.titleTemplate */
+  title?: string
+  /** Meta description override */
+  description?: string
+  /** Open Graph image (absolute URL) */
+  image?: string
+  /** Canonical URL override (defaults to current page URL) */
+  canonical?: string
+  /** Open Graph type */
+  type?: 'website' | 'article'
+  /** Exclude page from search engine indexing */
+  noindex?: boolean
+  /** Active theme config (for theme-color meta) */
+  theme: ThemeConfig
+}
+
+const {
+  title,
+  description = siteConfig.seo.defaultDescription,
+  image,
+  canonical,
+  type = 'website',
+  noindex = false,
+  theme,
+} = Astro.props
+
+const resolvedTitle = title
+  ? siteConfig.seo.titleTemplate.replace('%s', title)
+  : siteConfig.seo.defaultTitle
+
+const canonicalUrl = canonical ?? Astro.url.href
+---
+
+<title>{resolvedTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+{/* Open Graph */}
+<meta property="og:title" content={resolvedTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={siteConfig.name} />
+{image && <meta property="og:image" content={image} />}
+
+{/* Twitter Card */}
+<meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={resolvedTitle} />
+<meta name="twitter:description" content={description} />
+{image && <meta name="twitter:image" content={image} />}
+
+{/* Theme color */}
+<meta name="theme-color" content={theme.colors.primary} />
+
+{/* Robots */}
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+{/* JSON-LD: LocalBusiness */}
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: siteConfig.name,
+    description: siteConfig.seo.defaultDescription,
+    telephone: siteConfig.phone,
+    email: siteConfig.email,
+    url: canonicalUrl,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: siteConfig.address.street,
+      addressLocality: siteConfig.address.city,
+      addressRegion: siteConfig.address.state,
+      postalCode: siteConfig.address.zip,
+    },
+    areaServed: siteConfig.serviceAreas.map((area) => ({
+      '@type': 'City',
+      name: area,
+    })),
+    openingHours: ['Mo-Fr 08:00-18:00', 'Sa 09:00-16:00'],
+  })}
+/>

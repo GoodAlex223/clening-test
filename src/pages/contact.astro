@@ -1,0 +1,200 @@
+---
+export const prerender = false
+
+import { getCollection } from 'astro:content'
+import { resolveLayout } from '@lib/theme-resolver'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+import { siteConfig, getFullAddress } from '@lib/site-config'
+
+const themeId = Astro.locals.theme
+const Layout = resolveLayout(themeId)
+
+const services = await getCollection('services')
+const sortedServices = services.sort((a, b) => a.data.displayOrder - b.data.displayOrder)
+---
+
+<Layout
+  title="Contact"
+  description="Get in touch with CleanSpark. Request a free quote, ask a question, or book your cleaning today."
+>
+  <ThemeSwitcher currentTheme={themeId} />
+
+  <main data-page="contact">
+    <section data-section="page-hero" style="padding: var(--section-padding) 1rem; text-align: center;">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h1 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+          Get in Touch
+        </h1>
+        <p style="color: var(--color-text-muted); font-size: 1.125rem; max-width: 600px; margin: 0 auto;">
+          Ready to experience the CleanSpark difference? Let's talk.
+        </p>
+      </div>
+    </section>
+
+    <section data-section="contact-content" style="padding: 3rem 1rem;">
+      <div style={`max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;`}>
+
+        {/* Contact Form */}
+        <div>
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 1.5rem;">
+            Request a Free Quote
+          </h2>
+          <form id="contact-form" data-section="contact-form" style="display: flex; flex-direction: column; gap: 1rem;">
+            <label style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <span style="font-size: 0.875rem; font-weight: 600; color: var(--color-text);">Name *</span>
+              <input
+                type="text"
+                name="name"
+                required
+                autocomplete="name"
+                style={`padding: 0.625rem 0.75rem; border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent); border-radius: var(--radius-md); font-size: 1rem; font-family: var(--font-body); background: var(--color-surface); color: var(--color-text);`}
+              />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <span style="font-size: 0.875rem; font-weight: 600; color: var(--color-text);">Email *</span>
+              <input
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                style={`padding: 0.625rem 0.75rem; border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent); border-radius: var(--radius-md); font-size: 1rem; font-family: var(--font-body); background: var(--color-surface); color: var(--color-text);`}
+              />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <span style="font-size: 0.875rem; font-weight: 600; color: var(--color-text);">Phone</span>
+              <input
+                type="tel"
+                name="phone"
+                autocomplete="tel"
+                style={`padding: 0.625rem 0.75rem; border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent); border-radius: var(--radius-md); font-size: 1rem; font-family: var(--font-body); background: var(--color-surface); color: var(--color-text);`}
+              />
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <span style="font-size: 0.875rem; font-weight: 600; color: var(--color-text);">Service Interest</span>
+              <select
+                name="service"
+                style={`padding: 0.625rem 0.75rem; border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent); border-radius: var(--radius-md); font-size: 1rem; font-family: var(--font-body); background: var(--color-surface); color: var(--color-text);`}
+              >
+                <option value="">Select a service (optional)</option>
+                {sortedServices.map((s) => (
+                  <option value={s.data.slug}>{s.data.name}</option>
+                ))}
+              </select>
+            </label>
+            <label style="display: flex; flex-direction: column; gap: 0.25rem;">
+              <span style="font-size: 0.875rem; font-weight: 600; color: var(--color-text);">Message *</span>
+              <textarea
+                name="message"
+                required
+                rows={5}
+                style={`padding: 0.625rem 0.75rem; border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent); border-radius: var(--radius-md); font-size: 1rem; font-family: var(--font-body); background: var(--color-surface); color: var(--color-text); resize: vertical;`}
+              ></textarea>
+            </label>
+            <button
+              type="submit"
+              style={`padding: 0.75rem 2rem; background: var(--color-cta); color: var(--color-cta-text); border: none; border-radius: var(--radius-md); font-size: 1rem; font-weight: 600; cursor: pointer; font-family: var(--font-body);`}
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        {/* Contact Info */}
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <h2 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+            Contact Information
+          </h2>
+
+          <article data-info="phone" style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 1.25rem;`}>
+            <h3 style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-primary); margin-bottom: 0.25rem;">
+              Call Us
+            </h3>
+            <a href={`tel:${siteConfig.phone}`} style="color: var(--color-text); text-decoration: none; font-size: 1.125rem;">
+              {siteConfig.phone}
+            </a>
+          </article>
+
+          <article data-info="email" style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 1.25rem;`}>
+            <h3 style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-primary); margin-bottom: 0.25rem;">
+              Email Us
+            </h3>
+            <a href={`mailto:${siteConfig.email}`} style="color: var(--color-text); text-decoration: none; font-size: 1.125rem;">
+              {siteConfig.email}
+            </a>
+          </article>
+
+          <article data-info="address" style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 1.25rem;`}>
+            <h3 style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-primary); margin-bottom: 0.25rem;">
+              Visit Us
+            </h3>
+            <address style="font-style: normal; color: var(--color-text);">
+              {getFullAddress()}
+            </address>
+          </article>
+
+          <article data-info="hours" style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 1.25rem;`}>
+            <h3 style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+              Business Hours
+            </h3>
+            <ul style="list-style: none; padding: 0; margin: 0; color: var(--color-text); font-size: 0.9375rem; line-height: 1.8;">
+              <li>{siteConfig.hours.weekday}</li>
+              <li>{siteConfig.hours.saturday}</li>
+              <li>{siteConfig.hours.sunday}</li>
+            </ul>
+          </article>
+
+          <article data-info="social" style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 1.25rem;`}>
+            <h3 style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+              Follow Us
+            </h3>
+            <div style="display: flex; gap: 1rem;">
+              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">
+                Facebook
+              </a>
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">
+                Instagram
+              </a>
+              <a href={siteConfig.social.yelp} target="_blank" rel="noopener noreferrer" style="color: var(--color-primary); text-decoration: none;">
+                Yelp
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section data-section="service-areas" style="padding: 3rem 1rem; text-align: center; background: var(--color-surface);">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 1rem;">
+          We Serve
+        </h2>
+        <p style="color: var(--color-text-muted); font-size: 1.0625rem;">
+          {siteConfig.serviceAreas.join(' \u00B7 ')}
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  function initContactForm(): void {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null
+    if (!form) return
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      if (!form.checkValidity()) {
+        form.reportValidity()
+        return
+      }
+      // API route not yet implemented — show confirmation message
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
+      btn.textContent = 'Message Sent!'
+      btn.disabled = true
+      btn.style.opacity = '0.7'
+      form.reset()
+    })
+  }
+
+  initContactForm()
+</script>

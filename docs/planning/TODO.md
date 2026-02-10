@@ -22,21 +22,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-004: Page Routes & Base Structure
-
-**Priority**: P1 — High
-**Milestone**: M1
-**Depends on**: T-001
-
-- [ ] Create `src/pages/index.astro` (Home)
-- [ ] Create `src/pages/services.astro`
-- [ ] Create `src/pages/about.astro`
-- [ ] Create `src/pages/pricing.astro`
-- [ ] Create `src/pages/gallery.astro`
-- [ ] Create `src/pages/contact.astro`
-- [ ] Each page fetches content and delegates to ThemeResolver
-- [ ] Create shared SEO/Head component
-
 ### T-005: Minimal Zen Theme — Full Implementation
 
 **Priority**: P1 — High

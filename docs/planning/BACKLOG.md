@@ -123,6 +123,14 @@ Areas requiring investigation before implementation.
 - [ ] Fix DONE.md relative path pattern for T-001 entry — same `../../archive/` bug exists in the T-001 plan link (should be `../archive/`)
 - [ ] Add CI/CD workflow (GitHub Actions) — no checks configured yet; add linting, type checking, and build verification on PRs
 
+### 2026-02-10 From: T-004 Page Routes & Base Structure
+
+**Origin**: docs/archive/plans/2026-02-10_t-004-page-routes.md
+
+- [ ] Add gallery filter URL state persistence — persist active filter in URL search params for shareable filtered views
+- [ ] Create `/api/contact` endpoint — contact form currently shows client-side confirmation only, needs backend (email service or serverless)
+- [ ] Extract FAQ content to Content Collection — pricing page FAQ is hardcoded, could be a JSON collection if FAQ grows
+
 ### 2026-02-10 From: T-003 Theme Engine Core
 
 **Origin**: docs/archive/plans/2026-02-10_t-003-theme-engine.md
