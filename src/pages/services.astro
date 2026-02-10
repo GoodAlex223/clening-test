@@ -1,0 +1,111 @@
+---
+export const prerender = false
+
+import { getCollection } from 'astro:content'
+import { resolveLayout } from '@lib/theme-resolver'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+import { siteConfig } from '@lib/site-config'
+
+const themeId = Astro.locals.theme
+const Layout = resolveLayout(themeId)
+
+const services = await getCollection('services')
+const sorted = services.sort((a, b) => a.data.displayOrder - b.data.displayOrder)
+
+const categories = ['residential', 'commercial', 'specialty'] as const
+const servicesByCategory = Object.fromEntries(
+  categories.map((cat) => [cat, sorted.filter((s) => s.data.category === cat)])
+) as Record<(typeof categories)[number], typeof sorted>
+
+const categoryLabels: Record<string, string> = {
+  residential: 'Residential Services',
+  commercial: 'Commercial Services',
+  specialty: 'Specialty Services',
+}
+---
+
+<Layout
+  title="Services"
+  description="Comprehensive cleaning solutions for homes and businesses in the Seattle area."
+>
+  <ThemeSwitcher currentTheme={themeId} />
+
+  <main data-page="services">
+    <section data-section="page-hero" style="padding: var(--section-padding) 1rem; text-align: center;">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h1 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+          Our Services
+        </h1>
+        <p style="color: var(--color-text-muted); font-size: 1.125rem; max-width: 600px; margin: 0 auto;">
+          From routine home cleaning to post-construction cleanup, we have the expertise and equipment to make any space shine.
+        </p>
+      </div>
+    </section>
+
+    {categories.map((category) => (
+      <section
+        data-section={`services-${category}`}
+        style="padding: 3rem 1rem;"
+      >
+        <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+          <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 2rem;">
+            {categoryLabels[category]}
+          </h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;">
+            {servicesByCategory[category].map((service) => (
+              <article
+                data-service={service.data.slug}
+                id={service.data.slug}
+                style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 1.5rem; border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);`}
+              >
+                <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-primary); margin-bottom: 0.25rem;">
+                  {service.data.name}
+                </h3>
+                <p style="color: var(--color-text-muted); font-size: 0.9375rem; margin-bottom: 1rem;">
+                  {service.data.tagline}
+                </p>
+                <ul style="list-style: none; padding: 0; margin: 0 0 1rem;">
+                  {service.data.features.slice(0, 4).map((feature) => (
+                    <li style="padding: 0.25rem 0; font-size: 0.875rem; color: var(--color-text);">
+                      &#x2713; {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                  {service.data.startingPrice && (
+                    <span style="font-family: var(--font-heading); font-size: 1.125rem; color: var(--color-primary);">
+                      From ${service.data.startingPrice} {service.data.priceUnit}
+                    </span>
+                  )}
+                  <a
+                    href="/contact"
+                    style={`display: inline-block; padding: 0.5rem 1rem; background: var(--color-cta); color: var(--color-cta-text); border-radius: var(--radius-md); text-decoration: none; font-size: 0.875rem;`}
+                  >
+                    Get a Quote
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <section data-section="cta" style="padding: var(--section-padding) 1rem; text-align: center; background: var(--color-surface);">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+          Not Sure Which Service You Need?
+        </h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+          Call us at <a href={`tel:${siteConfig.phone}`} style="color: var(--color-primary);">{siteConfig.phone}</a> or get a free quote online.
+        </p>
+        <a
+          href="/contact"
+          style={`display: inline-block; padding: 0.75rem 2rem; background: var(--color-cta); color: var(--color-cta-text); border-radius: var(--radius-md); text-decoration: none; font-weight: 600;`}
+        >
+          Request a Free Quote
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>

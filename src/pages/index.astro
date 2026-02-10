@@ -1,28 +1,136 @@
 ---
 export const prerender = false
 
+import { getCollection } from 'astro:content'
 import { resolveLayout } from '@lib/theme-resolver'
-import { getThemeConfig } from '@themes/index'
 import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+import { siteConfig } from '@lib/site-config'
 
 const themeId = Astro.locals.theme
-const theme = getThemeConfig(themeId)
 const Layout = resolveLayout(themeId)
+
+const allServices = await getCollection('services')
+const featuredServices = allServices
+  .filter((s) => s.data.featured)
+  .sort((a, b) => a.data.displayOrder - b.data.displayOrder)
+  .slice(0, 3)
+
+const allTestimonials = await getCollection('testimonials')
+const featuredTestimonials = allTestimonials
+  .filter((t) => t.data.featured)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3)
 ---
 
-<Layout title="CleanSpark — Professional Cleaning Services">
-  <main style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;">
-    <div style="text-align: center;">
-      <h1 style={`font-family: var(--font-heading); font-size: 3rem; color: var(--color-primary); margin-bottom: 0.5rem;`}>
-        CleanSpark
-      </h1>
-      <p style="color: var(--color-text-muted); font-size: 1.125rem;">
-        Multi-theme cleaning business website
-      </p>
-      <p style="margin-top: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
-        Current theme: <strong style={`color: var(--color-primary);`}>{theme.displayName}</strong>
-      </p>
-    </div>
-    <ThemeSwitcher currentTheme={themeId} />
+<Layout description={siteConfig.seo.defaultDescription}>
+  <ThemeSwitcher currentTheme={themeId} />
+
+  <main data-page="home">
+    <section data-section="hero" style="padding: var(--section-padding) 1rem; text-align: center;">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h1 style={`font-family: var(--font-heading); font-size: 3rem; color: var(--color-primary); margin-bottom: 0.5rem;`}>
+          {siteConfig.name}
+        </h1>
+        <p style="color: var(--color-text-muted); font-size: 1.25rem; margin-bottom: 2rem;">
+          {siteConfig.tagline}
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a
+            href="/contact"
+            style={`display: inline-block; padding: 0.75rem 2rem; background: var(--color-cta); color: var(--color-cta-text); border-radius: var(--radius-md); text-decoration: none; font-weight: 600;`}
+          >
+            Get Your Free Quote
+          </a>
+          <a
+            href="/services"
+            style={`display: inline-block; padding: 0.75rem 2rem; border: 2px solid var(--color-primary); color: var(--color-primary); border-radius: var(--radius-md); text-decoration: none; font-weight: 600; background: transparent;`}
+          >
+            View Services
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section data-section="featured-services" style="padding: 3rem 1rem; background: var(--color-surface);">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 2rem; text-align: center;">
+          Our Most Popular Services
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+          {featuredServices.map((service) => (
+            <article
+              data-service={service.data.slug}
+              style={`background: var(--color-background); border-radius: var(--radius-lg); padding: 1.5rem; text-align: center;`}
+            >
+              <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+                {service.data.name}
+              </h3>
+              <p style="color: var(--color-text-muted); font-size: 0.9375rem; margin-bottom: 1rem;">
+                {service.data.tagline}
+              </p>
+              {service.data.startingPrice && (
+                <p style="font-family: var(--font-heading); color: var(--color-primary); margin-bottom: 1rem;">
+                  From ${service.data.startingPrice} {service.data.priceUnit}
+                </p>
+              )}
+              <a
+                href={`/services#${service.data.slug}`}
+                style="color: var(--color-primary); text-decoration: none; font-weight: 600; font-size: 0.875rem;"
+              >
+                Learn More &rarr;
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section data-section="testimonials" style="padding: var(--section-padding) 1rem;">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 2rem; text-align: center;">
+          What Our Clients Say
+        </h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+          {featuredTestimonials.map((t) => (
+            <blockquote
+              style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 1.5rem; margin: 0; border-left: 3px solid var(--color-primary);`}
+            >
+              <div role="img" aria-label={`${t.data.rating} out of 5 stars`} style="margin-bottom: 0.75rem;">
+                {Array.from({ length: t.data.rating }).map(() => (
+                  <span style="color: var(--color-accent); font-size: 1.125rem;" aria-hidden="true">&starf;</span>
+                ))}
+              </div>
+              <p style="color: var(--color-text); font-size: 0.9375rem; line-height: 1.6; margin-bottom: 1rem;">
+                &ldquo;{t.data.text}&rdquo;
+              </p>
+              <footer style="color: var(--color-text-muted); font-size: 0.875rem;">
+                <strong style="color: var(--color-primary);">{t.data.name}</strong>
+                {t.data.location && (
+                  <span> &mdash; {t.data.location}</span>
+                )}
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section data-section="cta" style="padding: var(--section-padding) 1rem; text-align: center; background: var(--color-surface);">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+          Ready for a Sparkling Clean?
+        </h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+          Serving {siteConfig.serviceAreas.slice(0, 5).join(', ')} and more.
+          Call <a href={`tel:${siteConfig.phone}`} style="color: var(--color-primary);">{siteConfig.phone}</a> or book online.
+        </p>
+        <a
+          href="/contact"
+          style={`display: inline-block; padding: 0.75rem 2rem; background: var(--color-cta); color: var(--color-cta-text); border-radius: var(--radius-md); text-decoration: none; font-weight: 600;`}
+        >
+          Book Your Clean Today
+        </a>
+      </div>
+    </section>
   </main>
 </Layout>

@@ -1,0 +1,125 @@
+---
+export const prerender = false
+
+import { getCollection } from 'astro:content'
+import { resolveLayout } from '@lib/theme-resolver'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+import { siteConfig } from '@lib/site-config'
+
+const themeId = Astro.locals.theme
+const Layout = resolveLayout(themeId)
+
+const pricingTiers = await getCollection('pricing')
+const sortedTiers = pricingTiers.sort((a, b) => a.data.displayOrder - b.data.displayOrder)
+---
+
+<Layout
+  title="Pricing"
+  description="Transparent, competitive pricing for residential and commercial cleaning. No hidden fees."
+>
+  <ThemeSwitcher currentTheme={themeId} />
+
+  <main data-page="pricing">
+    <section data-section="page-hero" style="padding: var(--section-padding) 1rem; text-align: center;">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h1 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+          Transparent Pricing
+        </h1>
+        <p style="color: var(--color-text-muted); font-size: 1.125rem; max-width: 600px; margin: 0 auto;">
+          No hidden fees. No surprises. Just clean, competitive rates.
+        </p>
+      </div>
+    </section>
+
+    <section data-section="pricing-tiers" style="padding: 3rem 1rem;">
+      <div style={`max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; align-items: start;`}>
+        {sortedTiers.map((tier) => (
+          <article
+            data-tier={tier.data.id}
+            style={`background: var(--color-surface); border-radius: var(--radius-lg); padding: 2rem; text-align: center; border: 2px solid ${tier.data.highlighted ? 'var(--color-primary)' : 'color-mix(in srgb, var(--color-text) 10%, transparent)'};${tier.data.highlighted ? ' position: relative;' : ''}`}
+          >
+            {tier.data.highlighted && (
+              <span style={`position: absolute; top: -0.75rem; left: 50%; transform: translateX(-50%); background: var(--color-primary); color: var(--color-cta-text); font-size: 0.75rem; font-weight: 600; padding: 0.25rem 1rem; border-radius: var(--radius-full);`}>
+                Most Popular
+              </span>
+            )}
+            <h2 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 0.25rem;">
+              {tier.data.name}
+            </h2>
+            <p style="color: var(--color-text-muted); font-size: 0.9375rem; margin-bottom: 1rem;">
+              {tier.data.tagline}
+            </p>
+            <p style="margin-bottom: 0.25rem;">
+              <span style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-primary);">
+                ${tier.data.price}
+              </span>
+              <span style="color: var(--color-text-muted); font-size: 0.875rem;">
+                {' '}{tier.data.priceUnit}
+              </span>
+            </p>
+            {tier.data.frequency && (
+              <p style="color: var(--color-text-muted); font-size: 0.8125rem; margin-bottom: 1.5rem;">
+                {tier.data.frequency}
+              </p>
+            )}
+            <ul style="list-style: none; padding: 0; margin: 0 0 1.5rem; text-align: left;">
+              {tier.data.features.map((feature) => (
+                <li style={`padding: 0.375rem 0; font-size: 0.875rem; color: ${feature.included ? 'var(--color-text)' : 'var(--color-text-muted)'};${!feature.included ? ' text-decoration: line-through; opacity: 0.5;' : ''}`}>
+                  <span aria-hidden="true">{feature.included ? '\u2713' : '\u2717'}</span>{' '}
+                  {feature.text}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={tier.data.ctaUrl}
+              style={`display: inline-block; width: 100%; padding: 0.75rem; background: ${tier.data.highlighted ? 'var(--color-cta)' : 'transparent'}; color: ${tier.data.highlighted ? 'var(--color-cta-text)' : 'var(--color-primary)'}; border: 2px solid ${tier.data.highlighted ? 'var(--color-cta)' : 'var(--color-primary)'}; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; box-sizing: border-box;`}
+            >
+              {tier.data.ctaText}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section data-section="faq" style="padding: var(--section-padding) 1rem; background: var(--color-surface);">
+      <div style={`max-width: 720px; margin: 0 auto;`}>
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 2rem; text-align: center;">
+          Frequently Asked Questions
+        </h2>
+        {[
+          { q: 'Do I need to be home during the cleaning?', a: 'Not at all. Many clients give us a key or access code. All our team members are background-checked, insured, and bonded.' },
+          { q: 'What if I\'m not satisfied with the cleaning?', a: 'We have a 100% satisfaction guarantee. If anything isn\'t up to your standards, we\'ll re-clean it free of charge within 24 hours.' },
+          { q: 'Do you bring your own supplies and equipment?', a: 'Yes! We bring all eco-friendly cleaning products and professional-grade equipment. You don\'t need to supply anything.' },
+          { q: 'Can I customize my cleaning plan?', a: 'Absolutely. While our tiers give you a starting point, we\'re happy to add or adjust services to match your specific needs. Just let us know when you book.' },
+          { q: 'How do I pay?', a: 'We accept all major credit cards and send invoices via email after each visit. No cash needed, no upfront payments.' },
+        ].map((faq) => (
+          <details style="margin-bottom: 1rem; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent); padding-bottom: 1rem;">
+            <summary style="font-family: var(--font-heading); font-weight: 600; color: var(--color-primary); cursor: pointer; padding: 0.5rem 0;">
+              {faq.q}
+            </summary>
+            <p style="color: var(--color-text-muted); font-size: 0.9375rem; line-height: 1.6; margin-top: 0.5rem;">
+              {faq.a}
+            </p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section data-section="cta" style="padding: 3rem 1rem; text-align: center;">
+      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
+        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.5rem;">
+          Ready to Get Started?
+        </h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
+          Book online or call us at <a href={`tel:${siteConfig.phone}`} style="color: var(--color-primary);">{siteConfig.phone}</a>.
+        </p>
+        <a
+          href="/contact"
+          style={`display: inline-block; padding: 0.75rem 2rem; background: var(--color-cta); color: var(--color-cta-text); border-radius: var(--radius-md); text-decoration: none; font-weight: 600;`}
+        >
+          Get Your Free Quote
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>

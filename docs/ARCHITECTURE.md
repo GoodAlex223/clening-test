@@ -68,7 +68,7 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 
 **Key Interfaces**:
 
-- Every theme layout MUST accept the same props: `{ title, description, theme }`
+- Every theme layout MUST accept the same props: `{ title, description, image, canonical, noindex }`
 - Every theme component receives content data via Astro props (not fetched internally)
 - ThemeSwitcher is a shared interactive island (client:load)
 

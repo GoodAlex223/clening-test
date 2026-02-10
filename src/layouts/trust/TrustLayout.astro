@@ -1,17 +1,30 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
+import SEO from '@components/shared/SEO.astro'
 import { trustTheme } from '@themes/trust'
 import { buildThemeCssVars } from '@lib/theme-css-vars'
 
 interface Props {
   title?: string
   description?: string
+  image?: string
+  canonical?: string
+  noindex?: boolean
 }
 
-const { title, description } = Astro.props
+const { title, description, image, canonical, noindex } = Astro.props
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout>
+  <SEO
+    slot="head"
+    title={title}
+    description={description}
+    image={image}
+    canonical={canonical}
+    noindex={noindex}
+    theme={trustTheme}
+  />
   <div data-theme={trustTheme.id} style={buildThemeCssVars(trustTheme)}>
     <slot />
   </div>
