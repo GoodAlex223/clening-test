@@ -1,0 +1,103 @@
+---
+/**
+ * ThemeSwitcher — interactive island for changing the active theme.
+ *
+ * Renders a list of theme buttons. When clicked, the cookie is updated
+ * and the page reloads so middleware picks up the new theme.
+ *
+ * Each theme's layout can wrap this component with its own styling.
+ * Buttons use `data-theme` attributes that the client script listens to.
+ */
+import { THEME_REGISTRY, THEME_IDS } from '@themes/index'
+import type { ThemeId } from '@themes/types'
+
+interface Props {
+  currentTheme: ThemeId
+}
+
+const { currentTheme } = Astro.props
+---
+
+<div class="theme-switcher" data-current={currentTheme}>
+  {
+    THEME_IDS.map((id) => (
+      <button
+        type="button"
+        data-theme={id}
+        aria-pressed={id === currentTheme ? 'true' : 'false'}
+        aria-label={`Switch to ${THEME_REGISTRY[id].displayName} theme`}
+        class:list={['theme-switcher__btn', { 'theme-switcher__btn--active': id === currentTheme }]}
+      >
+        <span
+          class="theme-switcher__swatch"
+          style={`background-color: ${THEME_REGISTRY[id].colors.primary}`}
+        />
+        <span class="theme-switcher__label">{THEME_REGISTRY[id].displayName}</span>
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  import { setThemeCookie } from '@lib/theme-store'
+  import { isValidThemeId } from '@themes/index'
+
+  function initThemeSwitcher(): void {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme]')
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const themeId = button.dataset.theme
+        if (themeId && isValidThemeId(themeId)) {
+          setThemeCookie(themeId)
+          window.location.reload()
+        }
+      })
+    })
+  }
+
+  initThemeSwitcher()
+</script>
+
+<style>
+  .theme-switcher {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .theme-switcher__btn {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background: none;
+    cursor: pointer;
+    font-size: 0.8125rem;
+    line-height: 1;
+    transition: border-color 200ms;
+  }
+
+  .theme-switcher__btn:hover {
+    border-color: currentColor;
+  }
+
+  .theme-switcher__btn--active {
+    border-color: currentColor;
+    font-weight: 600;
+  }
+
+  .theme-switcher__swatch {
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .theme-switcher__label {
+    white-space: nowrap;
+  }
+</style>

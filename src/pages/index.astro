@@ -1,12 +1,28 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro'
+export const prerender = false
+
+import { resolveLayout } from '@lib/theme-resolver'
+import { getThemeConfig } from '@themes/index'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+
+const themeId = Astro.locals.theme
+const theme = getThemeConfig(themeId)
+const Layout = resolveLayout(themeId)
 ---
 
-<BaseLayout title="CleanSpark — Professional Cleaning Services">
-  <main class="flex min-h-screen items-center justify-center">
-    <div class="text-center">
-      <h1 class="mb-4 text-5xl font-bold text-gray-900">CleanSpark</h1>
-      <p class="text-lg text-gray-600">Multi-theme cleaning business website</p>
+<Layout title="CleanSpark — Professional Cleaning Services">
+  <main style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;">
+    <div style="text-align: center;">
+      <h1 style={`font-family: var(--font-heading); font-size: 3rem; color: var(--color-primary); margin-bottom: 0.5rem;`}>
+        CleanSpark
+      </h1>
+      <p style="color: var(--color-text-muted); font-size: 1.125rem;">
+        Multi-theme cleaning business website
+      </p>
+      <p style="margin-top: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Current theme: <strong style={`color: var(--color-primary);`}>{theme.displayName}</strong>
+      </p>
     </div>
+    <ThemeSwitcher currentTheme={themeId} />
   </main>
-</BaseLayout>
+</Layout>

@@ -38,7 +38,13 @@ pnpm test             # All tests
 
 - **Multi-theme system**: 5 complete layout systems (Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap, not CSS variable themes
 - **Content Collections**: Astro Content Collections with Zod schemas for services, testimonials, team, gallery, pricing
-- **Theme Engine**: Cookie-based persistence, resolver maps theme name to layout components, middleware reads theme on request
+- **Theme Engine**:
+  - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
+  - Middleware reads `cleanspark_theme` cookie, stores ThemeId in `Astro.locals.theme`
+  - `theme-resolver.ts` maps ThemeId to layout components (static import map)
+  - `theme-css-vars.ts` converts ThemeConfig to inline CSS custom properties
+  - `theme-store.ts` handles cookie parsing, writing, and validation
+  - ThemeSwitcher component updates cookie and reloads page (no FOUC)
 - **Islands Architecture**: Static HTML by default, `client:load` only for ThemeSwitcher, contact form, gallery filter
 - **Pages**: 6 routes — Home, Services, About, Pricing, Gallery, Contact
 - **File structure**: `src/components/{theme}/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`
@@ -66,6 +72,9 @@ pnpm test             # All tests
 - **Content-design separation**: Business content in Content Collections, never hardcoded in components
 - **Progressive enhancement**: Core content works without JS
 - **Cookie-based state**: Theme persisted in cookie for server-side reading (no FOUC)
+- **Type-safe theme system**: ThemeId union type guards invalid themes, ThemeConfig interface ensures consistency across all 5 themes
+- **CSS custom properties**: Theme tokens (colors, fonts, spacing) injected as CSS vars in `<html>` style attribute for consistent access
+- **Static resolver pattern**: Layout components mapped at build time via satisfies operator, no runtime lookups
 
 <!-- END AUTO-MANAGED -->
 
