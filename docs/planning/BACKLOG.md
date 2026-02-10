@@ -123,6 +123,16 @@ Areas requiring investigation before implementation.
 - [ ] Fix DONE.md relative path pattern for T-001 entry — same `../../archive/` bug exists in the T-001 plan link (should be `../archive/`)
 - [ ] Add CI/CD workflow (GitHub Actions) — no checks configured yet; add linting, type checking, and build verification on PRs
 
+### 2026-02-10 From: T-003 Theme Engine Core
+
+**Origin**: docs/archive/plans/2026-02-10_t-003-theme-engine.md
+
+- [ ] Add unit tests for theme-store.ts — test cookie parsing edge cases (malformed cookies, missing values, empty strings)
+- [ ] Add unit tests for isValidThemeId() — verify type guard with valid/invalid inputs
+- [ ] Add E2E test for theme switching roundtrip — select theme, verify cookie, reload, verify correct layout
+- [ ] Enhance ThemeSwitcher keyboard navigation — add arrow-key navigation between theme options for a11y
+- [ ] Integrate View Transitions with theme switch — smooth cross-fade instead of hard reload (after T-010)
+
 ---
 
 ## Rejected Ideas

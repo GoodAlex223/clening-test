@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-10
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -60,6 +60,26 @@ Completed tasks with implementation details and learnings.
 - Key discovery: Astro 5 Content Layer API is a complete rewrite from v4 (loaders, new config location)
 
 **Spawned Tasks**: 2 items added to BACKLOG.md
+
+### 2026-02-10 — T-003: Theme Engine Core
+
+**Plan**: [docs/archive/plans/2026-02-10_t-003-theme-engine.md](../archive/plans/2026-02-10_t-003-theme-engine.md)
+**Summary**: Built the foundational theme engine infrastructure — cookie-based persistence read by Astro middleware, static layout resolver, CSS custom property system, 5 theme design token configs, and ThemeSwitcher interactive island.
+
+**Key Changes**:
+
+- Added `@astrojs/node` adapter for on-demand rendering (Astro 5 removed `hybrid` output)
+- Created `ThemeId`/`ThemeConfig` type system with strict TypeScript interfaces
+- Created 5 theme configs with design tokens (colors, fonts, spacing) from theme design specs
+- Created theme registry (`src/themes/index.ts`) with validation, constants, and getThemeConfig
+- Created `theme-store.ts` (cookie read/write), `theme-resolver.ts` (static layout map), `theme-css-vars.ts` (DRY CSS var generation)
+- Created Astro middleware to read theme cookie into `Astro.locals.theme`
+- Created ThemeSwitcher component with accessible buttons and client-side switching
+- Created 5 stub theme layouts using shared `buildThemeCssVars()` utility
+- Updated `env.d.ts` with `App.Locals` type augmentation
+- Updated index page to use theme engine end-to-end
+
+**Spawned Tasks**: 5 items added to BACKLOG.md
 
 ---
 

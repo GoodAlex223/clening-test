@@ -2,7 +2,7 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-10
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
@@ -21,20 +21,6 @@ _No tasks currently in progress._
 ## Planned
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
-
-### T-003: Theme Engine Core
-
-**Priority**: P0 — Critical
-**Milestone**: M1
-**Depends on**: T-001
-
-- [ ] Create `src/lib/theme-store.ts` — cookie-based theme state
-- [ ] Create `src/lib/theme-resolver.ts` — maps theme name to layout
-- [ ] Create `src/themes/` config files for all 5 themes (design tokens)
-- [ ] Create `src/middleware.ts` — reads theme from cookie on request
-- [ ] Create ThemeSwitcher component (interactive island, `client:load`)
-- [ ] Implement fallback to "minimal" if invalid theme
-- [ ] Test theme persistence across page reloads
 
 ### T-004: Page Routes & Base Structure
 
