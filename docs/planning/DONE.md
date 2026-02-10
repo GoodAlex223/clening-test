@@ -81,6 +81,26 @@ Completed tasks with implementation details and learnings.
 
 **Spawned Tasks**: 5 items added to BACKLOG.md
 
+### 2026-02-10 — T-004: Page Routes & Base Structure
+
+**Plan**: [docs/archive/plans/2026-02-10_t-004-page-routes.md](../archive/plans/2026-02-10_t-004-page-routes.md)
+**Summary**: Created all 6 page routes with real content from Content Collections, shared SEO component with full Open Graph/Twitter/JSON-LD support, and updated all theme layouts with SEO integration.
+
+**Key Changes**:
+
+- Created `SEO.astro` shared component (OG, Twitter Cards, JSON-LD LocalBusiness, canonical URLs, theme-color)
+- Added BaseLayout `<slot name="head" />` for SEO injection from theme layouts
+- Updated all 5 theme layouts with SEO component and extended props (image, canonical, noindex)
+- Created `services.astro` — category-grouped service cards with pricing and CTAs
+- Created `about.astro` — company story, values, team grid with certifications
+- Created `pricing.astro` — 3 tiers with feature comparison, "Most Popular" badge, FAQ section
+- Created `gallery.astro` — before/after photo grid with client-side service filter
+- Created `contact.astro` — contact form with validation, info cards, hours, social links
+- Updated `index.astro` — featured services, testimonials with star ratings, CTAs with real content
+- Added `data-page` and `data-section` attributes on all pages/sections for T-005+ migration
+
+**Spawned Tasks**: 3 items added to BACKLOG.md
+
 ---
 
 ## Notes
