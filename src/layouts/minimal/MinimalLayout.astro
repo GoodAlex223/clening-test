@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { minimalTheme } from '@themes/minimal'
+import { buildThemeCssVars } from '@lib/theme-css-vars'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const { title, description } = Astro.props
+---
+
+<BaseLayout title={title} description={description}>
+  <div data-theme={minimalTheme.id} style={buildThemeCssVars(minimalTheme)}>
+    <slot />
+  </div>
+</BaseLayout>
