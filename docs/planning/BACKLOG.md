@@ -131,6 +131,13 @@ Areas requiring investigation before implementation.
 - [ ] Create `/api/contact` endpoint — contact form currently shows client-side confirmation only, needs backend (email service or serverless)
 - [ ] Extract FAQ content to Content Collection — pricing page FAQ is hardcoded, could be a JSON collection if FAQ grows
 
+### 2026-02-10 From: T-004 Code Review
+
+**Origin**: PR #4 code review
+
+- [ ] Move hardcoded about page content to Content Collections — company story, values, and stats are inline in about.astro instead of in collections
+- [ ] Clean up BaseLayout dead props — title/description props and fallback rendering path are unused after SEO slot migration; remove or document as intentional backwards-compat
+
 ### 2026-02-10 From: T-003 Theme Engine Core
 
 **Origin**: docs/archive/plans/2026-02-10_t-003-theme-engine.md
