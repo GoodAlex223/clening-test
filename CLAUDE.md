@@ -36,7 +36,7 @@ pnpm test             # All tests
 
 ## Architecture
 
-- **Multi-theme system**: 5 complete layout systems (Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap, not CSS variable themes
+- **Multi-theme system**: 5 complete layout systems (Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
 - **Content Collections**: Astro Content Collections with Zod schemas for services, testimonials, team, gallery, pricing
 - **Theme Engine**:
   - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
@@ -56,11 +56,13 @@ pnpm test             # All tests
 ## Code Conventions
 
 - Components: PascalCase `.astro` files, theme-prefixed (`MinimalHero.astro`)
-- Layouts: `{Theme}Layout.astro` per theme
+- Layouts: `{Theme}Layout.astro` per theme, inject CSS vars via `buildThemeCssVars()`
 - Content: kebab-case `.md` or `.json` in Content Collections
 - TypeScript: Strict mode, no `any`, prefer `interface` over `type`
 - Styling: Tailwind utilities (mobile-first), avoid `@apply` except theme base styles
 - Theme IDs: lowercase single word (`minimal`, `bold`, `trust`, `bubbly`, `noir`)
+- env.d.ts augmentation: Use inline `import()` syntax to preserve global scope
+- Theme tokens: Defined in `src/themes/{theme}.ts`, consumed via CSS custom properties
 
 <!-- END AUTO-MANAGED -->
 
