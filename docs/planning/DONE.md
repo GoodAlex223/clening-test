@@ -116,6 +116,18 @@ Completed tasks with implementation details and learnings.
 
 **Spawned Tasks**: 1 task to TODO.md (Lighthouse audit), 4 items to BACKLOG.md
 
+### 2026-02-11 — T-011a: Lighthouse Audit for Minimal Zen
+
+**Plan**: [docs/archive/plans/2026-02-11_t-011a-lighthouse-audit.md](../archive/plans/2026-02-11_t-011a-lighthouse-audit.md)
+**Summary**: Ran Lighthouse audit on all 6 Minimal Zen pages. Found and fixed 3 issues (color contrast on Services/About labels, missing gallery placeholder images). Final result: 100/100/100/100 on all 6 pages.
+
+**Key Changes**:
+- Fixed `.cat-header__label` color contrast in MinimalServices.astro (accent → textMuted)
+- Fixed `.label` color contrast in MinimalAbout.astro (accent → textMuted)
+- Created 16 SVG placeholder images in `public/images/gallery/` for all before/after pairs
+
+**Spawned Tasks**: 4 items added to BACKLOG.md
+
 ---
 
 ## Notes

@@ -164,6 +164,15 @@ Areas requiring investigation before implementation.
 - [ ] Extract hardcoded page content to Content Collections — about story/values, pricing FAQ, CTA headlines are inline in Minimal theme components instead of collections (violates content-design separation pattern)
 - [ ] Add null coalescing for `btn.textContent` in MinimalContact.astro — use `?? 'Send Message'` fallback for strict TypeScript safety
 
+### 2026-02-11 From: T-011a Lighthouse Audit
+
+**Origin**: docs/archive/plans/2026-02-11_t-011a-lighthouse-audit.md
+
+- [ ] Add text-accent token to theme configs — distinguish decorative accent (backgrounds, borders) from text-accent (readable on white/surface) to prevent contrast failures
+- [ ] Add `width`/`height` attributes to gallery images — prevent layout shift, improve CLS score
+- [ ] Automate Lighthouse in CI — GitHub Actions step to run Lighthouse on PRs, fail if scores drop below 90
+- [ ] Replace SVG placeholders with real photos — integrate Astro `<Image>` for responsive sizes and WebP/AVIF
+
 ---
 
 ## Rejected Ideas

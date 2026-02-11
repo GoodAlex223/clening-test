@@ -16,17 +16,6 @@ Active tasks and backlog for CleanSpark.
 
 _No tasks currently in progress._
 
-### T-011a: Lighthouse Audit for Minimal Zen
-
-**Priority**: P1 — High
-**Milestone**: M2
-**Depends on**: T-005
-**Origin**: T-005 improvements
-
-- [ ] Run Lighthouse on all 6 pages with Minimal Zen theme
-- [ ] Verify 90+ scores for Performance, Accessibility, Best Practices, SEO
-- [ ] Fix any issues found
-
 ---
 
 ## Planned
