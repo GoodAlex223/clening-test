@@ -1,0 +1,182 @@
+---
+/**
+ * MinimalFooter — Clean 3-column footer with zen restraint.
+ *
+ * Thin top rule, small type, generous breathing room.
+ */
+import { siteConfig, getFullAddress } from '@lib/site-config'
+
+const year = new Date().getFullYear()
+
+const quickLinks = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+---
+
+<footer class="mf">
+  <div class="mf__inner">
+    <div class="mf__grid">
+      <div class="mf__col">
+        <a href="/" class="mf__brand">CleanSpark</a>
+        <p class="mf__tagline">{siteConfig.tagline}</p>
+      </div>
+
+      <div class="mf__col">
+        <h3 class="mf__heading">Navigation</h3>
+        <ul class="mf__list">
+          {quickLinks.map((link) => (
+            <li>
+              <a href={link.href} class="mf__link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mf__col">
+        <h3 class="mf__heading">Contact</h3>
+        <ul class="mf__list">
+          <li>
+            <a href={`tel:${siteConfig.phone}`} class="mf__link">{siteConfig.phone}</a>
+          </li>
+          <li>
+            <a href={`mailto:${siteConfig.email}`} class="mf__link">{siteConfig.email}</a>
+          </li>
+          <li class="mf__address">{getFullAddress()}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mf__bottom">
+      <p class="mf__copy">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+      <div class="mf__social">
+        <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" class="mf__social-link" aria-label="Facebook">
+          Facebook
+        </a>
+        <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="mf__social-link" aria-label="Instagram">
+          Instagram
+        </a>
+        <a href={siteConfig.social.yelp} target="_blank" rel="noopener noreferrer" class="mf__social-link" aria-label="Yelp">
+          Yelp
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .mf {
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .mf__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .mf__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .mf__brand {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .mf__tagline {
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  .mf__heading {
+    font-family: var(--font-heading);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .mf__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mf__link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    transition: color 200ms ease;
+  }
+
+  .mf__link:hover {
+    color: var(--color-primary);
+  }
+
+  .mf__address {
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    font-style: normal;
+  }
+
+  .mf__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
+  }
+
+  .mf__copy {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+  }
+
+  .mf__social {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .mf__social-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    transition: color 200ms ease;
+  }
+
+  .mf__social-link:hover {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .mf__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .mf__bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+</style>
