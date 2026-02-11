@@ -1,0 +1,316 @@
+---
+/**
+ * MinimalHome — Zen home page content.
+ *
+ * Hero (fullscreen centered), Featured Services (3-card grid),
+ * Testimonials (3-card grid), CTA banner.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig } from '@lib/site-config'
+
+interface Props {
+  services: CollectionEntry<'services'>[]
+  testimonials: CollectionEntry<'testimonials'>[]
+}
+
+const { services, testimonials } = Astro.props
+---
+
+<main data-page="home">
+  {/* ── Hero ── */}
+  <section class="hero">
+    <div class="hero__inner">
+      <h1 class="hero__title">{siteConfig.name}</h1>
+      <p class="hero__subtitle">{siteConfig.tagline}</p>
+      <div class="hero__actions">
+        <a href="/contact" class="btn btn--primary">Get Your Free Quote</a>
+        <a href="/services" class="btn btn--ghost">View Services</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Featured Services ── */}
+  <section class="section section--surface reveal">
+    <div class="container">
+      <h2 class="section__title">Our Most Popular Services</h2>
+      <div class="card-grid card-grid--3 reveal-stagger">
+        {services.map((service) => (
+          <article class="card">
+            <h3 class="card__title">{service.data.name}</h3>
+            <p class="card__text">{service.data.tagline}</p>
+            {service.data.startingPrice && (
+              <p class="card__price">
+                From ${service.data.startingPrice} {service.data.priceUnit}
+              </p>
+            )}
+            <a href={`/services#${service.data.slug}`} class="card__link">
+              Learn More <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Testimonials ── */}
+  <section class="section reveal">
+    <div class="container">
+      <h2 class="section__title">What Our Clients Say</h2>
+      <div class="card-grid card-grid--3 reveal-stagger">
+        {testimonials.map((t) => (
+          <blockquote class="testimonial">
+            <div class="testimonial__stars" role="img" aria-label={`${t.data.rating} out of 5 stars`}>
+              {Array.from({ length: t.data.rating }).map(() => (
+                <span class="testimonial__star" aria-hidden="true">&#9733;</span>
+              ))}
+            </div>
+            <p class="testimonial__text">&ldquo;{t.data.text}&rdquo;</p>
+            <footer class="testimonial__author">
+              <strong>{t.data.name}</strong>
+              {t.data.location && <span> &mdash; {t.data.location}</span>}
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA ── */}
+  <section class="cta reveal">
+    <div class="container">
+      <h2 class="cta__title">Ready for a Sparkling Clean?</h2>
+      <p class="cta__text">
+        Serving {siteConfig.serviceAreas.slice(0, 5).join(', ')} and more.
+        Call <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a> or book online.
+      </p>
+      <a href="/contact" class="btn btn--primary">Book Your Clean Today</a>
+    </div>
+  </section>
+</main>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero__inner {
+    max-width: 720px;
+  }
+
+  .hero__title {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ── Shared section ── */
+  .section {
+    padding: var(--section-padding) 1.5rem;
+  }
+
+  .section--surface {
+    background: var(--color-surface);
+  }
+
+  .section__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 3rem;
+    letter-spacing: -0.01em;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  /* ── Card grid ── */
+  .card-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .card-grid--3 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  /* ── Service card ── */
+  .card {
+    background: var(--color-background);
+    border-radius: var(--radius-sm);
+    padding: 2rem;
+    text-align: center;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  .card__title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .card__text {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .card__price {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .card__link {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: opacity 200ms ease;
+  }
+
+  .card__link:hover {
+    opacity: 0.65;
+  }
+
+  /* ── Testimonial ── */
+  .testimonial {
+    background: var(--color-surface);
+    border-radius: var(--radius-sm);
+    padding: 2rem;
+    margin: 0;
+    border-left: 2px solid var(--color-accent);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .testimonial__stars {
+    margin-bottom: 0.75rem;
+  }
+
+  .testimonial__star {
+    color: var(--color-accent);
+    font-size: 1rem;
+    margin-right: 1px;
+  }
+
+  .testimonial__text {
+    color: var(--color-text);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .testimonial__author {
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    font-style: normal;
+  }
+
+  .testimonial__author strong {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    padding: var(--section-padding) 1.5rem;
+    text-align: center;
+    background: var(--color-surface);
+  }
+
+  .cta__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .cta__text {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .cta__phone {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .cta__phone:hover {
+    text-decoration: underline;
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-block;
+    padding: 0.875rem 2.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.02em;
+    transition: all 200ms ease;
+  }
+
+  .btn--primary {
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+  }
+
+  .btn--primary:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+
+  .btn--ghost {
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+    background: transparent;
+  }
+
+  .btn--ghost:hover {
+    background: var(--color-primary);
+    color: var(--color-cta-text);
+  }
+</style>

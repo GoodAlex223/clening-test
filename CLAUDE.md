@@ -42,12 +42,13 @@ pnpm test             # All tests
   - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
   - Middleware reads `cleanspark_theme` cookie, stores ThemeId in `Astro.locals.theme`
   - `theme-resolver.ts` maps ThemeId to layout components (static import map)
+  - `page-resolver.ts` maps (ThemeId, PageName) to page content components (static import map)
   - `theme-css-vars.ts` converts ThemeConfig to inline CSS custom properties
   - `theme-store.ts` handles cookie parsing, writing, and validation
   - ThemeSwitcher component updates cookie and reloads page (no FOUC)
-- **Islands Architecture**: Static HTML by default, `client:load` only for ThemeSwitcher, contact form, gallery filter
+- **Islands Architecture**: Static HTML by default, `client:load` only for ThemeSwitcher, contact form, gallery filter, mobile nav
 - **Pages**: 6 routes — Home, Services, About, Pricing, Gallery, Contact
-- **File structure**: `src/components/{theme}/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`
+- **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`
 
 <!-- END AUTO-MANAGED -->
 
@@ -55,11 +56,12 @@ pnpm test             # All tests
 
 ## Code Conventions
 
-- Components: PascalCase `.astro` files, theme-prefixed (`MinimalHero.astro`)
+- Components: PascalCase `.astro` files, theme-prefixed (`MinimalHero.astro`, `MinimalNav.astro`)
+- Page components: `{Theme}{Page}.astro` in `src/components/{theme}/pages/` (e.g., `MinimalContact.astro`)
 - Layouts: `{Theme}Layout.astro` per theme, inject CSS vars via `buildThemeCssVars()`
 - Content: kebab-case `.md` or `.json` in Content Collections
 - TypeScript: Strict mode, no `any`, prefer `interface` over `type`
-- Styling: Tailwind utilities (mobile-first), avoid `@apply` except theme base styles
+- Styling: Tailwind utilities (mobile-first), avoid `@apply` except theme base styles; scoped `<style>` blocks for component-specific styles
 - Theme IDs: lowercase single word (`minimal`, `bold`, `trust`, `bubbly`, `noir`)
 - env.d.ts augmentation: Use inline `import()` syntax to preserve global scope
 - Theme tokens: Defined in `src/themes/{theme}.ts`, consumed via CSS custom properties
@@ -70,13 +72,17 @@ pnpm test             # All tests
 
 ## Detected Patterns
 
-- **Theme isolation**: Each theme's components and layouts are fully independent
-- **Content-design separation**: Business content in Content Collections, never hardcoded in components
-- **Progressive enhancement**: Core content works without JS
+- **Theme isolation**: Each theme's components and layouts are fully independent; page components organized in `src/components/{theme}/pages/`
+- **Content-design separation**: Structured business content (services, pricing, team, testimonials, gallery) stored in Content Collections; some page-specific content (about page story/values, pricing FAQ) currently inline
+- **Progressive enhancement**: Core content works without JS; JS enhances UX (mobile nav, gallery filter, contact form validation)
 - **Cookie-based state**: Theme persisted in cookie for server-side reading (no FOUC)
 - **Type-safe theme system**: ThemeId union type guards invalid themes, ThemeConfig interface ensures consistency across all 5 themes
 - **CSS custom properties**: Theme tokens (colors, fonts, spacing) injected as CSS vars in `<html>` style attribute for consistent access
-- **Static resolver pattern**: Layout components mapped at build time via satisfies operator, no runtime lookups
+- **Static resolver pattern**: Both layout and page content components mapped at build time via satisfies operator, no runtime lookups; `resolvePageContent<P extends PageName>()` uses generic narrowing for type-safe props per page
+- **Accessibility-first**: ARIA labels, semantic HTML, keyboard navigation (mobile menu Escape key, tabindex management), focus management
+- **Scroll-reveal animations**: IntersectionObserver-based `.reveal` / `.revealed` pattern in `<style is:global>` for cross-component animation consistency; `.reveal-stagger` for grid children animations using descendant selectors
+- **JS-controlled visibility via inline styles**: Astro scoped styles conflict with dynamically-toggled classes in `<script>` blocks; inline styles via JS provide reliable visibility control for mobile menu overlays
+- **Thin page routes pattern**: Page route files (`src/pages/*.astro`) are data-fetching shells that call `resolvePageContent()` to delegate presentation to theme-specific page components
 
 <!-- END AUTO-MANAGED -->
 

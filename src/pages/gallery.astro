@@ -3,10 +3,11 @@ export const prerender = false
 
 import { getCollection } from 'astro:content'
 import { resolveLayout } from '@lib/theme-resolver'
-import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+import { resolvePageContent } from '@lib/page-resolver'
 
 const themeId = Astro.locals.theme
 const Layout = resolveLayout(themeId)
+const PageContent = resolvePageContent(themeId, 'gallery')
 
 const galleryItems = await getCollection('gallery')
 const sorted = galleryItems.sort((a, b) => a.data.displayOrder - b.data.displayOrder)
@@ -17,134 +18,5 @@ const uniqueServices = [...new Set(galleryItems.map((item) => item.data.service)
   title="Gallery"
   description="See the CleanSpark difference. Before-and-after photos from real cleaning projects in the Seattle area."
 >
-  <ThemeSwitcher currentTheme={themeId} />
-
-  <main data-page="gallery">
-    <section data-section="page-hero" style="padding: var(--section-padding) 1rem; text-align: center;">
-      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
-        <h1 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-primary); margin-bottom: 0.5rem;">
-          Our Work
-        </h1>
-        <p style="color: var(--color-text-muted); font-size: 1.125rem; max-width: 600px; margin: 0 auto;">
-          See the CleanSpark difference in action. Real projects, real results.
-        </p>
-      </div>
-    </section>
-
-    <section data-section="gallery-filters" style="padding: 0 1rem 2rem; text-align: center;">
-      <div style={`max-width: var(--container-max); margin: 0 auto; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;`}>
-        <button
-          data-filter="all"
-          class="gallery-filter gallery-filter--active"
-          style={`padding: 0.5rem 1rem; border: 1px solid var(--color-primary); border-radius: var(--radius-full); background: var(--color-primary); color: var(--color-cta-text); cursor: pointer; font-size: 0.875rem;`}
-        >
-          All
-        </button>
-        {uniqueServices.map((service) => (
-          <button
-            data-filter={service}
-            class="gallery-filter"
-            style={`padding: 0.5rem 1rem; border: 1px solid var(--color-primary); border-radius: var(--radius-full); background: transparent; color: var(--color-primary); cursor: pointer; font-size: 0.875rem;`}
-          >
-            {service}
-          </button>
-        ))}
-      </div>
-    </section>
-
-    <section data-section="gallery-grid" style="padding: 0 1rem 3rem;">
-      <div style={`max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem;`}>
-        {sorted.map((item, index) => (
-          <article
-            data-gallery-item
-            data-service={item.data.service}
-            style={`background: var(--color-surface); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);`}
-          >
-            <div style="display: grid; grid-template-columns: 1fr 1fr;">
-              <div style="position: relative;">
-                <img
-                  src={item.data.before}
-                  alt={`Before: ${item.data.room} - ${item.data.service}`}
-                  loading={index < 4 ? 'eager' : 'lazy'}
-                  style="width: 100%; height: 200px; object-fit: cover; display: block;"
-                />
-                <span style="position: absolute; top: 0.5rem; left: 0.5rem; background: rgba(0,0,0,0.6); color: white; font-size: 0.6875rem; padding: 0.125rem 0.5rem; border-radius: var(--radius-full);">
-                  Before
-                </span>
-              </div>
-              <div style="position: relative;">
-                <img
-                  src={item.data.after}
-                  alt={`After: ${item.data.room} - ${item.data.service}`}
-                  loading={index < 4 ? 'eager' : 'lazy'}
-                  style="width: 100%; height: 200px; object-fit: cover; display: block;"
-                />
-                <span style="position: absolute; top: 0.5rem; left: 0.5rem; background: rgba(0,0,0,0.6); color: white; font-size: 0.6875rem; padding: 0.125rem 0.5rem; border-radius: var(--radius-full);">
-                  After
-                </span>
-              </div>
-            </div>
-            <div style="padding: 1rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <span style="font-family: var(--font-heading); font-weight: 600; color: var(--color-primary);">
-                  {item.data.room}
-                </span>
-                <span style={`font-size: 0.75rem; padding: 0.25rem 0.5rem; background: color-mix(in srgb, var(--color-primary) 10%, transparent); border-radius: var(--radius-full); color: var(--color-primary);`}>
-                  {item.data.service}
-                </span>
-              </div>
-              <p style="color: var(--color-text-muted); font-size: 0.875rem; line-height: 1.5;">
-                {item.data.description}
-              </p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <section data-section="cta" style="padding: var(--section-padding) 1rem; text-align: center; background: var(--color-surface);">
-      <div style={`max-width: var(--container-max); margin: 0 auto;`}>
-        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--color-primary); margin-bottom: 0.5rem;">
-          Want Results Like These?
-        </h2>
-        <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">
-          Every space has potential. Let us show you yours.
-        </p>
-        <a
-          href="/contact"
-          style={`display: inline-block; padding: 0.75rem 2rem; background: var(--color-cta); color: var(--color-cta-text); border-radius: var(--radius-md); text-decoration: none; font-weight: 600;`}
-        >
-          Book Your Clean
-        </a>
-      </div>
-    </section>
-  </main>
+  <PageContent gallery={sorted} uniqueServices={uniqueServices} />
 </Layout>
-
-<script>
-  function initGalleryFilter(): void {
-    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]')
-    const items = document.querySelectorAll<HTMLElement>('[data-gallery-item]')
-
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter
-
-        // Update active state
-        buttons.forEach((b) => {
-          const isActive = b === btn
-          b.style.background = isActive ? 'var(--color-primary)' : 'transparent'
-          b.style.color = isActive ? 'var(--color-cta-text)' : 'var(--color-primary)'
-        })
-
-        // Filter items
-        items.forEach((item) => {
-          const matches = filter === 'all' || item.dataset.service === filter
-          item.style.display = matches ? '' : 'none'
-        })
-      })
-    })
-  }
-
-  initGalleryFilter()
-</script>
