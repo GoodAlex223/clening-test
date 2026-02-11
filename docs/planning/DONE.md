@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-10
+**Last Updated**: 2026-02-11
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -100,6 +100,21 @@ Completed tasks with implementation details and learnings.
 - Added `data-page` and `data-section` attributes on all pages/sections for T-005+ migration
 
 **Spawned Tasks**: 3 items added to BACKLOG.md
+
+### 2026-02-11 — T-005: Minimal Zen Theme — Full Implementation
+
+**Plan**: [docs/archive/plans/2026-02-11_t-005-minimal-zen.md](../archive/plans/2026-02-11_t-005-minimal-zen.md)
+**Summary**: Implemented the first complete theme (Minimal Zen) with sticky nav, mobile hamburger overlay, footer, 6 page content components, scroll-reveal animations, and page-resolver infrastructure. Refactored all page routes to thin data-fetching shells.
+
+**Key Changes**:
+- Created `page-resolver.ts` with generic type narrowing for type-safe page component resolution
+- Built MinimalNav (frosted glass, mobile overlay, accessibility) and MinimalFooter
+- Created 6 page content components: Home, Services, About, Pricing, Gallery, Contact
+- Added scroll-reveal animations (IntersectionObserver) with staggered child reveals
+- Refactored 6 page routes from full pages to thin data-fetching shells (20 files, +2623/-736 lines)
+- Key discovery: Astro scoped styles conflict with JS-toggled classes; use inline styles for JS-controlled visibility
+
+**Spawned Tasks**: 1 task to TODO.md (Lighthouse audit), 4 items to BACKLOG.md
 
 ---
 

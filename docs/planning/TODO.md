@@ -2,7 +2,7 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-10
+**Last Updated**: 2026-02-11
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
@@ -16,30 +16,22 @@ Active tasks and backlog for CleanSpark.
 
 _No tasks currently in progress._
 
+### T-011a: Lighthouse Audit for Minimal Zen
+
+**Priority**: P1 — High
+**Milestone**: M2
+**Depends on**: T-005
+**Origin**: T-005 improvements
+
+- [ ] Run Lighthouse on all 6 pages with Minimal Zen theme
+- [ ] Verify 90+ scores for Performance, Accessibility, Best Practices, SEO
+- [ ] Fix any issues found
+
 ---
 
 ## Planned
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
-
-### T-005: Minimal Zen Theme — Full Implementation
-
-**Priority**: P1 — High
-**Milestone**: M2
-**Depends on**: T-002, T-003, T-004
-
-- [ ] Create `src/layouts/minimal/MinimalLayout.astro`
-- [ ] Create `src/components/minimal/MinimalNav.astro`
-- [ ] Create `src/components/minimal/MinimalFooter.astro`
-- [ ] Home page: Hero, services preview, testimonials, CTA
-- [ ] Services page: Service cards with icons, process steps
-- [ ] About page: Story, team grid, values, certifications
-- [ ] Pricing page: 3 tiers, comparison table, quote CTA
-- [ ] Gallery page: Photo grid, category filter
-- [ ] Contact page: Form, map placeholder, service areas
-- [ ] Mobile responsive across all pages (320px–1920px)
-- [ ] Micro-interactions (hover states, scroll reveals)
-- [ ] Lighthouse audit 90+ on all pages
 
 ### T-006: Bold Spark Theme — Full Implementation
 

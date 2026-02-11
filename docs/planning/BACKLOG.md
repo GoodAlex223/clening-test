@@ -2,7 +2,7 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-11
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -70,8 +70,8 @@ Known issues that should be addressed eventually.
 
 | Item | Impact | Effort | Added |
 | ---- | ------ | ------ | ----- |
-
-_No technical debt yet — project not started._
+| Mobile menu uses inline styles instead of CSS classes | Low — works correctly, just less elegant | Low | 2026-02-11 |
+| ThemeSwitcher `client:load` warning in dev server | None — cosmetic only, doesn't affect build | Low | 2026-02-11 |
 
 ---
 
@@ -147,6 +147,15 @@ Areas requiring investigation before implementation.
 - [ ] Add E2E test for theme switching roundtrip — select theme, verify cookie, reload, verify correct layout
 - [ ] Enhance ThemeSwitcher keyboard navigation — add arrow-key navigation between theme options for a11y
 - [ ] Integrate View Transitions with theme switch — smooth cross-fade instead of hard reload (after T-010)
+
+### 2026-02-11 From: T-005 Minimal Zen Theme
+
+**Origin**: docs/archive/plans/2026-02-11_t-005-minimal-zen.md
+
+- [ ] Investigate Astro `:global()` pseudo-function for JS-toggled CSS modifiers — find CSS-only solution to replace inline styles for mobile menu overlay
+- [ ] Extract shared button/form/field styles into utility components — `.btn`, `.field`, `.form` duplicated across MinimalContact, MinimalPricing, MinimalHome
+- [ ] Add contact form API endpoint — currently client-side only confirmation, needs backend (email service or serverless function)
+- [ ] Integrate Astro `<Image>` component — gallery and team use placeholder paths, need responsive sizes and WebP/AVIF when real assets available
 
 ---
 
