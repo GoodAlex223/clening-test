@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .bg { fill: #D4E8D4; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 48px; font-weight: 600; fill: #666; }
+      .room { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 32px; fill: #999; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" class="bg"/>
+  
+  <!-- Label -->
+  <text x="400" y="260" text-anchor="middle" class="label">After</text>
+  
+  <!-- Room name -->
+  <text x="400" y="340" text-anchor="middle" class="room">Open Office</text>
+</svg>
