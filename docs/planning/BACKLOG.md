@@ -157,6 +157,13 @@ Areas requiring investigation before implementation.
 - [ ] Add contact form API endpoint — currently client-side only confirmation, needs backend (email service or serverless function)
 - [ ] Integrate Astro `<Image>` component — gallery and team use placeholder paths, need responsive sizes and WebP/AVIF when real assets available
 
+### 2026-02-11 From: T-005 Code Review
+
+**Origin**: PR #5 code review
+
+- [ ] Extract hardcoded page content to Content Collections — about story/values, pricing FAQ, CTA headlines are inline in Minimal theme components instead of collections (violates content-design separation pattern)
+- [ ] Add null coalescing for `btn.textContent` in MinimalContact.astro — use `?? 'Send Message'` fallback for strict TypeScript safety
+
 ---
 
 ## Rejected Ideas
