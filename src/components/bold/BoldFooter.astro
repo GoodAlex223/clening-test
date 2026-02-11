@@ -1,0 +1,210 @@
+---
+/**
+ * BoldFooter — Bold 4-column footer with mint background.
+ *
+ * Full-width mint block, white text, bold brand, social links.
+ */
+import { siteConfig, getFullAddress } from '@lib/site-config'
+
+const year = new Date().getFullYear()
+
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+
+const serviceLinks = [
+  { label: 'Regular Cleaning', href: '/services#regular-cleaning' },
+  { label: 'Deep Clean', href: '/services#deep-cleaning' },
+  { label: 'Move In/Out', href: '/services#move-in-out-cleaning' },
+  { label: 'Office Cleaning', href: '/services#office-cleaning' },
+  { label: 'Post-Construction', href: '/services#post-construction-cleaning' },
+]
+---
+
+<footer class="bf">
+  <div class="bf__inner">
+    <div class="bf__grid">
+      <div class="bf__col">
+        <div class="bf__brand">CleanSpark</div>
+        <p class="bf__tagline">{siteConfig.tagline}</p>
+      </div>
+
+      <div class="bf__col">
+        <h3 class="bf__heading">Navigation</h3>
+        <ul class="bf__list">
+          {quickLinks.map((link) => (
+            <li>
+              <a href={link.href} class="bf__link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bf__col">
+        <h3 class="bf__heading">Services</h3>
+        <ul class="bf__list">
+          {serviceLinks.map((link) => (
+            <li>
+              <a href={link.href} class="bf__link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="bf__col">
+        <h3 class="bf__heading">Contact</h3>
+        <ul class="bf__list">
+          <li>
+            <a href={`tel:${siteConfig.phone}`} class="bf__link">{siteConfig.phone}</a>
+          </li>
+          <li>
+            <a href={`mailto:${siteConfig.email}`} class="bf__link">{siteConfig.email}</a>
+          </li>
+          <li class="bf__address">{getFullAddress()}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bf__bottom">
+      <p class="bf__copy">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+      <div class="bf__social">
+        <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" class="bf__social-link" aria-label="Facebook">
+          Facebook
+        </a>
+        <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="bf__social-link" aria-label="Instagram">
+          Instagram
+        </a>
+        <a href={siteConfig.social.yelp} target="_blank" rel="noopener noreferrer" class="bf__social-link" aria-label="Yelp">
+          Yelp
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .bf {
+    background: var(--color-primary);
+    padding: 5rem 2rem 2.5rem;
+    color: white;
+  }
+
+  .bf__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .bf__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .bf__brand {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .bf__tagline {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .bf__heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 1.25rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .bf__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .bf__link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    display: inline-block;
+    padding: 0.15rem 0;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .bf__link:hover {
+    color: white;
+    transform: translateX(4px);
+  }
+
+  .bf__address {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9375rem;
+    font-style: normal;
+  }
+
+  .bf__bottom {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bf__copy {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+  }
+
+  .bf__social {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .bf__social-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .bf__social-link:hover {
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .bf__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .bf__bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .bf__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

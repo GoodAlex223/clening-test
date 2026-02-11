@@ -1,0 +1,331 @@
+---
+/**
+ * BoldGallery — Filterable before/after photo grid with bold styling.
+ */
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  gallery: CollectionEntry<'gallery'>[]
+  uniqueServices: string[]
+}
+
+const { gallery, uniqueServices } = Astro.props
+---
+
+<main data-page="gallery">
+  {/* ── Page header ── */}
+  <section class="page-header">
+    <div class="container">
+      <span class="page-header__label">See the Difference</span>
+      <h1 class="page-header__title">Our Work</h1>
+      <p class="page-header__subtitle">Real projects, real results. See the CleanSpark difference in action.</p>
+    </div>
+  </section>
+
+  {/* ── Filters ── */}
+  <section class="filters">
+    <div class="container">
+      <div class="filter-bar">
+        <button data-filter="all" class="filter filter--active" type="button" aria-pressed="true">All</button>
+        {uniqueServices.map((service) => (
+          <button data-filter={service} class="filter" type="button" aria-pressed="false">{service}</button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Gallery grid ── */}
+  <section class="gallery-section reveal">
+    <div class="container">
+      <div class="gallery-grid reveal-stagger">
+        {gallery.map((item, i) => (
+          <article class="gal" data-gallery-item data-service={item.data.service}>
+            <div class="gal__images">
+              <div class="gal__img-wrap">
+                <img
+                  src={item.data.before}
+                  alt={`Before: ${item.data.room} - ${item.data.service}`}
+                  loading={i < 4 ? 'eager' : 'lazy'}
+                  class="gal__img"
+                />
+                <span class="gal__label">Before</span>
+              </div>
+              <div class="gal__img-wrap">
+                <img
+                  src={item.data.after}
+                  alt={`After: ${item.data.room} - ${item.data.service}`}
+                  loading={i < 4 ? 'eager' : 'lazy'}
+                  class="gal__img"
+                />
+                <span class="gal__label gal__label--after">After</span>
+              </div>
+            </div>
+            <div class="gal__info">
+              <div class="gal__meta">
+                <span class="gal__room">{item.data.room}</span>
+                <span class="gal__service">{item.data.service}</span>
+              </div>
+              <p class="gal__desc">{item.data.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA ── */}
+  <section class="cta-block reveal">
+    <div class="container">
+      <h2 class="cta-block__title">Want Results Like These?</h2>
+      <p class="cta-block__text">Every space has potential. Let us show you yours.</p>
+      <a href="/contact" class="btn btn--white">Book Your Clean &rarr;</a>
+    </div>
+  </section>
+</main>
+
+<script>
+  function initBoldGalleryFilter(): void {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]')
+    const items = document.querySelectorAll<HTMLElement>('[data-gallery-item]')
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter
+
+        buttons.forEach((b) => {
+          const isActive = b === btn
+          b.classList.toggle('filter--active', isActive)
+          b.setAttribute('aria-pressed', String(isActive))
+        })
+
+        items.forEach((item) => {
+          const matches = filter === 'all' || item.dataset.service === filter
+          item.style.display = matches ? '' : 'none'
+        })
+      })
+    })
+  }
+
+  initBoldGalleryFilter()
+</script>
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    padding: var(--section-padding) 2rem 3rem;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    padding-bottom: 5rem;
+  }
+
+  .page-header__label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .page-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
+
+  /* ── Filters ── */
+  .filters { padding: 0 0 2.5rem; }
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    justify-content: center;
+  }
+
+  .filter {
+    padding: 0.5rem 1.5rem;
+    border: 2.5px solid var(--color-primary);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .filter:hover {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  }
+
+  .filter--active {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* ── Gallery grid ── */
+  .gallery-section { padding: 0 0 4rem; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2rem;
+  }
+
+  .gal {
+    background: var(--color-surface);
+    border: 3px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.2s;
+  }
+
+  .gal:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 6px 0 var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .gal__images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gal__img-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gal__img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .gal:hover .gal__img {
+    transform: scale(1.03);
+  }
+
+  .gal__label {
+    position: absolute;
+    top: 0.625rem;
+    left: 0.625rem;
+    background: var(--color-text);
+    color: white;
+    font-family: var(--font-heading);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 0.2rem 0.625rem;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .gal__label--after {
+    background: var(--color-primary);
+  }
+
+  .gal__info { padding: 1.5rem; }
+
+  .gal__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .gal__room {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+  }
+
+  .gal__service {
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.625rem;
+    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    border-radius: var(--radius-full);
+    color: var(--color-primary);
+  }
+
+  .gal__desc {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  /* ── CTA Block ── */
+  .cta-block {
+    background: var(--color-secondary);
+    padding: 6rem 2rem;
+    text-align: center;
+    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .cta-block__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: white;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-block__text {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    padding: 1rem 2.5rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .btn--white {
+    background: white;
+    color: var(--color-secondary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn--white:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 640px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

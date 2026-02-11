@@ -11,11 +11,19 @@ import MinimalPricing from '@components/minimal/pages/MinimalPricing.astro'
 import MinimalGallery from '@components/minimal/pages/MinimalGallery.astro'
 import MinimalContact from '@components/minimal/pages/MinimalContact.astro'
 
-// Future: import Bold, Trust, Bubbly, Noir page components here
+// Bold Spark page content components
+import BoldHome from '@components/bold/pages/BoldHome.astro'
+import BoldServices from '@components/bold/pages/BoldServices.astro'
+import BoldAbout from '@components/bold/pages/BoldAbout.astro'
+import BoldPricing from '@components/bold/pages/BoldPricing.astro'
+import BoldGallery from '@components/bold/pages/BoldGallery.astro'
+import BoldContact from '@components/bold/pages/BoldContact.astro'
+
+// Future: import Trust, Bubbly, Noir page components here
 
 /**
  * Static map of (theme, page) → page content component.
- * All unimplemented themes fall back to Minimal components.
+ * Unimplemented themes fall back to Minimal components.
  * CSS custom properties still provide visual distinction per theme.
  */
 const PAGE_CONTENT_MAP = {
@@ -28,12 +36,12 @@ const PAGE_CONTENT_MAP = {
     contact: MinimalContact,
   },
   bold: {
-    home: MinimalHome,
-    services: MinimalServices,
-    about: MinimalAbout,
-    pricing: MinimalPricing,
-    gallery: MinimalGallery,
-    contact: MinimalContact,
+    home: BoldHome,
+    services: BoldServices,
+    about: BoldAbout,
+    pricing: BoldPricing,
+    gallery: BoldGallery,
+    contact: BoldContact,
   },
   trust: {
     home: MinimalHome,

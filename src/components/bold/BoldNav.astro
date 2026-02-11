@@ -1,0 +1,350 @@
+---
+/**
+ * BoldNav — Energetic sticky navigation with mint accents.
+ *
+ * Bold logo, uppercase links, mint underline on hover/active.
+ * Orange CTA button. Mobile hamburger overlay.
+ */
+import type { ThemeId } from '@themes/types'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+
+interface Props {
+  currentTheme: ThemeId
+  currentPath?: string
+}
+
+const { currentTheme, currentPath = Astro.url.pathname } = Astro.props
+
+const links = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+---
+
+<header class="bn" id="bold-nav">
+  <div class="bn__inner">
+    <a href="/" class="bn__logo" aria-label="CleanSpark — Home">
+      Clean<span class="bn__logo-accent">Spark</span>
+    </a>
+
+    <nav class="bn__links" aria-label="Main navigation">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={['bn__link', { 'bn__link--active': currentPath === link.href || (currentPath === '/' && link.href === '/') }]}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="bn__right">
+      <ThemeSwitcher currentTheme={currentTheme} client:load />
+      <a href="/contact" class="bn__cta">Get a Quote</a>
+      <button
+        type="button"
+        class="bn__burger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="bold-mobile-menu"
+      >
+        <span class="bn__burger-line" />
+        <span class="bn__burger-line" />
+        <span class="bn__burger-line" />
+      </button>
+    </div>
+  </div>
+</header>
+
+{/* Mobile overlay menu */}
+<div class="bn-mobile" id="bold-mobile-menu" aria-hidden="true" style="opacity: 0; visibility: hidden;">
+  <nav class="bn-mobile__nav" aria-label="Mobile navigation">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class:list={['bn-mobile__link', { 'bn-mobile__link--active': currentPath === link.href || (currentPath === '/' && link.href === '/') }]}
+        aria-current={currentPath === link.href ? 'page' : undefined}
+        tabindex="-1"
+        style="opacity: 0; transform: translateY(16px);"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</div>
+
+<script>
+  function initBoldNav(): void {
+    const nav = document.getElementById('bold-nav')
+    const burgerEl = nav?.querySelector<HTMLButtonElement>('.bn__burger')
+    const menuEl = document.getElementById('bold-mobile-menu')
+    if (!nav || !burgerEl || !menuEl) return
+
+    const burger = burgerEl
+    const mobileMenu = menuEl
+
+    // Accent border on scroll
+    const onScroll = (): void => {
+      nav.classList.toggle('bn--scrolled', window.scrollY > 20)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    const mobileLinks = mobileMenu.querySelectorAll<HTMLAnchorElement>('a')
+    let isMenuOpen = false
+
+    function openMenu(): void {
+      isMenuOpen = true
+      mobileMenu.style.opacity = '1'
+      mobileMenu.style.visibility = 'visible'
+      mobileMenu.setAttribute('aria-hidden', 'false')
+      burger.setAttribute('aria-expanded', 'true')
+      burger.classList.add('bn__burger--open')
+      document.body.style.overflow = 'hidden'
+      mobileLinks.forEach((l) => {
+        l.removeAttribute('tabindex')
+        l.style.opacity = '1'
+        l.style.transform = 'translateY(0)'
+      })
+      mobileLinks[0]?.focus()
+    }
+
+    function closeMenu(): void {
+      isMenuOpen = false
+      mobileMenu.style.opacity = '0'
+      mobileMenu.style.visibility = 'hidden'
+      mobileMenu.setAttribute('aria-hidden', 'true')
+      burger.setAttribute('aria-expanded', 'false')
+      burger.classList.remove('bn__burger--open')
+      document.body.style.overflow = ''
+      mobileLinks.forEach((l) => {
+        l.setAttribute('tabindex', '-1')
+        l.style.opacity = '0'
+        l.style.transform = 'translateY(16px)'
+      })
+      burger.focus()
+    }
+
+    burger.addEventListener('click', () => {
+      if (isMenuOpen) closeMenu()
+      else openMenu()
+    })
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) closeMenu()
+    })
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu)
+    })
+  }
+
+  initBoldNav()
+</script>
+
+<style>
+  /* ── Sticky header ── */
+  .bn {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(254, 255, 254, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .bn--scrolled {
+    border-bottom-color: var(--color-primary);
+    box-shadow: 0 4px 24px rgba(56, 217, 169, 0.1);
+  }
+
+  .bn__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.5rem;
+  }
+
+  /* ── Logo ── */
+  .bn__logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    flex-shrink: 0;
+  }
+
+  .bn__logo-accent {
+    color: var(--color-secondary);
+  }
+
+  /* ── Desktop links ── */
+  .bn__links {
+    display: flex;
+    gap: 2.25rem;
+    align-items: center;
+  }
+
+  .bn__link {
+    position: relative;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-bottom: 4px;
+    transition: color 0.2s;
+  }
+
+  .bn__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .bn__link:hover,
+  .bn__link--active {
+    color: var(--color-primary);
+  }
+
+  .bn__link:hover::after,
+  .bn__link--active::after {
+    width: 100%;
+  }
+
+  /* ── Right side ── */
+  .bn__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .bn__cta {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.65rem 1.5rem;
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .bn__cta:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.35);
+  }
+
+  /* ── Hamburger ── */
+  .bn__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 28px;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .bn__burger-line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .bn__burger--open .bn__burger-line:first-child {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .bn__burger--open .bn__burger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .bn__burger--open .bn__burger-line:last-child {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* ── Mobile overlay ── */
+  .bn-mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .bn-mobile__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .bn-mobile__link {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: color 0.2s;
+  }
+
+  .bn-mobile__link:hover,
+  .bn-mobile__link--active {
+    color: var(--color-primary);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .bn__links {
+      display: none;
+    }
+
+    .bn__burger {
+      display: flex;
+    }
+
+    .bn__cta {
+      display: none;
+    }
+
+    /* Hide theme switcher on mobile — shown in footer instead */
+    .bn__right :global(.theme-switcher) {
+      display: none;
+    }
+  }
+</style>
