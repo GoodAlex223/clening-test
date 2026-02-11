@@ -130,7 +130,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-11 — T-006: Bold Spark Theme — Full Implementation
 
-**Plan**: [plans/2026-02-11_t-006-bold-spark.md](plans/2026-02-11_t-006-bold-spark.md)
+**Plan**: [docs/archive/plans/2026-02-11_t-006-bold-spark.md](../archive/plans/2026-02-11_t-006-bold-spark.md)
 **Summary**: Implemented the second complete theme (Bold Spark) with energetic neo-mint + orange palette, diagonal clip-path section transitions, offset box-shadow cards, animated stats counter, geometric CSS hero art, and 6 fully-styled page components. Used /frontend-design skill to establish the visual language via an HTML prototype.
 
 **Key Changes**:
