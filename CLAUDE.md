@@ -36,7 +36,7 @@ pnpm test             # All tests
 
 ## Architecture
 
-- **Multi-theme system**: 5 complete layout systems (Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
+- **Multi-theme system**: 5 complete layout systems (3 implemented: Minimal Zen, Bold Spark, Trust Shield; 2 planned: Bubbly Clean, Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
 - **Content Collections**: Astro Content Collections with Zod schemas for services, testimonials, team, gallery, pricing
 - **Theme Engine**:
   - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
@@ -49,6 +49,12 @@ pnpm test             # All tests
 - **Islands Architecture**: Static HTML by default, `client:load` only for ThemeSwitcher, contact form, gallery filter, mobile nav
 - **Pages**: 6 routes — Home, Services, About, Pricing, Gallery, Contact
 - **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`
+- **Theme implementations**:
+  - **Minimal Zen** (complete): Soft pastels, sans-serif (Inter), rounded corners, clean spacing
+  - **Bold Spark** (complete): Vibrant orange/yellow, sans-serif (Poppins), 3px borders, offset shadows, clip-paths
+  - **Trust Shield** (complete): Navy/slate grey, serif (Merriweather), 1px borders, trust badges, corporate professional
+  - **Bubbly Clean** (planned): Pink/teal, rounded fonts, bubble shapes, playful animations
+  - **Noir Luxe** (planned): Black/gold, elegant serif, minimalist luxury
 
 <!-- END AUTO-MANAGED -->
 
@@ -83,9 +89,14 @@ pnpm test             # All tests
 - **Scroll-reveal animations**: IntersectionObserver-based `.reveal` / `.revealed` pattern in `<style is:global>` for cross-component animation consistency; `.reveal-stagger` for grid children animations using descendant selectors
 - **Stats counter animations**: IntersectionObserver-triggered number counting with `data-counter`, `data-target`, `data-suffix` attributes; eased animation via `requestAnimationFrame` for performance; used in Trust and Bold themes
 - **Decorative SVG animations**: Theme-specific hero decorations (Trust shield, Bold spark) with CSS keyframe animations and pseudo-elements for visual depth
-- **Native accordion pattern**: FAQ sections use native `<details>`/`<summary>` elements with custom styling; progressive enhancement without JS dependencies
+- **Native accordion pattern**: FAQ sections use native `<details>`/`<summary>` elements with custom styling; progressive enhancement without JS dependencies (Trust theme)
 - **JS-controlled visibility via inline styles**: Astro scoped styles conflict with dynamically-toggled classes in `<script>` blocks; inline styles via JS provide reliable visibility control for mobile menu overlays
 - **Thin page routes pattern**: Page route files (`src/pages/*.astro`) are data-fetching shells that call `resolvePageContent()` to delegate presentation to theme-specific page components
+- **Scoped component class prefixes**: Theme-specific prefixes prevent style leaking (`.mn`/`.mf` for Minimal, `.bn`/`.bf` for Bold, `.tn`/`.tf` for Trust)
+- **CSS-only illustrations**: Complex decorative elements built entirely with CSS (Trust shield: gradients, absolute positioning, border-radius, dashed borders) — demonstrates CSS art skills without external dependencies
+- **Trust credentials pattern**: Footer trust strip with certifications/badges unique to Trust theme; reinforces corporate reliability (could be reused in other professional themes)
+- **Inline SVG icons**: All themes use inline SVG for icons (shields, checkmarks, stars, user icons) for performance and customization via `currentColor`
+- **Service category grouping**: Services organized by type (residential/commercial/specialty) in Trust theme; improves scanability for corporate audiences
 
 <!-- END AUTO-MANAGED -->
 
