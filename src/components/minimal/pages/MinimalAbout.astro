@@ -13,8 +13,14 @@ const { team } = Astro.props
 
 const values = [
   { title: 'Quality First', desc: 'We never cut corners. Every surface, every room, every time.' },
-  { title: 'Fair & Transparent', desc: 'No hidden fees. Fair wages for our team. Honest pricing for our clients.' },
-  { title: 'Eco-Conscious', desc: 'Green cleaning products and sustainable practices as standard.' },
+  {
+    title: 'Fair & Transparent',
+    desc: 'No hidden fees. Fair wages for our team. Honest pricing for our clients.',
+  },
+  {
+    title: 'Eco-Conscious',
+    desc: 'Green cleaning products and sustainable practices as standard.',
+  },
   { title: 'Reliable', desc: 'On time, every time. Consistent results you can count on.' },
 ]
 ---
@@ -36,22 +42,28 @@ const values = [
           <span class="label">Our Story</span>
           <h2 class="heading-2">How We Started</h2>
           <p class="body-text">
-            CleanSpark was born from a simple belief: everyone deserves a clean, healthy space — and every cleaner deserves fair pay and respect. Founded in 2019, we started as a one-person operation in a Seattle studio apartment with a vacuum, a bucket, and a vision.
+            CleanSpark was born from a simple belief: everyone deserves a clean, healthy space — and
+            every cleaner deserves fair pay and respect. Founded in 2019, we started as a one-person
+            operation in a Seattle studio apartment with a vacuum, a bucket, and a vision.
           </p>
           <p class="body-text">
-            Today, we're a team of dedicated professionals serving homes and businesses across the greater Seattle area. We've completed over 5,000 cleans, maintained a 4.9-star rating, and built something we're truly proud of.
+            Today, we're a team of dedicated professionals serving homes and businesses across the
+            greater Seattle area. We've completed over 5,000 cleans, maintained a 4.9-star rating,
+            and built something we're truly proud of.
           </p>
         </div>
         <div class="two-col__right">
           <span class="label">What We Believe</span>
           <h2 class="heading-2">Our Values</h2>
           <ul class="values-list">
-            {values.map((v) => (
-              <li class="value">
-                <strong class="value__title">{v.title}</strong>
-                <p class="value__desc">{v.desc}</p>
-              </li>
-            ))}
+            {
+              values.map((v) => (
+                <li class="value">
+                  <strong class="value__title">{v.title}</strong>
+                  <p class="value__desc">{v.desc}</p>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </div>
@@ -63,25 +75,29 @@ const values = [
     <div class="container">
       <h2 class="section__title">Meet Our Team</h2>
       <div class="team-grid reveal-stagger">
-        {team.map((member) => (
-          <article class="member" data-member={member.data.id}>
-            <div class="member__avatar" aria-hidden="true">
-              {member.data.name.charAt(0)}
-            </div>
-            <h3 class="member__name">{member.data.name}</h3>
-            <p class="member__role">{member.data.role}</p>
-            <p class="member__bio">
-              {member.data.bio.length > 200 ? member.data.bio.slice(0, 200) + '...' : member.data.bio}
-            </p>
-            {member.data.certifications && member.data.certifications.length > 0 && (
-              <div class="member__certs">
-                {member.data.certifications.map((cert) => (
-                  <span class="member__cert">{cert}</span>
-                ))}
+        {
+          team.map((member) => (
+            <article class="member" data-member={member.data.id}>
+              <div class="member__avatar" aria-hidden="true">
+                {member.data.name.charAt(0)}
               </div>
-            )}
-          </article>
-        ))}
+              <h3 class="member__name">{member.data.name}</h3>
+              <p class="member__role">{member.data.role}</p>
+              <p class="member__bio">
+                {member.data.bio.length > 200
+                  ? member.data.bio.slice(0, 200) + '...'
+                  : member.data.bio}
+              </p>
+              {member.data.certifications && member.data.certifications.length > 0 && (
+                <div class="member__certs">
+                  {member.data.certifications.map((cert) => (
+                    <span class="member__cert">{cert}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>

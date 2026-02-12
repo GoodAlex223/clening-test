@@ -21,7 +21,7 @@ const categoryLabels: Record<string, string> = {
 }
 
 const servicesByCategory = Object.fromEntries(
-  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)]),
+  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)])
 ) as Record<(typeof categories)[number], typeof services>
 ---
 
@@ -31,55 +31,63 @@ const servicesByCategory = Object.fromEntries(
     <div class="container">
       <h1 class="page-header__title">Our Services</h1>
       <p class="page-header__subtitle">
-        From routine home cleaning to post-construction cleanup, we have the expertise to make any space shine.
+        From routine home cleaning to post-construction cleanup, we have the expertise to make any
+        space shine.
       </p>
     </div>
   </section>
 
   {/* ── Service categories ── */}
-  {categories.map((category) => (
-    <section class="section reveal" data-section={`services-${category}`}>
-      <div class="container">
-        <div class="cat-header">
-          <span class="cat-header__label">{categoryLabels[category]}</span>
-          <h2 class="cat-header__title">{categoryLabels[category]} Services</h2>
+  {
+    categories.map((category) => (
+      <section class="section reveal" data-section={`services-${category}`}>
+        <div class="container">
+          <div class="cat-header">
+            <span class="cat-header__label">{categoryLabels[category]}</span>
+            <h2 class="cat-header__title">{categoryLabels[category]} Services</h2>
+          </div>
+          <div class="service-grid reveal-stagger">
+            {servicesByCategory[category].map((service) => (
+              <article class="svc" id={service.data.slug} data-service={service.data.slug}>
+                <div class="svc__top">
+                  <h3 class="svc__name">{service.data.name}</h3>
+                  <p class="svc__tagline">{service.data.tagline}</p>
+                </div>
+                <ul class="svc__features">
+                  {service.data.features.slice(0, 4).map((feature) => (
+                    <li class="svc__feature">
+                      <span class="svc__check" aria-hidden="true">
+                        &#10003;
+                      </span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div class="svc__bottom">
+                  {service.data.startingPrice && (
+                    <span class="svc__price">
+                      From ${service.data.startingPrice} {service.data.priceUnit}
+                    </span>
+                  )}
+                  <a href="/contact" class="svc__cta">
+                    Get a Quote
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-        <div class="service-grid reveal-stagger">
-          {servicesByCategory[category].map((service) => (
-            <article class="svc" id={service.data.slug} data-service={service.data.slug}>
-              <div class="svc__top">
-                <h3 class="svc__name">{service.data.name}</h3>
-                <p class="svc__tagline">{service.data.tagline}</p>
-              </div>
-              <ul class="svc__features">
-                {service.data.features.slice(0, 4).map((feature) => (
-                  <li class="svc__feature">
-                    <span class="svc__check" aria-hidden="true">&#10003;</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <div class="svc__bottom">
-                {service.data.startingPrice && (
-                  <span class="svc__price">
-                    From ${service.data.startingPrice} {service.data.priceUnit}
-                  </span>
-                )}
-                <a href="/contact" class="svc__cta">Get a Quote</a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  ))}
+      </section>
+    ))
+  }
 
   {/* ── CTA ── */}
   <section class="cta reveal">
     <div class="container">
       <h2 class="cta__title">Not Sure Which Service You Need?</h2>
       <p class="cta__text">
-        Call us at <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a> or get a free quote online.
+        Call us at <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a> or get
+        a free quote online.
       </p>
       <a href="/contact" class="btn btn--primary">Request a Free Quote</a>
     </div>
@@ -157,7 +165,9 @@ const servicesByCategory = Object.fromEntries(
     display: flex;
     flex-direction: column;
     border: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
   }
 
   .svc:hover {

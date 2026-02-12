@@ -16,6 +16,7 @@ Implement the Trust Shield theme — a corporate reliability theme with navy + s
 Direct implementation following patterns established by Minimal Zen (T-005) and Bold Spark (T-006). Used inline SVG icons throughout for professional, corporate feel. CSS-only shield illustration in hero (no external images). Scoped styles per component with `.tn`/`.tf` class prefixes for nav/footer.
 
 **Design Differentiation from Bold Spark:**
+
 - 1px borders (not 3px), subtle shadows (not offset box-shadows)
 - No clip-paths or diagonal section dividers
 - `md` border-radius on buttons (not pill/full)
@@ -26,6 +27,7 @@ Direct implementation following patterns established by Minimal Zen (T-005) and 
 ## 3. Implementation
 
 ### Files Created (8)
+
 - `src/components/trust/TrustNav.astro` — Sticky corporate nav with shield SVG logo, underline link animations, mobile overlay
 - `src/components/trust/TrustFooter.astro` — Trust credentials strip + dark navy 4-column footer
 - `src/components/trust/pages/TrustHome.astro` — Hero with CSS shield illustration, trust badges, services grid, animated stats, testimonials, CTA
@@ -36,6 +38,7 @@ Direct implementation following patterns established by Minimal Zen (T-005) and 
 - `src/components/trust/pages/TrustContact.astro` — 2-column form + info cards sidebar with SVG icons
 
 ### Files Modified (3)
+
 - `src/layouts/trust/TrustLayout.astro` — Expanded from placeholder to full layout with fonts, nav, footer, scroll-reveal
 - `src/lib/page-resolver.ts` — Replaced Minimal fallbacks with Trust component imports
 - `package.json` / `pnpm-lock.yaml` — Added @fontsource/merriweather, @fontsource/source-sans-3

@@ -12,10 +12,26 @@ interface Props {
 const { team } = Astro.props
 
 const values = [
-  { title: 'Quality First', desc: 'We never cut corners. Every surface, every room, every time.', icon: 'shield' },
-  { title: 'Fair & Transparent', desc: 'No hidden fees. Fair wages for our team. Honest pricing for our clients.', icon: 'check' },
-  { title: 'Eco-Conscious', desc: 'Green cleaning products and sustainable practices as standard.', icon: 'leaf' },
-  { title: 'Reliable', desc: 'On time, every time. Consistent results you can count on.', icon: 'clock' },
+  {
+    title: 'Quality First',
+    desc: 'We never cut corners. Every surface, every room, every time.',
+    icon: 'shield',
+  },
+  {
+    title: 'Fair & Transparent',
+    desc: 'No hidden fees. Fair wages for our team. Honest pricing for our clients.',
+    icon: 'check',
+  },
+  {
+    title: 'Eco-Conscious',
+    desc: 'Green cleaning products and sustainable practices as standard.',
+    icon: 'leaf',
+  },
+  {
+    title: 'Reliable',
+    desc: 'On time, every time. Consistent results you can count on.',
+    icon: 'clock',
+  },
 ]
 ---
 
@@ -35,10 +51,14 @@ const values = [
         <div class="story__content">
           <h2 class="story__heading">Our Story</h2>
           <p class="story__text">
-            CleanSpark was born from a simple belief: everyone deserves a clean, healthy space — and every cleaner deserves fair pay and respect. Founded in 2019, we started as a one-person operation in a Seattle studio apartment with a vacuum, a bucket, and a vision.
+            CleanSpark was born from a simple belief: everyone deserves a clean, healthy space — and
+            every cleaner deserves fair pay and respect. Founded in 2019, we started as a one-person
+            operation in a Seattle studio apartment with a vacuum, a bucket, and a vision.
           </p>
           <p class="story__text">
-            Today, we're a team of dedicated professionals serving homes and businesses across the greater Seattle area. We've completed over 5,000 cleans, maintained a 4.9-star rating, and built something we're truly proud of.
+            Today, we're a team of dedicated professionals serving homes and businesses across the
+            greater Seattle area. We've completed over 5,000 cleans, maintained a 4.9-star rating,
+            and built something we're truly proud of.
           </p>
           <div class="story__stats">
             <div class="story__stat">
@@ -57,9 +77,23 @@ const values = [
         </div>
         <div class="story__aside">
           <div class="story__card">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z" stroke="var(--color-primary)" stroke-width="1.5" fill="color-mix(in srgb, var(--color-primary) 8%, transparent)"/><path d="M9 12l2 2 4-4" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              ><path
+                d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z"
+                stroke="var(--color-primary)"
+                stroke-width="1.5"
+                fill="color-mix(in srgb, var(--color-primary) 8%, transparent)"></path><path
+                d="M9 12l2 2 4-4"
+                stroke="var(--color-primary)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path></svg
+            >
             <h3>Our Promise</h3>
-            <p>100% satisfaction guaranteed. If you're not completely happy with our work, we'll re-clean it free of charge within 24 hours.</p>
+            <p>
+              100% satisfaction guaranteed. If you're not completely happy with our work, we'll
+              re-clean it free of charge within 24 hours.
+            </p>
           </div>
         </div>
       </div>
@@ -74,18 +108,67 @@ const values = [
         <p class="values-header__subtitle">The principles that guide everything we do.</p>
       </div>
       <div class="values-grid reveal-stagger reveal">
-        {values.map((v) => (
-          <article class="value-card">
-            <div class="value-card__icon" aria-hidden="true">
-              {v.icon === 'shield' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>}
-              {v.icon === 'check' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>}
-              {v.icon === 'leaf' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1.41-3.53A9.62 9.62 0 0012 20c4.42 0 8-3.58 8-8V4l-3 4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>}
-              {v.icon === 'clock' && <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>}
-            </div>
-            <h3 class="value-card__title">{v.title}</h3>
-            <p class="value-card__desc">{v.desc}</p>
-          </article>
-        ))}
+        {
+          values.map((v) => (
+            <article class="value-card">
+              <div class="value-card__icon" aria-hidden="true">
+                {v.icon === 'shield' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                    <path
+                      d="M9 12l2 2 4-4"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                )}
+                {v.icon === 'check' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <path
+                      d="M9 12l2 2 4-4"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                )}
+                {v.icon === 'leaf' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1.41-3.53A9.62 9.62 0 0012 20c4.42 0 8-3.58 8-8V4l-3 4z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                )}
+                {v.icon === 'clock' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                    <path
+                      d="M12 6v6l4 2"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                )}
+              </div>
+              <h3 class="value-card__title">{v.title}</h3>
+              <p class="value-card__desc">{v.desc}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -98,28 +181,46 @@ const values = [
         <p class="team-header__subtitle">The people behind every sparkling clean.</p>
       </div>
       <div class="team-grid reveal-stagger reveal">
-        {team.map((member) => (
-          <article class="member" data-member={member.data.id}>
-            <div class="member__avatar" aria-hidden="true">
-              {member.data.name.charAt(0)}
-            </div>
-            <h3 class="member__name">{member.data.name}</h3>
-            <p class="member__role">{member.data.role}</p>
-            <p class="member__bio">
-              {member.data.bio.length > 200 ? member.data.bio.slice(0, 200) + '...' : member.data.bio}
-            </p>
-            {member.data.certifications && member.data.certifications.length > 0 && (
-              <div class="member__certs">
-                {member.data.certifications.map((cert) => (
-                  <span class="member__cert">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    {cert}
-                  </span>
-                ))}
+        {
+          team.map((member) => (
+            <article class="member" data-member={member.data.id}>
+              <div class="member__avatar" aria-hidden="true">
+                {member.data.name.charAt(0)}
               </div>
-            )}
-          </article>
-        ))}
+              <h3 class="member__name">{member.data.name}</h3>
+              <p class="member__role">{member.data.role}</p>
+              <p class="member__bio">
+                {member.data.bio.length > 200
+                  ? member.data.bio.slice(0, 200) + '...'
+                  : member.data.bio}
+              </p>
+              {member.data.certifications && member.data.certifications.length > 0 && (
+                <div class="member__certs">
+                  {member.data.certifications.map((cert) => (
+                    <span class="member__cert">
+                      <svg
+                        width="10"
+                        height="10"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M9 12l2 2 4-4"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      {cert}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -139,7 +240,7 @@ const values = [
     padding: var(--section-padding) 2rem 3rem;
     text-align: center;
     background: var(--color-surface);
-    border-bottom: 1px solid #DEE2E6;
+    border-bottom: 1px solid #dee2e6;
   }
 
   .page-header__title {
@@ -159,9 +260,17 @@ const values = [
   }
 
   /* ── Shared ── */
-  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
-  .section { padding: var(--section-padding) 0; }
-  .section--surface { background: var(--color-surface); }
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .section {
+    padding: var(--section-padding) 0;
+  }
+  .section--surface {
+    background: var(--color-surface);
+  }
 
   /* ── Story ── */
   .story {
@@ -191,7 +300,7 @@ const values = [
     gap: 2.5rem;
     margin-top: 2rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #DEE2E6;
+    border-top: 1px solid #dee2e6;
   }
 
   .story__stat {
@@ -214,7 +323,7 @@ const values = [
 
   .story__card {
     background: var(--color-surface);
-    border: 1px solid #DEE2E6;
+    border: 1px solid #dee2e6;
     border-radius: var(--radius-md);
     padding: 2rem;
     border-left: 4px solid var(--color-secondary);
@@ -239,7 +348,10 @@ const values = [
   }
 
   /* ── Values ── */
-  .values-header { text-align: center; margin-bottom: 3rem; }
+  .values-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
 
   .values-header__title {
     font-family: var(--font-heading);
@@ -262,11 +374,13 @@ const values = [
 
   .value-card {
     background: var(--color-background);
-    border: 1px solid #DEE2E6;
+    border: 1px solid #dee2e6;
     border-radius: var(--radius-md);
     padding: 2rem;
     text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .value-card:hover {
@@ -301,7 +415,10 @@ const values = [
   }
 
   /* ── Team ── */
-  .team-header { text-align: center; margin-bottom: 3rem; }
+  .team-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
 
   .team-header__title {
     font-family: var(--font-heading);
@@ -311,7 +428,10 @@ const values = [
     margin-bottom: 0.5rem;
   }
 
-  .team-header__subtitle { color: var(--color-text-muted); font-size: 1rem; }
+  .team-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+  }
 
   .team-grid {
     display: grid;
@@ -321,11 +441,13 @@ const values = [
 
   .member {
     background: var(--color-surface);
-    border: 1px solid #DEE2E6;
+    border: 1px solid #dee2e6;
     border-radius: var(--radius-md);
     padding: 2rem;
     text-align: center;
-    transition: border-color 0.2s, transform 0.2s;
+    transition:
+      border-color 0.2s,
+      transform 0.2s;
   }
 
   .member:hover {

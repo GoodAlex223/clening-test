@@ -19,7 +19,7 @@ const categoryLabels: Record<string, string> = {
 }
 
 const servicesByCategory = Object.fromEntries(
-  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)]),
+  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)])
 ) as Record<(typeof categories)[number], typeof services>
 ---
 
@@ -30,58 +30,73 @@ const servicesByCategory = Object.fromEntries(
       <span class="page-header__label">What We Do</span>
       <h1 class="page-header__title">Our Services</h1>
       <p class="page-header__subtitle">
-        From routine home cleaning to post-construction cleanup, we have the expertise to make any space shine.
+        From routine home cleaning to post-construction cleanup, we have the expertise to make any
+        space shine.
       </p>
     </div>
   </section>
 
   {/* ── Service categories ── */}
-  {categories.map((category, catIndex) => (
-    <section
-      class:list={['section', { 'section--surface': catIndex % 2 === 1 }]}
-      data-section={`services-${category}`}
-    >
-      <div class="container">
-        <div class:list={['cat-header', 'reveal', catIndex % 2 === 0 ? 'reveal--left' : 'reveal--right']}>
-          <span class="cat-header__label">{categoryLabels[category]}</span>
-          <h2 class="cat-header__title">{categoryLabels[category]} Services</h2>
+  {
+    categories.map((category, catIndex) => (
+      <section
+        class:list={['section', { 'section--surface': catIndex % 2 === 1 }]}
+        data-section={`services-${category}`}
+      >
+        <div class="container">
+          <div
+            class:list={[
+              'cat-header',
+              'reveal',
+              catIndex % 2 === 0 ? 'reveal--left' : 'reveal--right',
+            ]}
+          >
+            <span class="cat-header__label">{categoryLabels[category]}</span>
+            <h2 class="cat-header__title">{categoryLabels[category]} Services</h2>
+          </div>
+          <div class="service-grid reveal-stagger reveal">
+            {servicesByCategory[category].map((service) => (
+              <article class="svc" id={service.data.slug} data-service={service.data.slug}>
+                <div class="svc__top">
+                  <h3 class="svc__name">{service.data.name}</h3>
+                  <p class="svc__tagline">{service.data.tagline}</p>
+                </div>
+                <ul class="svc__features">
+                  {service.data.features.slice(0, 4).map((feature) => (
+                    <li class="svc__feature">
+                      <span class="svc__check" aria-hidden="true">
+                        &#10003;
+                      </span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div class="svc__bottom">
+                  {service.data.startingPrice && (
+                    <span class="svc__price">
+                      From ${service.data.startingPrice} {service.data.priceUnit}
+                    </span>
+                  )}
+                  <a href="/contact" class="svc__cta">
+                    Get a Quote &rarr;
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-        <div class="service-grid reveal-stagger reveal">
-          {servicesByCategory[category].map((service) => (
-            <article class="svc" id={service.data.slug} data-service={service.data.slug}>
-              <div class="svc__top">
-                <h3 class="svc__name">{service.data.name}</h3>
-                <p class="svc__tagline">{service.data.tagline}</p>
-              </div>
-              <ul class="svc__features">
-                {service.data.features.slice(0, 4).map((feature) => (
-                  <li class="svc__feature">
-                    <span class="svc__check" aria-hidden="true">&#10003;</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <div class="svc__bottom">
-                {service.data.startingPrice && (
-                  <span class="svc__price">
-                    From ${service.data.startingPrice} {service.data.priceUnit}
-                  </span>
-                )}
-                <a href="/contact" class="svc__cta">Get a Quote &rarr;</a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  ))}
+      </section>
+    ))
+  }
 
   {/* ── CTA ── */}
   <section class="cta-block reveal">
     <div class="container">
       <h2 class="cta-block__title">Not Sure Which Service You Need?</h2>
       <p class="cta-block__text">
-        Call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone">{siteConfig.phone}</a> or get a free quote online.
+        Call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone"
+          >{siteConfig.phone}</a
+        > or get a free quote online.
       </p>
       <a href="/contact" class="btn btn--white">Request a Free Quote &rarr;</a>
     </div>
@@ -180,7 +195,9 @@ const servicesByCategory = Object.fromEntries(
     display: flex;
     flex-direction: column;
     box-shadow: 6px 6px 0 var(--color-primary);
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    transition:
+      transform 0.25s ease-out,
+      box-shadow 0.25s ease-out;
   }
 
   .svc:hover {
@@ -254,7 +271,9 @@ const servicesByCategory = Object.fromEntries(
     font-family: var(--font-heading);
     font-size: 0.875rem;
     font-weight: 600;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .svc__cta:hover {

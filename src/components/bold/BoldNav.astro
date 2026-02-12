@@ -31,15 +31,23 @@ const links = [
     </a>
 
     <nav class="bn__links" aria-label="Main navigation">
-      {links.map((link) => (
-        <a
-          href={link.href}
-          class:list={['bn__link', { 'bn__link--active': currentPath === link.href || (currentPath === '/' && link.href === '/') }]}
-          aria-current={currentPath === link.href ? 'page' : undefined}
-        >
-          {link.label}
-        </a>
-      ))}
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              'bn__link',
+              {
+                'bn__link--active':
+                  currentPath === link.href || (currentPath === '/' && link.href === '/'),
+              },
+            ]}
+            aria-current={currentPath === link.href ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="bn__right">
@@ -52,28 +60,41 @@ const links = [
         aria-expanded="false"
         aria-controls="bold-mobile-menu"
       >
-        <span class="bn__burger-line" />
-        <span class="bn__burger-line" />
-        <span class="bn__burger-line" />
+        <span class="bn__burger-line"></span>
+        <span class="bn__burger-line"></span>
+        <span class="bn__burger-line"></span>
       </button>
     </div>
   </div>
 </header>
 
 {/* Mobile overlay menu */}
-<div class="bn-mobile" id="bold-mobile-menu" aria-hidden="true" style="opacity: 0; visibility: hidden;">
+<div
+  class="bn-mobile"
+  id="bold-mobile-menu"
+  aria-hidden="true"
+  style="opacity: 0; visibility: hidden;"
+>
   <nav class="bn-mobile__nav" aria-label="Mobile navigation">
-    {links.map((link) => (
-      <a
-        href={link.href}
-        class:list={['bn-mobile__link', { 'bn-mobile__link--active': currentPath === link.href || (currentPath === '/' && link.href === '/') }]}
-        aria-current={currentPath === link.href ? 'page' : undefined}
-        tabindex="-1"
-        style="opacity: 0; transform: translateY(16px);"
-      >
-        {link.label}
-      </a>
-    ))}
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'bn-mobile__link',
+            {
+              'bn-mobile__link--active':
+                currentPath === link.href || (currentPath === '/' && link.href === '/'),
+            },
+          ]}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+          tabindex="-1"
+          style="opacity: 0; transform: translateY(16px);"
+        >
+          {link.label}
+        </a>
+      ))
+    }
   </nav>
 </div>
 
@@ -156,7 +177,9 @@ const links = [
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 2px solid transparent;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
   }
 
   .bn--scrolled {
@@ -248,7 +271,9 @@ const links = [
     color: var(--color-cta-text);
     border-radius: var(--radius-full);
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .bn__cta:hover {
@@ -276,7 +301,9 @@ const links = [
     height: 3px;
     background: var(--color-primary);
     border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.2s ease;
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
     transform-origin: center;
   }
 

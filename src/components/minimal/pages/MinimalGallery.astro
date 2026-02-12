@@ -17,7 +17,9 @@ const { gallery, uniqueServices } = Astro.props
   <section class="page-header">
     <div class="container">
       <h1 class="page-header__title">Our Work</h1>
-      <p class="page-header__subtitle">See the CleanSpark difference in action. Real projects, real results.</p>
+      <p class="page-header__subtitle">
+        See the CleanSpark difference in action. Real projects, real results.
+      </p>
     </div>
   </section>
 
@@ -25,10 +27,16 @@ const { gallery, uniqueServices } = Astro.props
   <section class="filters">
     <div class="container">
       <div class="filter-bar">
-        <button data-filter="all" class="filter filter--active" type="button" aria-pressed="true">All</button>
-        {uniqueServices.map((service) => (
-          <button data-filter={service} class="filter" type="button" aria-pressed="false">{service}</button>
-        ))}
+        <button data-filter="all" class="filter filter--active" type="button" aria-pressed="true"
+          >All</button
+        >
+        {
+          uniqueServices.map((service) => (
+            <button data-filter={service} class="filter" type="button" aria-pressed="false">
+              {service}
+            </button>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -37,37 +45,39 @@ const { gallery, uniqueServices } = Astro.props
   <section class="section reveal">
     <div class="container">
       <div class="gallery-grid reveal-stagger">
-        {gallery.map((item, i) => (
-          <article class="gal" data-gallery-item data-service={item.data.service}>
-            <div class="gal__images">
-              <div class="gal__img-wrap">
-                <img
-                  src={item.data.before}
-                  alt={`Before: ${item.data.room} - ${item.data.service}`}
-                  loading={i < 4 ? 'eager' : 'lazy'}
-                  class="gal__img"
-                />
-                <span class="gal__label">Before</span>
+        {
+          gallery.map((item, i) => (
+            <article class="gal" data-gallery-item data-service={item.data.service}>
+              <div class="gal__images">
+                <div class="gal__img-wrap">
+                  <img
+                    src={item.data.before}
+                    alt={`Before: ${item.data.room} - ${item.data.service}`}
+                    loading={i < 4 ? 'eager' : 'lazy'}
+                    class="gal__img"
+                  />
+                  <span class="gal__label">Before</span>
+                </div>
+                <div class="gal__img-wrap">
+                  <img
+                    src={item.data.after}
+                    alt={`After: ${item.data.room} - ${item.data.service}`}
+                    loading={i < 4 ? 'eager' : 'lazy'}
+                    class="gal__img"
+                  />
+                  <span class="gal__label">After</span>
+                </div>
               </div>
-              <div class="gal__img-wrap">
-                <img
-                  src={item.data.after}
-                  alt={`After: ${item.data.room} - ${item.data.service}`}
-                  loading={i < 4 ? 'eager' : 'lazy'}
-                  class="gal__img"
-                />
-                <span class="gal__label">After</span>
+              <div class="gal__info">
+                <div class="gal__meta">
+                  <span class="gal__room">{item.data.room}</span>
+                  <span class="gal__service">{item.data.service}</span>
+                </div>
+                <p class="gal__desc">{item.data.description}</p>
               </div>
-            </div>
-            <div class="gal__info">
-              <div class="gal__meta">
-                <span class="gal__room">{item.data.room}</span>
-                <span class="gal__service">{item.data.service}</span>
-              </div>
-              <p class="gal__desc">{item.data.description}</p>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -185,7 +195,9 @@ const { gallery, uniqueServices } = Astro.props
     border-radius: var(--radius-sm);
     overflow: hidden;
     border: 1px solid color-mix(in srgb, var(--color-text) 6%, transparent);
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
   }
 
   .gal:hover {

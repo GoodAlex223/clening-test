@@ -27,24 +27,45 @@ const links = [
 <header class="tn" id="trust-nav">
   <div class="tn__inner">
     <a href="/" class="tn__logo" aria-label="CleanSpark — Home">
-      <svg class="tn__logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z" fill="currentColor" opacity="0.15"/>
-        <path d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg
+        class="tn__logo-icon"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z"
+          fill="currentColor"
+          opacity="0.15"></path>
+        <path
+          d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z"
+          stroke="currentColor"
+          stroke-width="1.5"
+          fill="none"></path>
+        <path
+          d="M9 12l2 2 4-4"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
       </svg>
       CleanSpark
     </a>
 
     <nav class="tn__links" aria-label="Main navigation">
-      {links.map((link) => (
-        <a
-          href={link.href}
-          class:list={['tn__link', { 'tn__link--active': currentPath === link.href }]}
-          aria-current={currentPath === link.href ? 'page' : undefined}
-        >
-          {link.label}
-        </a>
-      ))}
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={['tn__link', { 'tn__link--active': currentPath === link.href }]}
+            aria-current={currentPath === link.href ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
 
     <div class="tn__right">
@@ -57,28 +78,35 @@ const links = [
         aria-expanded="false"
         aria-controls="trust-mobile-menu"
       >
-        <span class="tn__burger-line" />
-        <span class="tn__burger-line" />
-        <span class="tn__burger-line" />
+        <span class="tn__burger-line"></span>
+        <span class="tn__burger-line"></span>
+        <span class="tn__burger-line"></span>
       </button>
     </div>
   </div>
 </header>
 
 {/* Mobile overlay menu */}
-<div class="tn-mobile" id="trust-mobile-menu" aria-hidden="true" style="opacity: 0; visibility: hidden;">
+<div
+  class="tn-mobile"
+  id="trust-mobile-menu"
+  aria-hidden="true"
+  style="opacity: 0; visibility: hidden;"
+>
   <nav class="tn-mobile__nav" aria-label="Mobile navigation">
-    {links.map((link) => (
-      <a
-        href={link.href}
-        class:list={['tn-mobile__link', { 'tn-mobile__link--active': currentPath === link.href }]}
-        aria-current={currentPath === link.href ? 'page' : undefined}
-        tabindex="-1"
-        style="opacity: 0; transform: translateY(12px);"
-      >
-        {link.label}
-      </a>
-    ))}
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class:list={['tn-mobile__link', { 'tn-mobile__link--active': currentPath === link.href }]}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+          tabindex="-1"
+          style="opacity: 0; transform: translateY(12px);"
+        >
+          {link.label}
+        </a>
+      ))
+    }
   </nav>
 </div>
 
@@ -159,7 +187,7 @@ const links = [
     background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border-bottom: 1px solid #DEE2E6;
+    border-bottom: 1px solid #dee2e6;
     transition: box-shadow 0.3s;
   }
 
@@ -250,7 +278,9 @@ const links = [
     color: var(--color-cta-text);
     border-radius: var(--radius-md);
     text-decoration: none;
-    transition: background 0.2s, box-shadow 0.2s;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
   }
 
   .tn__cta:hover {
@@ -278,7 +308,9 @@ const links = [
     height: 2px;
     background: var(--color-primary);
     border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.2s ease;
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
     transform-origin: center;
   }
 

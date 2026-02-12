@@ -18,7 +18,9 @@ const { gallery, uniqueServices } = Astro.props
     <div class="container">
       <span class="page-header__label">See the Difference</span>
       <h1 class="page-header__title">Our Work</h1>
-      <p class="page-header__subtitle">Real projects, real results. See the CleanSpark difference in action.</p>
+      <p class="page-header__subtitle">
+        Real projects, real results. See the CleanSpark difference in action.
+      </p>
     </div>
   </section>
 
@@ -26,10 +28,16 @@ const { gallery, uniqueServices } = Astro.props
   <section class="filters">
     <div class="container">
       <div class="filter-bar">
-        <button data-filter="all" class="filter filter--active" type="button" aria-pressed="true">All</button>
-        {uniqueServices.map((service) => (
-          <button data-filter={service} class="filter" type="button" aria-pressed="false">{service}</button>
-        ))}
+        <button data-filter="all" class="filter filter--active" type="button" aria-pressed="true"
+          >All</button
+        >
+        {
+          uniqueServices.map((service) => (
+            <button data-filter={service} class="filter" type="button" aria-pressed="false">
+              {service}
+            </button>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -38,37 +46,39 @@ const { gallery, uniqueServices } = Astro.props
   <section class="gallery-section reveal">
     <div class="container">
       <div class="gallery-grid reveal-stagger">
-        {gallery.map((item, i) => (
-          <article class="gal" data-gallery-item data-service={item.data.service}>
-            <div class="gal__images">
-              <div class="gal__img-wrap">
-                <img
-                  src={item.data.before}
-                  alt={`Before: ${item.data.room} - ${item.data.service}`}
-                  loading={i < 4 ? 'eager' : 'lazy'}
-                  class="gal__img"
-                />
-                <span class="gal__label">Before</span>
+        {
+          gallery.map((item, i) => (
+            <article class="gal" data-gallery-item data-service={item.data.service}>
+              <div class="gal__images">
+                <div class="gal__img-wrap">
+                  <img
+                    src={item.data.before}
+                    alt={`Before: ${item.data.room} - ${item.data.service}`}
+                    loading={i < 4 ? 'eager' : 'lazy'}
+                    class="gal__img"
+                  />
+                  <span class="gal__label">Before</span>
+                </div>
+                <div class="gal__img-wrap">
+                  <img
+                    src={item.data.after}
+                    alt={`After: ${item.data.room} - ${item.data.service}`}
+                    loading={i < 4 ? 'eager' : 'lazy'}
+                    class="gal__img"
+                  />
+                  <span class="gal__label gal__label--after">After</span>
+                </div>
               </div>
-              <div class="gal__img-wrap">
-                <img
-                  src={item.data.after}
-                  alt={`After: ${item.data.room} - ${item.data.service}`}
-                  loading={i < 4 ? 'eager' : 'lazy'}
-                  class="gal__img"
-                />
-                <span class="gal__label gal__label--after">After</span>
+              <div class="gal__info">
+                <div class="gal__meta">
+                  <span class="gal__room">{item.data.room}</span>
+                  <span class="gal__service">{item.data.service}</span>
+                </div>
+                <p class="gal__desc">{item.data.description}</p>
               </div>
-            </div>
-            <div class="gal__info">
-              <div class="gal__meta">
-                <span class="gal__room">{item.data.room}</span>
-                <span class="gal__service">{item.data.service}</span>
-              </div>
-              <p class="gal__desc">{item.data.description}</p>
-            </div>
-          </article>
-        ))}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -146,10 +156,16 @@ const { gallery, uniqueServices } = Astro.props
     line-height: 1.6;
   }
 
-  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
 
   /* ── Filters ── */
-  .filters { padding: 0 0 2.5rem; }
+  .filters {
+    padding: 0 0 2.5rem;
+  }
 
   .filter-bar {
     display: flex;
@@ -181,7 +197,9 @@ const { gallery, uniqueServices } = Astro.props
   }
 
   /* ── Gallery grid ── */
-  .gallery-section { padding: 0 0 4rem; }
+  .gallery-section {
+    padding: 0 0 4rem;
+  }
 
   .gallery-grid {
     display: grid;
@@ -194,7 +212,10 @@ const { gallery, uniqueServices } = Astro.props
     border: 3px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
     border-radius: var(--radius-md);
     overflow: hidden;
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.2s;
+    transition:
+      transform 0.25s ease-out,
+      box-shadow 0.25s ease-out,
+      border-color 0.2s;
   }
 
   .gal:hover {
@@ -244,7 +265,9 @@ const { gallery, uniqueServices } = Astro.props
     background: var(--color-primary);
   }
 
-  .gal__info { padding: 1.5rem; }
+  .gal__info {
+    padding: 1.5rem;
+  }
 
   .gal__meta {
     display: flex;

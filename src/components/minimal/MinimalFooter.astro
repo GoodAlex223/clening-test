@@ -28,11 +28,15 @@ const quickLinks = [
       <div class="mf__col">
         <h3 class="mf__heading">Navigation</h3>
         <ul class="mf__list">
-          {quickLinks.map((link) => (
-            <li>
-              <a href={link.href} class="mf__link">{link.label}</a>
-            </li>
-          ))}
+          {
+            quickLinks.map((link) => (
+              <li>
+                <a href={link.href} class="mf__link">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
@@ -53,13 +57,31 @@ const quickLinks = [
     <div class="mf__bottom">
       <p class="mf__copy">&copy; {year} {siteConfig.name}. All rights reserved.</p>
       <div class="mf__social">
-        <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" class="mf__social-link" aria-label="Facebook">
+        <a
+          href={siteConfig.social.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mf__social-link"
+          aria-label="Facebook"
+        >
           Facebook
         </a>
-        <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="mf__social-link" aria-label="Instagram">
+        <a
+          href={siteConfig.social.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mf__social-link"
+          aria-label="Instagram"
+        >
           Instagram
         </a>
-        <a href={siteConfig.social.yelp} target="_blank" rel="noopener noreferrer" class="mf__social-link" aria-label="Yelp">
+        <a
+          href={siteConfig.social.yelp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mf__social-link"
+          aria-label="Yelp"
+        >
           Yelp
         </a>
       </div>

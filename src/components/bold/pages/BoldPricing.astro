@@ -12,11 +12,26 @@ interface Props {
 const { pricing } = Astro.props
 
 const faqs = [
-  { q: 'Do I need to be home during the cleaning?', a: 'Not at all. Many clients give us a key or access code. All our team members are background-checked, insured, and bonded.' },
-  { q: "What if I'm not satisfied with the cleaning?", a: "We have a 100% satisfaction guarantee. If anything isn't up to your standards, we'll re-clean it free of charge within 24 hours." },
-  { q: 'Do you bring your own supplies and equipment?', a: "Yes! We bring all eco-friendly cleaning products and professional-grade equipment. You don't need to supply anything." },
-  { q: 'Can I customize my cleaning plan?', a: "Absolutely. While our tiers give you a starting point, we're happy to add or adjust services to match your specific needs. Just let us know when you book." },
-  { q: 'How do I pay?', a: 'We accept all major credit cards and send invoices via email after each visit. No cash needed, no upfront payments.' },
+  {
+    q: 'Do I need to be home during the cleaning?',
+    a: 'Not at all. Many clients give us a key or access code. All our team members are background-checked, insured, and bonded.',
+  },
+  {
+    q: "What if I'm not satisfied with the cleaning?",
+    a: "We have a 100% satisfaction guarantee. If anything isn't up to your standards, we'll re-clean it free of charge within 24 hours.",
+  },
+  {
+    q: 'Do you bring your own supplies and equipment?',
+    a: "Yes! We bring all eco-friendly cleaning products and professional-grade equipment. You don't need to supply anything.",
+  },
+  {
+    q: 'Can I customize my cleaning plan?',
+    a: "Absolutely. While our tiers give you a starting point, we're happy to add or adjust services to match your specific needs. Just let us know when you book.",
+  },
+  {
+    q: 'How do I pay?',
+    a: 'We accept all major credit cards and send invoices via email after each visit. No cash needed, no upfront payments.',
+  },
 ]
 ---
 
@@ -26,7 +41,9 @@ const faqs = [
     <div class="container">
       <span class="page-header__label">Simple & Fair</span>
       <h1 class="page-header__title">Transparent Pricing</h1>
-      <p class="page-header__subtitle">No hidden fees. No surprises. Just clean, competitive rates.</p>
+      <p class="page-header__subtitle">
+        No hidden fees. No surprises. Just clean, competitive rates.
+      </p>
     </div>
   </section>
 
@@ -34,39 +51,39 @@ const faqs = [
   <section class="tiers-section reveal">
     <div class="container">
       <div class="tiers reveal-stagger">
-        {pricing.map((tier) => (
-          <article
-            class:list={['tier', { 'tier--highlighted': tier.data.highlighted }]}
-            data-tier={tier.data.id}
-          >
-            {tier.data.highlighted && (
-              <span class="tier__badge">Most Popular</span>
-            )}
-            <h2 class="tier__name">{tier.data.name}</h2>
-            <p class="tier__tagline">{tier.data.tagline}</p>
-            <div class="tier__price-block">
-              <span class="tier__price">${tier.data.price}</span>
-              <span class="tier__unit">{tier.data.priceUnit}</span>
-            </div>
-            {tier.data.frequency && (
-              <p class="tier__freq">{tier.data.frequency}</p>
-            )}
-            <ul class="tier__features">
-              {tier.data.features.map((f) => (
-                <li class:list={['tier__feature', { 'tier__feature--excluded': !f.included }]}>
-                  <span aria-hidden="true" class="tier__feature-icon">{f.included ? '\u2713' : '\u2717'}</span>
-                  {f.text}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={tier.data.ctaUrl}
-              class:list={['tier__cta', { 'tier__cta--filled': tier.data.highlighted }]}
+        {
+          pricing.map((tier) => (
+            <article
+              class:list={['tier', { 'tier--highlighted': tier.data.highlighted }]}
+              data-tier={tier.data.id}
             >
-              {tier.data.ctaText}
-            </a>
-          </article>
-        ))}
+              {tier.data.highlighted && <span class="tier__badge">Most Popular</span>}
+              <h2 class="tier__name">{tier.data.name}</h2>
+              <p class="tier__tagline">{tier.data.tagline}</p>
+              <div class="tier__price-block">
+                <span class="tier__price">${tier.data.price}</span>
+                <span class="tier__unit">{tier.data.priceUnit}</span>
+              </div>
+              {tier.data.frequency && <p class="tier__freq">{tier.data.frequency}</p>}
+              <ul class="tier__features">
+                {tier.data.features.map((f) => (
+                  <li class:list={['tier__feature', { 'tier__feature--excluded': !f.included }]}>
+                    <span aria-hidden="true" class="tier__feature-icon">
+                      {f.included ? '\u2713' : '\u2717'}
+                    </span>
+                    {f.text}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={tier.data.ctaUrl}
+                class:list={['tier__cta', { 'tier__cta--filled': tier.data.highlighted }]}
+              >
+                {tier.data.ctaText}
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -79,12 +96,14 @@ const faqs = [
         <h2 class="section-heading">Frequently Asked Questions</h2>
       </div>
       <div class="faq-list">
-        {faqs.map((faq) => (
-          <details class="faq">
-            <summary class="faq__q">{faq.q}</summary>
-            <p class="faq__a">{faq.a}</p>
-          </details>
-        ))}
+        {
+          faqs.map((faq) => (
+            <details class="faq">
+              <summary class="faq__q">{faq.q}</summary>
+              <p class="faq__a">{faq.a}</p>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -94,7 +113,9 @@ const faqs = [
     <div class="container">
       <h2 class="cta-block__title">Ready to Get Started?</h2>
       <p class="cta-block__text">
-        Book online or call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone">{siteConfig.phone}</a>.
+        Book online or call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone"
+          >{siteConfig.phone}</a
+        >.
       </p>
       <a href="/contact" class="btn btn--white">Get Your Free Quote &rarr;</a>
     </div>
@@ -137,8 +158,14 @@ const faqs = [
   }
 
   /* ── Shared ── */
-  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
-  .container--narrow { max-width: 720px; }
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .container--narrow {
+    max-width: 720px;
+  }
 
   .section-label {
     display: block;
@@ -163,7 +190,9 @@ const faqs = [
   }
 
   /* ── Tiers ── */
-  .tiers-section { padding: 0 0 4rem; }
+  .tiers-section {
+    padding: 0 0 4rem;
+  }
 
   .tiers {
     display: grid;
@@ -179,7 +208,9 @@ const faqs = [
     padding: 2.5rem 2rem;
     text-align: center;
     position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .tier:hover {
@@ -226,7 +257,9 @@ const faqs = [
     margin-bottom: 1.5rem;
   }
 
-  .tier__price-block { margin-bottom: 0.25rem; }
+  .tier__price-block {
+    margin-bottom: 0.25rem;
+  }
 
   .tier__price {
     font-family: var(--font-heading);
@@ -320,7 +353,9 @@ const faqs = [
     background: var(--color-surface);
   }
 
-  .faq-header { margin-bottom: 2rem; }
+  .faq-header {
+    margin-bottom: 2rem;
+  }
 
   .faq-list {
     display: flex;
@@ -344,8 +379,12 @@ const faqs = [
     align-items: center;
   }
 
-  .faq__q::-webkit-details-marker { display: none; }
-  .faq__q::marker { content: ''; }
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__q::marker {
+    content: '';
+  }
 
   .faq__q::after {
     content: '+';

@@ -30,14 +30,14 @@ Run Lighthouse on all 6 pages with the Minimal Zen theme and verify 90+ scores f
 
 ### Initial Audit (Before Fixes)
 
-| Page     | Perf | A11y |  BP  | SEO |
-|----------|------|------|------|-----|
-| Home     |  100 |  100 |  100 | 100 |
-| Services |  100 |   95 |  100 | 100 |
-| About    |  100 |   95 |  100 | 100 |
-| Pricing  |  100 |  100 |  100 | 100 |
-| Gallery  |  100 |  100 |   96 | 100 |
-| Contact  |  100 |  100 |  100 | 100 |
+| Page     | Perf | A11y | BP  | SEO |
+| -------- | ---- | ---- | --- | --- |
+| Home     | 100  | 100  | 100 | 100 |
+| Services | 100  | 95   | 100 | 100 |
+| About    | 100  | 95   | 100 | 100 |
+| Pricing  | 100  | 100  | 100 | 100 |
+| Gallery  | 100  | 100  | 96  | 100 |
+| Contact  | 100  | 100  | 100 | 100 |
 
 ### Issues Found
 
@@ -57,14 +57,14 @@ Run Lighthouse on all 6 pages with the Minimal Zen theme and verify 90+ scores f
 
 ### Final Audit (After Fixes)
 
-| Page     | Perf | A11y |  BP  | SEO |
-|----------|------|------|------|-----|
-| Home     |  100 |  100 |  100 | 100 |
-| Services |  100 |  100 |  100 | 100 |
-| About    |  100 |  100 |  100 | 100 |
-| Pricing  |  100 |  100 |  100 | 100 |
-| Gallery  |  100 |  100 |  100 | 100 |
-| Contact  |  100 |  100 |  100 | 100 |
+| Page     | Perf | A11y | BP  | SEO |
+| -------- | ---- | ---- | --- | --- |
+| Home     | 100  | 100  | 100 | 100 |
+| Services | 100  | 100  | 100 | 100 |
+| About    | 100  | 100  | 100 | 100 |
+| Pricing  | 100  | 100  | 100 | 100 |
+| Gallery  | 100  | 100  | 100 | 100 |
+| Contact  | 100  | 100  | 100 | 100 |
 
 **All 6 pages: 100/100/100/100** — exceeds the 90+ target.
 
@@ -93,16 +93,19 @@ Run Lighthouse on all 6 pages with the Minimal Zen theme and verify 90+ scores f
 ## Execution Log
 
 ### 2026-02-11 14:00 — PHASE: Planning
+
 - Goal: Lighthouse audit all 6 Minimal Zen pages, verify 90+ scores
 - Approach: Build → preview → lighthouse CLI → fix → re-verify
 - Risks: Preview server instability, flaky lighthouse scores
 
 ### 2026-02-11 14:10 — PHASE: Implementation
+
 - Built project successfully (0 errors)
 - Started preview server on localhost:4321
 - Ran Lighthouse on all 6 pages in parallel
 
 ### 2026-02-11 14:20 — PHASE: Sub-Item Complete (Initial Audit)
+
 - Sub-item: Initial Lighthouse audit on all 6 pages
 - **Results**: 3 pages had issues: Services (A11y 95), About (A11y 95), Gallery (BP 96)
 - **Lessons**: Accent color not suitable for text, gallery needs placeholder assets
@@ -110,6 +113,7 @@ Run Lighthouse on all 6 pages with the Minimal Zen theme and verify 90+ scores f
 - **Improvements**: Theme configs should have text-accent vs decorative-accent distinction
 
 ### 2026-02-11 14:30 — PHASE: Sub-Item Complete (Fixes)
+
 - Sub-item: Fixed all 3 issues (color contrast × 2, gallery placeholders × 16)
 - **Results**: Changed label colors to textMuted, created 16 SVG placeholders
 - **Lessons**: SVG-as-JPG works for placeholders; `color-mix()` in CSS can help compute accessible shades
@@ -117,6 +121,7 @@ Run Lighthouse on all 6 pages with the Minimal Zen theme and verify 90+ scores f
 - **Improvements**: Automate Lighthouse in CI to catch regressions early
 
 ### 2026-02-11 14:48 — PHASE: Sub-Item Complete (Verification)
+
 - Sub-item: Re-ran Lighthouse on all 6 pages after rebuild
 - **Results**: All 6 pages score 100/100/100/100
 - **Lessons**: Always rebuild and restart preview server before re-auditing
@@ -124,6 +129,7 @@ Run Lighthouse on all 6 pages with the Minimal Zen theme and verify 90+ scores f
 - **Improvements**: Add width/height to gallery images for explicit sizing
 
 ### 2026-02-11 14:50 — PHASE: Complete
+
 - Final approach: Fix contrast with textMuted token, create SVG placeholders, full rebuild + verify
 - Tests passing: Lighthouse 100/100/100/100 on all 6 pages
 - User approval: Pending

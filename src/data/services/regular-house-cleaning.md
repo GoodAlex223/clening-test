@@ -1,34 +1,34 @@
 ---
-name: "Regular House Cleaning"
-slug: "regular-house-cleaning"
-category: "residential"
-icon: "Home"
-tagline: "A clean home, every single week."
-description: "Our signature recurring service keeps your home fresh and inviting. We handle the dusting, vacuuming, mopping, and sanitizing so you can reclaim your weekends."
+name: 'Regular House Cleaning'
+slug: 'regular-house-cleaning'
+category: 'residential'
+icon: 'Home'
+tagline: 'A clean home, every single week.'
+description: 'Our signature recurring service keeps your home fresh and inviting. We handle the dusting, vacuuming, mopping, and sanitizing so you can reclaim your weekends.'
 features:
-  - "All rooms dusted and vacuumed"
-  - "Kitchen counters and appliances wiped down"
-  - "Bathrooms scrubbed and sanitized"
-  - "Floors mopped throughout"
-  - "Mirrors and glass surfaces polished"
-  - "Trash emptied and liners replaced"
-  - "Beds made and linens straightened"
+  - 'All rooms dusted and vacuumed'
+  - 'Kitchen counters and appliances wiped down'
+  - 'Bathrooms scrubbed and sanitized'
+  - 'Floors mopped throughout'
+  - 'Mirrors and glass surfaces polished'
+  - 'Trash emptied and liners replaced'
+  - 'Beds made and linens straightened'
 process:
   - step: 1
-    title: "Book Online"
+    title: 'Book Online'
     description: "Choose your preferred day and frequency. We'll match you with a dedicated cleaning team."
   - step: 2
-    title: "We Clean"
-    description: "Your team arrives on schedule with all supplies and equipment. Same crew every visit."
+    title: 'We Clean'
+    description: 'Your team arrives on schedule with all supplies and equipment. Same crew every visit.'
   - step: 3
-    title: "You Relax"
+    title: 'You Relax'
     description: "Come home to a spotless house. Guaranteed satisfaction or we'll re-clean for free."
 startingPrice: 99
-priceUnit: "per visit"
+priceUnit: 'per visit'
 featured: true
 displayOrder: 1
-metaTitle: "Regular House Cleaning Services | CleanSpark"
-metaDescription: "Reliable weekly and biweekly house cleaning in Seattle. Same team every visit, all supplies included. Book your recurring clean today."
+metaTitle: 'Regular House Cleaning Services | CleanSpark'
+metaDescription: 'Reliable weekly and biweekly house cleaning in Seattle. Same team every visit, all supplies included. Book your recurring clean today.'
 ---
 
 ## Consistent Clean, Every Visit
@@ -38,6 +38,7 @@ Life's too short to spend your weekends scrubbing floors. Our regular house clea
 ### What We Clean Every Visit
 
 **Kitchen**
+
 - Countertops wiped and sanitized
 - Stovetop and exterior of appliances cleaned
 - Sink scrubbed and polished
@@ -45,6 +46,7 @@ Life's too short to spend your weekends scrubbing floors. Our regular house clea
 - Floor swept and mopped
 
 **Bathrooms**
+
 - Toilets thoroughly cleaned inside and out
 - Showers and tubs scrubbed
 - Vanities and sinks sanitized
@@ -52,6 +54,7 @@ Life's too short to spend your weekends scrubbing floors. Our regular house clea
 - Floors mopped
 
 **Living Areas & Bedrooms**
+
 - All surfaces dusted (shelves, tables, decor)
 - Furniture vacuumed or wiped
 - Floors vacuumed and hard floors mopped
@@ -70,6 +73,7 @@ Homes that receive regular cleaning stay cleaner between visits. Dust, allergens
 ### Flexible Scheduling
 
 Choose the cadence that fits your lifestyle:
+
 - **Weekly** — ideal for busy families and pet owners
 - **Biweekly** — our most popular option
 - **Monthly** — for those who just need a refresh

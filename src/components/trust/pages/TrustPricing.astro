@@ -13,11 +13,26 @@ interface Props {
 const { pricing } = Astro.props
 
 const faqs = [
-  { q: 'Do I need to be home during the cleaning?', a: 'Not at all. Many clients give us a key or access code. All our team members are background-checked, insured, and bonded for your peace of mind.' },
-  { q: "What if I'm not satisfied with the cleaning?", a: "We have a 100% satisfaction guarantee. If anything isn't up to your standards, we'll re-clean it free of charge within 24 hours." },
-  { q: 'Do you bring your own supplies and equipment?', a: "Yes! We bring all eco-friendly cleaning products and professional-grade equipment. You don't need to supply anything." },
-  { q: 'Can I customize my cleaning plan?', a: "Absolutely. While our tiers give you a starting point, we're happy to add or adjust services to match your specific needs. Just let us know when you book." },
-  { q: 'How do I pay?', a: 'We accept all major credit cards and send invoices via email after each visit. No cash needed, no upfront payments.' },
+  {
+    q: 'Do I need to be home during the cleaning?',
+    a: 'Not at all. Many clients give us a key or access code. All our team members are background-checked, insured, and bonded for your peace of mind.',
+  },
+  {
+    q: "What if I'm not satisfied with the cleaning?",
+    a: "We have a 100% satisfaction guarantee. If anything isn't up to your standards, we'll re-clean it free of charge within 24 hours.",
+  },
+  {
+    q: 'Do you bring your own supplies and equipment?',
+    a: "Yes! We bring all eco-friendly cleaning products and professional-grade equipment. You don't need to supply anything.",
+  },
+  {
+    q: 'Can I customize my cleaning plan?',
+    a: "Absolutely. While our tiers give you a starting point, we're happy to add or adjust services to match your specific needs. Just let us know when you book.",
+  },
+  {
+    q: 'How do I pay?',
+    a: 'We accept all major credit cards and send invoices via email after each visit. No cash needed, no upfront payments.',
+  },
 ]
 ---
 
@@ -26,7 +41,9 @@ const faqs = [
   <section class="page-header">
     <div class="container">
       <h1 class="page-header__title">Transparent Pricing</h1>
-      <p class="page-header__subtitle">No hidden fees. No surprises. Clear, competitive rates for professional cleaning.</p>
+      <p class="page-header__subtitle">
+        No hidden fees. No surprises. Clear, competitive rates for professional cleaning.
+      </p>
     </div>
   </section>
 
@@ -34,43 +51,72 @@ const faqs = [
   <section class="tiers-section reveal">
     <div class="container">
       <div class="tiers reveal-stagger">
-        {pricing.map((tier) => (
-          <article
-            class:list={['tier', { 'tier--highlighted': tier.data.highlighted }]}
-            data-tier={tier.data.id}
-          >
-            {tier.data.highlighted && (
-              <span class="tier__badge">Recommended</span>
-            )}
-            <h2 class="tier__name">{tier.data.name}</h2>
-            <p class="tier__tagline">{tier.data.tagline}</p>
-            <div class="tier__price-block">
-              <span class="tier__price">${tier.data.price}</span>
-              <span class="tier__unit">{tier.data.priceUnit}</span>
-            </div>
-            {tier.data.frequency && (
-              <p class="tier__freq">{tier.data.frequency}</p>
-            )}
-            <ul class="tier__features">
-              {tier.data.features.map((f) => (
-                <li class:list={['tier__feature', { 'tier__feature--excluded': !f.included }]}>
-                  {f.included ? (
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="tier__feature-icon" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#28A745" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#28A745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  ) : (
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="tier__feature-icon" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#DEE2E6" stroke-width="2"/><path d="M15 9l-6 6M9 9l6 6" stroke="#DEE2E6" stroke-width="2" stroke-linecap="round"/></svg>
-                  )}
-                  {f.text}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={tier.data.ctaUrl}
-              class:list={['tier__cta', { 'tier__cta--filled': tier.data.highlighted }]}
+        {
+          pricing.map((tier) => (
+            <article
+              class:list={['tier', { 'tier--highlighted': tier.data.highlighted }]}
+              data-tier={tier.data.id}
             >
-              {tier.data.ctaText}
-            </a>
-          </article>
-        ))}
+              {tier.data.highlighted && <span class="tier__badge">Recommended</span>}
+              <h2 class="tier__name">{tier.data.name}</h2>
+              <p class="tier__tagline">{tier.data.tagline}</p>
+              <div class="tier__price-block">
+                <span class="tier__price">${tier.data.price}</span>
+                <span class="tier__unit">{tier.data.priceUnit}</span>
+              </div>
+              {tier.data.frequency && <p class="tier__freq">{tier.data.frequency}</p>}
+              <ul class="tier__features">
+                {tier.data.features.map((f) => (
+                  <li class:list={['tier__feature', { 'tier__feature--excluded': !f.included }]}>
+                    {f.included ? (
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        class="tier__feature-icon"
+                        aria-hidden="true"
+                      >
+                        <circle cx="12" cy="12" r="10" stroke="#28A745" stroke-width="2" />
+                        <path
+                          d="M9 12l2 2 4-4"
+                          stroke="#28A745"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        class="tier__feature-icon"
+                        aria-hidden="true"
+                      >
+                        <circle cx="12" cy="12" r="10" stroke="#DEE2E6" stroke-width="2" />
+                        <path
+                          d="M15 9l-6 6M9 9l6 6"
+                          stroke="#DEE2E6"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    )}
+                    {f.text}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={tier.data.ctaUrl}
+                class:list={['tier__cta', { 'tier__cta--filled': tier.data.highlighted }]}
+              >
+                {tier.data.ctaText}
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -79,13 +125,31 @@ const faqs = [
   <section class="guarantee reveal">
     <div class="container">
       <div class="guarantee__inner">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" class="guarantee__icon" aria-hidden="true">
-          <path d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z" stroke="currentColor" stroke-width="1.5" fill="color-mix(in srgb, currentColor 10%, transparent)"/>
-          <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="guarantee__icon"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z"
+            stroke="currentColor"
+            stroke-width="1.5"
+            fill="color-mix(in srgb, currentColor 10%, transparent)"></path>
+          <path
+            d="M9 12l2 2 4-4"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
         </svg>
         <div>
           <h3 class="guarantee__title">100% Satisfaction Guarantee</h3>
-          <p class="guarantee__text">Not happy with our work? We'll re-clean it free within 24 hours. No questions asked.</p>
+          <p class="guarantee__text">
+            Not happy with our work? We'll re-clean it free within 24 hours. No questions asked.
+          </p>
         </div>
       </div>
     </div>
@@ -96,12 +160,14 @@ const faqs = [
     <div class="container container--narrow">
       <h2 class="faq-header__title">Frequently Asked Questions</h2>
       <div class="faq-list">
-        {faqs.map((faq) => (
-          <details class="faq">
-            <summary class="faq__q">{faq.q}</summary>
-            <p class="faq__a">{faq.a}</p>
-          </details>
-        ))}
+        {
+          faqs.map((faq) => (
+            <details class="faq">
+              <summary class="faq__q">{faq.q}</summary>
+              <p class="faq__a">{faq.a}</p>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -111,7 +177,9 @@ const faqs = [
     <div class="container">
       <h2 class="cta__title">Ready to Get Started?</h2>
       <p class="cta__text">
-        Book online or call us at <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a>.
+        Book online or call us at <a href={`tel:${siteConfig.phone}`} class="cta__phone"
+          >{siteConfig.phone}</a
+        >.
       </p>
       <a href="/contact" class="btn btn--white">Request Free Estimate</a>
     </div>
@@ -124,7 +192,7 @@ const faqs = [
     padding: var(--section-padding) 2rem 3rem;
     text-align: center;
     background: var(--color-surface);
-    border-bottom: 1px solid #DEE2E6;
+    border-bottom: 1px solid #dee2e6;
   }
 
   .page-header__title {
@@ -144,11 +212,19 @@ const faqs = [
   }
 
   /* ── Shared ── */
-  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
-  .container--narrow { max-width: 720px; }
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .container--narrow {
+    max-width: 720px;
+  }
 
   /* ── Tiers ── */
-  .tiers-section { padding: var(--section-padding) 0; }
+  .tiers-section {
+    padding: var(--section-padding) 0;
+  }
 
   .tiers {
     display: grid;
@@ -159,12 +235,14 @@ const faqs = [
 
   .tier {
     background: var(--color-surface);
-    border: 1px solid #DEE2E6;
+    border: 1px solid #dee2e6;
     border-radius: var(--radius-md);
     padding: 2.5rem 2rem;
     text-align: center;
     position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .tier:hover {
@@ -212,7 +290,9 @@ const faqs = [
     margin-bottom: 1.5rem;
   }
 
-  .tier__price-block { margin-bottom: 0.25rem; }
+  .tier__price-block {
+    margin-bottom: 0.25rem;
+  }
 
   .tier__price {
     font-family: var(--font-heading);
@@ -351,7 +431,7 @@ const faqs = [
   }
 
   .faq {
-    border-bottom: 1px solid #DEE2E6;
+    border-bottom: 1px solid #dee2e6;
     padding: 1.25rem 0;
   }
 
@@ -367,8 +447,12 @@ const faqs = [
     align-items: center;
   }
 
-  .faq__q::-webkit-details-marker { display: none; }
-  .faq__q::marker { content: ''; }
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__q::marker {
+    content: '';
+  }
 
   .faq__q::after {
     content: '+';

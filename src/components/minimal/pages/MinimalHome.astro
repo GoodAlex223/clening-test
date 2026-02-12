@@ -34,20 +34,22 @@ const { services, testimonials } = Astro.props
     <div class="container">
       <h2 class="section__title">Our Most Popular Services</h2>
       <div class="card-grid card-grid--3 reveal-stagger">
-        {services.map((service) => (
-          <article class="card">
-            <h3 class="card__title">{service.data.name}</h3>
-            <p class="card__text">{service.data.tagline}</p>
-            {service.data.startingPrice && (
-              <p class="card__price">
-                From ${service.data.startingPrice} {service.data.priceUnit}
-              </p>
-            )}
-            <a href={`/services#${service.data.slug}`} class="card__link">
-              Learn More <span aria-hidden="true">&rarr;</span>
-            </a>
-          </article>
-        ))}
+        {
+          services.map((service) => (
+            <article class="card">
+              <h3 class="card__title">{service.data.name}</h3>
+              <p class="card__text">{service.data.tagline}</p>
+              {service.data.startingPrice && (
+                <p class="card__price">
+                  From ${service.data.startingPrice} {service.data.priceUnit}
+                </p>
+              )}
+              <a href={`/services#${service.data.slug}`} class="card__link">
+                Learn More <span aria-hidden="true">&rarr;</span>
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -57,20 +59,28 @@ const { services, testimonials } = Astro.props
     <div class="container">
       <h2 class="section__title">What Our Clients Say</h2>
       <div class="card-grid card-grid--3 reveal-stagger">
-        {testimonials.map((t) => (
-          <blockquote class="testimonial">
-            <div class="testimonial__stars" role="img" aria-label={`${t.data.rating} out of 5 stars`}>
-              {Array.from({ length: t.data.rating }).map(() => (
-                <span class="testimonial__star" aria-hidden="true">&#9733;</span>
-              ))}
-            </div>
-            <p class="testimonial__text">&ldquo;{t.data.text}&rdquo;</p>
-            <footer class="testimonial__author">
-              <strong>{t.data.name}</strong>
-              {t.data.location && <span> &mdash; {t.data.location}</span>}
-            </footer>
-          </blockquote>
-        ))}
+        {
+          testimonials.map((t) => (
+            <blockquote class="testimonial">
+              <div
+                class="testimonial__stars"
+                role="img"
+                aria-label={`${t.data.rating} out of 5 stars`}
+              >
+                {Array.from({ length: t.data.rating }).map(() => (
+                  <span class="testimonial__star" aria-hidden="true">
+                    &#9733;
+                  </span>
+                ))}
+              </div>
+              <p class="testimonial__text">&ldquo;{t.data.text}&rdquo;</p>
+              <footer class="testimonial__author">
+                <strong>{t.data.name}</strong>
+                {t.data.location && <span> &mdash; {t.data.location}</span>}
+              </footer>
+            </blockquote>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -80,8 +90,10 @@ const { services, testimonials } = Astro.props
     <div class="container">
       <h2 class="cta__title">Ready for a Sparkling Clean?</h2>
       <p class="cta__text">
-        Serving {siteConfig.serviceAreas.slice(0, 5).join(', ')} and more.
-        Call <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a> or book online.
+        Serving {siteConfig.serviceAreas.slice(0, 5).join(', ')} and more. Call <a
+          href={`tel:${siteConfig.phone}`}
+          class="cta__phone">{siteConfig.phone}</a
+        > or book online.
       </p>
       <a href="/contact" class="btn btn--primary">Book Your Clean Today</a>
     </div>
@@ -167,7 +179,9 @@ const { services, testimonials } = Astro.props
     border-radius: var(--radius-sm);
     padding: 2rem;
     text-align: center;
-    transition: transform 200ms ease, box-shadow 200ms ease;
+    transition:
+      transform 200ms ease,
+      box-shadow 200ms ease;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 

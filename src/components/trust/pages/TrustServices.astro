@@ -25,7 +25,7 @@ const categoryDescs: Record<string, string> = {
 }
 
 const servicesByCategory = Object.fromEntries(
-  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)]),
+  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)])
 ) as Record<(typeof categories)[number], typeof services>
 ---
 
@@ -35,58 +35,82 @@ const servicesByCategory = Object.fromEntries(
     <div class="container">
       <h1 class="page-header__title">Our Services</h1>
       <p class="page-header__subtitle">
-        Professional, reliable cleaning services backed by our satisfaction guarantee. From routine home cleaning to post-construction cleanup.
+        Professional, reliable cleaning services backed by our satisfaction guarantee. From routine
+        home cleaning to post-construction cleanup.
       </p>
     </div>
   </section>
 
   {/* ── Service categories ── */}
-  {categories.map((category, catIndex) => (
-    <section
-      class:list={['section', { 'section--surface': catIndex % 2 === 1 }]}
-      data-section={`services-${category}`}
-    >
-      <div class="container">
-        <div class="cat-header reveal">
-          <h2 class="cat-header__title">{categoryLabels[category]}</h2>
-          <p class="cat-header__desc">{categoryDescs[category]}</p>
+  {
+    categories.map((category, catIndex) => (
+      <section
+        class:list={['section', { 'section--surface': catIndex % 2 === 1 }]}
+        data-section={`services-${category}`}
+      >
+        <div class="container">
+          <div class="cat-header reveal">
+            <h2 class="cat-header__title">{categoryLabels[category]}</h2>
+            <p class="cat-header__desc">{categoryDescs[category]}</p>
+          </div>
+          <div class="service-grid reveal-stagger reveal">
+            {servicesByCategory[category].map((service) => (
+              <article class="svc" id={service.data.slug} data-service={service.data.slug}>
+                <div class="svc__top">
+                  <h3 class="svc__name">{service.data.name}</h3>
+                  <p class="svc__tagline">{service.data.tagline}</p>
+                </div>
+                <ul class="svc__features">
+                  {service.data.features.slice(0, 4).map((feature) => (
+                    <li class="svc__feature">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        class="svc__check-icon"
+                        aria-hidden="true"
+                      >
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
+                        <path
+                          d="M9 12l2 2 4-4"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div class="svc__bottom">
+                  {service.data.startingPrice && (
+                    <span class="svc__price">
+                      From ${service.data.startingPrice} {service.data.priceUnit}
+                    </span>
+                  )}
+                  <a href="/contact" class="svc__cta">
+                    Get a Quote
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
-        <div class="service-grid reveal-stagger reveal">
-          {servicesByCategory[category].map((service) => (
-            <article class="svc" id={service.data.slug} data-service={service.data.slug}>
-              <div class="svc__top">
-                <h3 class="svc__name">{service.data.name}</h3>
-                <p class="svc__tagline">{service.data.tagline}</p>
-              </div>
-              <ul class="svc__features">
-                {service.data.features.slice(0, 4).map((feature) => (
-                  <li class="svc__feature">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="svc__check-icon" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <div class="svc__bottom">
-                {service.data.startingPrice && (
-                  <span class="svc__price">
-                    From ${service.data.startingPrice} {service.data.priceUnit}
-                  </span>
-                )}
-                <a href="/contact" class="svc__cta">Get a Quote</a>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  ))}
+      </section>
+    ))
+  }
 
   {/* ── CTA ── */}
   <section class="cta reveal">
     <div class="container">
       <h2 class="cta__title">Not Sure Which Service You Need?</h2>
       <p class="cta__text">
-        Our team will help you find the perfect cleaning solution. Call <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a> or request a free estimate.
+        Our team will help you find the perfect cleaning solution. Call <a
+          href={`tel:${siteConfig.phone}`}
+          class="cta__phone">{siteConfig.phone}</a
+        > or request a free estimate.
       </p>
       <a href="/contact" class="btn btn--white">Request Free Estimate</a>
     </div>
@@ -99,7 +123,7 @@ const servicesByCategory = Object.fromEntries(
     padding: var(--section-padding) 2rem 3rem;
     text-align: center;
     background: var(--color-surface);
-    border-bottom: 1px solid #DEE2E6;
+    border-bottom: 1px solid #dee2e6;
   }
 
   .page-header__title {
@@ -119,13 +143,23 @@ const servicesByCategory = Object.fromEntries(
   }
 
   /* ── Shared ── */
-  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
 
-  .section { padding: var(--section-padding) 0; }
-  .section--surface { background: var(--color-surface); }
+  .section {
+    padding: var(--section-padding) 0;
+  }
+  .section--surface {
+    background: var(--color-surface);
+  }
 
   /* ── Category header ── */
-  .cat-header { margin-bottom: 2.5rem; }
+  .cat-header {
+    margin-bottom: 2.5rem;
+  }
 
   .cat-header__title {
     font-family: var(--font-heading);
@@ -151,12 +185,14 @@ const servicesByCategory = Object.fromEntries(
 
   .svc {
     background: var(--color-surface);
-    border: 1px solid #DEE2E6;
+    border: 1px solid #dee2e6;
     border-radius: var(--radius-md);
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .svc:hover {
@@ -168,7 +204,9 @@ const servicesByCategory = Object.fromEntries(
     background: var(--color-background);
   }
 
-  .svc__top { margin-bottom: 1rem; }
+  .svc__top {
+    margin-bottom: 1rem;
+  }
 
   .svc__name {
     font-family: var(--font-heading);
@@ -201,7 +239,7 @@ const servicesByCategory = Object.fromEntries(
   }
 
   .svc__check-icon {
-    color: #28A745;
+    color: #28a745;
     flex-shrink: 0;
     position: relative;
     top: 2px;
@@ -212,7 +250,7 @@ const servicesByCategory = Object.fromEntries(
     justify-content: space-between;
     align-items: center;
     padding-top: 1.25rem;
-    border-top: 1px solid #DEE2E6;
+    border-top: 1px solid #dee2e6;
   }
 
   .svc__price {
@@ -232,7 +270,9 @@ const servicesByCategory = Object.fromEntries(
     font-family: var(--font-body);
     font-size: 0.875rem;
     font-weight: 600;
-    transition: background 0.2s, box-shadow 0.2s;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s;
   }
 
   .svc__cta:hover {

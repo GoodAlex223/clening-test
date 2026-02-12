@@ -12,10 +12,26 @@ interface Props {
 const { team } = Astro.props
 
 const values = [
-  { title: 'Quality First', desc: 'We never cut corners. Every surface, every room, every time.', icon: '💎' },
-  { title: 'Fair & Transparent', desc: 'No hidden fees. Fair wages for our team. Honest pricing for our clients.', icon: '🤝' },
-  { title: 'Eco-Conscious', desc: 'Green cleaning products and sustainable practices as standard.', icon: '🌿' },
-  { title: 'Reliable', desc: 'On time, every time. Consistent results you can count on.', icon: '⚡' },
+  {
+    title: 'Quality First',
+    desc: 'We never cut corners. Every surface, every room, every time.',
+    icon: '💎',
+  },
+  {
+    title: 'Fair & Transparent',
+    desc: 'No hidden fees. Fair wages for our team. Honest pricing for our clients.',
+    icon: '🤝',
+  },
+  {
+    title: 'Eco-Conscious',
+    desc: 'Green cleaning products and sustainable practices as standard.',
+    icon: '🌿',
+  },
+  {
+    title: 'Reliable',
+    desc: 'On time, every time. Consistent results you can count on.',
+    icon: '⚡',
+  },
 ]
 ---
 
@@ -37,10 +53,14 @@ const values = [
           <span class="section-label">Our Story</span>
           <h2 class="section-heading">How We Started</h2>
           <p class="body-text">
-            CleanSpark was born from a simple belief: everyone deserves a clean, healthy space — and every cleaner deserves fair pay and respect. Founded in 2019, we started as a one-person operation in a Seattle studio apartment with a vacuum, a bucket, and a vision.
+            CleanSpark was born from a simple belief: everyone deserves a clean, healthy space — and
+            every cleaner deserves fair pay and respect. Founded in 2019, we started as a one-person
+            operation in a Seattle studio apartment with a vacuum, a bucket, and a vision.
           </p>
           <p class="body-text">
-            Today, we're a team of dedicated professionals serving homes and businesses across the greater Seattle area. We've completed over 5,000 cleans, maintained a 4.9-star rating, and built something we're truly proud of.
+            Today, we're a team of dedicated professionals serving homes and businesses across the
+            greater Seattle area. We've completed over 5,000 cleans, maintained a 4.9-star rating,
+            and built something we're truly proud of.
           </p>
         </div>
         <div class="story__art" aria-hidden="true">
@@ -60,13 +80,17 @@ const values = [
         <h2 class="section-heading section-heading--center">Our Values</h2>
       </div>
       <div class="values-grid reveal-stagger reveal">
-        {values.map((v) => (
-          <article class="value-card">
-            <span class="value-card__icon" aria-hidden="true">{v.icon}</span>
-            <h3 class="value-card__title">{v.title}</h3>
-            <p class="value-card__desc">{v.desc}</p>
-          </article>
-        ))}
+        {
+          values.map((v) => (
+            <article class="value-card">
+              <span class="value-card__icon" aria-hidden="true">
+                {v.icon}
+              </span>
+              <h3 class="value-card__title">{v.title}</h3>
+              <p class="value-card__desc">{v.desc}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -79,25 +103,29 @@ const values = [
         <h2 class="section-heading section-heading--center">Meet Our Team</h2>
       </div>
       <div class="team-grid reveal-stagger reveal">
-        {team.map((member) => (
-          <article class="member" data-member={member.data.id}>
-            <div class="member__avatar" aria-hidden="true">
-              {member.data.name.charAt(0)}
-            </div>
-            <h3 class="member__name">{member.data.name}</h3>
-            <p class="member__role">{member.data.role}</p>
-            <p class="member__bio">
-              {member.data.bio.length > 200 ? member.data.bio.slice(0, 200) + '...' : member.data.bio}
-            </p>
-            {member.data.certifications && member.data.certifications.length > 0 && (
-              <div class="member__certs">
-                {member.data.certifications.map((cert) => (
-                  <span class="member__cert">{cert}</span>
-                ))}
+        {
+          team.map((member) => (
+            <article class="member" data-member={member.data.id}>
+              <div class="member__avatar" aria-hidden="true">
+                {member.data.name.charAt(0)}
               </div>
-            )}
-          </article>
-        ))}
+              <h3 class="member__name">{member.data.name}</h3>
+              <p class="member__role">{member.data.role}</p>
+              <p class="member__bio">
+                {member.data.bio.length > 200
+                  ? member.data.bio.slice(0, 200) + '...'
+                  : member.data.bio}
+              </p>
+              {member.data.certifications && member.data.certifications.length > 0 && (
+                <div class="member__certs">
+                  {member.data.certifications.map((cert) => (
+                    <span class="member__cert">{cert}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -105,7 +133,9 @@ const values = [
   {/* ── Service Areas ── */}
   <section class="areas-section reveal">
     <div class="container">
-      <h2 class="section-heading section-heading--center section-heading--white">Proudly Serving</h2>
+      <h2 class="section-heading section-heading--center section-heading--white">
+        Proudly Serving
+      </h2>
       <p class="areas__list">{siteConfig.serviceAreas.join(' \u00B7 ')}</p>
     </div>
   </section>
@@ -149,7 +179,10 @@ const values = [
   }
 
   /* ── Shared ── */
-  .container { max-width: var(--container-max); margin: 0 auto; }
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
 
   .section-label {
     display: block;
@@ -171,9 +204,13 @@ const values = [
     margin-bottom: 1.5rem;
   }
 
-  .section-heading--center { text-align: center; }
+  .section-heading--center {
+    text-align: center;
+  }
 
-  .section-heading--white { color: white; }
+  .section-heading--white {
+    color: white;
+  }
 
   .body-text {
     color: var(--color-text);
@@ -205,21 +242,27 @@ const values = [
   }
 
   .story__shape--1 {
-    width: 200px; height: 200px;
+    width: 200px;
+    height: 200px;
     background: linear-gradient(135deg, var(--color-primary), rgba(56, 217, 169, 0.3));
-    top: 10%; left: 20%;
+    top: 10%;
+    left: 20%;
   }
 
   .story__shape--2 {
-    width: 140px; height: 140px;
+    width: 140px;
+    height: 140px;
     background: linear-gradient(135deg, var(--color-secondary), rgba(255, 107, 53, 0.3));
-    bottom: 10%; left: 40%;
+    bottom: 10%;
+    left: 40%;
   }
 
   .story__shape--3 {
-    width: 80px; height: 80px;
+    width: 80px;
+    height: 80px;
     background: var(--color-accent);
-    top: 30%; right: 10%;
+    top: 30%;
+    right: 10%;
     border-radius: 16px;
     transform: rotate(45deg);
   }
@@ -230,7 +273,9 @@ const values = [
     background: var(--color-surface);
   }
 
-  .values-header { margin-bottom: 3rem; }
+  .values-header {
+    margin-bottom: 3rem;
+  }
 
   .values-grid {
     display: grid;
@@ -244,7 +289,9 @@ const values = [
     border-radius: var(--radius-md);
     padding: 2rem;
     box-shadow: 6px 6px 0 var(--color-primary);
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    transition:
+      transform 0.25s ease-out,
+      box-shadow 0.25s ease-out;
     text-align: center;
   }
 
@@ -278,7 +325,9 @@ const values = [
     padding: 5rem 2rem;
   }
 
-  .team-header { margin-bottom: 3rem; }
+  .team-header {
+    margin-bottom: 3rem;
+  }
 
   .team-grid {
     display: grid;
@@ -292,7 +341,9 @@ const values = [
     border-radius: var(--radius-md);
     padding: 2rem;
     text-align: center;
-    transition: border-color 0.2s, transform 0.2s;
+    transition:
+      border-color 0.2s,
+      transform 0.2s;
   }
 
   .member:hover {
@@ -373,7 +424,9 @@ const values = [
       gap: 2rem;
     }
 
-    .story__art { height: 200px; }
+    .story__art {
+      height: 200px;
+    }
 
     .value-card {
       box-shadow: 4px 4px 0 var(--color-primary);
