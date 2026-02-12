@@ -22,19 +22,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-008: Bubbly Clean Theme — Full Implementation
-
-**Priority**: P2 — Medium
-**Milestone**: M3
-**Depends on**: T-005
-
-- [ ] Create Bubbly Clean layout with rounded shapes
-- [ ] Soft pastel palette
-- [ ] Bouncy CSS animations (keyframes)
-- [ ] Handwritten font accents, illustration placeholders
-- [ ] All 6 pages implemented
-- [ ] Mobile responsive
-
 ### T-009: Noir Luxe Theme — Full Implementation
 
 **Priority**: P2 — Medium

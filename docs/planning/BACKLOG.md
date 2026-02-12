@@ -68,10 +68,10 @@ Improvements to existing functionality.
 
 Known issues that should be addressed eventually.
 
-| Item | Impact | Effort | Added |
-| ---- | ------ | ------ | ----- |
-| Mobile menu uses inline styles instead of CSS classes | Low — works correctly, just less elegant | Low | 2026-02-11 |
-| ThemeSwitcher `client:load` warning in dev server | None — cosmetic only, doesn't affect build | Low | 2026-02-11 |
+| Item                                                  | Impact                                     | Effort | Added      |
+| ----------------------------------------------------- | ------------------------------------------ | ------ | ---------- |
+| Mobile menu uses inline styles instead of CSS classes | Low — works correctly, just less elegant   | Low    | 2026-02-11 |
+| ThemeSwitcher `client:load` warning in dev server     | None — cosmetic only, doesn't affect build | Low    | 2026-02-11 |
 
 ---
 
@@ -201,6 +201,16 @@ Areas requiring investigation before implementation.
 
 - [ ] Recurring `var(--color-secondary)` contrast failure — same WCAG AA issue hit for third time (Minimal, Bold, Trust); reinforces need for shared SectionLabel component (see T-006 Code Review item above) or a lint rule to catch `color: var(--color-secondary)` on light backgrounds
 - [ ] Standardize stats counter script location across themes — Bold places it in layout, Trust places it in page component; establish convention for shared interactive scripts
+
+### 2026-02-12 From: T-008 Bubbly Clean Theme
+
+**Origin**: docs/archive/plans/2026-02-12_t-008-bubbly-clean.md
+
+- [ ] Shared wave divider component — Wave SVG patterns are duplicated across all page components; a `<WaveDivider color={} />` could reduce duplication across all themes
+- [ ] Shared section-label utility — `.section-label` styles repeated in every page component's scoped `<style>`; extract to shared CSS file or global style
+- [ ] Interactive before/after slider — Gallery currently shows static side-by-side images; a draggable slider would be more engaging (tracked in T-010)
+- [ ] Animated bubble component — Floating bubble decorations duplicated between Home and About; extract a `<BubbleDecoration />` component
+- [ ] Contact form backend — Form currently uses client-side mock submission; needs real backend integration (tracked in T-010)
 
 ---
 
