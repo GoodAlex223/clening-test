@@ -195,6 +195,13 @@ Areas requiring investigation before implementation.
 - [ ] Optimize Merriweather + Source Sans 3 font loading — consider `font-display: swap` and subsetting for faster LCP
 - [ ] Add mobile nav link stagger animation on close — Trust nav currently instant hide, Bold has stagger effect
 
+### 2026-02-12 From: T-007 Code Review
+
+**Origin**: PR #7 code review
+
+- [ ] Recurring `var(--color-secondary)` contrast failure — same WCAG AA issue hit for third time (Minimal, Bold, Trust); reinforces need for shared SectionLabel component (see T-006 Code Review item above) or a lint rule to catch `color: var(--color-secondary)` on light backgrounds
+- [ ] Standardize stats counter script location across themes — Bold places it in layout, Trust places it in page component; establish convention for shared interactive scripts
+
 ---
 
 ## Rejected Ideas
