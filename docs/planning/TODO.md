@@ -22,19 +22,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-007: Trust Shield Theme — Full Implementation
-
-**Priority**: P2 — Medium
-**Milestone**: M3
-**Depends on**: T-005
-
-- [ ] Create Trust Shield layout with traditional grid
-- [ ] Navy + slate grey color scheme
-- [ ] Trust badges, certification icons
-- [ ] Formal serif headings, structured sections
-- [ ] All 6 pages implemented
-- [ ] Mobile responsive
-
 ### T-008: Bubbly Clean Theme — Full Implementation
 
 **Priority**: P2 — Medium

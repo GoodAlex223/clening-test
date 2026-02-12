@@ -187,6 +187,14 @@ Areas requiring investigation before implementation.
 
 - [ ] Create shared SectionLabel component or utility class — section labels (`color: var(--color-secondary)`) failed WCAG AA contrast in Bold theme, same pattern fixed before in Minimal (commit 7c837f7); a shared component with accessible defaults would prevent recurrence in Trust, Bubbly, Noir themes
 
+### 2026-02-12 From: T-007 Trust Shield Theme
+
+**Origin**: docs/archive/plans/2026-02-12_t-007-trust-shield.md
+
+- [ ] Extract shared button/form/field styles into utility components — `.btn`, `.field`, `.form` duplicated across Trust, Bold, and Minimal themes (growing debt)
+- [ ] Optimize Merriweather + Source Sans 3 font loading — consider `font-display: swap` and subsetting for faster LCP
+- [ ] Add mobile nav link stagger animation on close — Trust nav currently instant hide, Bold has stagger effect
+
 ---
 
 ## Rejected Ideas
