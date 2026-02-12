@@ -1,0 +1,349 @@
+---
+/**
+ * TrustNav — Traditional corporate navigation.
+ *
+ * Logo left, centered links, CTA button right.
+ * Navy accent, professional styling, dropdown-ready structure.
+ */
+import type { ThemeId } from '@themes/types'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+
+interface Props {
+  currentTheme: ThemeId
+  currentPath?: string
+}
+
+const { currentTheme, currentPath = Astro.url.pathname } = Astro.props
+
+const links = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+---
+
+<header class="tn" id="trust-nav">
+  <div class="tn__inner">
+    <a href="/" class="tn__logo" aria-label="CleanSpark — Home">
+      <svg class="tn__logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z" fill="currentColor" opacity="0.15"/>
+        <path d="M12 2L3 7v6c0 5.25 3.83 10.15 9 11.25C17.17 23.15 21 18.25 21 13V7l-9-5z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      CleanSpark
+    </a>
+
+    <nav class="tn__links" aria-label="Main navigation">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class:list={['tn__link', { 'tn__link--active': currentPath === link.href }]}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="tn__right">
+      <ThemeSwitcher currentTheme={currentTheme} client:load />
+      <a href="/contact" class="tn__cta">Get a Free Quote</a>
+      <button
+        type="button"
+        class="tn__burger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="trust-mobile-menu"
+      >
+        <span class="tn__burger-line" />
+        <span class="tn__burger-line" />
+        <span class="tn__burger-line" />
+      </button>
+    </div>
+  </div>
+</header>
+
+{/* Mobile overlay menu */}
+<div class="tn-mobile" id="trust-mobile-menu" aria-hidden="true" style="opacity: 0; visibility: hidden;">
+  <nav class="tn-mobile__nav" aria-label="Mobile navigation">
+    {links.map((link) => (
+      <a
+        href={link.href}
+        class:list={['tn-mobile__link', { 'tn-mobile__link--active': currentPath === link.href }]}
+        aria-current={currentPath === link.href ? 'page' : undefined}
+        tabindex="-1"
+        style="opacity: 0; transform: translateY(12px);"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</div>
+
+<script>
+  function initTrustNav(): void {
+    const nav = document.getElementById('trust-nav')
+    const burgerEl = nav?.querySelector<HTMLButtonElement>('.tn__burger')
+    const menuEl = document.getElementById('trust-mobile-menu')
+    if (!nav || !burgerEl || !menuEl) return
+
+    const burger = burgerEl
+    const mobileMenu = menuEl
+
+    const onScroll = (): void => {
+      nav.classList.toggle('tn--scrolled', window.scrollY > 20)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    const mobileLinks = mobileMenu.querySelectorAll<HTMLAnchorElement>('a')
+    let isMenuOpen = false
+
+    function openMenu(): void {
+      isMenuOpen = true
+      mobileMenu.style.opacity = '1'
+      mobileMenu.style.visibility = 'visible'
+      mobileMenu.setAttribute('aria-hidden', 'false')
+      burger.setAttribute('aria-expanded', 'true')
+      burger.classList.add('tn__burger--open')
+      document.body.style.overflow = 'hidden'
+      mobileLinks.forEach((l) => {
+        l.removeAttribute('tabindex')
+        l.style.opacity = '1'
+        l.style.transform = 'translateY(0)'
+      })
+      mobileLinks[0]?.focus()
+    }
+
+    function closeMenu(): void {
+      isMenuOpen = false
+      mobileMenu.style.opacity = '0'
+      mobileMenu.style.visibility = 'hidden'
+      mobileMenu.setAttribute('aria-hidden', 'true')
+      burger.setAttribute('aria-expanded', 'false')
+      burger.classList.remove('tn__burger--open')
+      document.body.style.overflow = ''
+      mobileLinks.forEach((l) => {
+        l.setAttribute('tabindex', '-1')
+        l.style.opacity = '0'
+        l.style.transform = 'translateY(12px)'
+      })
+      burger.focus()
+    }
+
+    burger.addEventListener('click', () => {
+      if (isMenuOpen) closeMenu()
+      else openMenu()
+    })
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) closeMenu()
+    })
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu)
+    })
+  }
+
+  initTrustNav()
+</script>
+
+<style>
+  /* ── Sticky header ── */
+  .tn {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid #DEE2E6;
+    transition: box-shadow 0.3s;
+  }
+
+  .tn--scrolled {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .tn__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+  }
+
+  /* ── Logo ── */
+  .tn__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.375rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .tn__logo-icon {
+    color: var(--color-primary);
+  }
+
+  /* ── Desktop links ── */
+  .tn__links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .tn__link {
+    position: relative;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    text-decoration: none;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+
+  .tn__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.25s ease;
+  }
+
+  .tn__link:hover,
+  .tn__link--active {
+    color: var(--color-primary);
+  }
+
+  .tn__link:hover::after,
+  .tn__link--active::after {
+    width: 100%;
+  }
+
+  /* ── Right side ── */
+  .tn__right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .tn__cta {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.6rem 1.25rem;
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+
+  .tn__cta:hover {
+    background: var(--color-secondary);
+    box-shadow: 0 2px 8px rgba(27, 73, 101, 0.2);
+  }
+
+  /* ── Hamburger ── */
+  .tn__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 26px;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .tn__burger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .tn__burger--open .tn__burger-line:first-child {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .tn__burger--open .tn__burger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .tn__burger--open .tn__burger-line:last-child {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ── Mobile overlay ── */
+  .tn-mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .tn-mobile__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .tn-mobile__link {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .tn-mobile__link:hover,
+  .tn-mobile__link--active {
+    color: var(--color-primary);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .tn__links {
+      display: none;
+    }
+
+    .tn__burger {
+      display: flex;
+    }
+
+    .tn__cta {
+      display: none;
+    }
+
+    .tn__right :global(.theme-switcher) {
+      display: none;
+    }
+  }
+</style>

@@ -74,13 +74,16 @@ pnpm test             # All tests
 
 - **Theme isolation**: Each theme's components and layouts are fully independent; page components organized in `src/components/{theme}/pages/`
 - **Content-design separation**: Structured business content (services, pricing, team, testimonials, gallery) stored in Content Collections; some page-specific content (about page story/values, pricing FAQ) currently inline
-- **Progressive enhancement**: Core content works without JS; JS enhances UX (mobile nav, gallery filter, contact form validation)
+- **Progressive enhancement**: Core content works without JS; JS enhances UX (mobile nav, gallery filter, contact form validation, stats counters)
 - **Cookie-based state**: Theme persisted in cookie for server-side reading (no FOUC)
 - **Type-safe theme system**: ThemeId union type guards invalid themes, ThemeConfig interface ensures consistency across all 5 themes
 - **CSS custom properties**: Theme tokens (colors, fonts, spacing) injected as CSS vars in `<html>` style attribute for consistent access
 - **Static resolver pattern**: Both layout and page content components mapped at build time via satisfies operator, no runtime lookups; `resolvePageContent<P extends PageName>()` uses generic narrowing for type-safe props per page
 - **Accessibility-first**: ARIA labels, semantic HTML, keyboard navigation (mobile menu Escape key, tabindex management), focus management
 - **Scroll-reveal animations**: IntersectionObserver-based `.reveal` / `.revealed` pattern in `<style is:global>` for cross-component animation consistency; `.reveal-stagger` for grid children animations using descendant selectors
+- **Stats counter animations**: IntersectionObserver-triggered number counting with `data-counter`, `data-target`, `data-suffix` attributes; eased animation via `requestAnimationFrame` for performance; used in Trust and Bold themes
+- **Decorative SVG animations**: Theme-specific hero decorations (Trust shield, Bold spark) with CSS keyframe animations and pseudo-elements for visual depth
+- **Native accordion pattern**: FAQ sections use native `<details>`/`<summary>` elements with custom styling; progressive enhancement without JS dependencies
 - **JS-controlled visibility via inline styles**: Astro scoped styles conflict with dynamically-toggled classes in `<script>` blocks; inline styles via JS provide reliable visibility control for mobile menu overlays
 - **Thin page routes pattern**: Page route files (`src/pages/*.astro`) are data-fetching shells that call `resolvePageContent()` to delegate presentation to theme-specific page components
 
