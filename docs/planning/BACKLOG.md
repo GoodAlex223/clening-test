@@ -181,6 +181,12 @@ Areas requiring investigation before implementation.
 - [ ] Add real parallax scroll effect to Bold hero — currently IntersectionObserver reveal only; true parallax (different scroll speeds) could enhance hero section
 - [ ] Optimize font loading for Space Grotesk and DM Sans — consider `font-display: swap` and subsetting for faster LCP
 
+### 2026-02-12 From: T-006 Code Review
+
+**Origin**: PR #6 code review
+
+- [ ] Create shared SectionLabel component or utility class — section labels (`color: var(--color-secondary)`) failed WCAG AA contrast in Bold theme, same pattern fixed before in Minimal (commit 7c837f7); a shared component with accessible defaults would prevent recurrence in Trust, Bubbly, Noir themes
+
 ---
 
 ## Rejected Ideas
