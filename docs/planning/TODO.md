@@ -2,7 +2,7 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-11
+**Last Updated**: 2026-02-12
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
@@ -21,20 +21,6 @@ _No tasks currently in progress._
 ## Planned
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
-
-### T-006: Bold Spark Theme — Full Implementation
-
-**Priority**: P2 — Medium
-**Milestone**: M3
-**Depends on**: T-005
-
-- [ ] Create Bold Spark layout with diagonal sections
-- [ ] Parallax scrolling effects on hero and key sections
-- [ ] Large expressive typography (neo-mint + orange palette)
-- [ ] Dynamic motion on scroll (IntersectionObserver)
-- [ ] All 6 pages implemented with Bold Spark design
-- [ ] Mobile responsive
-- [ ] Theme switch from/to Bold Spark works
 
 ### T-007: Trust Shield Theme — Full Implementation
 

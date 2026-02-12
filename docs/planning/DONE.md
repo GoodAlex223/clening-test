@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-11
+**Last Updated**: 2026-02-12
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -127,6 +127,20 @@ Completed tasks with implementation details and learnings.
 - Created 16 SVG placeholder images in `public/images/gallery/` for all before/after pairs
 
 **Spawned Tasks**: 4 items added to BACKLOG.md
+
+### 2026-02-11 — T-006: Bold Spark Theme — Full Implementation
+
+**Plan**: [docs/archive/plans/2026-02-11_t-006-bold-spark.md](../archive/plans/2026-02-11_t-006-bold-spark.md)
+**Summary**: Implemented the second complete theme (Bold Spark) with energetic neo-mint + orange palette, diagonal clip-path section transitions, offset box-shadow cards, animated stats counter, geometric CSS hero art, and 6 fully-styled page components. Used /frontend-design skill to establish the visual language via an HTML prototype.
+
+**Key Changes**:
+- Created BoldNav (sticky, mint underlines, bold typography, mobile overlay) and BoldFooter (4-column mint grid)
+- Created 6 page content components: Home (split hero, geometric art, stats counter, testimonials), Services (category grouping, offset shadow cards), About (story, values, team), Pricing (bold tiers, FAQ accordion), Gallery (filterable grid), Contact (form + info cards)
+- Updated BoldLayout with font imports (@fontsource/space-grotesk, @fontsource/dm-sans), scroll-reveal, and stats counter scripts
+- Registered all Bold components in page-resolver.ts (replaced Minimal fallbacks)
+- All pages mobile responsive with diagonal sections, bold hover effects, and IntersectionObserver animations
+
+**Spawned Tasks**: 1 item added to TODO.md (Lighthouse audit), 3 items to BACKLOG.md
 
 ---
 

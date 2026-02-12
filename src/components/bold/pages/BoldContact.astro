@@ -1,0 +1,392 @@
+---
+/**
+ * BoldContact — Contact form + info cards with bold design.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig, getFullAddress } from '@lib/site-config'
+
+interface Props {
+  services: CollectionEntry<'services'>[]
+}
+
+const { services } = Astro.props
+---
+
+<main data-page="contact">
+  {/* ── Page header ── */}
+  <section class="page-header">
+    <div class="container">
+      <span class="page-header__label">Let's Talk</span>
+      <h1 class="page-header__title">Get in Touch</h1>
+      <p class="page-header__subtitle">Ready to experience the CleanSpark difference? Let's talk.</p>
+    </div>
+  </section>
+
+  {/* ── Contact content ── */}
+  <section class="contact reveal">
+    <div class="container">
+      <div class="contact__grid">
+
+        {/* ── Form ── */}
+        <div class="contact__form-wrap">
+          <h2 class="contact__heading">Request a Free Quote</h2>
+          <form id="contact-form" class="form">
+            <label class="field">
+              <span class="field__label">Name *</span>
+              <input
+                type="text"
+                name="name"
+                required
+                autocomplete="name"
+                class="field__input"
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">Email *</span>
+              <input
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                class="field__input"
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">Phone</span>
+              <input
+                type="tel"
+                name="phone"
+                autocomplete="tel"
+                class="field__input"
+              />
+            </label>
+            <label class="field">
+              <span class="field__label">Service Interest</span>
+              <select name="service" class="field__input">
+                <option value="">Select a service (optional)</option>
+                {services.map((s) => (
+                  <option value={s.data.slug}>{s.data.name}</option>
+                ))}
+              </select>
+            </label>
+            <label class="field">
+              <span class="field__label">Message *</span>
+              <textarea
+                name="message"
+                required
+                rows={5}
+                class="field__input field__input--textarea"
+              ></textarea>
+            </label>
+            <button type="submit" class="btn btn--primary btn--full">Send Message &rarr;</button>
+          </form>
+        </div>
+
+        {/* ── Info cards ── */}
+        <div class="info-stack">
+          <h2 class="contact__heading">Contact Information</h2>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Call Us</h3>
+            <a href={`tel:${siteConfig.phone}`} class="info-card__link">{siteConfig.phone}</a>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Email Us</h3>
+            <a href={`mailto:${siteConfig.email}`} class="info-card__link">{siteConfig.email}</a>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Visit Us</h3>
+            <address class="info-card__text">{getFullAddress()}</address>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Business Hours</h3>
+            <ul class="info-card__hours">
+              <li>{siteConfig.hours.weekday}</li>
+              <li>{siteConfig.hours.saturday}</li>
+              <li>{siteConfig.hours.sunday}</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Follow Us</h3>
+            <div class="info-card__social">
+              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href={siteConfig.social.yelp} target="_blank" rel="noopener noreferrer">Yelp</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Service areas ── */}
+  <section class="areas reveal">
+    <div class="container">
+      <h2 class="areas__title">We Serve</h2>
+      <p class="areas__list">{siteConfig.serviceAreas.join(' \u00B7 ')}</p>
+    </div>
+  </section>
+</main>
+
+<script>
+  function initBoldContactForm(): void {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null
+    if (!form) return
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      if (!form.checkValidity()) {
+        form.reportValidity()
+        return
+      }
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
+      const originalText = btn.textContent
+      btn.textContent = 'Message Sent! ✓'
+      btn.disabled = true
+      btn.style.opacity = '0.7'
+      form.reset()
+      setTimeout(() => {
+        btn.textContent = originalText
+        btn.disabled = false
+        btn.style.opacity = ''
+      }, 3000)
+    })
+  }
+
+  initBoldContactForm()
+</script>
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    padding: var(--section-padding) 2rem 3rem;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    padding-bottom: 5rem;
+  }
+
+  .page-header__label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .page-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
+
+  /* ── Contact layout ── */
+  .contact { padding: 0 0 4rem; }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact__heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── Form ── */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .field__label {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .field__input {
+    padding: 0.75rem 1rem;
+    border: 2.5px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .field__input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(56, 217, 169, 0.15);
+  }
+
+  .field__input--textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    padding: 1rem 2.5rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .btn--primary {
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+  }
+
+  .btn--full { width: 100%; }
+
+  /* ── Info cards ── */
+  .info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-card {
+    background: var(--color-surface);
+    border: 2.5px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .info-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .info-card__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    margin-bottom: 0.375rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .info-card__link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .info-card__link:hover { color: var(--color-primary); }
+
+  .info-card__text {
+    font-style: normal;
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .info-card__hours {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+
+  .info-card__social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .info-card__social a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+  }
+
+  .info-card__social a:hover { opacity: 0.7; }
+
+  /* ── Service areas ── */
+  .areas {
+    padding: 5rem 2rem;
+    text-align: center;
+    background: var(--color-primary);
+    clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .areas__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .areas__list {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.125rem;
+    line-height: 2;
+  }
+
+  @media (max-width: 768px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

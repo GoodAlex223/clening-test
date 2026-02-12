@@ -2,7 +2,7 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-11
+**Last Updated**: 2026-02-12
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -172,6 +172,14 @@ Areas requiring investigation before implementation.
 - [ ] Add `width`/`height` attributes to gallery images — prevent layout shift, improve CLS score
 - [ ] Automate Lighthouse in CI — GitHub Actions step to run Lighthouse on PRs, fail if scores drop below 90
 - [ ] Replace SVG placeholders with real photos — integrate Astro `<Image>` for responsive sizes and WebP/AVIF
+
+### 2026-02-11 From: T-006 Bold Spark Theme
+
+**Origin**: docs/planning/plans/2026-02-11_t-006-bold-spark.md
+
+- [ ] Extract shared bold button/form styles — `.btn`, `.field`, `.form` duplicated across BoldContact, BoldPricing, BoldHome (same pattern as Minimal Zen debt)
+- [ ] Add real parallax scroll effect to Bold hero — currently IntersectionObserver reveal only; true parallax (different scroll speeds) could enhance hero section
+- [ ] Optimize font loading for Space Grotesk and DM Sans — consider `font-display: swap` and subsetting for faster LCP
 
 ---
 

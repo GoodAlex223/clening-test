@@ -1,0 +1,696 @@
+---
+/**
+ * BoldHome — Energetic home page with split hero, diagonal sections,
+ * animated stats bar, testimonials, and bold CTA.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig } from '@lib/site-config'
+
+interface Props {
+  services: CollectionEntry<'services'>[]
+  testimonials: CollectionEntry<'testimonials'>[]
+}
+
+const { services, testimonials } = Astro.props
+
+const stats = [
+  { target: '5000', suffix: '+', label: 'Happy Cleans' },
+  { target: '4.9', suffix: '★', label: 'Star Rating', decimal: true },
+  { target: '150', suffix: '+', label: '5-Star Reviews' },
+  { target: '6', suffix: ' Yrs', label: 'Experience' },
+]
+---
+
+<main data-page="home">
+  {/* ── Hero ── */}
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__text">
+        <div class="hero__label">Seattle's #1 Rated Cleaning Service</div>
+        <h1 class="hero__title">
+          <span class="hero__title-line">We Make</span>
+          <span class="hero__title-line">Clean Look</span>
+          <span class="hero__title-line hero__title-line--accent">Bold.</span>
+        </h1>
+        <p class="hero__subtitle">
+          Professional cleaning that matches your energy. Fast, thorough, and always on point.
+        </p>
+        <div class="hero__actions">
+          <a href="/contact" class="btn btn--primary">Get Your Free Quote &rarr;</a>
+          <a href="/services" class="btn btn--ghost">View Services</a>
+        </div>
+      </div>
+      <div class="hero__art" aria-hidden="true">
+        <div class="geo geo--ring"></div>
+        <div class="geo geo--1"></div>
+        <div class="geo geo--2"></div>
+        <div class="geo geo--3"></div>
+        <div class="geo geo--4"></div>
+        <div class="geo geo--5"></div>
+        <div class="geo geo--dots"></div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Featured Services ── */}
+  <section class="services-section">
+    <div class="container">
+      <div class="services-header reveal">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Our Most Popular Services</h2>
+      </div>
+      <div class="svc-grid reveal-stagger reveal">
+        {services.map((service) => (
+          <article class="svc-card">
+            <span class="svc-card__arrow" aria-hidden="true">&rarr;</span>
+            <h3 class="svc-card__name">{service.data.name}</h3>
+            <p class="svc-card__text">{service.data.tagline}</p>
+            {service.data.startingPrice && (
+              <p class="svc-card__price">
+                From ${service.data.startingPrice}
+                <span class="svc-card__unit">{service.data.priceUnit}</span>
+              </p>
+            )}
+            <a href={`/services#${service.data.slug}`} class="svc-card__link">
+              Learn More
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Stats Bar ── */}
+  <section class="stats" id="bold-stats">
+    <div class="stats__inner reveal reveal-stagger">
+      {stats.map((stat) => (
+        <div class="stat">
+          <div
+            class="stat__number"
+            data-counter
+            data-target={stat.target}
+            data-suffix={stat.suffix}
+            data-decimal={stat.decimal ? 'true' : undefined}
+          >
+            0
+          </div>
+          <div class="stat__label">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* ── Testimonials ── */}
+  <section class="testimonials">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <span class="section-label">Trusted by Hundreds</span>
+        <h2 class="section-title">What Our Clients Say</h2>
+      </div>
+      <div class="testi-grid reveal-stagger reveal">
+        {testimonials.map((t) => (
+          <blockquote class="testi">
+            <span class="testi__big-quote" aria-hidden="true">&ldquo;</span>
+            <div class="testi__stars" role="img" aria-label={`${t.data.rating} out of 5 stars`}>
+              {Array.from({ length: t.data.rating }).map(() => (
+                <span class="testi__star" aria-hidden="true">&#9733;</span>
+              ))}
+            </div>
+            <p class="testi__text">&ldquo;{t.data.text}&rdquo;</p>
+            <footer class="testi__footer">
+              <strong class="testi__author">{t.data.name}</strong>
+              {t.data.location && <span class="testi__location">{t.data.location}</span>}
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA ── */}
+  <section class="cta-block reveal">
+    <div class="container">
+      <h2 class="cta-block__title">Ready for a Sparkling Clean?</h2>
+      <p class="cta-block__text">
+        Serving {siteConfig.serviceAreas.slice(0, 5).join(', ')} and more.
+        Call <a href={`tel:${siteConfig.phone}`} class="cta-block__phone">{siteConfig.phone}</a> or book online.
+      </p>
+      <a href="/contact" class="btn btn--white">Book Your Clean Today &rarr;</a>
+    </div>
+  </section>
+</main>
+
+<style>
+  /* ═══════════════ HERO ═══════════════ */
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 0 10rem;
+    overflow: hidden;
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    background: var(--color-background);
+  }
+
+  .hero__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero__text { z-index: 2; }
+
+  .hero__label {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+    background: rgba(74, 85, 104, 0.08);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateX(-40px);
+    animation: boldSlideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+  }
+
+  .hero__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__title-line {
+    display: block;
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  .hero__title-line:nth-child(1) {
+    animation: boldSlideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s forwards;
+  }
+
+  .hero__title-line:nth-child(2) {
+    animation: boldSlideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.5s forwards;
+  }
+
+  .hero__title-line--accent {
+    color: var(--color-primary);
+    animation: boldSlideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.65s forwards;
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateX(-40px);
+    animation: boldSlideInLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s forwards;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: boldFadeUp 0.6s ease 1s forwards;
+  }
+
+  @keyframes boldSlideInLeft {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes boldFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Geometric art ── */
+  .hero__art {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    opacity: 0;
+    animation: boldFadeUp 1s ease 0.5s forwards;
+  }
+
+  .geo {
+    position: absolute;
+    border-radius: 50%;
+    animation: geoFloat 6s ease-in-out infinite;
+  }
+
+  .geo--1 {
+    width: 320px; height: 320px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, rgba(56, 217, 169, 0.3) 100%);
+    top: 10%; right: 5%;
+  }
+
+  .geo--2 {
+    width: 200px; height: 200px;
+    background: linear-gradient(135deg, var(--color-secondary) 0%, rgba(255, 107, 53, 0.4) 100%);
+    top: 45%; right: 35%;
+    animation-delay: -2s;
+  }
+
+  .geo--3 {
+    width: 140px; height: 140px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, rgba(255, 217, 61, 0.4) 100%);
+    top: 15%; right: 40%;
+    animation-delay: -4s;
+  }
+
+  .geo--4 {
+    width: 80px; height: 80px;
+    background: var(--color-primary);
+    bottom: 15%; right: 15%;
+    border-radius: 20px;
+    transform: rotate(45deg);
+    animation: geoSpin 8s linear infinite;
+  }
+
+  .geo--5 {
+    width: 60px; height: 60px;
+    background: var(--color-accent);
+    top: 5%; right: 55%;
+    border-radius: 12px;
+    transform: rotate(30deg);
+    animation: geoSpin 10s linear infinite reverse;
+  }
+
+  .geo--ring {
+    width: 260px; height: 260px;
+    border: 4px solid rgba(56, 217, 169, 0.25);
+    top: 25%; right: 10%;
+    animation-delay: -1s;
+  }
+
+  .geo--dots {
+    width: 8px; height: 8px;
+    background: var(--color-secondary);
+    box-shadow:
+      20px 0 0 var(--color-secondary),
+      40px 0 0 var(--color-secondary),
+      0 20px 0 var(--color-secondary),
+      20px 20px 0 var(--color-secondary),
+      40px 20px 0 var(--color-secondary),
+      0 40px 0 var(--color-secondary),
+      20px 40px 0 var(--color-secondary),
+      40px 40px 0 var(--color-secondary);
+    bottom: 25%; right: 50%;
+    border-radius: 50%;
+    animation: none;
+    opacity: 0.3;
+  }
+
+  @keyframes geoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes geoSpin {
+    to { transform: rotate(405deg); }
+  }
+
+  /* ═══════════════ BUTTONS ═══════════════ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    padding: 1rem 2.5rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .btn--primary {
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
+  }
+
+  .btn--ghost {
+    color: var(--color-primary);
+    border: 2.5px solid var(--color-primary);
+    background: transparent;
+  }
+
+  .btn--ghost:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .btn--white {
+    background: white;
+    color: var(--color-secondary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn--white:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  /* ═══════════════ SHARED ═══════════════ */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: var(--color-text);
+  }
+
+  /* ═══════════════ SERVICES ═══════════════ */
+  .services-section {
+    position: relative;
+    padding: 2rem 0 6rem;
+    margin-top: -6rem;
+    z-index: 10;
+  }
+
+  .services-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .svc-card {
+    background: var(--color-background);
+    border: 3px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2rem;
+    position: relative;
+    box-shadow: 8px 8px 0 var(--color-primary);
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  }
+
+  .svc-card:hover {
+    transform: translate(-4px, -4px) scale(1.03);
+    box-shadow: 12px 12px 0 var(--color-primary);
+  }
+
+  .svc-card__arrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 36px;
+    height: 36px;
+    background: var(--color-surface);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .svc-card:hover .svc-card__arrow {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .svc-card__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.375rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .svc-card__text {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .svc-card__price {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  .svc-card__unit {
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .svc-card__link {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+  }
+
+  .svc-card__link:hover {
+    opacity: 0.7;
+  }
+
+  /* ═══════════════ STATS ═══════════════ */
+  .stats {
+    background: var(--color-primary);
+    padding: 5rem 0;
+    clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%);
+    margin: 2rem 0;
+  }
+
+  .stats__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .stat__number {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat__label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+
+  /* ═══════════════ TESTIMONIALS ═══════════════ */
+  .testimonials {
+    padding: 6rem 0;
+    background: var(--color-background);
+  }
+
+  .testimonials-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .testi {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2rem;
+    border-left: 5px solid var(--color-secondary);
+    position: relative;
+    margin: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .testi:hover {
+    transform: translateY(-4px);
+  }
+
+  .testi__big-quote {
+    position: absolute;
+    top: 0.75rem;
+    right: 1.5rem;
+    font-size: 4rem;
+    color: var(--color-primary);
+    opacity: 0.12;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .testi__stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .testi__star {
+    color: var(--color-accent);
+    font-size: 1.25rem;
+  }
+
+  .testi__text {
+    color: var(--color-text);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .testi__footer {
+    font-style: normal;
+  }
+
+  .testi__author {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-text);
+    font-size: 1rem;
+    display: block;
+  }
+
+  .testi__location {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  /* ═══════════════ CTA BLOCK ═══════════════ */
+  .cta-block {
+    background: var(--color-secondary);
+    padding: 6rem 0;
+    text-align: center;
+    clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
+    margin: 2rem 0 0;
+  }
+
+  .cta-block__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    color: white;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-block__text {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.25rem;
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+
+  .cta-block__phone {
+    color: white;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  /* ═══════════════ RESPONSIVE ═══════════════ */
+  @media (max-width: 1024px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+
+    .hero__subtitle { margin: 0 auto 2.5rem; }
+    .hero__actions { justify-content: center; }
+    .hero__art { height: 350px; margin: 0 auto; }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+      padding: 4rem 0 8rem;
+      clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+    }
+
+    .hero__art { height: 280px; }
+
+    .stats__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .stats {
+      clip-path: polygon(0 4%, 100% 0, 100% 96%, 0 100%);
+    }
+
+    .cta-block {
+      clip-path: polygon(0 0, 100% 3%, 100% 100%, 0 97%);
+    }
+
+    .svc-card {
+      box-shadow: 6px 6px 0 var(--color-primary);
+    }
+
+    .btn {
+      padding: 0.875rem 1.75rem;
+      font-size: 0.9375rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>
