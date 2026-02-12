@@ -19,7 +19,15 @@ import BoldPricing from '@components/bold/pages/BoldPricing.astro'
 import BoldGallery from '@components/bold/pages/BoldGallery.astro'
 import BoldContact from '@components/bold/pages/BoldContact.astro'
 
-// Future: import Trust, Bubbly, Noir page components here
+// Trust Shield page content components
+import TrustHome from '@components/trust/pages/TrustHome.astro'
+import TrustServices from '@components/trust/pages/TrustServices.astro'
+import TrustAbout from '@components/trust/pages/TrustAbout.astro'
+import TrustPricing from '@components/trust/pages/TrustPricing.astro'
+import TrustGallery from '@components/trust/pages/TrustGallery.astro'
+import TrustContact from '@components/trust/pages/TrustContact.astro'
+
+// Future: import Bubbly, Noir page components here
 
 /**
  * Static map of (theme, page) → page content component.
@@ -44,12 +52,12 @@ const PAGE_CONTENT_MAP = {
     contact: BoldContact,
   },
   trust: {
-    home: MinimalHome,
-    services: MinimalServices,
-    about: MinimalAbout,
-    pricing: MinimalPricing,
-    gallery: MinimalGallery,
-    contact: MinimalContact,
+    home: TrustHome,
+    services: TrustServices,
+    about: TrustAbout,
+    pricing: TrustPricing,
+    gallery: TrustGallery,
+    contact: TrustContact,
   },
   bubbly: {
     home: MinimalHome,

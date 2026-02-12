@@ -1,0 +1,300 @@
+---
+/**
+ * TrustServices — Professional service catalog with category grouping,
+ * feature checklists, and corporate card styling.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig } from '@lib/site-config'
+
+interface Props {
+  services: CollectionEntry<'services'>[]
+}
+
+const { services } = Astro.props
+
+const categories = ['residential', 'commercial', 'specialty'] as const
+const categoryLabels: Record<string, string> = {
+  residential: 'Residential Cleaning',
+  commercial: 'Commercial Cleaning',
+  specialty: 'Specialty Services',
+}
+const categoryDescs: Record<string, string> = {
+  residential: 'Dependable home cleaning services for busy families and professionals.',
+  commercial: 'Professional cleaning solutions for offices, retail, and commercial spaces.',
+  specialty: 'Specialized deep cleaning for unique situations and one-time needs.',
+}
+
+const servicesByCategory = Object.fromEntries(
+  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)]),
+) as Record<(typeof categories)[number], typeof services>
+---
+
+<main data-page="services">
+  {/* ── Page header ── */}
+  <section class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">Our Services</h1>
+      <p class="page-header__subtitle">
+        Professional, reliable cleaning services backed by our satisfaction guarantee. From routine home cleaning to post-construction cleanup.
+      </p>
+    </div>
+  </section>
+
+  {/* ── Service categories ── */}
+  {categories.map((category, catIndex) => (
+    <section
+      class:list={['section', { 'section--surface': catIndex % 2 === 1 }]}
+      data-section={`services-${category}`}
+    >
+      <div class="container">
+        <div class="cat-header reveal">
+          <h2 class="cat-header__title">{categoryLabels[category]}</h2>
+          <p class="cat-header__desc">{categoryDescs[category]}</p>
+        </div>
+        <div class="service-grid reveal-stagger reveal">
+          {servicesByCategory[category].map((service) => (
+            <article class="svc" id={service.data.slug} data-service={service.data.slug}>
+              <div class="svc__top">
+                <h3 class="svc__name">{service.data.name}</h3>
+                <p class="svc__tagline">{service.data.tagline}</p>
+              </div>
+              <ul class="svc__features">
+                {service.data.features.slice(0, 4).map((feature) => (
+                  <li class="svc__feature">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" class="svc__check-icon" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div class="svc__bottom">
+                {service.data.startingPrice && (
+                  <span class="svc__price">
+                    From ${service.data.startingPrice} {service.data.priceUnit}
+                  </span>
+                )}
+                <a href="/contact" class="svc__cta">Get a Quote</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  {/* ── CTA ── */}
+  <section class="cta reveal">
+    <div class="container">
+      <h2 class="cta__title">Not Sure Which Service You Need?</h2>
+      <p class="cta__text">
+        Our team will help you find the perfect cleaning solution. Call <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a> or request a free estimate.
+      </p>
+      <a href="/contact" class="btn btn--white">Request Free Estimate</a>
+    </div>
+  </section>
+</main>
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    padding: var(--section-padding) 2rem 3rem;
+    text-align: center;
+    background: var(--color-surface);
+    border-bottom: 1px solid #DEE2E6;
+  }
+
+  .page-header__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Shared ── */
+  .container { max-width: var(--container-max); margin: 0 auto; padding: 0 2rem; }
+
+  .section { padding: var(--section-padding) 0; }
+  .section--surface { background: var(--color-surface); }
+
+  /* ── Category header ── */
+  .cat-header { margin-bottom: 2.5rem; }
+
+  .cat-header__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-header__desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+
+  /* ── Service grid ── */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .svc {
+    background: var(--color-surface);
+    border: 1px solid #DEE2E6;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .svc:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .section--surface .svc {
+    background: var(--color-background);
+  }
+
+  .svc__top { margin-bottom: 1rem; }
+
+  .svc__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .svc__tagline {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .svc__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    flex: 1;
+  }
+
+  .svc__feature {
+    padding: 0.35rem 0;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .svc__check-icon {
+    color: #28A745;
+    flex-shrink: 0;
+    position: relative;
+    top: 2px;
+  }
+
+  .svc__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.25rem;
+    border-top: 1px solid #DEE2E6;
+  }
+
+  .svc__price {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-primary);
+  }
+
+  .svc__cta {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+
+  .svc__cta:hover {
+    background: var(--color-secondary);
+    box-shadow: 0 2px 8px rgba(27, 73, 101, 0.2);
+  }
+
+  /* ── CTA ── */
+  .cta {
+    background: var(--color-primary);
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .cta__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta__text {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.0625rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .cta__phone {
+    color: white;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    padding: 0.8rem 1.75rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn--white {
+    background: white;
+    color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn--white:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  @media (max-width: 640px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
