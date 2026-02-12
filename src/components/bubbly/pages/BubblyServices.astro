@@ -1,0 +1,388 @@
+---
+/**
+ * BubblyServices — Service catalog with rounded cards and pastel gradients.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig } from '@lib/site-config'
+
+interface Props {
+  services: CollectionEntry<'services'>[]
+}
+
+const { services } = Astro.props
+
+const categories = ['residential', 'commercial', 'specialty'] as const
+const categoryLabels: Record<string, string> = {
+  residential: 'Residential',
+  commercial: 'Commercial',
+  specialty: 'Specialty',
+}
+const categoryIcons: Record<string, string> = {
+  residential: '🏠',
+  commercial: '🏢',
+  specialty: '✨',
+}
+
+const servicesByCategory = Object.fromEntries(
+  categories.map((cat) => [cat, services.filter((s) => s.data.category === cat)])
+) as Record<(typeof categories)[number], typeof services>
+---
+
+<main data-page="services">
+  {/* ── Page header ── */}
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">What We Do</span>
+      <h1 class="page-header__title">Our Awesome Services</h1>
+      <p class="page-header__subtitle">
+        From cozy homes to busy offices — we've got the perfect clean for every space!
+      </p>
+    </div>
+    <svg
+      class="wave"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M0,40 Q200,10 400,40 T800,30 Q1000,50 1200,35 L1200,80 L0,80 Z"
+        fill="var(--color-surface)"></path>
+    </svg>
+  </section>
+
+  {/* ── Service categories ── */}
+  {
+    categories.map((category, catIndex) => (
+      <section
+        class:list={['section', { 'section--alt': catIndex % 2 === 0 }]}
+        data-section={`services-${category}`}
+      >
+        <div class="container">
+          <div class="cat-header reveal">
+            <span class="cat-header__icon" aria-hidden="true">
+              {categoryIcons[category]}
+            </span>
+            <span class="cat-header__label">{categoryLabels[category]}</span>
+            <h2 class="cat-header__title">{categoryLabels[category]} Services</h2>
+          </div>
+          <div class="service-grid reveal-stagger reveal">
+            {servicesByCategory[category].map((service) => (
+              <article class="svc" id={service.data.slug} data-service={service.data.slug}>
+                <div class="svc__top">
+                  <h3 class="svc__name">{service.data.name}</h3>
+                  <p class="svc__tagline">{service.data.tagline}</p>
+                </div>
+                <ul class="svc__features">
+                  {service.data.features.slice(0, 4).map((feature) => (
+                    <li class="svc__feature">
+                      <span class="svc__check" aria-hidden="true">
+                        &#10003;
+                      </span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div class="svc__bottom">
+                  {service.data.startingPrice && (
+                    <span class="svc__price">
+                      From ${service.data.startingPrice} {service.data.priceUnit}
+                    </span>
+                  )}
+                  <a href="/contact" class="svc__cta">
+                    Get a Quote
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  {/* ── CTA ── */}
+  <section class="cta-block reveal">
+    <svg
+      class="wave wave--cta"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M0,50 Q300,10 600,45 T1200,35 L1200,80 L0,80 Z" fill="var(--color-primary)"></path>
+    </svg>
+    <div class="cta-block__body">
+      <div class="container">
+        <h2 class="cta-block__title">Not Sure Which Service You Need?</h2>
+        <p class="cta-block__text">
+          Call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone"
+            >{siteConfig.phone}</a
+          > — we'll help you pick the perfect plan!
+        </p>
+        <a href="/contact" class="btn btn--white">Request a Free Quote</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    padding: var(--section-padding) 2rem 0;
+    text-align: center;
+    background: var(--color-background);
+  }
+
+  .page-header__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.175rem);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Shared ── */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: -1px;
+  }
+
+  .wave--cta {
+    margin-top: 0;
+    margin-bottom: -1px;
+  }
+
+  /* ── Sections ── */
+  .section {
+    padding: 4rem 2rem;
+    background: var(--color-surface);
+  }
+
+  .section--alt {
+    background: var(--color-background);
+  }
+
+  /* ── Category header ── */
+  .cat-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .cat-header__icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-header__label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-header__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    color: var(--color-text);
+  }
+
+  /* ── Service grid ── */
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  /* ── Service card ── */
+  .svc {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .svc:hover {
+    transform: translateY(-6px) rotate(-0.3deg);
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.1);
+  }
+
+  .svc__top {
+    margin-bottom: 1rem;
+  }
+
+  .svc__name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .svc__tagline {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  .svc__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    flex: 1;
+  }
+
+  .svc__feature {
+    padding: 0.35rem 0;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .svc__check {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .svc__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.25rem;
+    border-top: 2px solid color-mix(in srgb, var(--color-primary) 15%, transparent);
+  }
+
+  .svc__price {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--color-primary);
+  }
+
+  .svc__cta {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .svc__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  }
+
+  /* ── CTA Block ── */
+  .cta-block {
+    position: relative;
+  }
+
+  .cta-block__body {
+    background: var(--color-primary);
+    padding: 5rem 0;
+    text-align: center;
+  }
+
+  .cta-block__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .cta-block__text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.175rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .cta-block__phone {
+    color: white;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .btn--white {
+    background: white;
+    color: var(--color-primary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn--white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  @media (max-width: 640px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

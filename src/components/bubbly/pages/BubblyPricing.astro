@@ -1,0 +1,472 @@
+---
+/**
+ * BubblyPricing — Rounded pricing cards, FAQ accordion, playful CTA.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig } from '@lib/site-config'
+
+interface Props {
+  pricing: CollectionEntry<'pricing'>[]
+}
+
+const { pricing } = Astro.props
+
+const faqs = [
+  {
+    q: 'Do I need to be home during the cleaning?',
+    a: 'Not at all! Many clients give us a key or access code. All our team members are background-checked, insured, and bonded.',
+  },
+  {
+    q: "What if I'm not satisfied with the cleaning?",
+    a: "We have a 100% satisfaction guarantee. If anything isn't up to your standards, we'll re-clean it free of charge within 24 hours.",
+  },
+  {
+    q: 'Do you bring your own supplies and equipment?',
+    a: "Yes! We bring all eco-friendly cleaning products and professional-grade equipment. You don't need to supply anything.",
+  },
+  {
+    q: 'Can I customize my cleaning plan?',
+    a: "Absolutely! While our tiers give you a starting point, we're happy to add or adjust services to match your specific needs. Just let us know when you book.",
+  },
+  {
+    q: 'How do I pay?',
+    a: 'We accept all major credit cards and send invoices via email after each visit. No cash needed, no upfront payments.',
+  },
+]
+---
+
+<main data-page="pricing">
+  {/* ── Page header ── */}
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">Simple & Fair</span>
+      <h1 class="page-header__title">Super Fair Pricing</h1>
+      <p class="page-header__subtitle">No hidden fees. No surprises. Just clean, friendly rates!</p>
+    </div>
+  </section>
+
+  {/* ── Pricing tiers ── */}
+  <section class="tiers-section reveal">
+    <div class="container">
+      <div class="tiers reveal-stagger">
+        {
+          pricing.map((tier) => (
+            <article
+              class:list={['tier', { 'tier--popular': tier.data.highlighted }]}
+              data-tier={tier.data.id}
+            >
+              {tier.data.highlighted && <span class="tier__badge">Most Popular</span>}
+              <h2 class="tier__name">{tier.data.name}</h2>
+              <p class="tier__tagline">{tier.data.tagline}</p>
+              <div class="tier__price-block">
+                <span class="tier__price">${tier.data.price}</span>
+                <span class="tier__unit">{tier.data.priceUnit}</span>
+              </div>
+              {tier.data.frequency && <p class="tier__freq">{tier.data.frequency}</p>}
+              <ul class="tier__features">
+                {tier.data.features.map((f) => (
+                  <li class:list={['tier__feature', { 'tier__feature--excluded': !f.included }]}>
+                    <span aria-hidden="true" class="tier__feature-icon">
+                      {f.included ? '✓' : '✗'}
+                    </span>
+                    {f.text}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={tier.data.ctaUrl}
+                class:list={['tier__cta', { 'tier__cta--filled': tier.data.highlighted }]}
+              >
+                {tier.data.ctaText}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ── FAQ ── */}
+  <section class="faq-section reveal">
+    <div class="container container--narrow">
+      <div class="faq-header">
+        <span class="section-label">Got Questions?</span>
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        {
+          faqs.map((faq) => (
+            <details class="faq">
+              <summary class="faq__q">{faq.q}</summary>
+              <p class="faq__a">{faq.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA ── */}
+  <section class="cta-block reveal">
+    <svg
+      class="wave wave--cta"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M0,50 Q300,10 600,45 T1200,35 L1200,80 L0,80 Z" fill="var(--color-primary)"></path>
+    </svg>
+    <div class="cta-block__body">
+      <div class="container">
+        <h2 class="cta-block__title">Ready to Get Started?</h2>
+        <p class="cta-block__text">
+          Book online or call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone"
+            >{siteConfig.phone}</a
+          >!
+        </p>
+        <a href="/contact" class="btn btn--white">Get Your Free Quote</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    padding: var(--section-padding) 2rem 3rem;
+    text-align: center;
+  }
+
+  .page-header__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.175rem);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Shared ── */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .container--narrow {
+    max-width: 720px;
+  }
+
+  .section-label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    height: 60px;
+  }
+  .wave--cta {
+    margin-bottom: -1px;
+  }
+
+  /* ── Tiers ── */
+  .tiers-section {
+    padding: 0 0 4rem;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .tier {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .tier:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.1);
+  }
+
+  .tier--popular {
+    border: 3px solid var(--color-accent);
+    box-shadow: 0 0 30px rgba(244, 114, 182, 0.2);
+  }
+
+  .tier--popular:hover {
+    box-shadow: 0 0 40px rgba(244, 114, 182, 0.3);
+    transform: translateY(-6px);
+  }
+
+  .tier__badge {
+    position: absolute;
+    top: -0.875rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #d946b2;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 1.25rem;
+    border-radius: var(--radius-full);
+    letter-spacing: 0.04em;
+  }
+
+  .tier__name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .tier__tagline {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tier__price-block {
+    margin-bottom: 0.25rem;
+  }
+
+  .tier__price {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 3rem;
+    color: var(--color-primary);
+  }
+
+  .tier__unit {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+
+  .tier__freq {
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tier__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    text-align: left;
+  }
+
+  .tier__feature {
+    padding: 0.4rem 0;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    display: flex;
+    align-items: baseline;
+    gap: 0.625rem;
+  }
+
+  .tier__feature-icon {
+    font-weight: 700;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .tier__feature--excluded {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  .tier__feature--excluded .tier__feature-icon {
+    color: var(--color-text-muted);
+  }
+
+  .tier__cta {
+    display: block;
+    width: 100%;
+    padding: 0.875rem;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    background: transparent;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .tier__cta:hover {
+    background: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .tier__cta--filled {
+    background: var(--color-cta);
+    color: white;
+    border-color: var(--color-cta);
+  }
+
+  .tier__cta--filled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+    background: var(--color-cta);
+  }
+
+  /* ── FAQ ── */
+  .faq-section {
+    padding: 4rem 0;
+    background: var(--color-surface);
+  }
+
+  .faq-header {
+    margin-bottom: 2rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq {
+    border-bottom: 2px solid color-mix(in srgb, var(--color-primary) 12%, transparent);
+    padding: 1.5rem 0;
+  }
+
+  .faq__q {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__q::marker {
+    content: '';
+  }
+
+  .faq__q::after {
+    content: '+';
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    line-height: 1;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .faq[open] .faq__q::after {
+    content: '−';
+    transform: rotate(180deg);
+  }
+
+  .faq__a {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-top: 1rem;
+  }
+
+  /* ── CTA Block ── */
+  .cta-block {
+    position: relative;
+  }
+
+  .cta-block__body {
+    background: var(--color-primary);
+    padding: 5rem 0;
+    text-align: center;
+  }
+
+  .cta-block__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .cta-block__text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.175rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-block__phone {
+    color: white;
+    text-decoration: underline;
+    font-weight: 700;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .btn--white {
+    background: white;
+    color: var(--color-primary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn--white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  }
+</style>

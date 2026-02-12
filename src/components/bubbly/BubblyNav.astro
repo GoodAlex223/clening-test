@@ -1,0 +1,402 @@
+---
+/**
+ * BubblyNav — Playful floating navigation with rounded pill links.
+ *
+ * Fredoka One logo with sparkle icon, pill-shaped hover states,
+ * purple accents. Mobile hamburger overlay.
+ */
+import type { ThemeId } from '@themes/types'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+
+interface Props {
+  currentTheme: ThemeId
+  currentPath?: string
+}
+
+const { currentTheme, currentPath = Astro.url.pathname } = Astro.props
+
+const links = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+---
+
+<header class="bbn" id="bubbly-nav">
+  <div class="bbn__inner">
+    <a href="/" class="bbn__logo" aria-label="CleanSpark — Home">
+      <svg
+        class="bbn__sparkle"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M12 0l2 8 8 1-8 2-2 8-2-8-8-2 8-1z"></path>
+        <path d="M20 3l.75 3L24 6.75l-3.25.75L20 10.75l-.75-3.25L16 6.75l3.25-.75z" opacity="0.6"
+        ></path>
+      </svg>
+      Clean<span class="bbn__logo-accent">Spark</span>
+    </a>
+
+    <nav class="bbn__links" aria-label="Main navigation">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={['bbn__link', { 'bbn__link--active': currentPath === link.href }]}
+            aria-current={currentPath === link.href ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="bbn__right">
+      <ThemeSwitcher currentTheme={currentTheme} client:load />
+      <a href="/contact" class="bbn__cta">Get a Quote</a>
+      <button
+        type="button"
+        class="bbn__burger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="bubbly-mobile-menu"
+      >
+        <span class="bbn__burger-line"></span>
+        <span class="bbn__burger-line"></span>
+        <span class="bbn__burger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{/* Mobile overlay menu */}
+<div
+  class="bbn-mobile"
+  id="bubbly-mobile-menu"
+  aria-hidden="true"
+  style="opacity: 0; visibility: hidden;"
+>
+  <nav class="bbn-mobile__nav" aria-label="Mobile navigation">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'bbn-mobile__link',
+            { 'bbn-mobile__link--active': currentPath === link.href },
+          ]}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+          tabindex="-1"
+          style="opacity: 0; transform: translateY(16px);"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<script>
+  function initBubblyNav(): void {
+    const nav = document.getElementById('bubbly-nav')
+    const burgerEl = nav?.querySelector<HTMLButtonElement>('.bbn__burger')
+    const menuEl = document.getElementById('bubbly-mobile-menu')
+    if (!nav || !burgerEl || !menuEl) return
+
+    const burger = burgerEl
+    const mobileMenu = menuEl
+
+    const onScroll = (): void => {
+      nav.classList.toggle('bbn--scrolled', window.scrollY > 20)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    const mobileLinks = mobileMenu.querySelectorAll<HTMLAnchorElement>('a')
+    let isMenuOpen = false
+
+    function openMenu(): void {
+      isMenuOpen = true
+      mobileMenu.style.opacity = '1'
+      mobileMenu.style.visibility = 'visible'
+      mobileMenu.setAttribute('aria-hidden', 'false')
+      burger.setAttribute('aria-expanded', 'true')
+      burger.classList.add('bbn__burger--open')
+      document.body.style.overflow = 'hidden'
+      mobileLinks.forEach((l) => {
+        l.removeAttribute('tabindex')
+        l.style.opacity = '1'
+        l.style.transform = 'translateY(0)'
+      })
+      mobileLinks[0]?.focus()
+    }
+
+    function closeMenu(): void {
+      isMenuOpen = false
+      mobileMenu.style.opacity = '0'
+      mobileMenu.style.visibility = 'hidden'
+      mobileMenu.setAttribute('aria-hidden', 'true')
+      burger.setAttribute('aria-expanded', 'false')
+      burger.classList.remove('bbn__burger--open')
+      document.body.style.overflow = ''
+      mobileLinks.forEach((l) => {
+        l.setAttribute('tabindex', '-1')
+        l.style.opacity = '0'
+        l.style.transform = 'translateY(16px)'
+      })
+      burger.focus()
+    }
+
+    burger.addEventListener('click', () => {
+      if (isMenuOpen) closeMenu()
+      else openMenu()
+    })
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) closeMenu()
+    })
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu)
+    })
+  }
+
+  initBubblyNav()
+</script>
+
+<style>
+  /* ── Sticky header ── */
+  .bbn {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 249, 240, 0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 2px solid transparent;
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+  }
+
+  .bbn--scrolled {
+    border-bottom-color: color-mix(in srgb, var(--color-primary) 25%, transparent);
+    box-shadow: 0 4px 24px rgba(124, 58, 237, 0.08);
+  }
+
+  .bbn__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.5rem;
+  }
+
+  /* ── Logo ── */
+  .bbn__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .bbn__sparkle {
+    color: var(--color-accent);
+    animation: twinkle 2s ease-in-out infinite;
+  }
+
+  .bbn__logo-accent {
+    color: var(--color-secondary);
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  /* ── Desktop links (pills) ── */
+  .bbn__links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .bbn__link {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.4rem 1.125rem;
+    border-radius: var(--radius-full);
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  .bbn__link:hover {
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    color: var(--color-primary);
+  }
+
+  .bbn__link--active {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* ── Right side ── */
+  .bbn__right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .bbn__cta {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.6rem 1.5rem;
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition:
+      transform 0.15s,
+      box-shadow 0.2s;
+  }
+
+  .bbn__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.3);
+  }
+
+  .bbn__cta:active {
+    animation: jellySquish 150ms ease;
+  }
+
+  @keyframes jellySquish {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.95);
+    }
+  }
+
+  /* ── Hamburger ── */
+  .bbn__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .bbn__burger-line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .bbn__burger--open .bbn__burger-line:first-child {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .bbn__burger--open .bbn__burger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .bbn__burger--open .bbn__burger-line:last-child {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* ── Mobile overlay ── */
+  .bbn-mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .bbn-mobile__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .bbn-mobile__link {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.25rem 1.5rem;
+    border-radius: var(--radius-full);
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+
+  .bbn-mobile__link:hover,
+  .bbn-mobile__link--active {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .bbn__links {
+      display: none;
+    }
+
+    .bbn__burger {
+      display: flex;
+    }
+
+    .bbn__cta {
+      display: none;
+    }
+
+    .bbn__right :global(.theme-switcher) {
+      display: none;
+    }
+  }
+</style>

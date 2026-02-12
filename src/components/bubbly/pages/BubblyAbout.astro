@@ -1,0 +1,511 @@
+---
+/**
+ * BubblyAbout — Company story, values, and team with playful styling.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig } from '@lib/site-config'
+
+interface Props {
+  team: CollectionEntry<'team'>[]
+}
+
+const { team } = Astro.props
+
+const values = [
+  {
+    title: 'Quality First',
+    desc: 'We never cut corners. Every surface, every room, every time.',
+    icon: '💎',
+  },
+  {
+    title: 'Fair & Transparent',
+    desc: 'No hidden fees. Fair wages for our team. Honest pricing for our clients.',
+    icon: '🤝',
+  },
+  {
+    title: 'Eco-Conscious',
+    desc: 'Green cleaning products and sustainable practices as standard.',
+    icon: '🌿',
+  },
+  {
+    title: 'Reliable',
+    desc: 'On time, every time. Consistent results you can count on.',
+    icon: '⚡',
+  },
+]
+---
+
+<main data-page="about">
+  {/* ── Page header ── */}
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">Who We Are</span>
+      <h1 class="page-header__title">About CleanSpark</h1>
+      <p class="page-header__subtitle">Seattle's friendliest cleaning crew since 2019!</p>
+    </div>
+    <svg
+      class="wave"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M0,40 Q200,10 400,40 T800,30 Q1000,50 1200,35 L1200,80 L0,80 Z"
+        fill="var(--color-surface)"></path>
+    </svg>
+  </section>
+
+  {/* ── Story ── */}
+  <section class="story reveal">
+    <div class="container">
+      <div class="story__grid">
+        <div class="story__content">
+          <span class="section-label--left">Our Story</span>
+          <h2 class="section-heading">How We Started</h2>
+          <p class="body-text">
+            CleanSpark was born from a simple belief: everyone deserves a clean, healthy space — and
+            every cleaner deserves fair pay and respect. Founded in 2019, we started as a one-person
+            operation in a Seattle studio apartment with a vacuum, a bucket, and a vision.
+          </p>
+          <p class="body-text">
+            Today, we're a team of dedicated professionals serving homes and businesses across the
+            greater Seattle area. We've completed over 5,000 cleans, maintained a 4.9-star rating,
+            and built something we're truly proud of.
+          </p>
+          <p class="story__annotation">We love what we do!</p>
+        </div>
+        <div class="story__art" aria-hidden="true">
+          <div class="bubble bubble--1"></div>
+          <div class="bubble bubble--2"></div>
+          <div class="bubble bubble--3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Values ── */}
+  <section class="values-section">
+    <div class="container">
+      <div class="values-header reveal">
+        <span class="section-label">What Drives Us</span>
+        <h2 class="section-heading section-heading--center">Our Values</h2>
+      </div>
+      <div class="values-grid reveal-stagger reveal">
+        {
+          values.map((v) => (
+            <article class="value-card">
+              <span class="value-card__icon" aria-hidden="true">
+                {v.icon}
+              </span>
+              <h3 class="value-card__title">{v.title}</h3>
+              <p class="value-card__desc">{v.desc}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ── Team ── */}
+  <section class="team-section">
+    <div class="container">
+      <div class="team-header reveal">
+        <span class="section-label">The People Behind the Sparkle</span>
+        <h2 class="section-heading section-heading--center">Meet Our Team</h2>
+      </div>
+      <div class="team-grid reveal-stagger reveal">
+        {
+          team.map((member) => (
+            <article class="member" data-member={member.data.id}>
+              <div class="member__avatar" aria-hidden="true">
+                {member.data.name.charAt(0)}
+              </div>
+              <h3 class="member__name">{member.data.name}</h3>
+              <p class="member__role">{member.data.role}</p>
+              <p class="member__bio">
+                {member.data.bio.length > 200
+                  ? member.data.bio.slice(0, 200) + '...'
+                  : member.data.bio}
+              </p>
+              {member.data.certifications && member.data.certifications.length > 0 && (
+                <div class="member__certs">
+                  {member.data.certifications.map((cert) => (
+                    <span class="member__cert">{cert}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ── Service Areas ── */}
+  <section class="areas-section reveal">
+    <svg
+      class="wave wave--areas"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M0,50 Q300,10 600,45 T1200,35 L1200,80 L0,80 Z" fill="var(--color-primary)"></path>
+    </svg>
+    <div class="areas-body">
+      <div class="container">
+        <h2 class="areas__title">Proudly Serving</h2>
+        <p class="areas__list">{siteConfig.serviceAreas.join(' · ')}</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    padding: var(--section-padding) 2rem 0;
+    text-align: center;
+    background: var(--color-background);
+  }
+
+  .page-header__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.175rem);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Shared ── */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .section-label--left {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-heading {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-heading--center {
+    text-align: center;
+  }
+
+  .body-text {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 1.0625rem;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: -1px;
+  }
+
+  .wave--areas {
+    margin-top: 0;
+    margin-bottom: -1px;
+  }
+
+  /* ── Story ── */
+  .story {
+    padding: 4rem 2rem;
+    background: var(--color-surface);
+  }
+
+  .story__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .story__annotation {
+    font-family: var(--font-accent);
+    font-size: 1.25rem;
+    color: #d946b2;
+    margin-top: 0.5rem;
+  }
+
+  .story__art {
+    position: relative;
+    height: 320px;
+  }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.45;
+    will-change: transform;
+  }
+
+  .bubble--1 {
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, #c4f5fc, rgba(196, 245, 252, 0.3));
+    top: 10%;
+    left: 20%;
+    animation: float1 4s ease-in-out infinite;
+  }
+
+  .bubble--2 {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #f5e6ff, rgba(245, 230, 255, 0.3));
+    bottom: 10%;
+    left: 45%;
+    animation: float2 5s ease-in-out infinite;
+  }
+
+  .bubble--3 {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #ffe4f0, rgba(255, 228, 240, 0.4));
+    top: 30%;
+    right: 10%;
+    animation: float3 3.5s ease-in-out infinite;
+  }
+
+  @keyframes float1 {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes float2 {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+  }
+
+  @keyframes float3 {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  /* ── Values ── */
+  .values-section {
+    padding: 5rem 2rem;
+    background: var(--color-background);
+  }
+
+  .values-header {
+    margin-bottom: 3rem;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .value-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px) rotate(-0.5deg);
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.1);
+  }
+
+  .value-card__icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .value-card__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .value-card__desc {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* ── Team ── */
+  .team-section {
+    padding: 5rem 2rem;
+    background: var(--color-surface);
+  }
+
+  .team-header {
+    margin-bottom: 3rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .member {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .member:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.1);
+  }
+
+  .member__avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .member__name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.125rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .member__role {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  .member__bio {
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .member__certs {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    justify-content: center;
+  }
+
+  .member__cert {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    border-radius: var(--radius-full);
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  /* ── Areas ── */
+  .areas-section {
+    position: relative;
+  }
+
+  .areas-body {
+    padding: 4rem 2rem;
+    background: var(--color-primary);
+    text-align: center;
+  }
+
+  .areas__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.75rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .areas__list {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.125rem;
+    line-height: 2;
+  }
+
+  @media (max-width: 768px) {
+    .story__grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .story__art {
+      height: 200px;
+    }
+  }
+</style>

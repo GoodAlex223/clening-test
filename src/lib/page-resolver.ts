@@ -27,7 +27,15 @@ import TrustPricing from '@components/trust/pages/TrustPricing.astro'
 import TrustGallery from '@components/trust/pages/TrustGallery.astro'
 import TrustContact from '@components/trust/pages/TrustContact.astro'
 
-// Future: import Bubbly, Noir page components here
+// Bubbly Clean page content components
+import BubblyHome from '@components/bubbly/pages/BubblyHome.astro'
+import BubblyServices from '@components/bubbly/pages/BubblyServices.astro'
+import BubblyAbout from '@components/bubbly/pages/BubblyAbout.astro'
+import BubblyPricing from '@components/bubbly/pages/BubblyPricing.astro'
+import BubblyGallery from '@components/bubbly/pages/BubblyGallery.astro'
+import BubblyContact from '@components/bubbly/pages/BubblyContact.astro'
+
+// Future: import Noir page components here
 
 /**
  * Static map of (theme, page) → page content component.
@@ -60,12 +68,12 @@ const PAGE_CONTENT_MAP = {
     contact: TrustContact,
   },
   bubbly: {
-    home: MinimalHome,
-    services: MinimalServices,
-    about: MinimalAbout,
-    pricing: MinimalPricing,
-    gallery: MinimalGallery,
-    contact: MinimalContact,
+    home: BubblyHome,
+    services: BubblyServices,
+    about: BubblyAbout,
+    pricing: BubblyPricing,
+    gallery: BubblyGallery,
+    contact: BubblyContact,
   },
   noir: {
     home: MinimalHome,
@@ -80,7 +88,7 @@ const PAGE_CONTENT_MAP = {
 /** Resolve a theme + page pair to the page content component. */
 export function resolvePageContent<P extends PageName>(
   themeId: ThemeId,
-  pageName: P,
+  pageName: P
 ): (typeof PAGE_CONTENT_MAP)[ThemeId][P] {
   return PAGE_CONTENT_MAP[themeId][pageName] as (typeof PAGE_CONTENT_MAP)[ThemeId][P]
 }

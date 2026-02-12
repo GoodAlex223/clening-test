@@ -1,0 +1,436 @@
+---
+/**
+ * BubblyContact — Rounded contact form + playful info cards with bubbly styling.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig, getFullAddress } from '@lib/site-config'
+
+interface Props {
+  services: CollectionEntry<'services'>[]
+}
+
+const { services } = Astro.props
+---
+
+<main data-page="contact">
+  {/* ── Page header ── */}
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">Say Hello</span>
+      <h1 class="page-header__title">Let's Chat!</h1>
+      <p class="page-header__subtitle">
+        We'd love to hear from you. Drop us a message and we'll get back to you with sparkle-speed!
+      </p>
+    </div>
+    <svg
+      class="wave"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M0,40 Q200,10 400,40 T800,30 Q1000,50 1200,35 L1200,80 L0,80 Z"
+        fill="var(--color-surface)"></path>
+    </svg>
+  </section>
+
+  {/* ── Contact content ── */}
+  <section class="contact reveal">
+    <div class="container">
+      <div class="contact__grid">
+        {/* ── Form ── */}
+        <div class="contact__form-wrap">
+          <h2 class="contact__heading">Request a Free Quote</h2>
+          <form id="contact-form" class="form">
+            <label class="field">
+              <span class="field__label">Name *</span>
+              <input type="text" name="name" required autocomplete="name" class="field__input" />
+            </label>
+            <label class="field">
+              <span class="field__label">Email *</span>
+              <input type="email" name="email" required autocomplete="email" class="field__input" />
+            </label>
+            <label class="field">
+              <span class="field__label">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" class="field__input" />
+            </label>
+            <label class="field">
+              <span class="field__label">Service Interest</span>
+              <select name="service" class="field__input">
+                <option value="">Select a service (optional)</option>
+                {services.map((s) => <option value={s.data.slug}>{s.data.name}</option>)}
+              </select>
+            </label>
+            <label class="field">
+              <span class="field__label">Message *</span>
+              <textarea name="message" required rows={5} class="field__input field__input--textarea"
+              ></textarea>
+            </label>
+            <button type="submit" class="btn btn--primary btn--full">Send Message &rarr;</button>
+          </form>
+        </div>
+
+        {/* ── Info cards ── */}
+        <div class="info-stack reveal-stagger">
+          <h2 class="contact__heading">Contact Information</h2>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Call Us</h3>
+            <a href={`tel:${siteConfig.phone}`} class="info-card__link">{siteConfig.phone}</a>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Email Us</h3>
+            <a href={`mailto:${siteConfig.email}`} class="info-card__link">{siteConfig.email}</a>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Visit Us</h3>
+            <address class="info-card__text">{getFullAddress()}</address>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Business Hours</h3>
+            <ul class="info-card__hours">
+              <li>{siteConfig.hours.weekday}</li>
+              <li>{siteConfig.hours.saturday}</li>
+              <li>{siteConfig.hours.sunday}</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <h3 class="info-card__title">Follow Us</h3>
+            <div class="info-card__social">
+              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer"
+                >Facebook</a
+              >
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer"
+                >Instagram</a
+              >
+              <a href={siteConfig.social.yelp} target="_blank" rel="noopener noreferrer">Yelp</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Service areas ── */}
+  <section class="areas reveal">
+    <svg
+      class="wave wave--areas"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M0,50 Q300,10 600,45 T1200,35 L1200,80 L0,80 Z" fill="var(--color-primary)"></path>
+    </svg>
+    <div class="areas__body">
+      <div class="container">
+        <h2 class="areas__title">We Serve</h2>
+        <p class="areas__list">{siteConfig.serviceAreas.join(' \u00B7 ')}</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  function initBubblyContactForm(): void {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null
+    if (!form) return
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      if (!form.checkValidity()) {
+        form.reportValidity()
+        return
+      }
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
+      const originalText = btn.textContent
+      btn.textContent = 'Message Sent! ✓'
+      btn.disabled = true
+      btn.style.opacity = '0.7'
+      form.reset()
+      setTimeout(() => {
+        btn.textContent = originalText
+        btn.disabled = false
+        btn.style.opacity = ''
+      }, 3000)
+    })
+  }
+
+  initBubblyContactForm()
+</script>
+
+<style>
+  /* ── Page header ── */
+  .page-header {
+    padding: var(--section-padding) 2rem 0;
+    text-align: center;
+    background: var(--color-background);
+  }
+
+  .page-header__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header__subtitle {
+    color: var(--color-text-muted);
+    font-size: clamp(1rem, 2vw, 1.175rem);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Shared ── */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: -1px;
+  }
+  .wave--areas {
+    margin-top: 0;
+    margin-bottom: -1px;
+  }
+
+  /* ── Contact layout ── */
+  .contact {
+    padding: 0 0 4rem;
+    background: var(--color-surface);
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .contact__heading {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── Form ── */
+  .contact__form-wrap {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 2.5rem;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .field__label {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .field__input {
+    padding: 0.75rem 1.25rem;
+    border: 2px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    background: var(--color-background);
+    color: var(--color-text);
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .field__input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+  }
+
+  .field__input--textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+
+  .btn--primary {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.25);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(124, 58, 237, 0.3);
+  }
+
+  .btn--full {
+    width: 100%;
+  }
+
+  /* ── Info cards ── */
+  .info-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .info-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .info-card:hover {
+    transform: translateY(-3px) rotate(-0.3deg);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+  }
+
+  .info-card__title {
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    margin-bottom: 0.375rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .info-card__link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .info-card__link:hover {
+    color: var(--color-primary);
+  }
+
+  .info-card__text {
+    font-style: normal;
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .info-card__hours {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+  }
+
+  .info-card__social {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .info-card__social a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+
+  .info-card__social a:hover {
+    color: var(--color-secondary);
+  }
+
+  /* ── Service areas ── */
+  .areas {
+    position: relative;
+  }
+
+  .areas__body {
+    background: var(--color-primary);
+    padding: 5rem 0;
+    text-align: center;
+  }
+
+  .areas__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .areas__list {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.175rem;
+    line-height: 2;
+  }
+
+  @media (max-width: 768px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

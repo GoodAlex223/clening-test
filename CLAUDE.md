@@ -36,7 +36,7 @@ pnpm test             # All tests
 
 ## Architecture
 
-- **Multi-theme system**: 5 complete layout systems (3 implemented: Minimal Zen, Bold Spark, Trust Shield; 2 planned: Bubbly Clean, Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
+- **Multi-theme system**: 5 complete layout systems (4 implemented: Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean; 1 planned: Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
 - **Content Collections**: Astro Content Collections with Zod schemas for services, testimonials, team, gallery, pricing
 - **Theme Engine**:
   - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
@@ -53,7 +53,7 @@ pnpm test             # All tests
   - **Minimal Zen** (complete): Soft pastels, sans-serif (Inter), rounded corners, clean spacing
   - **Bold Spark** (complete): Vibrant orange/yellow, sans-serif (Poppins), 3px borders, offset shadows, clip-paths
   - **Trust Shield** (complete): Navy/slate grey, serif (Merriweather), 1px borders, trust badges, corporate professional
-  - **Bubbly Clean** (planned): Pink/teal, rounded fonts, bubble shapes, playful animations
+  - **Bubbly Clean** (complete): Cream/purple/cyan pastels, Fredoka One/Nunito/Caveat fonts, floating bubble decorations, wave SVG dividers, bouncy CSS keyframe animations, pill-shaped nav links, gradient footer, WCAG AA proactive contrast verification
   - **Noir Luxe** (planned): Black/gold, elegant serif, minimalist luxury
 
 <!-- END AUTO-MANAGED -->
@@ -97,6 +97,12 @@ pnpm test             # All tests
 - **Trust credentials pattern**: Footer trust strip with certifications/badges unique to Trust theme; reinforces corporate reliability (could be reused in other professional themes)
 - **Inline SVG icons**: All themes use inline SVG for icons (shields, checkmarks, stars, user icons) for performance and customization via `currentColor`
 - **Service category grouping**: Services organized by type (residential/commercial/specialty) in Trust theme; improves scanability for corporate audiences
+- **Floating bubble decorations**: Bubbly theme uses CSS-only floating bubbles with keyframe animations (`@keyframes float`, staggered delays); multiple bubble sizes and speeds create depth without JS overhead
+- **Wave SVG dividers**: Reusable wave path pattern (`<svg><path d="M0,40 Q200,10..."/></svg>`) separates sections in Bubbly theme; fills with CSS custom properties for color flexibility
+- **Handwritten font accents**: Bubbly theme uses Caveat font for annotations and accent text to create playful, approachable feel; limited to non-critical text to maintain readability
+- **Pill-shaped UI elements**: Bubbly theme uses extreme border-radius (`2rem+`) for buttons, nav links, cards, badges, and filter pills to reinforce rounded visual language
+- **WCAG AA proactive verification**: Bubbly theme color selection proactively verified against WCAG AA 4.5:1 contrast ratio; cyan (#06B6D4) and accent pink (#F472B6) replaced with higher-contrast alternatives (#7C3AED, #D946B2) before implementation
+- **Bouncy CSS animations**: Bubbly theme uses `cubic-bezier(0.68, -0.55, 0.265, 1.55)` for elastic bounce effect on hero title, buttons, and hover states; creates playful interaction without JS
 
 <!-- END AUTO-MANAGED -->
 
