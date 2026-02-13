@@ -240,6 +240,13 @@ Areas requiring investigation before implementation.
 - [ ] Extract shared scroll-reveal to `src/lib/scroll-reveal.ts` — Scroll-reveal IntersectionObserver script and CSS (~20 lines JS + ~45 lines CSS) duplicated across all 5 Layout files with only minor timing/distance differences; a shared utility accepting options would reduce ~100 lines of duplication
 - [ ] Add `astro:before-swap` cleanup for document-level event listeners — Nav components and contact forms add `keydown`/`scroll` listeners to `document`/`window` that are not cleaned up on page transition; while low practical impact (Astro replaces DOM), proper cleanup prevents theoretical memory leaks during long sessions
 
+### 2026-02-13 From: T-010 Code Review
+
+**Origin**: PR #10 code review
+
+- [ ] Extend `astro:before-swap` cleanup to Nav component listeners — PR #10 fix (a039879) addressed BeforeAfterSlider and scroll-spy cleanup, but each Nav component still adds `window` scroll listener (frosted glass) and `document` keydown listener (Escape key) without removal on View Transitions swap; apply same cleanup array pattern used in BeforeAfterSlider
+- [ ] Establish listener cleanup convention for new interactive components — document the `astro:before-swap` + cleanup array pattern (from BeforeAfterSlider fix) as a project convention so future interactive features follow the same approach
+
 ---
 
 ## Rejected Ideas
