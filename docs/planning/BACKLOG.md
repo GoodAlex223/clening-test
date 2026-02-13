@@ -232,6 +232,14 @@ Areas requiring investigation before implementation.
 
 - [ ] Update CLAUDE.md scoped class prefix documentation — Detected Patterns section is missing Noir's `.nn`/`.nf` prefixes (same issue as Bubbly's `.bbn`/`.bbf` noted in T-008 code review; both should be added together)
 
+### 2026-02-13 From: T-010 Interactive Features
+
+**Origin**: T-010 code review (quality review phase)
+
+- [ ] Extract shared `initContactForm()` to `src/lib/contact-form.ts` — Contact form initialization logic (~60 lines) is duplicated across all 5 Contact page components with only CSS class prefixes differing; extracting to a shared utility with a config parameter would eliminate ~300 lines of duplication
+- [ ] Extract shared scroll-reveal to `src/lib/scroll-reveal.ts` — Scroll-reveal IntersectionObserver script and CSS (~20 lines JS + ~45 lines CSS) duplicated across all 5 Layout files with only minor timing/distance differences; a shared utility accepting options would reduce ~100 lines of duplication
+- [ ] Add `astro:before-swap` cleanup for document-level event listeners — Nav components and contact forms add `keydown`/`scroll` listeners to `document`/`window` that are not cleaned up on page transition; while low practical impact (Astro replaces DOM), proper cleanup prevents theoretical memory leaks during long sessions
+
 ---
 
 ## Rejected Ideas

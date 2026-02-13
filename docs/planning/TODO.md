@@ -22,18 +22,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-010: Interactive Features
-
-**Priority**: P2 — Medium
-**Milestone**: M3–M4
-**Depends on**: T-005
-
-- [ ] Contact form with client-side validation (Zod)
-- [ ] Gallery filter by service category (interactive island)
-- [ ] Before/after image slider component
-- [ ] Smooth scroll navigation
-- [ ] View Transitions API for page transitions
-
 ### T-011: Testing & Quality
 
 **Priority**: P2 — Medium
