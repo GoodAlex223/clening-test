@@ -226,6 +226,12 @@ Areas requiring investigation before implementation.
 - [ ] Extract shared `#2a2a2a` border color to theme config — This literal appears in every Noir component; adding `--color-border-subtle` to ThemeConfig would centralize it and make future palette changes easier
 - [ ] Shared NoirPageHeader component — Page header (title + subtitle) markup and styles are identical across all 5 sub-pages; a `<NoirPageHeader>` component could eliminate ~20 lines per page
 
+### 2026-02-13 From: T-009 Code Review
+
+**Origin**: PR #9 code review
+
+- [ ] Update CLAUDE.md scoped class prefix documentation — Detected Patterns section is missing Noir's `.nn`/`.nf` prefixes (same issue as Bubbly's `.bbn`/`.bbf` noted in T-008 code review; both should be added together)
+
 ---
 
 ## Rejected Ideas
