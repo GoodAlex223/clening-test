@@ -211,6 +211,21 @@ Completed tasks with implementation details and learnings.
 
 **Spawned Tasks**: 3 items added to BACKLOG.md (contact form DRY extraction, scroll-reveal DRY extraction, event listener cleanup)
 
+### 2026-02-13 — T-011: Testing & Quality
+
+**Plan**: [docs/archive/plans/2026-02-13_t-011-testing-quality.md](../archive/plans/2026-02-13_t-011-testing-quality.md)
+**Summary**: Implemented comprehensive test suite: 78 Vitest unit tests + 884 Playwright E2E tests across 4 browsers (Desktop Chrome, Mobile Chrome, Firefox, WebKit). Covers 6 pages x 5 themes, theme switching roundtrip, mobile viewport, gallery filter, contact form validation, and axe-core accessibility audit. Found and fixed a production ThemeSwitcher event bubbling bug.
+
+**Key Changes**:
+- Created 4 unit test files: theme-store, theme-configs, theme-css-vars, contact-validation (78 tests)
+- Created 4 E2E feature test files: theme-switching, navigation, gallery-filter, contact-form
+- Created 6 E2E page test files: home, services, about, pricing, gallery, contact (5 themes each with a11y)
+- Created 4 test helpers: constants, theme, accessibility, navigation
+- Fixed production bug: ThemeSwitcher event bubbling from layout wrapper `<div data-theme>`
+- All 962 tests passing, 0 failures across all browsers
+
+**Spawned Tasks**: 4 items added to BACKLOG.md
+
 ---
 
 ## Notes

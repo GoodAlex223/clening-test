@@ -22,19 +22,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-011: Testing & Quality
-
-**Priority**: P2 — Medium
-**Milestone**: M4
-
-- [ ] Playwright E2E: Test all 6 pages × 5 themes = 30 test cases
-- [ ] Playwright: Theme switching roundtrip test
-- [ ] Playwright: Mobile viewport tests
-- [ ] Vitest: Theme resolver unit tests
-- [ ] Vitest: Content schema validation tests
-- [ ] Accessibility audit (axe-core or Lighthouse)
-- [ ] Cross-browser testing matrix
-
 ### T-012: Deployment & Launch
 
 **Priority**: P3 — Normal
