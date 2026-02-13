@@ -160,12 +160,14 @@ const links = [
     })
 
     // Scroll-spy for active nav link highlighting
-    initScrollSpy({
+    scrollSpyCleanup?.()
+    scrollSpyCleanup = initScrollSpy({
       linkSelector: '.mn__link',
       activeClass: 'mn__link--active',
     })
   }
 
+  let scrollSpyCleanup: (() => void) | undefined
   initMinimalNav()
   document.addEventListener('astro:page-load', initMinimalNav)
 </script>

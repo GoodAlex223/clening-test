@@ -51,7 +51,17 @@ const { before, after, alt, loading = 'lazy' } = Astro.props
 </div>
 
 <script>
+  // Track document-level listeners for cleanup on View Transitions swap
+  const baCleanups: (() => void)[] = []
+
+  function cleanupBeforeAfterSliders(): void {
+    baCleanups.forEach((fn) => fn())
+    baCleanups.length = 0
+  }
+
   function initBeforeAfterSliders(): void {
+    cleanupBeforeAfterSliders()
+
     const sliders = document.querySelectorAll<HTMLElement>('[data-ba-slider]')
 
     sliders.forEach((slider) => {
@@ -92,13 +102,14 @@ const { before, after, alt, loading = 'lazy' } = Astro.props
         updatePosition(e.clientX)
       })
 
-      document.addEventListener('mousemove', (e) => {
+      const onMouseMove = (e: MouseEvent): void => {
         if (isDragging) updatePosition(e.clientX)
-      })
-
-      document.addEventListener('mouseup', () => {
+      }
+      const onMouseUp = (): void => {
         isDragging = false
-      })
+      }
+      document.addEventListener('mousemove', onMouseMove)
+      document.addEventListener('mouseup', onMouseUp)
 
       // Touch events
       handle.addEventListener('touchstart', (e) => {
@@ -112,15 +123,16 @@ const { before, after, alt, loading = 'lazy' } = Astro.props
         if (e.touches[0]) updatePosition(e.touches[0].clientX)
       }, { passive: true })
 
-      document.addEventListener('touchmove', (e) => {
+      const onTouchMove = (e: TouchEvent): void => {
         if (isDragging && e.touches[0]) {
           updatePosition(e.touches[0].clientX)
         }
-      }, { passive: true })
-
-      document.addEventListener('touchend', () => {
+      }
+      const onTouchEnd = (): void => {
         isDragging = false
-      })
+      }
+      document.addEventListener('touchmove', onTouchMove, { passive: true })
+      document.addEventListener('touchend', onTouchEnd)
 
       // Keyboard accessibility
       handle.addEventListener('keydown', (e) => {
@@ -133,11 +145,20 @@ const { before, after, alt, loading = 'lazy' } = Astro.props
           setPercent(currentPercent + step)
         }
       })
+
+      // Register cleanup for this slider's document-level listeners
+      baCleanups.push(() => {
+        document.removeEventListener('mousemove', onMouseMove)
+        document.removeEventListener('mouseup', onMouseUp)
+        document.removeEventListener('touchmove', onTouchMove)
+        document.removeEventListener('touchend', onTouchEnd)
+      })
     })
   }
 
   initBeforeAfterSliders()
   document.addEventListener('astro:page-load', initBeforeAfterSliders)
+  document.addEventListener('astro:before-swap', cleanupBeforeAfterSliders)
 </script>
 
 <style>
