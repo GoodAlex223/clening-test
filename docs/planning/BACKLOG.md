@@ -247,6 +247,15 @@ Areas requiring investigation before implementation.
 - [ ] Extend `astro:before-swap` cleanup to Nav component listeners — PR #10 fix (a039879) addressed BeforeAfterSlider and scroll-spy cleanup, but each Nav component still adds `window` scroll listener (frosted glass) and `document` keydown listener (Escape key) without removal on View Transitions swap; apply same cleanup array pattern used in BeforeAfterSlider
 - [ ] Establish listener cleanup convention for new interactive components — document the `astro:before-swap` + cleanup array pattern (from BeforeAfterSlider fix) as a project convention so future interactive features follow the same approach
 
+### 2026-02-13 From: T-011 Testing & Quality
+
+**Origin**: docs/archive/plans/2026-02-13_t-011-testing-quality.md
+
+- [ ] Extract test timeout constants — Hardcoded timeout values (3000ms, 10000ms) scattered across E2E tests should be centralized in constants.ts for environment-specific tuning (CI vs local)
+- [ ] Shared page test factory — The 6 page spec files have near-identical structure (page identifier, title, a11y audit per theme); a factory function could eliminate ~200 lines of boilerplate
+- [ ] Better error messages in test helpers — Helper functions (openMobileMenu, clickThemeButton, getAppliedPrimaryColor) lack contextual error handling; unclear failures in CI
+- [ ] Visual regression testing — Add Playwright screenshot comparison tests to catch visual regressions across themes (research topic already in BACKLOG)
+
 ---
 
 ## Rejected Ideas

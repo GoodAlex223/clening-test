@@ -49,6 +49,12 @@ pnpm test             # All tests
 - **Islands Architecture**: Static HTML by default, `client:load` only for ThemeSwitcher, contact form, gallery filter, mobile nav
 - **Pages**: 6 routes — Home, Services, About, Pricing, Gallery, Contact
 - **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`
+- **Testing Infrastructure**:
+  - **Unit tests** (Vitest): 78 tests across theme-store, theme-configs, theme-css-vars, contact-validation
+  - **E2E tests** (Playwright): 218 tests per browser (4 browsers: Chrome, Firefox, WebKit, Mobile Chrome)
+  - **Test structure**: `tests/unit/`, `tests/e2e/helpers/`, `tests/e2e/features/`, `tests/e2e/pages/`
+  - **Accessibility**: axe-core integration scans all 30 theme/page combinations (WCAG 2.1 AA)
+  - **Cross-browser**: Automated testing across desktop Chrome, Firefox, WebKit, and mobile Chrome
 - **Theme implementations**:
   - **Minimal Zen** (complete): Soft pastels, sans-serif (Inter), rounded corners, clean spacing
   - **Bold Spark** (complete): Vibrant orange/yellow, sans-serif (Poppins), 3px borders, offset shadows, clip-paths
@@ -71,6 +77,12 @@ pnpm test             # All tests
 - Theme IDs: lowercase single word (`minimal`, `bold`, `trust`, `bubbly`, `noir`)
 - env.d.ts augmentation: Use inline `import()` syntax to preserve global scope
 - Theme tokens: Defined in `src/themes/{theme}.ts`, consumed via CSS custom properties
+- **Testing conventions**:
+  - Test files: `{module}.test.ts` for unit, `{feature}.spec.ts` for E2E
+  - Helpers: Reusable functions in `tests/e2e/helpers/` (theme, navigation, accessibility, constants)
+  - Test organization: `features/` for cross-cutting functionality, `pages/` for page-specific tests
+  - Test data: Constants exported from `tests/e2e/helpers/constants.ts` (themes, pages, nav links)
+  - Accessibility: Use `scanAccessibility(page, label)` helper with axe-core
 
 <!-- END AUTO-MANAGED -->
 
@@ -103,6 +115,14 @@ pnpm test             # All tests
 - **Pill-shaped UI elements**: Bubbly theme uses extreme border-radius (`2rem+`) for buttons, nav links, cards, badges, and filter pills to reinforce rounded visual language
 - **WCAG AA proactive verification**: Bubbly theme color selection proactively verified against WCAG AA 4.5:1 contrast ratio; cyan (#06B6D4) and accent pink (#F472B6) replaced with higher-contrast alternatives (#7C3AED, #D946B2) before implementation
 - **Bouncy CSS animations**: Bubbly theme uses `cubic-bezier(0.68, -0.55, 0.265, 1.55)` for elastic bounce effect on hero title, buttons, and hover states; creates playful interaction without JS
+- **Test helper pattern**: Reusable test helpers encapsulate common operations (`gotoWithTheme()`, `clickThemeButton()`, `scanAccessibility()`, `openMobileMenu()`); DRY test code across 218 E2E tests
+- **Cookie-first theme testing**: `setThemeCookie()` helper sets theme cookie before navigation to avoid FOUC in tests; uses `context.addCookies()` for first-request cookie delivery
+- **ClientRouter navigation handling**: Astro's `<ClientRouter />` intercepts link clicks for SPA-mode navigation; tests use `page.waitForURL(regex)` instead of `waitForLoadState('networkidle')` for deterministic navigation waits
+- **Parameterized theme tests**: Use `for (const theme of THEMES)` loops to test all 5 themes with identical assertions; scales test coverage without duplication
+- **Accessibility-first testing**: axe-core scans run on all 30 theme/page combinations; WCAG 2.1 AA violations fail tests (excludes design-level color-contrast issues tracked in BACKLOG)
+- **Scoped selector pattern**: `.theme-switcher` prefix scopes ThemeSwitcher queries to first instance; prevents conflicts when multiple islands exist (desktop + mobile nav)
+- **Cross-browser test architecture**: Playwright config defines 4 browser projects (Desktop Chrome, Mobile Chrome, Firefox, WebKit); single test suite runs against all browsers
+- **Production bug discovery via testing**: Theme switching bug found during E2E test development — `querySelectorAll('[data-theme]')` matched both buttons and wrapper div, causing event bubbling; fixed with scoped selector `.theme-switcher button[data-theme]`
 
 <!-- END AUTO-MANAGED -->
 

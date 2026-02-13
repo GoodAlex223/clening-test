@@ -43,7 +43,7 @@ const { currentTheme } = Astro.props
   import { isValidThemeId } from '@themes/index'
 
   function initThemeSwitcher(): void {
-    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme]')
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.theme-switcher button[data-theme]')
 
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
