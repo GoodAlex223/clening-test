@@ -85,11 +85,15 @@ const links = [
 </div>
 
 <script>
+  import { initScrollSpy } from '@lib/scroll-spy'
+
   function initMinimalNav(): void {
     const nav = document.getElementById('minimal-nav')
     const burgerEl = nav?.querySelector<HTMLButtonElement>('.mn__burger')
     const menuEl = document.getElementById('mobile-menu')
     if (!nav || !burgerEl || !menuEl) return
+    if (nav.dataset.navInit === 'true') return
+    nav.dataset.navInit = 'true'
 
     const burger = burgerEl
     const mobileMenu = menuEl
@@ -154,9 +158,18 @@ const links = [
     mobileLinks.forEach((link) => {
       link.addEventListener('click', closeMenu)
     })
+
+    // Scroll-spy for active nav link highlighting
+    scrollSpyCleanup?.()
+    scrollSpyCleanup = initScrollSpy({
+      linkSelector: '.mn__link',
+      activeClass: 'mn__link--active',
+    })
   }
 
+  let scrollSpyCleanup: (() => void) | undefined
   initMinimalNav()
+  document.addEventListener('astro:page-load', initMinimalNav)
 </script>
 
 <style>

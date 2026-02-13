@@ -35,27 +35,32 @@ const { services } = Astro.props
           <form id="contact-form" class="form">
             <label class="field">
               <span class="field__label">Name *</span>
-              <input type="text" name="name" required autocomplete="name" class="field__input" />
+              <input type="text" name="name" required autocomplete="name" class="field__input" data-field="name" />
+              <span class="field__error" data-error="name"></span>
             </label>
             <label class="field">
               <span class="field__label">Email *</span>
-              <input type="email" name="email" required autocomplete="email" class="field__input" />
+              <input type="email" name="email" required autocomplete="email" class="field__input" data-field="email" />
+              <span class="field__error" data-error="email"></span>
             </label>
             <label class="field">
               <span class="field__label">Phone</span>
-              <input type="tel" name="phone" autocomplete="tel" class="field__input" />
+              <input type="tel" name="phone" autocomplete="tel" class="field__input" data-field="phone" />
+              <span class="field__error" data-error="phone"></span>
             </label>
             <label class="field">
               <span class="field__label">Service Interest</span>
-              <select name="service" class="field__input">
+              <select name="service" class="field__input" data-field="service">
                 <option value="">Select a service (optional)</option>
                 {services.map((s) => <option value={s.data.slug}>{s.data.name}</option>)}
               </select>
+              <span class="field__error" data-error="service"></span>
             </label>
             <label class="field">
               <span class="field__label">Message *</span>
-              <textarea name="message" required rows={5} class="field__input field__input--textarea"
+              <textarea name="message" required rows={5} class="field__input field__input--textarea" data-field="message"
               ></textarea>
+              <span class="field__error" data-error="message"></span>
             </label>
             <button type="submit" class="btn btn--gold btn--full">Send Message</button>
           </form>
@@ -117,22 +122,59 @@ const { services } = Astro.props
 </main>
 
 <script>
-  function initNoirContactForm(): void {
+  import { validateField, validateForm } from '@lib/contact-validation'
+  import type { ContactFieldName } from '@lib/contact-validation'
+
+  function initContactForm(): void {
     const form = document.getElementById('contact-form') as HTMLFormElement | null
     if (!form) return
+    if (form.dataset.validationInit === 'true') return
+    form.dataset.validationInit = 'true'
+
+    function showError(fieldName: string, message: string): void {
+      const errorSpan = form!.querySelector<HTMLElement>(`[data-error="${fieldName}"]`)
+      const input = form!.querySelector<HTMLElement>(`[data-field="${fieldName}"]`)
+      if (errorSpan) errorSpan.textContent = message
+      if (input) input.setAttribute('aria-invalid', 'true')
+    }
+
+    function clearError(fieldName: string): void {
+      const errorSpan = form!.querySelector<HTMLElement>(`[data-error="${fieldName}"]`)
+      const input = form!.querySelector<HTMLElement>(`[data-field="${fieldName}"]`)
+      if (errorSpan) errorSpan.textContent = ''
+      if (input) input.setAttribute('aria-invalid', 'false')
+    }
+
+    const fields = form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>('[data-field]')
+    fields.forEach((field) => {
+      field.addEventListener('blur', () => {
+        const name = field.dataset.field as ContactFieldName
+        const error = validateField(name, field.value)
+        if (error) showError(name, error)
+        else clearError(name)
+      })
+    })
 
     form.addEventListener('submit', (e) => {
       e.preventDefault()
-      if (!form.checkValidity()) {
-        form.reportValidity()
+      fields.forEach((f) => clearError(f.dataset.field!))
+
+      const result = validateForm(new FormData(form))
+      if (!result.success) {
+        Object.entries(result.errors).forEach(([field, message]) => {
+          if (message) showError(field, message)
+        })
+        form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus()
         return
       }
+
       const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement
       const originalText = btn.textContent
       btn.textContent = 'Message Sent'
       btn.disabled = true
-      btn.style.opacity = '0.6'
+      btn.style.opacity = '0.7'
       form.reset()
+      fields.forEach((f) => clearError(f.dataset.field!))
       setTimeout(() => {
         btn.textContent = originalText
         btn.disabled = false
@@ -141,7 +183,8 @@ const { services } = Astro.props
     })
   }
 
-  initNoirContactForm()
+  initContactForm()
+  document.addEventListener('astro:page-load', initContactForm)
 </script>
 
 <style>
@@ -258,6 +301,17 @@ const { services } = Astro.props
   .field__input--textarea {
     resize: vertical;
     min-height: 120px;
+  }
+
+  .field__input[aria-invalid='true'] {
+    border-color: #dc2626;
+  }
+
+  .field__error {
+    font-size: 0.75rem;
+    color: #dc2626;
+    min-height: 1rem;
+    line-height: 1.3;
   }
 
   /* -- Buttons -- */

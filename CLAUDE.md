@@ -36,7 +36,7 @@ pnpm test             # All tests
 
 ## Architecture
 
-- **Multi-theme system**: 5 complete layout systems (4 implemented: Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean; 1 planned: Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
+- **Multi-theme system**: 5 complete layout systems (all implemented: Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
 - **Content Collections**: Astro Content Collections with Zod schemas for services, testimonials, team, gallery, pricing
 - **Theme Engine**:
   - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
@@ -54,7 +54,7 @@ pnpm test             # All tests
   - **Bold Spark** (complete): Vibrant orange/yellow, sans-serif (Poppins), 3px borders, offset shadows, clip-paths
   - **Trust Shield** (complete): Navy/slate grey, serif (Merriweather), 1px borders, trust badges, corporate professional
   - **Bubbly Clean** (complete): Cream/purple/cyan pastels, Fredoka One/Nunito/Caveat fonts, floating bubble decorations, wave SVG dividers, bouncy CSS keyframe animations, pill-shaped nav links, gradient footer, WCAG AA proactive contrast verification
-  - **Noir Luxe** (planned): Black/gold, elegant serif, minimalist luxury
+  - **Noir Luxe** (complete): Black/gold/tan palette, Playfair Display/Lato fonts, minimalist luxury, premium aesthetic with subtle animations, elegant serif headers
 
 <!-- END AUTO-MANAGED -->
 
@@ -92,7 +92,7 @@ pnpm test             # All tests
 - **Native accordion pattern**: FAQ sections use native `<details>`/`<summary>` elements with custom styling; progressive enhancement without JS dependencies (Trust theme)
 - **JS-controlled visibility via inline styles**: Astro scoped styles conflict with dynamically-toggled classes in `<script>` blocks; inline styles via JS provide reliable visibility control for mobile menu overlays
 - **Thin page routes pattern**: Page route files (`src/pages/*.astro`) are data-fetching shells that call `resolvePageContent()` to delegate presentation to theme-specific page components
-- **Scoped component class prefixes**: Theme-specific prefixes prevent style leaking (`.mn`/`.mf` for Minimal, `.bn`/`.bf` for Bold, `.tn`/`.tf` for Trust)
+- **Scoped component class prefixes**: Theme-specific prefixes prevent style leaking (`.mn`/`.mf` for Minimal, `.bn`/`.bf` for Bold, `.tn`/`.tf` for Trust, `.bbn`/`.bbf` for Bubbly, `.nn`/`.nf` for Noir)
 - **CSS-only illustrations**: Complex decorative elements built entirely with CSS (Trust shield: gradients, absolute positioning, border-radius, dashed borders) — demonstrates CSS art skills without external dependencies
 - **Trust credentials pattern**: Footer trust strip with certifications/badges unique to Trust theme; reinforces corporate reliability (could be reused in other professional themes)
 - **Inline SVG icons**: All themes use inline SVG for icons (shields, checkmarks, stars, user icons) for performance and customization via `currentColor`

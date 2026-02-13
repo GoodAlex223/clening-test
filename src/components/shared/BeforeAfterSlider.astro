@@ -1,0 +1,253 @@
+---
+/**
+ * BeforeAfterSlider — Interactive draggable image comparison slider.
+ * Shared component used across all 5 theme Gallery pages.
+ * Theming via CSS custom properties: --slider-divider, --slider-handle-bg, --slider-handle-icon.
+ *
+ * Uses clip-path on the before image to reveal/hide — avoids the nested-container
+ * width problem entirely since both images are full-size absolutely positioned.
+ */
+
+interface Props {
+  before: string
+  after: string
+  alt: string
+  loading?: 'lazy' | 'eager'
+}
+
+const { before, after, alt, loading = 'lazy' } = Astro.props
+---
+
+<div class="ba-slider" data-ba-slider>
+  <img
+    src={after}
+    alt={`After: ${alt}`}
+    loading={loading}
+    class="ba-slider__img"
+  />
+  <img
+    src={before}
+    alt={`Before: ${alt}`}
+    loading={loading}
+    class="ba-slider__img ba-slider__img--before"
+    style="clip-path: inset(0 50% 0 0)"
+    data-ba-before
+  />
+  <div class="ba-slider__divider" style="left: 50%" data-ba-divider>
+    <button
+      type="button"
+      class="ba-slider__handle"
+      aria-label="Drag to compare before and after"
+      data-ba-handle
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M7 4l-5 6 5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M13 4l5 6-5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+  <span class="ba-slider__label ba-slider__label--before">Before</span>
+  <span class="ba-slider__label ba-slider__label--after">After</span>
+</div>
+
+<script>
+  // Track document-level listeners for cleanup on View Transitions swap
+  const baCleanups: (() => void)[] = []
+
+  function cleanupBeforeAfterSliders(): void {
+    baCleanups.forEach((fn) => fn())
+    baCleanups.length = 0
+  }
+
+  function initBeforeAfterSliders(): void {
+    cleanupBeforeAfterSliders()
+
+    const sliders = document.querySelectorAll<HTMLElement>('[data-ba-slider]')
+
+    sliders.forEach((slider) => {
+      if (slider.dataset.baInit === 'true') return
+      slider.dataset.baInit = 'true'
+
+      const beforeImg = slider.querySelector<HTMLImageElement>('[data-ba-before]')
+      const divider = slider.querySelector<HTMLElement>('[data-ba-divider]')
+      const handle = slider.querySelector<HTMLButtonElement>('[data-ba-handle]')
+
+      if (!beforeImg || !divider || !handle) return
+
+      let isDragging = false
+      let currentPercent = 50
+
+      function updatePosition(clientX: number): void {
+        const rect = slider.getBoundingClientRect()
+        currentPercent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100))
+        beforeImg!.style.clipPath = `inset(0 ${100 - currentPercent}% 0 0)`
+        divider!.style.left = `${currentPercent}%`
+      }
+
+      function setPercent(percent: number): void {
+        currentPercent = Math.max(0, Math.min(100, percent))
+        beforeImg!.style.clipPath = `inset(0 ${100 - currentPercent}% 0 0)`
+        divider!.style.left = `${currentPercent}%`
+      }
+
+      // Mouse events
+      handle.addEventListener('mousedown', (e) => {
+        e.preventDefault()
+        isDragging = true
+      })
+
+      slider.addEventListener('mousedown', (e) => {
+        if (e.target === handle) return
+        isDragging = true
+        updatePosition(e.clientX)
+      })
+
+      const onMouseMove = (e: MouseEvent): void => {
+        if (isDragging) updatePosition(e.clientX)
+      }
+      const onMouseUp = (): void => {
+        isDragging = false
+      }
+      document.addEventListener('mousemove', onMouseMove)
+      document.addEventListener('mouseup', onMouseUp)
+
+      // Touch events
+      handle.addEventListener('touchstart', (e) => {
+        e.preventDefault()
+        isDragging = true
+      }, { passive: false })
+
+      slider.addEventListener('touchstart', (e) => {
+        if (e.target === handle) return
+        isDragging = true
+        if (e.touches[0]) updatePosition(e.touches[0].clientX)
+      }, { passive: true })
+
+      const onTouchMove = (e: TouchEvent): void => {
+        if (isDragging && e.touches[0]) {
+          updatePosition(e.touches[0].clientX)
+        }
+      }
+      const onTouchEnd = (): void => {
+        isDragging = false
+      }
+      document.addEventListener('touchmove', onTouchMove, { passive: true })
+      document.addEventListener('touchend', onTouchEnd)
+
+      // Keyboard accessibility
+      handle.addEventListener('keydown', (e) => {
+        const step = 2
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault()
+          setPercent(currentPercent - step)
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault()
+          setPercent(currentPercent + step)
+        }
+      })
+
+      // Register cleanup for this slider's document-level listeners
+      baCleanups.push(() => {
+        document.removeEventListener('mousemove', onMouseMove)
+        document.removeEventListener('mouseup', onMouseUp)
+        document.removeEventListener('touchmove', onTouchMove)
+        document.removeEventListener('touchend', onTouchEnd)
+      })
+    })
+  }
+
+  initBeforeAfterSliders()
+  document.addEventListener('astro:page-load', initBeforeAfterSliders)
+  document.addEventListener('astro:before-swap', cleanupBeforeAfterSliders)
+</script>
+
+<style>
+  .ba-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius-sm, 0.5rem);
+    user-select: none;
+    touch-action: pan-y;
+    cursor: ew-resize;
+  }
+
+  .ba-slider__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .ba-slider__img--before {
+    z-index: 2;
+  }
+
+  .ba-slider__divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--slider-divider, #ffffff);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .ba-slider__handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--slider-handle-bg, #ffffff);
+    border: 2px solid var(--slider-divider, #ffffff);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: ew-resize;
+    color: var(--slider-handle-icon, #333333);
+    transition: transform 150ms ease;
+    padding: 0;
+  }
+
+  .ba-slider__handle:hover,
+  .ba-slider__handle:focus-visible {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .ba-slider__handle:focus-visible {
+    outline: 2px solid var(--slider-divider, #ffffff);
+    outline-offset: 2px;
+  }
+
+  .ba-slider__label {
+    position: absolute;
+    bottom: 0.625rem;
+    z-index: 4;
+    background: rgba(0, 0, 0, 0.55);
+    color: white;
+    font-size: 0.625rem;
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  .ba-slider__label--before {
+    left: 0.625rem;
+  }
+
+  .ba-slider__label--after {
+    right: 0.625rem;
+  }
+</style>

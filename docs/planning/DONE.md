@@ -191,6 +191,26 @@ Completed tasks with implementation details and learnings.
 
 **Spawned Tasks**: 2 items added to BACKLOG.md
 
+### 2026-02-13 — T-010: Interactive Features
+
+**Summary**: Implemented 5 interactive features across all 5 themes: Zod contact form validation, gallery filter with shared utility, before/after image slider, smooth scroll navigation with scroll-spy, and View Transitions (ClientRouter) for page navigation. Created 4 shared utilities and updated 22 files.
+
+**Key Changes**:
+
+- Created `src/lib/contact-validation.ts` — Shared Zod schema with `validateField()` and `validateForm()` helpers; inline field-level errors on blur/submit
+- Created `src/components/shared/BeforeAfterSlider.astro` — Draggable clip-path image comparison slider with mouse, touch, and keyboard support
+- Created `src/lib/gallery-filter.ts` — Shared gallery filter replacing 5 inline scripts; data-attribute based filtering
+- Created `src/lib/scroll-spy.ts` — Scroll-spy utility with requestAnimationFrame throttling; returns cleanup function
+- Added `html { scroll-behavior: smooth }` to `global.css` with `prefers-reduced-motion` media query
+- Updated `BaseLayout.astro` with `ClientRouter` (Astro's renamed View Transitions) for same-theme page navigation
+- Updated all 5 Contact pages with Zod validation (replacing basic HTML5 validation)
+- Updated all 5 Gallery pages with BeforeAfterSlider + shared filter (replacing side-by-side grids + inline scripts)
+- Updated all 5 Nav components with scroll-spy + double-init guards + `astro:page-load` re-initialization
+- Updated all 5 Layout files + 2 Home pages with `astro:page-load` for scroll-reveal and stats counter re-initialization
+- Clean build: 0 errors, 0 warnings, 0 hints
+
+**Spawned Tasks**: 3 items added to BACKLOG.md (contact form DRY extraction, scroll-reveal DRY extraction, event listener cleanup)
+
 ---
 
 ## Notes
