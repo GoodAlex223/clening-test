@@ -212,6 +212,13 @@ Areas requiring investigation before implementation.
 - [ ] Animated bubble component — Floating bubble decorations duplicated between Home and About; extract a `<BubbleDecoration />` component
 - [ ] Contact form backend — Form currently uses client-side mock submission; needs real backend integration (tracked in T-010)
 
+### 2026-02-13 From: T-008 Code Review
+
+**Origin**: PR #8 code review
+
+- [ ] Recurring `var(--color-secondary)` contrast failure (4th occurrence) — Bubbly nav logo accent and contact social hover both used cyan on light backgrounds, same WCAG AA issue previously hit in Minimal, Bold, and Trust themes; strongly reinforces need for shared SectionLabel component or automated contrast lint rule (see T-006/T-007 Code Review items)
+- [ ] Update CLAUDE.md scoped class prefix documentation — Detected Patterns section lists `.mn`/`.mf`, `.bn`/`.bf`, `.tn`/`.tf` but missing Bubbly's `.bbn`/`.bbf` prefixes
+
 ---
 
 ## Rejected Ideas
