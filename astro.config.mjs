@@ -1,13 +1,13 @@
 import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
-import node from '@astrojs/node'
+import vercel from '@astrojs/vercel'
 
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  adapter: node({ mode: 'standalone' }),
-  output: 'static',
+  adapter: vercel(),
+  output: 'server',
   site: process.env.PUBLIC_SITE_URL || 'http://localhost:4321',
   trailingSlash: 'never',
   build: {
