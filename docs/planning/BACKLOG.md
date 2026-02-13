@@ -247,6 +247,16 @@ Areas requiring investigation before implementation.
 - [ ] Extend `astro:before-swap` cleanup to Nav component listeners — PR #10 fix (a039879) addressed BeforeAfterSlider and scroll-spy cleanup, but each Nav component still adds `window` scroll listener (frosted glass) and `document` keydown listener (Escape key) without removal on View Transitions swap; apply same cleanup array pattern used in BeforeAfterSlider
 - [ ] Establish listener cleanup convention for new interactive components — document the `astro:before-swap` + cleanup array pattern (from BeforeAfterSlider fix) as a project convention so future interactive features follow the same approach
 
+### 2026-02-13 From: T-012 Deployment & Launch
+
+**Origin**: docs/planning/plans/2026-02-13_t-012-deployment-launch.md
+
+- [ ] Add README screenshots of all 5 themes — Capture and embed screenshots showing each theme's distinct visual identity for portfolio presentation
+- [ ] Write portfolio case study — Document design decisions, architecture choices, and technical challenges
+- [ ] Generate social share / OG images per theme — Theme-specific Open Graph images for better social media sharing
+- [ ] Add Lighthouse CI to GitHub Actions — Automated performance regression testing on PRs (fail if scores drop below 90)
+- [ ] Configure custom domain — Set up custom domain when available
+
 ### 2026-02-13 From: T-011 Testing & Quality
 
 **Origin**: docs/archive/plans/2026-02-13_t-011-testing-quality.md

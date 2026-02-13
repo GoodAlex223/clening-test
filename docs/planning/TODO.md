@@ -22,19 +22,7 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-012: Deployment & Launch
-
-**Priority**: P3 — Normal
-**Milestone**: M5
-**Depends on**: T-011
-
-- [ ] Configure Vercel deployment
-- [ ] Set up custom domain (if available)
-- [ ] Generate Lighthouse performance report
-- [ ] Create README with screenshots of all 5 themes
-- [ ] Write portfolio case study
-- [ ] Create social share images per theme
-- [ ] Final documentation review
+_No planned tasks._
 
 ---
 

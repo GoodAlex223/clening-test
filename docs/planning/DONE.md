@@ -211,6 +211,20 @@ Completed tasks with implementation details and learnings.
 
 **Spawned Tasks**: 3 items added to BACKLOG.md (contact form DRY extraction, scroll-reveal DRY extraction, event listener cleanup)
 
+### 2026-02-13 — T-012: Deployment & Launch
+
+**Plan**: [plans/2026-02-13_t-012-deployment-launch.md](plans/2026-02-13_t-012-deployment-launch.md)
+**Summary**: Configured Vercel SSR deployment, swapped @astrojs/node to @astrojs/vercel adapter, deployed to cleanspark-virid.vercel.app with perfect 100/100/100/100 Lighthouse scores on both mobile and desktop. Updated README with live demo link, enhanced .env.example, robots.txt, and .gitignore.
+
+**Key Changes**:
+- Swapped `@astrojs/node` adapter to `@astrojs/vercel` with `output: 'server'`
+- Deployed SSR site to Vercel (serverless functions, nodejs22.x runtime)
+- Achieved 100/100/100/100 Lighthouse scores (Performance, Accessibility, Best Practices, SEO)
+- Enhanced README with live demo link, highlights, themes table, architecture overview
+- Set production env vars, added Sitemap to robots.txt
+
+**Spawned Tasks**: 5 items added to BACKLOG.md
+
 ### 2026-02-13 — T-011: Testing & Quality
 
 **Plan**: [docs/archive/plans/2026-02-13_t-011-testing-quality.md](../archive/plans/2026-02-13_t-011-testing-quality.md)
