@@ -37,22 +37,30 @@ const serviceLinks = [
       <div class="bf__col">
         <h3 class="bf__heading">Navigation</h3>
         <ul class="bf__list">
-          {quickLinks.map((link) => (
-            <li>
-              <a href={link.href} class="bf__link">{link.label}</a>
-            </li>
-          ))}
+          {
+            quickLinks.map((link) => (
+              <li>
+                <a href={link.href} class="bf__link">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
       <div class="bf__col">
         <h3 class="bf__heading">Services</h3>
         <ul class="bf__list">
-          {serviceLinks.map((link) => (
-            <li>
-              <a href={link.href} class="bf__link">{link.label}</a>
-            </li>
-          ))}
+          {
+            serviceLinks.map((link) => (
+              <li>
+                <a href={link.href} class="bf__link">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
@@ -73,13 +81,31 @@ const serviceLinks = [
     <div class="bf__bottom">
       <p class="bf__copy">&copy; {year} {siteConfig.name}. All rights reserved.</p>
       <div class="bf__social">
-        <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" class="bf__social-link" aria-label="Facebook">
+        <a
+          href={siteConfig.social.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bf__social-link"
+          aria-label="Facebook"
+        >
           Facebook
         </a>
-        <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" class="bf__social-link" aria-label="Instagram">
+        <a
+          href={siteConfig.social.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bf__social-link"
+          aria-label="Instagram"
+        >
           Instagram
         </a>
-        <a href={siteConfig.social.yelp} target="_blank" rel="noopener noreferrer" class="bf__social-link" aria-label="Yelp">
+        <a
+          href={siteConfig.social.yelp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bf__social-link"
+          aria-label="Yelp"
+        >
           Yelp
         </a>
       </div>
@@ -145,7 +171,9 @@ const serviceLinks = [
     font-size: 0.9375rem;
     display: inline-block;
     padding: 0.15rem 0;
-    transition: color 0.2s, transform 0.2s;
+    transition:
+      color 0.2s,
+      transform 0.2s;
   }
 
   .bf__link:hover {

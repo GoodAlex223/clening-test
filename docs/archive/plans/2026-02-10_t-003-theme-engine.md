@@ -27,20 +27,21 @@ Build the foundational theme engine infrastructure: cookie-based persistence, mi
 - ThemeSwitcher: logic-only island, each theme wraps with own UI
 
 **Alternatives considered**:
+
 1. Dynamic imports for layouts — rejected (Astro needs static paths, adds complexity)
 2. CSS-only theming — rejected (can't change layout structure, only colors)
 3. localStorage instead of cookies — rejected (causes FOUC, server can't read)
 
 ## 3. Key Decisions
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
+| Decision          | Choice                                       | Rationale                                                             |
+| ----------------- | -------------------------------------------- | --------------------------------------------------------------------- |
 | Astro output mode | `output: 'static'` + `@astrojs/node` adapter | Astro 5 removed `hybrid`; pages opt into SSR with `prerender = false` |
-| Locals shape | `Astro.locals.theme: ThemeId` (string only) | Thin middleware; pages import config when needed |
-| Token delivery | CSS custom properties via inline style | Standard, debuggable, shared components adapt automatically |
-| Theme switch | Full page reload | Reliable for full layout swaps; simple |
-| ThemeSwitcher UI | Logic-only (each theme wraps) | Maximum design flexibility per theme |
-| DRY CSS vars | Shared `buildThemeCssVars()` utility | Eliminated 5x duplication in theme layouts |
+| Locals shape      | `Astro.locals.theme: ThemeId` (string only)  | Thin middleware; pages import config when needed                      |
+| Token delivery    | CSS custom properties via inline style       | Standard, debuggable, shared components adapt automatically           |
+| Theme switch      | Full page reload                             | Reliable for full layout swaps; simple                                |
+| ThemeSwitcher UI  | Logic-only (each theme wraps)                | Maximum design flexibility per theme                                  |
+| DRY CSS vars      | Shared `buildThemeCssVars()` utility         | Eliminated 5x duplication in theme layouts                            |
 
 ## 4. Key Discoveries
 
@@ -60,6 +61,7 @@ Build the foundational theme engine infrastructure: cookie-based persistence, mi
 ## 6. Files Created/Modified
 
 ### New files (14)
+
 - `src/themes/types.ts` — ThemeId, ThemeConfig, ThemeColors, ThemeFonts, ThemeSpacing
 - `src/themes/minimal.ts` — Minimal Zen design tokens
 - `src/themes/bold.ts` — Bold Spark design tokens
@@ -75,6 +77,7 @@ Build the foundational theme engine infrastructure: cookie-based persistence, mi
 - `src/layouts/{minimal,bold,trust,bubbly,noir}/{Theme}Layout.astro` — 5 stub layouts
 
 ### Modified files (4)
+
 - `astro.config.mjs` — Added @astrojs/node adapter
 - `src/env.d.ts` — App.Locals type augmentation
 - `src/styles/global.css` — Theme-aware body base styles
@@ -83,12 +86,14 @@ Build the foundational theme engine infrastructure: cookie-based persistence, mi
 ### Execution Log
 
 #### 2026-02-10 — PHASE: Planning
+
 - Explored codebase with code-explorer agent
 - Read architecture docs, content collections, existing patterns
 - Asked 4 clarifying questions (output mode, switcher UI, switch method, token usage)
 - Got architect agent to design clean architecture approach
 
 #### 2026-02-10 — PHASE: Implementation
+
 - Created types.ts foundation, 5 theme configs, registry
 - Created theme-store, theme-resolver, middleware
 - Created ThemeSwitcher component
@@ -97,12 +102,14 @@ Build the foundational theme engine infrastructure: cookie-based persistence, mi
 - Fixed env.d.ts augmentation (inline import pattern)
 
 #### 2026-02-10 — PHASE: Review
+
 - Code review found DRY violation (CSS vars duplicated 5x in layouts)
 - Extracted shared `buildThemeCssVars()` utility
 - Moved duplicate global body styles to global.css
 - All layouts now use shared utility (18 lines each vs 50)
 
 #### 2026-02-10 — PHASE: Complete
+
 - `pnpm astro check`: 0 errors, 0 warnings, 0 hints
 - `pnpm build`: Clean (3.92s)
 - `pnpm lint`: Clean

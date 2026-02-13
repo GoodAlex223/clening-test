@@ -60,22 +60,26 @@ const stats = [
         <h2 class="section-title">Our Most Popular Services</h2>
       </div>
       <div class="svc-grid reveal-stagger reveal">
-        {services.map((service) => (
-          <article class="svc-card">
-            <span class="svc-card__arrow" aria-hidden="true">&rarr;</span>
-            <h3 class="svc-card__name">{service.data.name}</h3>
-            <p class="svc-card__text">{service.data.tagline}</p>
-            {service.data.startingPrice && (
-              <p class="svc-card__price">
-                From ${service.data.startingPrice}
-                <span class="svc-card__unit">{service.data.priceUnit}</span>
-              </p>
-            )}
-            <a href={`/services#${service.data.slug}`} class="svc-card__link">
-              Learn More
-            </a>
-          </article>
-        ))}
+        {
+          services.map((service) => (
+            <article class="svc-card">
+              <span class="svc-card__arrow" aria-hidden="true">
+                &rarr;
+              </span>
+              <h3 class="svc-card__name">{service.data.name}</h3>
+              <p class="svc-card__text">{service.data.tagline}</p>
+              {service.data.startingPrice && (
+                <p class="svc-card__price">
+                  From ${service.data.startingPrice}
+                  <span class="svc-card__unit">{service.data.priceUnit}</span>
+                </p>
+              )}
+              <a href={`/services#${service.data.slug}`} class="svc-card__link">
+                Learn More
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -83,20 +87,22 @@ const stats = [
   {/* ── Stats Bar ── */}
   <section class="stats" id="bold-stats">
     <div class="stats__inner reveal reveal-stagger">
-      {stats.map((stat) => (
-        <div class="stat">
-          <div
-            class="stat__number"
-            data-counter
-            data-target={stat.target}
-            data-suffix={stat.suffix}
-            data-decimal={stat.decimal ? 'true' : undefined}
-          >
-            0
+      {
+        stats.map((stat) => (
+          <div class="stat">
+            <div
+              class="stat__number"
+              data-counter
+              data-target={stat.target}
+              data-suffix={stat.suffix}
+              data-decimal={stat.decimal ? 'true' : undefined}
+            >
+              0
+            </div>
+            <div class="stat__label">{stat.label}</div>
           </div>
-          <div class="stat__label">{stat.label}</div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </section>
 
@@ -108,21 +114,27 @@ const stats = [
         <h2 class="section-title">What Our Clients Say</h2>
       </div>
       <div class="testi-grid reveal-stagger reveal">
-        {testimonials.map((t) => (
-          <blockquote class="testi">
-            <span class="testi__big-quote" aria-hidden="true">&ldquo;</span>
-            <div class="testi__stars" role="img" aria-label={`${t.data.rating} out of 5 stars`}>
-              {Array.from({ length: t.data.rating }).map(() => (
-                <span class="testi__star" aria-hidden="true">&#9733;</span>
-              ))}
-            </div>
-            <p class="testi__text">&ldquo;{t.data.text}&rdquo;</p>
-            <footer class="testi__footer">
-              <strong class="testi__author">{t.data.name}</strong>
-              {t.data.location && <span class="testi__location">{t.data.location}</span>}
-            </footer>
-          </blockquote>
-        ))}
+        {
+          testimonials.map((t) => (
+            <blockquote class="testi">
+              <span class="testi__big-quote" aria-hidden="true">
+                &ldquo;
+              </span>
+              <div class="testi__stars" role="img" aria-label={`${t.data.rating} out of 5 stars`}>
+                {Array.from({ length: t.data.rating }).map(() => (
+                  <span class="testi__star" aria-hidden="true">
+                    &#9733;
+                  </span>
+                ))}
+              </div>
+              <p class="testi__text">&ldquo;{t.data.text}&rdquo;</p>
+              <footer class="testi__footer">
+                <strong class="testi__author">{t.data.name}</strong>
+                {t.data.location && <span class="testi__location">{t.data.location}</span>}
+              </footer>
+            </blockquote>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -132,8 +144,10 @@ const stats = [
     <div class="container">
       <h2 class="cta-block__title">Ready for a Sparkling Clean?</h2>
       <p class="cta-block__text">
-        Serving {siteConfig.serviceAreas.slice(0, 5).join(', ')} and more.
-        Call <a href={`tel:${siteConfig.phone}`} class="cta-block__phone">{siteConfig.phone}</a> or book online.
+        Serving {siteConfig.serviceAreas.slice(0, 5).join(', ')} and more. Call <a
+          href={`tel:${siteConfig.phone}`}
+          class="cta-block__phone">{siteConfig.phone}</a
+        > or book online.
       </p>
       <a href="/contact" class="btn btn--white">Book Your Clean Today &rarr;</a>
     </div>
@@ -163,7 +177,9 @@ const stats = [
     align-items: center;
   }
 
-  .hero__text { z-index: 2; }
+  .hero__text {
+    z-index: 2;
+  }
 
   .hero__label {
     display: inline-block;
@@ -232,11 +248,17 @@ const stats = [
   }
 
   @keyframes boldSlideInLeft {
-    to { opacity: 1; transform: translateX(0); }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   @keyframes boldFadeUp {
-    to { opacity: 1; transform: translateY(0); }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* ── Geometric art ── */
@@ -255,52 +277,65 @@ const stats = [
   }
 
   .geo--1 {
-    width: 320px; height: 320px;
+    width: 320px;
+    height: 320px;
     background: linear-gradient(135deg, var(--color-primary) 0%, rgba(56, 217, 169, 0.3) 100%);
-    top: 10%; right: 5%;
+    top: 10%;
+    right: 5%;
   }
 
   .geo--2 {
-    width: 200px; height: 200px;
+    width: 200px;
+    height: 200px;
     background: linear-gradient(135deg, var(--color-secondary) 0%, rgba(255, 107, 53, 0.4) 100%);
-    top: 45%; right: 35%;
+    top: 45%;
+    right: 35%;
     animation-delay: -2s;
   }
 
   .geo--3 {
-    width: 140px; height: 140px;
+    width: 140px;
+    height: 140px;
     background: linear-gradient(135deg, var(--color-accent) 0%, rgba(255, 217, 61, 0.4) 100%);
-    top: 15%; right: 40%;
+    top: 15%;
+    right: 40%;
     animation-delay: -4s;
   }
 
   .geo--4 {
-    width: 80px; height: 80px;
+    width: 80px;
+    height: 80px;
     background: var(--color-primary);
-    bottom: 15%; right: 15%;
+    bottom: 15%;
+    right: 15%;
     border-radius: 20px;
     transform: rotate(45deg);
     animation: geoSpin 8s linear infinite;
   }
 
   .geo--5 {
-    width: 60px; height: 60px;
+    width: 60px;
+    height: 60px;
     background: var(--color-accent);
-    top: 5%; right: 55%;
+    top: 5%;
+    right: 55%;
     border-radius: 12px;
     transform: rotate(30deg);
     animation: geoSpin 10s linear infinite reverse;
   }
 
   .geo--ring {
-    width: 260px; height: 260px;
+    width: 260px;
+    height: 260px;
     border: 4px solid rgba(56, 217, 169, 0.25);
-    top: 25%; right: 10%;
+    top: 25%;
+    right: 10%;
     animation-delay: -1s;
   }
 
   .geo--dots {
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     background: var(--color-secondary);
     box-shadow:
       20px 0 0 var(--color-secondary),
@@ -311,19 +346,27 @@ const stats = [
       0 40px 0 var(--color-secondary),
       20px 40px 0 var(--color-secondary),
       40px 40px 0 var(--color-secondary);
-    bottom: 25%; right: 50%;
+    bottom: 25%;
+    right: 50%;
     border-radius: 50%;
     animation: none;
     opacity: 0.3;
   }
 
   @keyframes geoFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
   }
 
   @keyframes geoSpin {
-    to { transform: rotate(405deg); }
+    to {
+      transform: rotate(405deg);
+    }
   }
 
   /* ═══════════════ BUTTONS ═══════════════ */
@@ -427,7 +470,9 @@ const stats = [
     padding: 2.5rem 2rem;
     position: relative;
     box-shadow: 8px 8px 0 var(--color-primary);
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+    transition:
+      transform 0.25s ease-out,
+      box-shadow 0.25s ease-out;
   }
 
   .svc-card:hover {
@@ -448,7 +493,9 @@ const stats = [
     justify-content: center;
     color: var(--color-primary);
     font-size: 1.25rem;
-    transition: background 0.2s, color 0.2s;
+    transition:
+      background 0.2s,
+      color 0.2s;
   }
 
   .svc-card:hover .svc-card__arrow {
@@ -650,9 +697,16 @@ const stats = [
       text-align: center;
     }
 
-    .hero__subtitle { margin: 0 auto 2.5rem; }
-    .hero__actions { justify-content: center; }
-    .hero__art { height: 350px; margin: 0 auto; }
+    .hero__subtitle {
+      margin: 0 auto 2.5rem;
+    }
+    .hero__actions {
+      justify-content: center;
+    }
+    .hero__art {
+      height: 350px;
+      margin: 0 auto;
+    }
   }
 
   @media (max-width: 768px) {
@@ -662,7 +716,9 @@ const stats = [
       clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
     }
 
-    .hero__art { height: 280px; }
+    .hero__art {
+      height: 280px;
+    }
 
     .stats__inner {
       grid-template-columns: 1fr 1fr;

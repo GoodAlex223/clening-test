@@ -1,6 +1,6 @@
 ---
 /**
- * BoldPricing — Bold pricing tiers, FAQ accordion, CTA.
+ * BubblyPricing — Rounded pricing cards, FAQ accordion, playful CTA.
  */
 import type { CollectionEntry } from 'astro:content'
 import { siteConfig } from '@lib/site-config'
@@ -14,7 +14,7 @@ const { pricing } = Astro.props
 const faqs = [
   {
     q: 'Do I need to be home during the cleaning?',
-    a: 'Not at all. Many clients give us a key or access code. All our team members are background-checked, insured, and bonded.',
+    a: 'Not at all! Many clients give us a key or access code. All our team members are background-checked, insured, and bonded.',
   },
   {
     q: "What if I'm not satisfied with the cleaning?",
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: 'Can I customize my cleaning plan?',
-    a: "Absolutely. While our tiers give you a starting point, we're happy to add or adjust services to match your specific needs. Just let us know when you book.",
+    a: "Absolutely! While our tiers give you a starting point, we're happy to add or adjust services to match your specific needs. Just let us know when you book.",
   },
   {
     q: 'How do I pay?',
@@ -39,11 +39,9 @@ const faqs = [
   {/* ── Page header ── */}
   <section class="page-header">
     <div class="container">
-      <span class="page-header__label">Simple & Fair</span>
-      <h1 class="page-header__title">Transparent Pricing</h1>
-      <p class="page-header__subtitle">
-        No hidden fees. No surprises. Just clean, competitive rates.
-      </p>
+      <span class="section-label">Simple & Fair</span>
+      <h1 class="page-header__title">Super Fair Pricing</h1>
+      <p class="page-header__subtitle">No hidden fees. No surprises. Just clean, friendly rates!</p>
     </div>
   </section>
 
@@ -54,7 +52,7 @@ const faqs = [
         {
           pricing.map((tier) => (
             <article
-              class:list={['tier', { 'tier--highlighted': tier.data.highlighted }]}
+              class:list={['tier', { 'tier--popular': tier.data.highlighted }]}
               data-tier={tier.data.id}
             >
               {tier.data.highlighted && <span class="tier__badge">Most Popular</span>}
@@ -69,7 +67,7 @@ const faqs = [
                 {tier.data.features.map((f) => (
                   <li class:list={['tier__feature', { 'tier__feature--excluded': !f.included }]}>
                     <span aria-hidden="true" class="tier__feature-icon">
-                      {f.included ? '\u2713' : '\u2717'}
+                      {f.included ? '✓' : '✗'}
                     </span>
                     {f.text}
                   </li>
@@ -110,14 +108,25 @@ const faqs = [
 
   {/* ── CTA ── */}
   <section class="cta-block reveal">
-    <div class="container">
-      <h2 class="cta-block__title">Ready to Get Started?</h2>
-      <p class="cta-block__text">
-        Book online or call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone"
-          >{siteConfig.phone}</a
-        >.
-      </p>
-      <a href="/contact" class="btn btn--white">Get Your Free Quote &rarr;</a>
+    <svg
+      class="wave wave--cta"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M0,50 Q300,10 600,45 T1200,35 L1200,80 L0,80 Z" fill="var(--color-primary)"></path>
+    </svg>
+    <div class="cta-block__body">
+      <div class="container">
+        <h2 class="cta-block__title">Ready to Get Started?</h2>
+        <p class="cta-block__text">
+          Book online or call us at <a href={`tel:${siteConfig.phone}`} class="cta-block__phone"
+            >{siteConfig.phone}</a
+          >!
+        </p>
+        <a href="/contact" class="btn btn--white">Get Your Free Quote</a>
+      </div>
     </div>
   </section>
 </main>
@@ -129,30 +138,18 @@ const faqs = [
     text-align: center;
   }
 
-  .page-header__label {
-    display: block;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.8125rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--color-text-muted);
-    margin-bottom: 0.75rem;
-  }
-
   .page-header__title {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 400;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     color: var(--color-text);
     margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
   }
 
   .page-header__subtitle {
     color: var(--color-text-muted);
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    max-width: 560px;
+    font-size: clamp(1rem, 2vw, 1.175rem);
+    max-width: 540px;
     margin: 0 auto;
     line-height: 1.6;
   }
@@ -169,24 +166,32 @@ const faqs = [
 
   .section-label {
     display: block;
-    font-family: var(--font-heading);
-    font-weight: 600;
+    font-family: var(--font-body);
+    font-weight: 700;
     font-size: 0.8125rem;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--color-secondary);
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
     margin-bottom: 0.5rem;
     text-align: center;
   }
 
   .section-heading {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 400;
     font-size: clamp(1.75rem, 3vw, 2.5rem);
     color: var(--color-text);
     text-align: center;
     margin-bottom: 2.5rem;
-    letter-spacing: -0.02em;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    height: 60px;
+  }
+  .wave--cta {
+    margin-bottom: -1px;
   }
 
   /* ── Tiers ── */
@@ -203,28 +208,29 @@ const faqs = [
 
   .tier {
     background: var(--color-surface);
-    border: 3px solid color-mix(in srgb, var(--color-text) 8%, transparent);
     border-radius: var(--radius-md);
     padding: 2.5rem 2rem;
     text-align: center;
     position: relative;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
     transition:
-      transform 0.2s,
-      box-shadow 0.2s;
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   .tier:hover {
     transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.1);
   }
 
-  .tier--highlighted {
-    border-color: var(--color-primary);
-    box-shadow: 8px 8px 0 var(--color-primary);
+  .tier--popular {
+    border: 3px solid var(--color-accent);
+    box-shadow: 0 0 30px rgba(244, 114, 182, 0.2);
   }
 
-  .tier--highlighted:hover {
-    box-shadow: 10px 10px 0 var(--color-primary);
-    transform: translate(-2px, -6px);
+  .tier--popular:hover {
+    box-shadow: 0 0 40px rgba(244, 114, 182, 0.3);
+    transform: translateY(-6px);
   }
 
   .tier__badge {
@@ -232,20 +238,19 @@ const faqs = [
     top: -0.875rem;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--color-secondary);
+    background: #d946b2;
     color: white;
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 0.75rem;
     font-weight: 700;
     padding: 0.3rem 1.25rem;
     border-radius: var(--radius-full);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .tier__name {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.5rem;
     color: var(--color-text);
     margin-bottom: 0.25rem;
@@ -263,10 +268,9 @@ const faqs = [
 
   .tier__price {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 400;
     font-size: 3rem;
     color: var(--color-primary);
-    letter-spacing: -0.02em;
   }
 
   .tier__unit {
@@ -318,14 +322,14 @@ const faqs = [
     padding: 0.875rem;
     text-align: center;
     text-decoration: none;
-    font-family: var(--font-heading);
-    font-weight: 600;
+    font-family: var(--font-body);
+    font-weight: 700;
     font-size: 0.9375rem;
     border-radius: var(--radius-full);
-    border: 2.5px solid var(--color-primary);
+    border: 2px solid var(--color-primary);
     color: var(--color-primary);
     background: transparent;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: all 0.2s ease;
     box-sizing: border-box;
   }
 
@@ -342,8 +346,8 @@ const faqs = [
   }
 
   .tier__cta--filled:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
     background: var(--color-cta);
   }
 
@@ -363,13 +367,13 @@ const faqs = [
   }
 
   .faq {
-    border-bottom: 2px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    border-bottom: 2px solid color-mix(in srgb, var(--color-primary) 12%, transparent);
     padding: 1.5rem 0;
   }
 
   .faq__q {
-    font-family: var(--font-heading);
-    font-weight: 600;
+    font-family: var(--font-body);
+    font-weight: 700;
     font-size: 1.0625rem;
     color: var(--color-text);
     cursor: pointer;
@@ -388,7 +392,7 @@ const faqs = [
 
   .faq__q::after {
     content: '+';
-    font-weight: 600;
+    font-weight: 700;
     font-size: 1.5rem;
     color: var(--color-primary);
     line-height: 1;
@@ -398,7 +402,7 @@ const faqs = [
   }
 
   .faq[open] .faq__q::after {
-    content: '\2212';
+    content: '−';
     transform: rotate(180deg);
   }
 
@@ -411,24 +415,26 @@ const faqs = [
 
   /* ── CTA Block ── */
   .cta-block {
-    background: var(--color-secondary);
-    padding: 6rem 2rem;
+    position: relative;
+  }
+
+  .cta-block__body {
+    background: var(--color-primary);
+    padding: 5rem 0;
     text-align: center;
-    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
   }
 
   .cta-block__title {
     font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.75rem);
     color: white;
     margin-bottom: 1rem;
-    letter-spacing: -0.02em;
   }
 
   .cta-block__text {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.175rem;
     margin-bottom: 2.5rem;
   }
 
@@ -442,23 +448,25 @@ const faqs = [
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.0625rem;
-    padding: 1rem 2.5rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
     border-radius: var(--radius-full);
     text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .btn--white {
     background: white;
-    color: var(--color-secondary);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    color: var(--color-primary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   }
 
   .btn--white:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
   }
 </style>

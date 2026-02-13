@@ -1,35 +1,35 @@
 ---
-name: "Deep Cleaning"
-slug: "deep-cleaning"
-category: "residential"
-icon: "Sparkles"
-tagline: "Every corner, spotless."
-description: "A thorough top-to-bottom clean that targets areas often missed in regular cleaning. Perfect for spring cleaning, pre-event prep, or a fresh start."
+name: 'Deep Cleaning'
+slug: 'deep-cleaning'
+category: 'residential'
+icon: 'Sparkles'
+tagline: 'Every corner, spotless.'
+description: 'A thorough top-to-bottom clean that targets areas often missed in regular cleaning. Perfect for spring cleaning, pre-event prep, or a fresh start.'
 features:
-  - "Baseboards and crown molding dusted"
-  - "Inside appliances (oven, fridge, dishwasher)"
-  - "Window sills and tracks cleaned"
-  - "Light fixtures and ceiling fans"
-  - "Grout scrubbing in bathrooms"
-  - "Behind and under furniture"
-  - "Door frames and cabinet exteriors"
-  - "Air vents dusted"
+  - 'Baseboards and crown molding dusted'
+  - 'Inside appliances (oven, fridge, dishwasher)'
+  - 'Window sills and tracks cleaned'
+  - 'Light fixtures and ceiling fans'
+  - 'Grout scrubbing in bathrooms'
+  - 'Behind and under furniture'
+  - 'Door frames and cabinet exteriors'
+  - 'Air vents dusted'
 process:
   - step: 1
-    title: "Walk-Through"
-    description: "We assess your home and note priority areas. You tell us what matters most."
+    title: 'Walk-Through'
+    description: 'We assess your home and note priority areas. You tell us what matters most.'
   - step: 2
-    title: "Deep Scrub"
-    description: "Our team works room by room with professional-grade products and equipment."
+    title: 'Deep Scrub'
+    description: 'Our team works room by room with professional-grade products and equipment.'
   - step: 3
-    title: "Final Inspection"
-    description: "We walk through the results with you to ensure every detail meets your standards."
+    title: 'Final Inspection'
+    description: 'We walk through the results with you to ensure every detail meets your standards.'
 startingPrice: 179
-priceUnit: "per visit"
+priceUnit: 'per visit'
 featured: true
 displayOrder: 2
-metaTitle: "Deep Cleaning Services | CleanSpark"
-metaDescription: "Professional deep cleaning in Seattle. We clean every corner — baseboards, appliances, grout, and more. Book your thorough home refresh today."
+metaTitle: 'Deep Cleaning Services | CleanSpark'
+metaDescription: 'Professional deep cleaning in Seattle. We clean every corner — baseboards, appliances, grout, and more. Book your thorough home refresh today.'
 ---
 
 ## What's Included in Deep Cleaning?
@@ -67,4 +67,4 @@ Our deep cleaning service goes beyond the surface. We tackle the areas that accu
 
 Our team arrives with professional-grade cleaners and equipment designed for deep scrubbing and sanitization. We allocate extra time to ensure every detail is addressed.
 
-*Typical deep clean takes 4-6 hours for a 2-bedroom home.*
+_Typical deep clean takes 4-6 hours for a 2-bedroom home._

@@ -17,12 +17,21 @@ importers:
       '@fontsource-variable/inter':
         specifier: ^5.2.8
         version: 5.2.8
+      '@fontsource/caveat':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/dm-sans':
         specifier: ^5.2.8
         version: 5.2.8
+      '@fontsource/fredoka-one':
+        specifier: ^5.2.5
+        version: 5.2.5
       '@fontsource/merriweather':
         specifier: ^5.2.11
         version: 5.2.11
+      '@fontsource/nunito':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@fontsource/source-sans-3':
         specifier: ^5.2.9
         version: 5.2.9
@@ -495,11 +504,20 @@ packages:
   '@fontsource-variable/inter@5.2.8':
     resolution: {integrity: sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==}
 
+  '@fontsource/caveat@5.2.8':
+    resolution: {integrity: sha512-9fUUfFE2IQFKbx+xOcaeQxxmh8iJguEb8z+j1PeueO4UUx+XfT4pRm/B04ZDvFA794/iRxY/IibmP8ZKtIf4rw==}
+
   '@fontsource/dm-sans@5.2.8':
     resolution: {integrity: sha512-tlovG42m9ESG28WiHpLq3F5umAlm64rv0RkqTbYowRn70e9OlRr5a3yTJhrhrY+k5lftR/OFJjPzOLQzk8EfCA==}
 
+  '@fontsource/fredoka-one@5.2.5':
+    resolution: {integrity: sha512-Fan2k5pTOmmN8eydeUOk20/NALW+qtRu6WdqPBNhFq2WaquxKpBMUzdxFXgy9asICtbEhxTM51XHeU+OKfPQnQ==}
+
   '@fontsource/merriweather@5.2.11':
     resolution: {integrity: sha512-ZiIMeUh5iT8d73o6xlSF8GKgjV5pgiFrufYc5jZTVAfExtWKqM2vQHnsqXSFMv4ELhAcjt6Vf+5T3oVGXhAizQ==}
+
+  '@fontsource/nunito@5.2.7':
+    resolution: {integrity: sha512-pmtBq0H9ex9nk+RtJYEJOD9pag393iHETnl/PVKleF4i06cd0ttngK5ZCTgYb5eOqR3Xdlrjtev8m7bmgYprew==}
 
   '@fontsource/source-sans-3@5.2.9':
     resolution: {integrity: sha512-u3ymIq4rfmCCyB9MEw/sFR5lPVJ1yTNXmIMbUz+9kVCFIHvNtfzXOEBuvkg3Tk0zhmioPeJ28ZK5smZ7TurezQ==}
@@ -3284,9 +3302,15 @@ snapshots:
 
   '@fontsource-variable/inter@5.2.8': {}
 
+  '@fontsource/caveat@5.2.8': {}
+
   '@fontsource/dm-sans@5.2.8': {}
 
+  '@fontsource/fredoka-one@5.2.5': {}
+
   '@fontsource/merriweather@5.2.11': {}
+
+  '@fontsource/nunito@5.2.7': {}
 
   '@fontsource/source-sans-3@5.2.9': {}
 

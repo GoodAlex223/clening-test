@@ -1,6 +1,6 @@
 ---
 /**
- * BoldGallery — Filterable before/after photo grid with bold styling.
+ * BubblyGallery — Filterable photo grid with rounded cards and playful styling.
  */
 import type { CollectionEntry } from 'astro:content'
 
@@ -16,12 +16,23 @@ const { gallery, uniqueServices } = Astro.props
   {/* ── Page header ── */}
   <section class="page-header">
     <div class="container">
-      <span class="page-header__label">See the Difference</span>
-      <h1 class="page-header__title">Our Work</h1>
+      <span class="section-label">See the Difference</span>
+      <h1 class="page-header__title">Our Beautiful Work</h1>
       <p class="page-header__subtitle">
-        Real projects, real results. See the CleanSpark difference in action.
+        Real projects, real sparkle. See the CleanSpark difference!
       </p>
     </div>
+    <svg
+      class="wave"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M0,40 Q200,10 400,40 T800,30 Q1000,50 1200,35 L1200,80 L0,80 Z"
+        fill="var(--color-surface)"></path>
+    </svg>
   </section>
 
   {/* ── Filters ── */}
@@ -85,16 +96,27 @@ const { gallery, uniqueServices } = Astro.props
 
   {/* ── CTA ── */}
   <section class="cta-block reveal">
-    <div class="container">
-      <h2 class="cta-block__title">Want Results Like These?</h2>
-      <p class="cta-block__text">Every space has potential. Let us show you yours.</p>
-      <a href="/contact" class="btn btn--white">Book Your Clean &rarr;</a>
+    <svg
+      class="wave wave--cta"
+      viewBox="0 0 1200 80"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M0,50 Q300,10 600,45 T1200,35 L1200,80 L0,80 Z" fill="var(--color-primary)"></path>
+    </svg>
+    <div class="cta-block__body">
+      <div class="container">
+        <h2 class="cta-block__title">Want Results Like These?</h2>
+        <p class="cta-block__text">Every space has potential. Let us show you yours!</p>
+        <a href="/contact" class="btn btn--white">Book Your Clean</a>
+      </div>
     </div>
   </section>
 </main>
 
 <script>
-  function initBoldGalleryFilter(): void {
+  function initBubblyGalleryFilter(): void {
     const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]')
     const items = document.querySelectorAll<HTMLElement>('[data-gallery-item]')
 
@@ -116,55 +138,67 @@ const { gallery, uniqueServices } = Astro.props
     })
   }
 
-  initBoldGalleryFilter()
+  initBubblyGalleryFilter()
 </script>
 
 <style>
   /* ── Page header ── */
   .page-header {
-    padding: var(--section-padding) 2rem 3rem;
+    padding: var(--section-padding) 2rem 0;
     text-align: center;
-    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
-    padding-bottom: 5rem;
-  }
-
-  .page-header__label {
-    display: block;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.8125rem;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    color: var(--color-text-muted);
-    margin-bottom: 0.75rem;
+    background: var(--color-background);
   }
 
   .page-header__title {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 400;
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     color: var(--color-text);
     margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
   }
 
   .page-header__subtitle {
     color: var(--color-text-muted);
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    max-width: 560px;
+    font-size: clamp(1rem, 2vw, 1.175rem);
+    max-width: 540px;
     margin: 0 auto;
     line-height: 1.6;
   }
 
+  /* ── Shared ── */
   .container {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 2rem;
   }
 
+  .section-label {
+    display: block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .wave {
+    display: block;
+    width: 100%;
+    height: 60px;
+    margin-top: -1px;
+  }
+  .wave--cta {
+    margin-top: 0;
+    margin-bottom: -1px;
+  }
+
   /* ── Filters ── */
   .filters {
     padding: 0 0 2.5rem;
+    background: var(--color-surface);
   }
 
   .filter-bar {
@@ -176,14 +210,14 @@ const { gallery, uniqueServices } = Astro.props
 
   .filter {
     padding: 0.5rem 1.5rem;
-    border: 2.5px solid var(--color-primary);
+    border: 2px solid var(--color-primary);
     border-radius: var(--radius-full);
     background: transparent;
     color: var(--color-primary);
     cursor: pointer;
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
     transition: all 0.2s ease;
   }
 
@@ -194,34 +228,34 @@ const { gallery, uniqueServices } = Astro.props
   .filter--active {
     background: var(--color-primary);
     color: white;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
   }
 
   /* ── Gallery grid ── */
   .gallery-section {
     padding: 0 0 4rem;
+    background: var(--color-surface);
   }
 
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 2rem;
   }
 
   .gal {
-    background: var(--color-surface);
-    border: 3px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+    background: white;
     border-radius: var(--radius-md);
     overflow: hidden;
+    box-shadow: 0 2px 16px rgba(124, 58, 237, 0.06);
     transition:
-      transform 0.25s ease-out,
-      box-shadow 0.25s ease-out,
-      border-color 0.2s;
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
   }
 
   .gal:hover {
-    transform: translateY(-4px);
-    box-shadow: 6px 6px 0 var(--color-primary);
-    border-color: var(--color-primary);
+    transform: translateY(-4px) rotate(-0.3deg);
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.12);
   }
 
   .gal__images {
@@ -252,12 +286,12 @@ const { gallery, uniqueServices } = Astro.props
     left: 0.625rem;
     background: var(--color-text);
     color: white;
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 0.6875rem;
     font-weight: 700;
-    padding: 0.2rem 0.625rem;
+    padding: 0.2rem 0.75rem;
     border-radius: var(--radius-full);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 
@@ -278,17 +312,17 @@ const { gallery, uniqueServices } = Astro.props
 
   .gal__room {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.0625rem;
     color: var(--color-text);
   }
 
   .gal__service {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.2rem 0.625rem;
-    background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    font-weight: 700;
+    padding: 0.2rem 0.75rem;
+    background: color-mix(in srgb, var(--color-primary) 10%, transparent);
     border-radius: var(--radius-full);
     color: var(--color-primary);
   }
@@ -301,24 +335,26 @@ const { gallery, uniqueServices } = Astro.props
 
   /* ── CTA Block ── */
   .cta-block {
-    background: var(--color-secondary);
-    padding: 6rem 2rem;
+    position: relative;
+  }
+
+  .cta-block__body {
+    background: var(--color-primary);
+    padding: 5rem 0;
     text-align: center;
-    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
   }
 
   .cta-block__title {
     font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    font-size: clamp(2rem, 4vw, 2.75rem);
     color: white;
     margin-bottom: 1rem;
-    letter-spacing: -0.02em;
   }
 
   .cta-block__text {
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.175rem;
     margin-bottom: 2.5rem;
   }
 
@@ -326,24 +362,26 @@ const { gallery, uniqueServices } = Astro.props
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.0625rem;
-    padding: 1rem 2.5rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
     border-radius: var(--radius-full);
     text-decoration: none;
-    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
   }
 
   .btn--white {
     background: white;
-    color: var(--color-secondary);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    color: var(--color-primary);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   }
 
   .btn--white:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
   }
 
   @media (max-width: 640px) {

@@ -15,13 +15,7 @@ export const THEME_REGISTRY: Record<ThemeId, ThemeConfig> = {
 }
 
 /** Ordered list of all available theme IDs */
-export const THEME_IDS: readonly ThemeId[] = [
-  'minimal',
-  'bold',
-  'trust',
-  'bubbly',
-  'noir',
-] as const
+export const THEME_IDS: readonly ThemeId[] = ['minimal', 'bold', 'trust', 'bubbly', 'noir'] as const
 
 /** Default theme when no cookie exists or cookie is invalid */
 export const DEFAULT_THEME: ThemeId = 'minimal'

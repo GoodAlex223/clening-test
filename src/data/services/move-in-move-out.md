@@ -1,35 +1,35 @@
 ---
-name: "Move-In/Move-Out Cleaning"
-slug: "move-in-move-out"
-category: "residential"
-icon: "Truck"
-tagline: "Start fresh. Leave spotless."
+name: 'Move-In/Move-Out Cleaning'
+slug: 'move-in-move-out'
+category: 'residential'
+icon: 'Truck'
+tagline: 'Start fresh. Leave spotless.'
 description: "Whether you're moving into a new place or leaving one behind, we'll make sure every surface is immaculate. Landlord-approved results guaranteed."
 features:
-  - "All rooms deep cleaned top to bottom"
-  - "Inside all cabinets and drawers"
-  - "Appliance interiors (oven, fridge, dishwasher)"
-  - "Closet shelves and rods wiped"
-  - "Window tracks and sills detailed"
-  - "Light switches and outlet covers cleaned"
-  - "Garage sweep (if applicable)"
-  - "Deposit-back guarantee"
+  - 'All rooms deep cleaned top to bottom'
+  - 'Inside all cabinets and drawers'
+  - 'Appliance interiors (oven, fridge, dishwasher)'
+  - 'Closet shelves and rods wiped'
+  - 'Window tracks and sills detailed'
+  - 'Light switches and outlet covers cleaned'
+  - 'Garage sweep (if applicable)'
+  - 'Deposit-back guarantee'
 process:
   - step: 1
-    title: "Schedule Around Your Move"
-    description: "We work with your timeline — cleaning before you arrive or after you leave."
+    title: 'Schedule Around Your Move'
+    description: 'We work with your timeline — cleaning before you arrive or after you leave.'
   - step: 2
-    title: "Empty Home Clean"
-    description: "With the space cleared, we access every corner, shelf, and surface."
+    title: 'Empty Home Clean'
+    description: 'With the space cleared, we access every corner, shelf, and surface.'
   - step: 3
-    title: "Inspection Ready"
-    description: "Your home passes landlord or buyer inspection. We guarantee it."
+    title: 'Inspection Ready'
+    description: 'Your home passes landlord or buyer inspection. We guarantee it.'
 startingPrice: 249
-priceUnit: "per home"
+priceUnit: 'per home'
 featured: false
 displayOrder: 3
-metaTitle: "Move-In/Move-Out Cleaning | CleanSpark"
-metaDescription: "Moving in or out? Our professional cleaning ensures every surface is spotless. Get your deposit back or start fresh in your new home."
+metaTitle: 'Move-In/Move-Out Cleaning | CleanSpark'
+metaDescription: 'Moving in or out? Our professional cleaning ensures every surface is spotless. Get your deposit back or start fresh in your new home.'
 ---
 
 ## Moving Shouldn't Mean Scrubbing
@@ -66,4 +66,4 @@ We understand moving timelines are tight. We offer:
 - **Flexible scheduling** to fit between movers
 - **Key handoff coordination** if you can't be present
 
-*Pricing varies by home size. Average 2-bedroom apartment takes 4-5 hours.*
+_Pricing varies by home size. Average 2-bedroom apartment takes 4-5 hours._
