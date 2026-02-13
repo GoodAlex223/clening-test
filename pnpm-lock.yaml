@@ -26,12 +26,18 @@ importers:
       '@fontsource/fredoka-one':
         specifier: ^5.2.5
         version: 5.2.5
+      '@fontsource/lato':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@fontsource/merriweather':
         specifier: ^5.2.11
         version: 5.2.11
       '@fontsource/nunito':
         specifier: ^5.2.7
         version: 5.2.7
+      '@fontsource/playfair-display':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@fontsource/source-sans-3':
         specifier: ^5.2.9
         version: 5.2.9
@@ -513,11 +519,17 @@ packages:
   '@fontsource/fredoka-one@5.2.5':
     resolution: {integrity: sha512-Fan2k5pTOmmN8eydeUOk20/NALW+qtRu6WdqPBNhFq2WaquxKpBMUzdxFXgy9asICtbEhxTM51XHeU+OKfPQnQ==}
 
+  '@fontsource/lato@5.2.7':
+    resolution: {integrity: sha512-k5mum1ADbDW5cTw1Ett1eQVWeoZ6gq0ct6SFBibEhB4LRxhniChJZTBgd6ph5yBxLkN1fcnsnmicBNA4S/3nbw==}
+
   '@fontsource/merriweather@5.2.11':
     resolution: {integrity: sha512-ZiIMeUh5iT8d73o6xlSF8GKgjV5pgiFrufYc5jZTVAfExtWKqM2vQHnsqXSFMv4ELhAcjt6Vf+5T3oVGXhAizQ==}
 
   '@fontsource/nunito@5.2.7':
     resolution: {integrity: sha512-pmtBq0H9ex9nk+RtJYEJOD9pag393iHETnl/PVKleF4i06cd0ttngK5ZCTgYb5eOqR3Xdlrjtev8m7bmgYprew==}
+
+  '@fontsource/playfair-display@5.2.8':
+    resolution: {integrity: sha512-fUEhib70SszNhQVsGbUMSsWJhr7Je0rdeuZdtGpDNu0GKF1xJM8QhpI/y0pckU25GcChXm9TLOmeZupkvvZo2g==}
 
   '@fontsource/source-sans-3@5.2.9':
     resolution: {integrity: sha512-u3ymIq4rfmCCyB9MEw/sFR5lPVJ1yTNXmIMbUz+9kVCFIHvNtfzXOEBuvkg3Tk0zhmioPeJ28ZK5smZ7TurezQ==}
@@ -3308,9 +3320,13 @@ snapshots:
 
   '@fontsource/fredoka-one@5.2.5': {}
 
+  '@fontsource/lato@5.2.7': {}
+
   '@fontsource/merriweather@5.2.11': {}
 
   '@fontsource/nunito@5.2.7': {}
+
+  '@fontsource/playfair-display@5.2.8': {}
 
   '@fontsource/source-sans-3@5.2.9': {}
 

@@ -2,7 +2,7 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-12
+**Last Updated**: 2026-02-13
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
@@ -21,19 +21,6 @@ _No tasks currently in progress._
 ## Planned
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
-
-### T-009: Noir Luxe Theme — Full Implementation
-
-**Priority**: P2 — Medium
-**Milestone**: M4
-**Depends on**: T-005
-
-- [ ] Create Noir Luxe dark layout
-- [ ] Charcoal + champagne gold palette
-- [ ] Elegant serif typography, grain texture overlay
-- [ ] Sophisticated fade-in animations
-- [ ] All 6 pages implemented
-- [ ] Mobile responsive
 
 ### T-010: Interactive Features
 

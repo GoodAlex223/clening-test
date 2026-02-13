@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-12
+**Last Updated**: 2026-02-13
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -175,6 +175,21 @@ Completed tasks with implementation details and learnings.
 - All pages mobile responsive with wave dividers, bouncy animations, and IntersectionObserver reveals
 
 **Spawned Tasks**: 5 items added to BACKLOG.md
+
+### 2026-02-13 — T-009: Noir Luxe Theme — Full Implementation
+
+**Plan**: [docs/archive/plans/2026-02-13_t-009-noir-luxe.md](../archive/plans/2026-02-13_t-009-noir-luxe.md)
+**Summary**: Implemented the fifth and final complete theme (Noir Luxe) with premium dark charcoal + champagne gold palette, Playfair Display/Lato typography, film grain SVG overlay, gold diamond hero CSS art, split-centered navigation, grayscale-to-color gallery hover, and 6 fully-styled page components. Completes all 5 CleanSpark themes.
+
+**Key Changes**:
+
+- Created NoirNav (split-centered links with gold underlines, transparent-to-blur scroll, mobile overlay) and NoirFooter (minimal centered with gold rule separator)
+- Created 6 page content components: Home (gold diamond CSS art, service cards, stats counter, testimonials), Services (category grouping with gold glow cards), About (story, SVG icon values, team cards), Pricing (gold-bordered tiers, native FAQ accordion), Gallery (filterable grid with grayscale-to-color hover), Contact (dark form with gold focus states, info cards)
+- Updated NoirLayout with font imports (@fontsource/playfair-display, @fontsource/lato), scroll-reveal (0.8s elegant timing), film grain overlay (SVG feTurbulence), gold-rule draw-in animation
+- Registered all Noir components in page-resolver.ts (replaced Minimal fallbacks)
+- All pages mobile responsive with elegant animations, thin gold borders, and IntersectionObserver reveals
+
+**Spawned Tasks**: 2 items added to BACKLOG.md
 
 ---
 
