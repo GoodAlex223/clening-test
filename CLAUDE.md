@@ -8,8 +8,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **CleanSpark** — A multi-theme cleaning business MVP website built as a developer portfolio piece. Features 5 radically different design themes with real-time switching. Built with Astro 5.x + TypeScript + Tailwind CSS 4.x.
 
-**Tech stack**: Astro, TypeScript (strict), Tailwind CSS, pnpm, Vitest, Playwright
-**Purpose**: Portfolio showcase demonstrating frontend architecture, multi-theme systems, and production-quality code.
+**Live Demo**: [cleanspark-virid.vercel.app](https://cleanspark-virid.vercel.app)
+**Tech stack**: Astro SSR (Vercel), TypeScript (strict), Tailwind CSS, pnpm, Vitest, Playwright
+**Purpose**: Portfolio showcase demonstrating frontend architecture, multi-theme systems, production-quality code, and SSR deployment
+**Performance**: Perfect Lighthouse scores (100/100/100/100 mobile and desktop)
 
 <!-- END AUTO-MANAGED -->
 
@@ -37,6 +39,7 @@ pnpm test             # All tests
 ## Architecture
 
 - **Multi-theme system**: 5 complete layout systems (all implemented: Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
+- **Deployment**: Vercel serverless with `@astrojs/vercel` adapter, SSR mode (`output: 'server'`), production URL: https://cleanspark-virid.vercel.app
 - **Content Collections**: Astro Content Collections with Zod schemas for services, testimonials, team, gallery, pricing
 - **Theme Engine**:
   - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
@@ -123,6 +126,7 @@ pnpm test             # All tests
 - **Scoped selector pattern**: `.theme-switcher` prefix scopes ThemeSwitcher queries to first instance; prevents conflicts when multiple islands exist (desktop + mobile nav)
 - **Cross-browser test architecture**: Playwright config defines 4 browser projects (Desktop Chrome, Mobile Chrome, Firefox, WebKit); single test suite runs against all browsers
 - **Production bug discovery via testing**: Theme switching bug found during E2E test development — `querySelectorAll('[data-theme]')` matched both buttons and wrapper div, causing event bubbling; fixed with scoped selector `.theme-switcher button[data-theme]`
+- **View Transitions compatibility**: `<ClientRouter />` in BaseLayout enables SPA-mode navigation; interactive islands use `document.addEventListener('astro:page-load', initFunction)` instead of immediate initialization to re-initialize after both initial page load and View Transitions navigation; prevents stale event listeners and ensures components work after client-side navigation
 
 <!-- END AUTO-MANAGED -->
 
