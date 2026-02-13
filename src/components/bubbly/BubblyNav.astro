@@ -102,11 +102,16 @@ const links = [
 </div>
 
 <script>
+  import { initScrollSpy } from '@lib/scroll-spy'
+
   function initBubblyNav(): void {
     const nav = document.getElementById('bubbly-nav')
     const burgerEl = nav?.querySelector<HTMLButtonElement>('.bbn__burger')
     const menuEl = document.getElementById('bubbly-mobile-menu')
     if (!nav || !burgerEl || !menuEl) return
+
+    if (nav.dataset.navInit === 'true') return
+    nav.dataset.navInit = 'true'
 
     const burger = burgerEl
     const mobileMenu = menuEl
@@ -164,9 +169,16 @@ const links = [
     mobileLinks.forEach((link) => {
       link.addEventListener('click', closeMenu)
     })
+
+    // Scroll-spy for active nav link highlighting
+    initScrollSpy({
+      linkSelector: '.bbn__link',
+      activeClass: 'bbn__link--active',
+    })
   }
 
   initBubblyNav()
+  document.addEventListener('astro:page-load', initBubblyNav)
 </script>
 
 <style>

@@ -3,6 +3,7 @@
  * BoldGallery — Filterable before/after photo grid with bold styling.
  */
 import type { CollectionEntry } from 'astro:content'
+import BeforeAfterSlider from '@components/shared/BeforeAfterSlider.astro'
 
 interface Props {
   gallery: CollectionEntry<'gallery'>[]
@@ -49,26 +50,12 @@ const { gallery, uniqueServices } = Astro.props
         {
           gallery.map((item, i) => (
             <article class="gal" data-gallery-item data-service={item.data.service}>
-              <div class="gal__images">
-                <div class="gal__img-wrap">
-                  <img
-                    src={item.data.before}
-                    alt={`Before: ${item.data.room} - ${item.data.service}`}
-                    loading={i < 4 ? 'eager' : 'lazy'}
-                    class="gal__img"
-                  />
-                  <span class="gal__label">Before</span>
-                </div>
-                <div class="gal__img-wrap">
-                  <img
-                    src={item.data.after}
-                    alt={`After: ${item.data.room} - ${item.data.service}`}
-                    loading={i < 4 ? 'eager' : 'lazy'}
-                    class="gal__img"
-                  />
-                  <span class="gal__label gal__label--after">After</span>
-                </div>
-              </div>
+              <BeforeAfterSlider
+                before={item.data.before}
+                after={item.data.after}
+                alt={`${item.data.room} - ${item.data.service}`}
+                loading={i < 4 ? 'eager' : 'lazy'}
+              />
               <div class="gal__info">
                 <div class="gal__meta">
                   <span class="gal__room">{item.data.room}</span>
@@ -94,29 +81,10 @@ const { gallery, uniqueServices } = Astro.props
 </main>
 
 <script>
-  function initBoldGalleryFilter(): void {
-    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]')
-    const items = document.querySelectorAll<HTMLElement>('[data-gallery-item]')
+  import { initGalleryFilter } from '@lib/gallery-filter'
 
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter
-
-        buttons.forEach((b) => {
-          const isActive = b === btn
-          b.classList.toggle('filter--active', isActive)
-          b.setAttribute('aria-pressed', String(isActive))
-        })
-
-        items.forEach((item) => {
-          const matches = filter === 'all' || item.dataset.service === filter
-          item.style.display = matches ? '' : 'none'
-        })
-      })
-    })
-  }
-
-  initBoldGalleryFilter()
+  initGalleryFilter()
+  document.addEventListener('astro:page-load', initGalleryFilter)
 </script>
 
 <style>
@@ -222,47 +190,6 @@ const { gallery, uniqueServices } = Astro.props
     transform: translateY(-4px);
     box-shadow: 6px 6px 0 var(--color-primary);
     border-color: var(--color-primary);
-  }
-
-  .gal__images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .gal__img-wrap {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .gal__img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .gal:hover .gal__img {
-    transform: scale(1.03);
-  }
-
-  .gal__label {
-    position: absolute;
-    top: 0.625rem;
-    left: 0.625rem;
-    background: var(--color-text);
-    color: white;
-    font-family: var(--font-heading);
-    font-size: 0.6875rem;
-    font-weight: 700;
-    padding: 0.2rem 0.625rem;
-    border-radius: var(--radius-full);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .gal__label--after {
-    background: var(--color-primary);
   }
 
   .gal__info {

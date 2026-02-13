@@ -72,6 +72,7 @@ const {
   }
 
   initBoldScrollReveal()
+  document.addEventListener('astro:page-load', initBoldScrollReveal)
 </script>
 
 {/* Stats counter animation */}
@@ -116,6 +117,7 @@ const {
   }
 
   initStatsCounter()
+  document.addEventListener('astro:page-load', initStatsCounter)
 </script>
 
 <style is:global>

@@ -106,11 +106,16 @@ const allLinks = [...leftLinks, ...rightLinks]
 </div>
 
 <script>
+  import { initScrollSpy } from '@lib/scroll-spy'
+
   function initNoirNav(): void {
     const nav = document.getElementById('noir-nav')
     const burgerEl = nav?.querySelector<HTMLButtonElement>('.nn__burger')
     const menuEl = document.getElementById('noir-mobile-menu')
     if (!nav || !burgerEl || !menuEl) return
+
+    if (nav.dataset.navInit === 'true') return
+    nav.dataset.navInit = 'true'
 
     const burger = burgerEl
     const mobileMenu = menuEl
@@ -168,9 +173,16 @@ const allLinks = [...leftLinks, ...rightLinks]
     mobileLinks.forEach((link) => {
       link.addEventListener('click', closeMenu)
     })
+
+    // Scroll-spy for active nav link highlighting
+    initScrollSpy({
+      linkSelector: '.nn__link',
+      activeClass: 'nn__link--active',
+    })
   }
 
   initNoirNav()
+  document.addEventListener('astro:page-load', initNoirNav)
 </script>
 
 <style>
