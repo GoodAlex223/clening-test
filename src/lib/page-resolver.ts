@@ -35,7 +35,13 @@ import BubblyPricing from '@components/bubbly/pages/BubblyPricing.astro'
 import BubblyGallery from '@components/bubbly/pages/BubblyGallery.astro'
 import BubblyContact from '@components/bubbly/pages/BubblyContact.astro'
 
-// Future: import Noir page components here
+// Noir Luxe page content components
+import NoirHome from '@components/noir/pages/NoirHome.astro'
+import NoirServices from '@components/noir/pages/NoirServices.astro'
+import NoirAbout from '@components/noir/pages/NoirAbout.astro'
+import NoirPricing from '@components/noir/pages/NoirPricing.astro'
+import NoirGallery from '@components/noir/pages/NoirGallery.astro'
+import NoirContact from '@components/noir/pages/NoirContact.astro'
 
 /**
  * Static map of (theme, page) → page content component.
@@ -76,12 +82,12 @@ const PAGE_CONTENT_MAP = {
     contact: BubblyContact,
   },
   noir: {
-    home: MinimalHome,
-    services: MinimalServices,
-    about: MinimalAbout,
-    pricing: MinimalPricing,
-    gallery: MinimalGallery,
-    contact: MinimalContact,
+    home: NoirHome,
+    services: NoirServices,
+    about: NoirAbout,
+    pricing: NoirPricing,
+    gallery: NoirGallery,
+    contact: NoirContact,
   },
 } as const satisfies Record<ThemeId, Record<PageName, unknown>>
 

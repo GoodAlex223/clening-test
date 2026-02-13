@@ -1,0 +1,207 @@
+---
+/**
+ * NoirFooter — Minimal, centered footer with thin gold rule.
+ *
+ * Elegant and restrained. Gold accents, small text, centered layout.
+ */
+import { siteConfig } from '@lib/site-config'
+
+const year = new Date().getFullYear()
+
+const links = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+---
+
+<footer class="nf">
+  <div class="nf__rule" aria-hidden="true"></div>
+  <div class="nf__inner">
+    <div class="nf__brand">
+      Clean<span class="nf__brand-accent">Spark</span>
+    </div>
+    <p class="nf__tagline">{siteConfig.tagline}</p>
+
+    <nav class="nf__links" aria-label="Footer navigation">
+      {
+        links.map((link) => (
+          <a href={link.href} class="nf__link">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="nf__contact">
+      <a href={`tel:${siteConfig.phone}`} class="nf__contact-link">{siteConfig.phone}</a>
+      <span class="nf__dot" aria-hidden="true"></span>
+      <a href={`mailto:${siteConfig.email}`} class="nf__contact-link">{siteConfig.email}</a>
+    </div>
+
+    <div class="nf__social">
+      <a
+        href={siteConfig.social.facebook}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nf__social-link"
+        aria-label="Facebook"
+      >
+        Facebook
+      </a>
+      <a
+        href={siteConfig.social.instagram}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nf__social-link"
+        aria-label="Instagram"
+      >
+        Instagram
+      </a>
+      <a
+        href={siteConfig.social.yelp}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nf__social-link"
+        aria-label="Yelp"
+      >
+        Yelp
+      </a>
+    </div>
+
+    <p class="nf__copy">&copy; {year} {siteConfig.name}. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .nf {
+    padding: 0 2rem 3rem;
+  }
+
+  .nf__rule {
+    width: 60px;
+    height: 1px;
+    background: var(--color-primary);
+    margin: 0 auto 3rem;
+  }
+
+  .nf__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .nf__brand {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .nf__brand-accent {
+    color: var(--color-text);
+  }
+
+  .nf__tagline {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .nf__links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .nf__link {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .nf__link:hover {
+    color: var(--color-primary);
+  }
+
+  .nf__contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .nf__contact-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    transition: color 0.3s ease;
+  }
+
+  .nf__contact-link:hover {
+    color: var(--color-primary);
+  }
+
+  .nf__dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    opacity: 0.5;
+  }
+
+  .nf__social {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .nf__social-link {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .nf__social-link:hover {
+    color: var(--color-primary);
+  }
+
+  .nf__copy {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .nf__links {
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+    }
+
+    .nf__contact {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nf__dot {
+      display: none;
+    }
+  }
+</style>

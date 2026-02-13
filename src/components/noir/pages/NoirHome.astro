@@ -1,0 +1,713 @@
+---
+/**
+ * NoirHome — Premium home page with cinematic hero, gold diamond art,
+ * dark service cards, gold stats bar, elegant testimonials, and outlined CTA.
+ */
+import type { CollectionEntry } from 'astro:content'
+import { siteConfig } from '@lib/site-config'
+
+interface Props {
+  services: CollectionEntry<'services'>[]
+  testimonials: CollectionEntry<'testimonials'>[]
+}
+
+const { services, testimonials } = Astro.props
+
+const stats = [
+  { target: '5000', suffix: '+', label: 'Homes Cleaned' },
+  { target: '4.9', suffix: '/5', label: 'Average Rating', decimal: true },
+  { target: '150', suffix: '+', label: '5-Star Reviews' },
+  { target: '6', suffix: '+', label: 'Years of Service' },
+]
+---
+
+<main data-page="home">
+  {/* ── Hero ── */}
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <p class="hero__label">Premium Cleaning Services</p>
+        <h1 class="hero__title">Immaculate Spaces,<br />Elevated Living</h1>
+        <p class="hero__subtitle">
+          Where meticulous attention meets white-glove service. CleanSpark delivers an unparalleled
+          standard of cleanliness for discerning clients across Seattle.
+        </p>
+        <div class="hero__actions">
+          <a href="/contact" class="btn btn--gold">Request Consultation</a>
+          <a href="/services" class="btn btn--outline">Explore Services</a>
+        </div>
+      </div>
+      <div class="hero__art" aria-hidden="true">
+        <div class="diamond">
+          <div class="diamond__shape"></div>
+          <div class="diamond__glow"></div>
+          <div class="diamond__ring"></div>
+          <div class="diamond__dot diamond__dot--1"></div>
+          <div class="diamond__dot diamond__dot--2"></div>
+          <div class="diamond__dot diamond__dot--3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── Gold separator ── */}
+  <div class="separator reveal">
+    <div class="gold-rule"></div>
+  </div>
+
+  {/* ── Featured Services ── */}
+  <section class="section reveal">
+    <div class="container">
+      <p class="section__label">Our Expertise</p>
+      <h2 class="section__title">Signature Services</h2>
+      <div class="svc-grid reveal-stagger">
+        {
+          services.map((service) => (
+            <article class="svc-card">
+              <h3 class="svc-card__name">{service.data.name}</h3>
+              <p class="svc-card__text">{service.data.tagline}</p>
+              {service.data.startingPrice && (
+                <p class="svc-card__price">
+                  From <strong>${service.data.startingPrice}</strong>
+                  <span class="svc-card__unit">{service.data.priceUnit}</span>
+                </p>
+              )}
+              <a href={`/services#${service.data.slug}`} class="svc-card__link">
+                Learn More
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M5 12h14M12 5l7 7-7 7"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ── Stats ── */}
+  <section class="stats-section" id="noir-stats">
+    <div class="container">
+      <div class="stats__rule" aria-hidden="true"></div>
+      <div class="stats__inner reveal reveal-stagger">
+        {
+          stats.map((stat) => (
+            <div class="stat">
+              <div
+                class="stat__number"
+                data-counter
+                data-target={stat.target}
+                data-suffix={stat.suffix}
+                data-decimal={stat.decimal ? 'true' : undefined}
+              >
+                0
+              </div>
+              <div class="stat__label">{stat.label}</div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="stats__rule" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  {/* ── Testimonials ── */}
+  <section class="section reveal">
+    <div class="container">
+      <p class="section__label">Client Testimonials</p>
+      <h2 class="section__title">Words of Distinction</h2>
+      <div class="testi-grid reveal-stagger">
+        {
+          testimonials.map((t) => (
+            <blockquote class="testi">
+              <span class="testi__quote" aria-hidden="true">
+                &ldquo;
+              </span>
+              <p class="testi__text">{t.data.text}</p>
+              <footer class="testi__footer">
+                <strong class="testi__author">{t.data.name}</strong>
+                {t.data.location && <span class="testi__location">{t.data.location}</span>}
+              </footer>
+            </blockquote>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA ── */}
+  <section class="cta reveal">
+    <div class="container">
+      <div class="cta__rule" aria-hidden="true"></div>
+      <div class="cta__inner">
+        <h2 class="cta__title">Experience the Difference</h2>
+        <p class="cta__text">
+          Join discerning clients across {siteConfig.serviceAreas.slice(0, 3).join(', ')} who trust
+          CleanSpark for an exceptional standard of service.
+        </p>
+        <div class="cta__actions">
+          <a href="/contact" class="btn btn--gold">Schedule a Consultation</a>
+          <a href={`tel:${siteConfig.phone}`} class="cta__phone">{siteConfig.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{/* Stats counter animation */}
+<script>
+  function initNoirStatsCounter(): void {
+    const statsSection = document.getElementById('noir-stats')
+    if (!statsSection) return
+
+    let counted = false
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !counted) {
+            counted = true
+            document.querySelectorAll<HTMLElement>('[data-counter]').forEach((el) => {
+              const target = parseFloat(el.dataset.target || '0')
+              if (isNaN(target)) return
+              const suffix = el.dataset.suffix || ''
+              const isDecimal = el.dataset.decimal === 'true'
+              const duration = 1200
+              const start = performance.now()
+
+              function update(now: number): void {
+                const elapsed = now - start
+                const progress = Math.min(elapsed / duration, 1)
+                const eased = 1 - Math.pow(1 - progress, 3)
+                const current = isDecimal
+                  ? (target * eased).toFixed(1)
+                  : Math.floor(target * eased).toLocaleString()
+                el.textContent = current + suffix
+                if (progress < 1) requestAnimationFrame(update)
+              }
+
+              requestAnimationFrame(update)
+            })
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(statsSection)
+  }
+
+  initNoirStatsCounter()
+</script>
+
+<style>
+  /* ═══════════════ HERO ═══════════════ */
+  .hero {
+    padding: 6rem 0 5rem;
+  }
+
+  .hero__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero__label {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+    color: var(--color-text-muted);
+    max-width: 480px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Diamond art ── */
+  .hero__art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 360px;
+  }
+
+  .diamond {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .diamond__shape {
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--color-primary);
+    transform: rotate(45deg);
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(
+      135deg,
+      rgba(201, 169, 110, 0.08),
+      rgba(201, 169, 110, 0.02)
+    );
+  }
+
+  .diamond__shape::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+  }
+
+  .diamond__glow {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+    z-index: 1;
+  }
+
+  .diamond__ring {
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 169, 110, 0.1);
+    animation: noirSpin 40s linear infinite;
+  }
+
+  .diamond__dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-primary);
+  }
+
+  .diamond__dot--1 {
+    top: 15%;
+    right: 20%;
+    opacity: 0.6;
+  }
+  .diamond__dot--2 {
+    bottom: 25%;
+    left: 15%;
+    opacity: 0.3;
+  }
+  .diamond__dot--3 {
+    top: 55%;
+    right: 10%;
+    opacity: 0.2;
+    width: 2px;
+    height: 2px;
+  }
+
+  @keyframes noirSpin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* ═══════════════ BUTTONS ═══════════════ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.875rem 2rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+
+  .btn--gold {
+    background: var(--color-cta);
+    color: var(--color-cta-text);
+  }
+
+  .btn--gold:hover {
+    background: var(--color-secondary);
+    box-shadow: 0 4px 20px rgba(201, 169, 110, 0.2);
+  }
+
+  .btn--outline {
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    background: transparent;
+  }
+
+  .btn--outline:hover {
+    background: rgba(201, 169, 110, 0.08);
+  }
+
+  /* ═══════════════ SHARED ═══════════════ */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section {
+    padding: var(--section-padding) 0;
+  }
+
+  .section__label {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .section__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    color: var(--color-text);
+    text-align: center;
+    letter-spacing: 0.02em;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── Separator ── */
+  .separator {
+    padding: 0 2rem;
+  }
+
+  .separator .gold-rule {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-primary),
+      transparent
+    );
+  }
+
+  /* ═══════════════ SERVICES ═══════════════ */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .svc-card {
+    background: var(--color-surface);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .svc-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(201, 169, 110, 0.1);
+  }
+
+  .svc-card__name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+
+  .svc-card__text {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .svc-card__price {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .svc-card__price strong {
+    color: var(--color-primary);
+    font-weight: 400;
+    font-size: 1rem;
+  }
+
+  .svc-card__unit {
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+  }
+
+  .svc-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: gap 0.3s ease;
+  }
+
+  .svc-card__link:hover {
+    gap: 0.625rem;
+  }
+
+  /* ═══════════════ STATS ═══════════════ */
+  .stats-section {
+    padding: 4rem 0;
+  }
+
+  .stats__rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.3), transparent);
+  }
+
+  .stats__inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .stat__number {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat__label {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════ TESTIMONIALS ═══════════════ */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testi {
+    background: var(--color-surface);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2rem 2rem;
+    margin: 0;
+    position: relative;
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .testi:hover {
+    border-color: rgba(201, 169, 110, 0.3);
+    box-shadow: 0 0 20px rgba(201, 169, 110, 0.06);
+  }
+
+  .testi__quote {
+    position: absolute;
+    top: 0.5rem;
+    left: 1.5rem;
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--color-primary);
+    opacity: 0.3;
+    line-height: 1;
+  }
+
+  .testi__text {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .testi__footer {
+    font-style: normal;
+  }
+
+  .testi__author {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: 0.125rem;
+  }
+
+  .testi__location {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    font-size: 0.8125rem;
+  }
+
+  /* ═══════════════ CTA ═══════════════ */
+  .cta {
+    padding: 0 0 var(--section-padding);
+  }
+
+  .cta__rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    margin-bottom: 4rem;
+  }
+
+  .cta__inner {
+    text-align: center;
+  }
+
+  .cta__title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .cta__text {
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--color-text-muted);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .cta__phone {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .cta__phone:hover {
+    color: var(--color-primary);
+  }
+
+  /* ═══════════════ RESPONSIVE ═══════════════ */
+  @media (max-width: 1024px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .hero__subtitle {
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero__actions {
+      justify-content: center;
+    }
+
+    .hero__art {
+      min-height: 240px;
+    }
+
+    .diamond {
+      width: 220px;
+      height: 220px;
+    }
+
+    .diamond__shape {
+      width: 90px;
+      height: 90px;
+    }
+
+    .diamond__ring {
+      width: 180px;
+      height: 180px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 4rem 0 3rem;
+    }
+
+    .stats__inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

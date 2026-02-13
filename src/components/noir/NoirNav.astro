@@ -1,0 +1,376 @@
+---
+/**
+ * NoirNav — Elegant split-centered navigation with gold accents.
+ *
+ * Logo centered, links split left/right, transparent background,
+ * gold hover states. Thin and luxurious.
+ */
+import type { ThemeId } from '@themes/types'
+import ThemeSwitcher from '@components/shared/ThemeSwitcher.astro'
+
+interface Props {
+  currentTheme: ThemeId
+  currentPath?: string
+}
+
+const { currentTheme, currentPath = Astro.url.pathname } = Astro.props
+
+const leftLinks = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+]
+
+const rightLinks = [
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+]
+
+const allLinks = [...leftLinks, ...rightLinks]
+---
+
+<header class="nn" id="noir-nav">
+  <div class="nn__inner">
+    <nav class="nn__left" aria-label="Main navigation (left)">
+      {
+        leftLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={['nn__link', { 'nn__link--active': currentPath === link.href }]}
+            aria-current={currentPath === link.href ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href="/" class="nn__logo" aria-label="CleanSpark — Home">
+      Clean<span class="nn__logo-accent">Spark</span>
+    </a>
+
+    <div class="nn__right">
+      <nav aria-label="Main navigation (right)">
+        {
+          rightLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={['nn__link', { 'nn__link--active': currentPath === link.href }]}
+              aria-current={currentPath === link.href ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+      <ThemeSwitcher currentTheme={currentTheme} client:load />
+      <button
+        type="button"
+        class="nn__burger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="noir-mobile-menu"
+      >
+        <span class="nn__burger-line"></span>
+        <span class="nn__burger-line"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+{/* Mobile overlay */}
+<div
+  class="nn-mobile"
+  id="noir-mobile-menu"
+  aria-hidden="true"
+  style="opacity: 0; visibility: hidden;"
+>
+  <nav class="nn-mobile__nav" aria-label="Mobile navigation">
+    {
+      allLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'nn-mobile__link',
+            { 'nn-mobile__link--active': currentPath === link.href },
+          ]}
+          aria-current={currentPath === link.href ? 'page' : undefined}
+          tabindex="-1"
+          style="opacity: 0; transform: translateY(12px);"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<script>
+  function initNoirNav(): void {
+    const nav = document.getElementById('noir-nav')
+    const burgerEl = nav?.querySelector<HTMLButtonElement>('.nn__burger')
+    const menuEl = document.getElementById('noir-mobile-menu')
+    if (!nav || !burgerEl || !menuEl) return
+
+    const burger = burgerEl
+    const mobileMenu = menuEl
+
+    const onScroll = (): void => {
+      nav.classList.toggle('nn--scrolled', window.scrollY > 20)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+
+    const mobileLinks = mobileMenu.querySelectorAll<HTMLAnchorElement>('a')
+    let isMenuOpen = false
+
+    function openMenu(): void {
+      isMenuOpen = true
+      mobileMenu.style.opacity = '1'
+      mobileMenu.style.visibility = 'visible'
+      mobileMenu.setAttribute('aria-hidden', 'false')
+      burger.setAttribute('aria-expanded', 'true')
+      burger.classList.add('nn__burger--open')
+      document.body.style.overflow = 'hidden'
+      mobileLinks.forEach((l) => {
+        l.removeAttribute('tabindex')
+        l.style.opacity = '1'
+        l.style.transform = 'translateY(0)'
+      })
+      mobileLinks[0]?.focus()
+    }
+
+    function closeMenu(): void {
+      isMenuOpen = false
+      mobileMenu.style.opacity = '0'
+      mobileMenu.style.visibility = 'hidden'
+      mobileMenu.setAttribute('aria-hidden', 'true')
+      burger.setAttribute('aria-expanded', 'false')
+      burger.classList.remove('nn__burger--open')
+      document.body.style.overflow = ''
+      mobileLinks.forEach((l) => {
+        l.setAttribute('tabindex', '-1')
+        l.style.opacity = '0'
+        l.style.transform = 'translateY(12px)'
+      })
+      burger.focus()
+    }
+
+    burger.addEventListener('click', () => {
+      if (isMenuOpen) closeMenu()
+      else openMenu()
+    })
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) closeMenu()
+    })
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu)
+    })
+  }
+
+  initNoirNav()
+</script>
+
+<style>
+  /* ── Sticky header ── */
+  .nn {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: transparent;
+    transition:
+      background 0.4s ease,
+      border-color 0.4s ease;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nn--scrolled {
+    background: rgba(15, 15, 15, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .nn__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.5rem;
+    gap: 2rem;
+  }
+
+  /* ── Logo (centered) ── */
+  .nn__logo {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+  }
+
+  .nn__logo:hover {
+    color: var(--color-secondary);
+  }
+
+  .nn__logo-accent {
+    color: var(--color-text);
+    font-weight: 400;
+  }
+
+  /* ── Nav links ── */
+  .nn__left,
+  .nn__right nav {
+    display: flex;
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  .nn__left {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .nn__right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .nn__link {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nn__link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  .nn__link:hover {
+    color: var(--color-primary);
+  }
+
+  .nn__link:hover::after {
+    width: 100%;
+  }
+
+  .nn__link--active {
+    color: var(--color-primary);
+  }
+
+  .nn__link--active::after {
+    width: 100%;
+  }
+
+  /* ── Hamburger ── */
+  .nn__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 24px;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .nn__burger-line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--color-primary);
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
+    transform-origin: center;
+  }
+
+  .nn__burger--open .nn__burger-line:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+
+  .nn__burger--open .nn__burger-line:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  /* ── Mobile overlay ── */
+  .nn-mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .nn-mobile__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nn-mobile__link {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: color 0.3s ease;
+  }
+
+  .nn-mobile__link:hover,
+  .nn-mobile__link--active {
+    color: var(--color-primary);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nn__left,
+    .nn__right nav {
+      display: none;
+    }
+
+    .nn__burger {
+      display: flex;
+    }
+
+    .nn__right :global(.theme-switcher) {
+      display: none;
+    }
+
+    .nn__inner {
+      justify-content: space-between;
+    }
+  }
+</style>
