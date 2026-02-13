@@ -213,7 +213,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-13 — T-012: Deployment & Launch
 
-**Plan**: [plans/2026-02-13_t-012-deployment-launch.md](plans/2026-02-13_t-012-deployment-launch.md)
+**Plan**: [docs/archive/plans/2026-02-13_t-012-deployment-launch.md](../archive/plans/2026-02-13_t-012-deployment-launch.md)
 **Summary**: Configured Vercel SSR deployment, swapped @astrojs/node to @astrojs/vercel adapter, deployed to cleanspark-virid.vercel.app with perfect 100/100/100/100 Lighthouse scores on both mobile and desktop. Updated README with live demo link, enhanced .env.example, robots.txt, and .gitignore.
 
 **Key Changes**:
