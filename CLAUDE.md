@@ -127,6 +127,7 @@ pnpm test             # All tests
 - **Cross-browser test architecture**: Playwright config defines 4 browser projects (Desktop Chrome, Mobile Chrome, Firefox, WebKit); single test suite runs against all browsers
 - **Production bug discovery via testing**: Theme switching bug found during E2E test development — `querySelectorAll('[data-theme]')` matched both buttons and wrapper div, causing event bubbling; fixed with scoped selector `.theme-switcher button[data-theme]`
 - **View Transitions compatibility**: `<ClientRouter />` in BaseLayout enables SPA-mode navigation; interactive islands use `document.addEventListener('astro:page-load', initFunction)` instead of immediate initialization to re-initialize after both initial page load and View Transitions navigation; prevents stale event listeners and ensures components work after client-side navigation
+- **Automated screenshot capture**: `scripts/capture-screenshots.mjs` uses Playwright to capture above-the-fold screenshots for all 5 themes; sets theme cookie before navigation to avoid FOUC; supports `BASE_URL` env var for local/production testing; 1280x800 viewport with 2s wait for fonts/animations; outputs to `public/images/screenshots/{theme}-home.png` for README showcase
 
 <!-- END AUTO-MANAGED -->
 

@@ -2,12 +2,21 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-13
+**Last Updated**: 2026-02-16
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
 **Completed work**: See [DONE.md](DONE.md)
 **Strategic direction**: See [ROADMAP.md](ROADMAP.md)
+
+---
+
+### 2026-02-16 From: T-F01 README Screenshots
+**Origin**: docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md
+
+- [ ] WebP format with PNG fallback — ~60% size reduction for screenshot images (~519KB to ~200KB)
+- [ ] Additional page screenshots (Services, Gallery) — show layout variety beyond home hero
+- [ ] Mobile viewport screenshots (375x812) — showcase responsive design in README
 
 ---
 

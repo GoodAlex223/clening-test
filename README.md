@@ -22,6 +22,38 @@ A multi-theme cleaning business website built with Astro 5, TypeScript, and Tail
 | **Bubbly Clean** | Pastels, Fredoka One | Floating bubbles, wave dividers, bouncy animations, pill-shaped UI |
 | **Noir Luxe** | Black/gold, Playfair Display | Minimalist luxury, film grain overlay, gold diamond hero art |
 
+## Theme Showcase
+
+### Minimal Zen
+
+Warm neutrals, generous whitespace, Apple-like simplicity.
+
+![Minimal Zen theme — clean centered hero with Inter typography](public/images/screenshots/minimal-home.png)
+
+### Bold Spark
+
+Vibrant orange and mint, geometric CSS art, energetic motion.
+
+![Bold Spark theme — split hero with geometric circles and bold typography](public/images/screenshots/bold-home.png)
+
+### Trust Shield
+
+Corporate navy, serif typography, CSS-only shield illustration.
+
+![Trust Shield theme — professional hero with shield art and trust badges](public/images/screenshots/trust-home.png)
+
+### Bubbly Clean
+
+Pastel purple and pink, floating bubbles, bouncy animations.
+
+![Bubbly Clean theme — playful hero with floating bubble decorations](public/images/screenshots/bubbly-home.png)
+
+### Noir Luxe
+
+Black and gold, elegant serif, minimalist luxury aesthetic.
+
+![Noir Luxe theme — dark luxury hero with gold diamond art](public/images/screenshots/noir-home.png)
+
 ## Tech Stack
 
 - **Framework**: Astro 5.x (SSR, islands architecture)

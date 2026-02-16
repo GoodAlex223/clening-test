@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-13
+**Last Updated**: 2026-02-16
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -11,6 +11,18 @@ Completed tasks with implementation details and learnings.
 ---
 
 ## 2026-02 (February)
+
+### 2026-02-16 — T-F01: README Screenshots & Visual Showcase
+
+**Plan**: [docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md](../../archive/plans/2026-02-16_t-f01-readme-screenshots.md)
+**Summary**: Captured above-the-fold screenshots of all 5 themes using a reusable Playwright script and added a Theme Showcase section to README.md with vertical stack layout.
+**Key Changes**:
+- Created `scripts/capture-screenshots.mjs` — Playwright automation for theme screenshots
+- Added 5 PNG screenshots to `public/images/screenshots/` (~519KB total)
+- Added Theme Showcase section to README.md with descriptive alt text
+**Spawned Tasks**: 3 items added to BACKLOG.md (WebP format, additional pages, mobile viewport)
+
+---
 
 ### 2026-02-09 — Project Planning & Documentation
 
