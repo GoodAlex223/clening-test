@@ -2,7 +2,7 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-16b
+**Last Updated**: 2026-02-16c
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -270,7 +270,7 @@ Areas requiring investigation before implementation.
 **Origin**: docs/planning/plans/2026-02-13_t-012-deployment-launch.md
 
 - [x] Add README screenshots of all 5 themes — Capture and embed screenshots showing each theme's distinct visual identity for portfolio presentation (completed in T-F01)
-- [ ] Write portfolio case study — Document design decisions, architecture choices, and technical challenges
+- [x] Write portfolio case study — Document design decisions, architecture choices, and technical challenges (completed in T-F02)
 - [ ] Generate social share / OG images per theme — Theme-specific Open Graph images for better social media sharing
 - [ ] Add Lighthouse CI to GitHub Actions — Automated performance regression testing on PRs (fail if scores drop below 90)
 - [ ] Configure custom domain — Set up custom domain when available
@@ -283,6 +283,13 @@ Areas requiring investigation before implementation.
 - [ ] Shared page test factory — The 6 page spec files have near-identical structure (page identifier, title, a11y audit per theme); a factory function could eliminate ~200 lines of boilerplate
 - [ ] Better error messages in test helpers — Helper functions (openMobileMenu, clickThemeButton, getAppliedPrimaryColor) lack contextual error handling; unclear failures in CI
 - [ ] Visual regression testing — Add Playwright screenshot comparison tests to catch visual regressions across themes (research topic already in BACKLOG)
+
+### 2026-02-16 From: T-F02 Code Review
+**Origin**: PR #14 code review
+
+- [ ] Fix GitHub repository URL in CASE_STUDY.md — references `/cleaning` but actual repo name is `clening-test`; broken link for anyone clicking through
+- [ ] Fix CASE_STUDY.md line count in DONE.md — claims 168 lines but actual file is 161 lines
+- [ ] Fix "auto-updated by memory-updater" claim in archived plan — CLAUDE.md changes were manual edits, not automated; misleading provenance
 
 ---
 
