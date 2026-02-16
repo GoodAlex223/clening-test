@@ -94,6 +94,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for full system design.
 
 ## Documentation
 
+- [docs/CASE_STUDY.md](docs/CASE_STUDY.md) — Portfolio case study (architecture decisions, results)
 - [PROJECT.md](PROJECT.md) — Project configuration and conventions
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — System design
 - [docs/planning/TODO.md](docs/planning/TODO.md) — Active tasks
