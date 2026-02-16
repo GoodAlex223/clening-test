@@ -12,6 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Tech stack**: Astro SSR (Vercel), TypeScript (strict), Tailwind CSS, pnpm, Vitest, Playwright
 **Purpose**: Portfolio showcase demonstrating frontend architecture, multi-theme systems, production-quality code, and SSR deployment
 **Performance**: Perfect Lighthouse scores (100/100/100/100 mobile and desktop)
+**Testing**: 962 automated tests (78 unit + 884 E2E across 4 browsers)
 
 <!-- END AUTO-MANAGED -->
 
@@ -54,10 +55,11 @@ pnpm test             # All tests
 - **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`
 - **Testing Infrastructure**:
   - **Unit tests** (Vitest): 78 tests across theme-store, theme-configs, theme-css-vars, contact-validation
-  - **E2E tests** (Playwright): 218 tests per browser (4 browsers: Chrome, Firefox, WebKit, Mobile Chrome)
+  - **E2E tests** (Playwright): 221 tests per browser (4 browsers: Chrome, Firefox, WebKit, Mobile Chrome) = 884 total E2E tests
   - **Test structure**: `tests/unit/`, `tests/e2e/helpers/`, `tests/e2e/features/`, `tests/e2e/pages/`
   - **Accessibility**: axe-core integration scans all 30 theme/page combinations (WCAG 2.1 AA)
   - **Cross-browser**: Automated testing across desktop Chrome, Firefox, WebKit, and mobile Chrome
+  - **Quality metrics**: Perfect Lighthouse scores (100/100/100/100), WCAG 2.1 AA compliance, 0.3s FCP desktop, 1.1s FCP mobile
 - **Theme implementations**:
   - **Minimal Zen** (complete): Soft pastels, sans-serif (Inter), rounded corners, clean spacing
   - **Bold Spark** (complete): Vibrant orange/yellow, sans-serif (Poppins), 3px borders, offset shadows, clip-paths
@@ -128,6 +130,8 @@ pnpm test             # All tests
 - **Production bug discovery via testing**: Theme switching bug found during E2E test development — `querySelectorAll('[data-theme]')` matched both buttons and wrapper div, causing event bubbling; fixed with scoped selector `.theme-switcher button[data-theme]`
 - **View Transitions compatibility**: `<ClientRouter />` in BaseLayout enables SPA-mode navigation; interactive islands use `document.addEventListener('astro:page-load', initFunction)` instead of immediate initialization to re-initialize after both initial page load and View Transitions navigation; prevents stale event listeners and ensures components work after client-side navigation
 - **Automated screenshot capture**: `scripts/capture-screenshots.mjs` uses Playwright to capture above-the-fold screenshots for all 5 themes; sets theme cookie before navigation to avoid FOUC; supports `BASE_URL` env var for local/production testing; 1280x800 viewport with 2s wait for fonts/animations; outputs to `public/images/screenshots/{theme}-home.png` for README showcase
+- **Compile-time completeness checking**: Static import maps with `satisfies` operator ensure all themes have registered layouts/pages at build time; adding a theme without updating maps is a compile error, not a runtime error
+- **Development timeline**: Built from empty repo to production deployment with perfect Lighthouse scores in 7 days; demonstrates rapid prototyping and production-quality implementation
 
 <!-- END AUTO-MANAGED -->
 
@@ -136,7 +140,7 @@ pnpm test             # All tests
 ## Custom Notes
 
 - **MCP setup**: Copy `.mcp.json.example` to `.mcp.json` and set `MEMORY_FILE_PATH` to your local memory file path. Configured servers: memory, context7, playwright.
-- **Detailed docs**: See [PROJECT.md](PROJECT.md) for full tech stack, [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for system design, [docs/planning/TODO.md](docs/planning/TODO.md) for task list.
+- **Detailed docs**: See [PROJECT.md](PROJECT.md) for full tech stack, [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for system design, [docs/CASE_STUDY.md](docs/CASE_STUDY.md) for portfolio case study, [docs/planning/TODO.md](docs/planning/TODO.md) for task list.
 - **Theme design specs**: See [docs/planning/plans/2026-02-09_theme-designs.md](docs/planning/plans/2026-02-09_theme-designs.md) for detailed color, typography, and layout specifications per theme.
 
 <!-- END MANUAL -->

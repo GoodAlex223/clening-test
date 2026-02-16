@@ -12,6 +12,18 @@ Completed tasks with implementation details and learnings.
 
 ## 2026-02 (February)
 
+### 2026-02-16 — T-F02: Portfolio Case Study
+
+**Plan**: [docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md](../../archive/plans/2026-02-16_t-f02-portfolio-case-study.md)
+**Summary**: Wrote a professional portfolio case study documenting CleanSpark's architecture, design decisions, and measurable results. Narrative arc structure targeting recruiters/hiring managers with 5 code snippets, architecture diagram, and quality metrics.
+**Key Changes**:
+- Created `docs/CASE_STUDY.md` (~1,050 words, 168 lines)
+- Added case study link to README.md Documentation section
+- Structure: Challenge → Architecture → Theme Engine Deep Dive → Quality → Decisions → Learnings
+**Spawned Tasks**: 3 items added to BACKLOG.md (interactive case study page, SVG diagrams, metrics dashboard)
+
+---
+
 ### 2026-02-16 — T-F01: README Screenshots & Visual Showcase
 
 **Plan**: [docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md](../../archive/plans/2026-02-16_t-f01-readme-screenshots.md)

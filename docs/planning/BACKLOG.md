@@ -2,12 +2,21 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-16
+**Last Updated**: 2026-02-16b
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
 **Completed work**: See [DONE.md](DONE.md)
 **Strategic direction**: See [ROADMAP.md](ROADMAP.md)
+
+---
+
+### 2026-02-16 From: T-F02 Portfolio Case Study
+**Origin**: docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md
+
+- [ ] Interactive case study page — convert CASE_STUDY.md to a live `/case-study` route with theme-aware styling
+- [ ] Architecture diagram images — replace ASCII art with SVG/Mermaid diagrams for better GitHub/presentation rendering
+- [ ] Metrics dashboard section — add visual metrics comparison (Lighthouse scores, test growth) to case study
 
 ---
 
