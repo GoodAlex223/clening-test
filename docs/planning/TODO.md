@@ -24,19 +24,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-F02: Portfolio Case Study (Feb 17)
-
-**Priority**: High | **Origin**: BACKLOG (T-012 spawned), ROADMAP v1.0
-**Goal**: Write a professional case study documenting design decisions, architecture, and results.
-
-- [ ] Create `docs/CASE_STUDY.md` with structured narrative
-- [ ] Cover: problem statement, architecture decisions, theme system design, performance results
-- [ ] Include Lighthouse scores, test coverage stats, and tech stack highlights
-- [ ] Add link from README.md to case study
-- [ ] Review for portfolio-readiness (recruiter/hiring manager audience)
-
----
-
 ### T-F03: OG/Social Share Images (Feb 18)
 
 **Priority**: Medium | **Origin**: BACKLOG (T-012 spawned), ROADMAP v1.0
