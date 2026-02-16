@@ -260,7 +260,7 @@ Areas requiring investigation before implementation.
 
 **Origin**: docs/planning/plans/2026-02-13_t-012-deployment-launch.md
 
-- [ ] Add README screenshots of all 5 themes — Capture and embed screenshots showing each theme's distinct visual identity for portfolio presentation
+- [x] Add README screenshots of all 5 themes — Capture and embed screenshots showing each theme's distinct visual identity for portfolio presentation (completed in T-F01)
 - [ ] Write portfolio case study — Document design decisions, architecture choices, and technical challenges
 - [ ] Generate social share / OG images per theme — Theme-specific Open Graph images for better social media sharing
 - [ ] Add Lighthouse CI to GitHub Actions — Automated performance regression testing on PRs (fail if scores drop below 90)
