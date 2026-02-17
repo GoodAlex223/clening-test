@@ -2,7 +2,7 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-16
+**Last Updated**: 2026-02-17
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
@@ -23,18 +23,6 @@ _No tasks currently in progress._
 ## Planned
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
-
-### T-F03: OG/Social Share Images (Feb 18)
-
-**Priority**: Medium | **Origin**: BACKLOG (T-012 spawned), ROADMAP v1.0
-**Goal**: Generate theme-specific Open Graph images for better social media sharing.
-
-- [ ] Design or generate OG image per theme (1200x630px)
-- [ ] Place images in `public/images/og/`
-- [ ] Update SEO component to serve theme-specific OG images
-- [ ] Test with social media preview tools (Twitter Card Validator, Facebook Debugger)
-
----
 
 ### T-F04: ROADMAP & Documentation Audit (Feb 19)
 

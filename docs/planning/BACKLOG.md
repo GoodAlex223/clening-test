@@ -2,7 +2,7 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-16c
+**Last Updated**: 2026-02-17
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -271,7 +271,7 @@ Areas requiring investigation before implementation.
 
 - [x] Add README screenshots of all 5 themes — Capture and embed screenshots showing each theme's distinct visual identity for portfolio presentation (completed in T-F01)
 - [x] Write portfolio case study — Document design decisions, architecture choices, and technical challenges (completed in T-F02)
-- [ ] Generate social share / OG images per theme — Theme-specific Open Graph images for better social media sharing
+- [x] Generate social share / OG images per theme — Theme-specific Open Graph images for better social media sharing (completed in T-F03)
 - [ ] Add Lighthouse CI to GitHub Actions — Automated performance regression testing on PRs (fail if scores drop below 90)
 - [ ] Configure custom domain — Set up custom domain when available
 
@@ -283,6 +283,13 @@ Areas requiring investigation before implementation.
 - [ ] Shared page test factory — The 6 page spec files have near-identical structure (page identifier, title, a11y audit per theme); a factory function could eliminate ~200 lines of boilerplate
 - [ ] Better error messages in test helpers — Helper functions (openMobileMenu, clickThemeButton, getAppliedPrimaryColor) lack contextual error handling; unclear failures in CI
 - [ ] Visual regression testing — Add Playwright screenshot comparison tests to catch visual regressions across themes (research topic already in BACKLOG)
+
+### 2026-02-17 From: T-F03 OG/Social Share Images
+**Origin**: docs/archive/plans/2026-02-17_t-f03-og-social-images.md
+
+- [ ] Per-page OG images — Generate 30 images (5 themes x 6 pages) for page-specific social previews instead of homepage-only
+- [ ] WebP OG images with PNG fallback — Reduce file sizes ~60% while maintaining compatibility with older social platform crawlers
+- [ ] OG image validation in CI — Add build step to verify all 5 OG images exist and meet 1200x630 dimensions
 
 ### 2026-02-16 From: T-F02 Code Review
 **Origin**: PR #14 code review
