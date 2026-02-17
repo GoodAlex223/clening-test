@@ -291,6 +291,11 @@ Areas requiring investigation before implementation.
 - [ ] WebP OG images with PNG fallback — Reduce file sizes ~60% while maintaining compatibility with older social platform crawlers
 - [ ] OG image validation in CI — Add build step to verify all 5 OG images exist and meet 1200x630 dimensions
 
+### 2026-02-17 From: T-F04 Code Review
+**Origin**: PR #16 code review
+
+- [ ] Update CLAUDE.md "Content Collections" naming to "Content Layer API" — Architecture section correctly uses `src/data/` path but still calls the system "Astro Content Collections with Zod schemas" instead of "Astro 5 Content Layer API"; Detected Patterns section also retains "30 theme/page combinations" after Testing Infrastructure section removed the count
+
 ### 2026-02-17 From: T-F04 ROADMAP & Documentation Audit
 **Origin**: T-F04 documentation audit (no separate plan file)
 
