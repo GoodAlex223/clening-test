@@ -52,7 +52,8 @@ pnpm test             # All tests
   - ThemeSwitcher component updates cookie and reloads page (no FOUC)
 - **Islands Architecture**: Static HTML by default, `client:load` only for ThemeSwitcher, contact form, gallery filter, mobile nav
 - **Pages**: 6 routes — Home, Services, About, Pricing, Gallery, Contact
-- **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`
+- **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`, `public/images/og/`, `public/images/screenshots/`
+- **SEO & Social Sharing**: Theme-aware Open Graph images (1200×630 PNG) via `getOgImageUrl()` in SEO component; static images at `public/images/og/{theme}-og.png`; automated generation via `scripts/capture-screenshots.mjs`
 - **Testing Infrastructure**:
   - **Unit tests** (Vitest): 78 tests across theme-store, theme-configs, theme-css-vars, contact-validation
   - **E2E tests** (Playwright): 221 tests per browser (4 browsers: Chrome, Firefox, WebKit, Mobile Chrome) = 884 total E2E tests
@@ -82,6 +83,7 @@ pnpm test             # All tests
 - Theme IDs: lowercase single word (`minimal`, `bold`, `trust`, `bubbly`, `noir`)
 - env.d.ts augmentation: Use inline `import()` syntax to preserve global scope
 - Theme tokens: Defined in `src/themes/{theme}.ts`, consumed via CSS custom properties
+- OG images: Named `{theme}-og.png` (1200×630 PNG), stored in `public/images/og/`
 - **Testing conventions**:
   - Test files: `{module}.test.ts` for unit, `{feature}.spec.ts` for E2E
   - Helpers: Reusable functions in `tests/e2e/helpers/` (theme, navigation, accessibility, constants)
@@ -129,7 +131,8 @@ pnpm test             # All tests
 - **Cross-browser test architecture**: Playwright config defines 4 browser projects (Desktop Chrome, Mobile Chrome, Firefox, WebKit); single test suite runs against all browsers
 - **Production bug discovery via testing**: Theme switching bug found during E2E test development — `querySelectorAll('[data-theme]')` matched both buttons and wrapper div, causing event bubbling; fixed with scoped selector `.theme-switcher button[data-theme]`
 - **View Transitions compatibility**: `<ClientRouter />` in BaseLayout enables SPA-mode navigation; interactive islands use `document.addEventListener('astro:page-load', initFunction)` instead of immediate initialization to re-initialize after both initial page load and View Transitions navigation; prevents stale event listeners and ensures components work after client-side navigation
-- **Automated screenshot capture**: `scripts/capture-screenshots.mjs` uses Playwright to capture above-the-fold screenshots for all 5 themes; sets theme cookie before navigation to avoid FOUC; supports `BASE_URL` env var for local/production testing; 1280x800 viewport with 2s wait for fonts/animations; outputs to `public/images/screenshots/{theme}-home.png` for README showcase
+- **Automated screenshot capture**: `scripts/capture-screenshots.mjs` uses Playwright to capture two image sets for all 5 themes: (1) README screenshots (1280×800) → `public/images/screenshots/{theme}-home.png`, (2) OG social images (1200×630) → `public/images/og/{theme}-og.png`; sets theme cookie before navigation to avoid FOUC; supports `BASE_URL` env var for local/production testing; 2s wait for fonts/animations
+- **Theme-aware OG images**: SEO component uses `getOgImageUrl(themeId, origin)` from `src/lib/og-image.ts` to resolve theme-specific Open Graph images; falls back to DEFAULT_THEME for invalid themes; supports custom image override via `image` prop
 - **Compile-time completeness checking**: Static import maps with `satisfies` operator ensure all themes have registered layouts/pages at build time; adding a theme without updating maps is a compile error, not a runtime error
 - **Development timeline**: Built from empty repo to production deployment with perfect Lighthouse scores in 7 days; demonstrates rapid prototyping and production-quality implementation
 

@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-16
+**Last Updated**: 2026-02-17
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -11,6 +11,19 @@ Completed tasks with implementation details and learnings.
 ---
 
 ## 2026-02 (February)
+
+### 2026-02-17 — T-F03: OG/Social Share Images
+
+**Plan**: [docs/archive/plans/2026-02-17_t-f03-og-social-images.md](../../archive/plans/2026-02-17_t-f03-og-social-images.md)
+**Summary**: Added theme-specific Open Graph images (1200x630px) for social media sharing. SEO component auto-resolves OG image from active theme with proper dimensions and alt text. Extended capture script to generate both README screenshots and OG images.
+**Key Changes**:
+- Created `src/lib/og-image.ts` — `getOgImageUrl()` utility with theme validation and fallback
+- Updated `SEO.astro` with auto-resolved OG images, `og:image:width/height/alt`, `twitter:image:alt`
+- Extended `scripts/capture-screenshots.mjs` for dual-purpose capture (screenshots + OG images)
+- Generated 5 theme-specific OG images in `public/images/og/`
+**Spawned Tasks**: 3 items added to BACKLOG.md (per-page OG, WebP format, CI validation)
+
+---
 
 ### 2026-02-16 — T-F02: Portfolio Case Study
 
