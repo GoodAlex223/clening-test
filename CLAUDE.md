@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Tech stack**: Astro SSR (Vercel), TypeScript (strict), Tailwind CSS, pnpm, Vitest, Playwright
 **Purpose**: Portfolio showcase demonstrating frontend architecture, multi-theme systems, production-quality code, and SSR deployment
 **Performance**: Perfect Lighthouse scores (100/100/100/100 mobile and desktop)
-**Testing**: 962 automated tests (78 unit + 884 E2E across 4 browsers)
+**Testing**: Vitest unit tests + Playwright E2E across 4 browsers (Chrome, Firefox, WebKit, Mobile Chrome)
 
 <!-- END AUTO-MANAGED -->
 
@@ -55,10 +55,10 @@ pnpm test             # All tests
 - **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/data/`, `src/lib/`, `public/images/og/`, `public/images/screenshots/`
 - **SEO & Social Sharing**: Theme-aware Open Graph images (1200×630 PNG) via `getOgImageUrl()` in SEO component; static images at `public/images/og/{theme}-og.png`; automated generation via `scripts/capture-screenshots.mjs`
 - **Testing Infrastructure**:
-  - **Unit tests** (Vitest): 78 tests across theme-store, theme-configs, theme-css-vars, contact-validation
-  - **E2E tests** (Playwright): 221 tests per browser (4 browsers: Chrome, Firefox, WebKit, Mobile Chrome) = 884 total E2E tests
+  - **Unit tests** (Vitest): theme-store, theme-configs, theme-css-vars, contact-validation
+  - **E2E tests** (Playwright): cross-browser across Chrome, Firefox, WebKit, Mobile Chrome
   - **Test structure**: `tests/unit/`, `tests/e2e/helpers/`, `tests/e2e/features/`, `tests/e2e/pages/`
-  - **Accessibility**: axe-core integration scans all 30 theme/page combinations (WCAG 2.1 AA)
+  - **Accessibility**: axe-core integration scans all theme/page combinations (WCAG 2.1 AA)
   - **Cross-browser**: Automated testing across desktop Chrome, Firefox, WebKit, and mobile Chrome
   - **Quality metrics**: Perfect Lighthouse scores (100/100/100/100), WCAG 2.1 AA compliance, 0.3s FCP desktop, 1.1s FCP mobile
 - **Theme implementations**:
