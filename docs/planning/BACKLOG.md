@@ -291,6 +291,13 @@ Areas requiring investigation before implementation.
 - [ ] WebP OG images with PNG fallback — Reduce file sizes ~60% while maintaining compatibility with older social platform crawlers
 - [ ] OG image validation in CI — Add build step to verify all 5 OG images exist and meet 1200x630 dimensions
 
+### 2026-02-17 From: T-F04 ROADMAP & Documentation Audit
+**Origin**: T-F04 documentation audit (no separate plan file)
+
+- [ ] Automated documentation drift detection — add a CI step or script that checks key documentation claims (file paths, feature lists, config files) against the actual codebase to catch stale docs earlier; this audit found 15+ factual errors (wrong file paths, removed tools, outdated config references)
+- [ ] Clean up resolved Research Topics in BACKLOG.md — several items (Astro View Transitions, cookie vs localStorage, font subsetting) were already resolved during implementation but never removed from the Research Topics section
+- [ ] Remove completed `[x]` items from BACKLOG.md spawned improvements — T-012 section has 3 completed items still in the backlog; they should be archived or removed during triage
+
 ### 2026-02-16 From: T-F02 Code Review
 **Origin**: PR #14 code review
 

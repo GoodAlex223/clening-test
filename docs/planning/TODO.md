@@ -24,21 +24,6 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
-### T-F04: ROADMAP & Documentation Audit (Feb 19)
-
-**Priority**: High | **Origin**: Freeze process
-**Goal**: Ensure all documentation reflects the final state of the project.
-
-- [ ] Update ROADMAP.md — mark v0.1, v0.2, v0.3 as complete, v1.0 as current
-- [ ] Update ROADMAP.md checkboxes to reflect actual completion status
-- [ ] Review PROJECT.md for accuracy against current codebase
-- [ ] Review ARCHITECTURE.md for accuracy
-- [ ] Update all "Last Updated" dates across planning docs
-- [ ] Verify docs/README.md index is complete and links work
-- [ ] Remove or archive any stale docs
-
----
-
 ### T-F05: BACKLOG Triage & Freeze Label (Feb 20)
 
 **Priority**: Medium | **Origin**: Freeze process

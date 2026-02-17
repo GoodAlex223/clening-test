@@ -2,13 +2,13 @@
 
 System design and technical architecture for CleanSpark.
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-17
 
 ---
 
 ## Overview
 
-CleanSpark is a **static-first, multi-theme cleaning business website** built with Astro's islands architecture. The core architectural challenge is rendering the same business content through 5 radically different design systems, switchable in real-time via a theme engine.
+CleanSpark is a **server-rendered, multi-theme cleaning business website** built with Astro's islands architecture and deployed on Vercel serverless. The core architectural challenge is rendering the same business content through 5 radically different design systems, switchable in real-time via a cookie-based theme engine.
 
 ### System Diagram
 
@@ -61,16 +61,19 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 **Components**:
 | Component | Responsibility | Location |
 |-----------|---------------|----------|
-| Theme Layouts | Top-level page wrappers per theme | `src/layouts/{theme}/` |
-| Theme Components | Theme-specific UI elements | `src/components/{theme}/` |
-| Shared Components | Cross-theme utilities (ThemeSwitcher, SEO) | `src/components/shared/` |
-| Theme Config | Design tokens, fonts, colors per theme | `src/themes/` |
+| BaseLayout | HTML shell, ClientRouter, head slot | `src/layouts/BaseLayout.astro` |
+| Theme Layouts | Per-theme wrappers with CSS vars, fonts, nav/footer | `src/layouts/{theme}/` |
+| Theme Components | Nav, Footer per theme | `src/components/{theme}/` |
+| Page Components | Theme-specific page content | `src/components/{theme}/pages/` |
+| Shared Components | ThemeSwitcher, SEO, BeforeAfterSlider | `src/components/shared/` |
+| Theme Config | Design tokens (colors, fonts, spacing) per theme | `src/themes/` |
 
 **Key Interfaces**:
 
-- Every theme layout MUST accept the same props: `{ title, description, image, canonical, noindex }`
-- Every theme component receives content data via Astro props (not fetched internally)
-- ThemeSwitcher is a shared interactive island (client:load)
+- Every theme layout wraps BaseLayout and injects CSS vars via `buildThemeCssVars()`
+- Every page component receives content data via Astro props (not fetched internally)
+- ThemeSwitcher, contact forms, gallery filters, and mobile navs are interactive islands (`client:load`)
+- `resolveLayout()` and `resolvePageContent()` map theme IDs to components at compile time
 
 ### Content Layer (Data)
 
@@ -79,18 +82,18 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 **Components**:
 | Component | Responsibility | Location |
 |-----------|---------------|----------|
-| Services Collection | Service definitions (name, description, icon, price) | `src/content/services/` |
-| Testimonials Collection | Customer reviews with names, ratings, photos | `src/content/testimonials/` |
-| Team Collection | Team member profiles | `src/content/team/` |
-| Gallery Collection | Before/after photos with metadata | `src/content/gallery/` |
-| Pricing Collection | Pricing tiers and features | `src/content/pricing/` |
-| Site Config | Company info, contact, areas served | `src/content/config/` |
+| Services Collection | 7 service definitions (Markdown, glob loader) | `src/data/services/` |
+| Testimonials Collection | 10 customer reviews (JSON, file loader) | `src/data/testimonials.json` |
+| Team Collection | 5 team member profiles (JSON, file loader) | `src/data/team.json` |
+| Gallery Collection | 8 before/after photo sets (JSON, file loader) | `src/data/gallery.json` |
+| Pricing Collection | 3 pricing tiers (JSON, file loader) | `src/data/pricing.json` |
+| Site Config | Company info, contact, areas served (TypeScript) | `src/lib/site-config.ts` |
 
 **Key Interfaces**:
 
-- All content uses Astro Content Collections with Zod schemas
+- All content uses Astro 5 Content Layer API with Zod schemas (defined in `src/content.config.ts`)
 - Content is type-safe at build time
-- Markdown/MDX for rich text fields, JSON for structured data
+- Services use Markdown (glob loader) for rich text; others use JSON (file loader)
 
 ### Theme Engine Layer (State Management)
 
@@ -99,20 +102,35 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 **Components**:
 | Component | Responsibility | Location |
 |-----------|---------------|----------|
-| ThemeStore | Current theme state (cookie-based) | `src/lib/theme-store.ts` |
-| ThemeResolver | Maps theme name to layout/components | `src/lib/theme-resolver.ts` |
-| ThemeSwitcher | Interactive UI for changing themes | `src/components/shared/ThemeSwitcher.astro` |
+| ThemeStore | Cookie parsing, writing, validation | `src/lib/theme-store.ts` |
+| ThemeResolver | Maps ThemeId to layout component (static import map) | `src/lib/theme-resolver.ts` |
+| PageResolver | Maps (ThemeId, PageName) to page content component | `src/lib/page-resolver.ts` |
+| ThemeCssVars | Converts ThemeConfig to inline CSS custom properties | `src/lib/theme-css-vars.ts` |
+| ThemeSwitcher | Interactive UI for changing themes (cookie + reload) | `src/components/shared/ThemeSwitcher.astro` |
 | ThemeConfig | Design tokens per theme | `src/themes/{theme}.ts` |
+| Theme Registry | Validation, constants, getThemeConfig | `src/themes/index.ts` |
 
 ### Routing Layer (Pages)
 
-**Purpose**: File-based routing, delegates rendering to theme system.
+**Purpose**: File-based routing, thin data-fetching shells that delegate rendering to theme system.
 
 **Components**:
 | Component | Responsibility | Location |
 |-----------|---------------|----------|
-| Page files | Route definitions, content fetching | `src/pages/` |
-| Dynamic theme selection | Read theme from cookie/URL, pass to layout | `src/middleware.ts` |
+| Page routes | Data fetching + delegation to resolvers | `src/pages/` |
+| Middleware | Read theme cookie into `Astro.locals.theme` | `src/middleware.ts` |
+
+### Utilities Layer
+
+**Purpose**: Shared interactive behavior and validation.
+
+**Components**:
+| Component | Responsibility | Location |
+|-----------|---------------|----------|
+| Contact Validation | Zod schema with field-level + form validation | `src/lib/contact-validation.ts` |
+| Gallery Filter | Data-attribute based category filtering | `src/lib/gallery-filter.ts` |
+| Scroll Spy | requestAnimationFrame-throttled nav highlighting | `src/lib/scroll-spy.ts` |
+| OG Image | Theme-aware Open Graph image URL resolution | `src/lib/og-image.ts` |
 
 ---
 
@@ -134,11 +152,11 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 ### Theme Switch Flow
 
 ```
-1. User clicks theme in ThemeSwitcher (interactive island)
-   └─▶ 2. JavaScript updates cookie with new theme name
-       └─▶ 3. Page reloads (or View Transition navigates)
-           └─▶ 4. New request picks up updated cookie
-               └─▶ 5. Different layout + components render
+1. User clicks theme button in ThemeSwitcher (interactive island)
+   └─▶ 2. JavaScript updates cleanspark_theme cookie
+       └─▶ 3. Full page reload (bypasses ClientRouter)
+           └─▶ 4. New request picks up updated cookie via middleware
+               └─▶ 5. Different layout + component tree renders
 ```
 
 ---
@@ -159,27 +177,32 @@ CleanSpark is a **static-first, multi-theme cleaning business website** built wi
 ### Theme Configuration Shape
 
 ```typescript
+type ThemeId = 'minimal' | 'bold' | 'trust' | 'bubbly' | 'noir'
+
 interface ThemeConfig {
-  name: string // "minimal" | "bold" | "trust" | "bubbly" | "noir"
-  displayName: string // "Minimal Zen"
+  id: ThemeId
+  displayName: string    // "Minimal Zen"
+  description: string
   colors: {
+    background: string
+    surface: string
+    text: string
+    textMuted: string
     primary: string
     secondary: string
     accent: string
-    background: string
-    text: string
-    muted: string
+    cta: string
+    ctaText: string
   }
   fonts: {
-    heading: string // Google Font family
-    body: string
-    accent?: string // Optional decorative font
+    heading: string      // CSS font-family for headings
+    body: string         // CSS font-family for body text
+    accent?: string      // Optional decorative font
   }
-  borderRadius: string // "0" to "2rem"
-  animations: {
-    pageTransition: string // CSS animation name
-    sectionReveal: string
-    hoverEffect: string
+  spacing: {
+    borderRadius: { sm: string; md: string; lg: string; full: string }
+    sectionPadding: string
+    containerMax: string
   }
 }
 ```
@@ -188,19 +211,18 @@ interface ThemeConfig {
 
 ## External Dependencies
 
-### Libraries (Planned)
+### Libraries
 
-| Library           | Version | Purpose                  |
-| ----------------- | ------- | ------------------------ |
-| astro             | 5.x     | Core framework           |
-| @astrojs/tailwind | latest  | Tailwind CSS integration |
-| @astrojs/check    | latest  | TypeScript checking      |
-| tailwindcss       | 4.x     | Utility-first CSS        |
-| astro-icon        | latest  | Icon components (Lucide) |
-| @fontsource/\*    | latest  | Self-hosted Google Fonts |
-| sharp             | latest  | Image optimization       |
-| playwright        | latest  | E2E testing              |
-| vitest            | latest  | Unit testing             |
+| Library            | Purpose                             |
+| ------------------ | ----------------------------------- |
+| astro 5.x          | Core framework (SSR)                |
+| @astrojs/vercel    | Vercel serverless adapter           |
+| @astrojs/check     | TypeScript checking                 |
+| @tailwindcss/vite  | Tailwind CSS 4.x (CSS-first config) |
+| @fontsource/*      | Self-hosted fonts (10 font packages) |
+| zod                | Content schema validation            |
+| playwright         | E2E testing (4 browsers)            |
+| vitest             | Unit testing                        |
 
 ---
 
@@ -208,20 +230,20 @@ interface ThemeConfig {
 
 ### Environment Variables
 
-| Variable               | Purpose                              | Required                   |
-| ---------------------- | ------------------------------------ | -------------------------- |
-| `PUBLIC_SITE_URL`      | Base URL for canonical tags, sitemap | Yes                        |
-| `PUBLIC_DEFAULT_THEME` | Fallback theme if no cookie          | No (defaults to "minimal") |
+| Variable          | Purpose                              | Required |
+| ----------------- | ------------------------------------ | -------- |
+| `PUBLIC_SITE_URL` | Base URL for canonical tags, sitemap | Yes      |
 
 ### Configuration Files
 
-| File                 | Purpose                |
-| -------------------- | ---------------------- |
-| `astro.config.mjs`   | Astro framework config |
-| `tailwind.config.ts` | Tailwind CSS config    |
-| `tsconfig.json`      | TypeScript config      |
-| `.prettierrc`        | Code formatting rules  |
-| `.eslintrc.cjs`      | Linting rules          |
+| File                 | Purpose                                  |
+| -------------------- | ---------------------------------------- |
+| `astro.config.mjs`   | Astro config (SSR, Vercel adapter, Vite) |
+| `tsconfig.json`      | TypeScript strict config with path aliases |
+| `eslint.config.js`   | ESLint v9 flat config                    |
+| `.prettierrc`        | Code formatting rules                    |
+| `vitest.config.ts`   | Vitest unit test config                  |
+| `playwright.config.ts` | Playwright E2E config (4 browsers)     |
 
 ---
 
@@ -247,16 +269,18 @@ All cleaning business content (services, prices, testimonials) lives in **Astro 
 
 ### 3. Cookie-Based Theme Persistence
 
-Theme choice stored in a cookie (not localStorage) so the server (or edge) can read it before rendering — avoiding a flash of wrong theme.
+Theme choice stored in a `cleanspark_theme` cookie so Astro middleware can read it before rendering — avoiding a flash of wrong theme. Full page reload on theme switch (bypasses ClientRouter) ensures clean component tree swap.
 
 ### 4. Progressive Enhancement
 
-All content is server-rendered static HTML. JavaScript only loads for:
+All content is server-rendered HTML. JavaScript only loads for 4 interactive islands:
 
-- ThemeSwitcher (interactive island)
-- Contact form validation (interactive island)
-- Gallery filter (interactive island)
-- Animations that require IntersectionObserver
+- ThemeSwitcher (`client:load`) — cookie update + page reload
+- Contact form validation (`client:load`) — Zod schema, inline field errors
+- Gallery filter (`client:load`) — data-attribute based filtering + BeforeAfterSlider
+- Mobile navigation (`client:load`) — hamburger overlay with keyboard support
+
+Non-interactive enhancements (scroll-reveal, stats counter, scroll-spy) use IntersectionObserver in `<script>` tags, re-initialized via `astro:page-load` for View Transitions compatibility.
 
 ---
 

@@ -12,9 +12,28 @@ Completed tasks with implementation details and learnings.
 
 ## 2026-02 (February)
 
+### 2026-02-17 — T-F04: ROADMAP & Documentation Audit
+
+**Plan**: No separate plan file (documentation-only task)
+**Summary**: Comprehensive audit of all project documentation to ensure accuracy against the actual v1.0 codebase. Fixed 15+ factual errors across 11 files including wrong file paths (`src/content/` → `src/data/`), removed tools (`astro-icon`, `tailwind.config.ts`), outdated config references (`.eslintrc.cjs` → `eslint.config.js`), and stale status markers (ROADMAP releases still "Not Started").
+**Key Changes**:
+- ROADMAP.md: All 4 releases marked Complete with dates and task references
+- MILESTONES.md: All 6 milestones marked Complete
+- GOALS.md: All 15 Key Results updated with actual metrics
+- PROJECT.md: Fixed tech stack (SSR not static), file paths, tool references
+- ARCHITECTURE.md: Updated all layers, ThemeConfig interface, libraries, config files
+- PROJECT_CONTEXT.md: Added 10 decisions, 6 tech debt items, expanded lessons learned
+- docs/README.md: Updated index, added CASE_STUDY.md, fixed plan count (14 not 15)
+- archive/README.md: Populated all 14 archived plans
+- DONE.md: Fixed 3 broken relative paths
+- CLAUDE.md: Fixed `src/content/` → `src/data/` in architecture section
+**Spawned Tasks**: 3 items added to BACKLOG.md (drift detection, research cleanup, completed items cleanup)
+
+---
+
 ### 2026-02-17 — T-F03: OG/Social Share Images
 
-**Plan**: [docs/archive/plans/2026-02-17_t-f03-og-social-images.md](../../archive/plans/2026-02-17_t-f03-og-social-images.md)
+**Plan**: [docs/archive/plans/2026-02-17_t-f03-og-social-images.md](../archive/plans/2026-02-17_t-f03-og-social-images.md)
 **Summary**: Added theme-specific Open Graph images (1200x630px) for social media sharing. SEO component auto-resolves OG image from active theme with proper dimensions and alt text. Extended capture script to generate both README screenshots and OG images.
 **Key Changes**:
 - Created `src/lib/og-image.ts` — `getOgImageUrl()` utility with theme validation and fallback
@@ -27,7 +46,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-16 — T-F02: Portfolio Case Study
 
-**Plan**: [docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md](../../archive/plans/2026-02-16_t-f02-portfolio-case-study.md)
+**Plan**: [docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md](../archive/plans/2026-02-16_t-f02-portfolio-case-study.md)
 **Summary**: Wrote a professional portfolio case study documenting CleanSpark's architecture, design decisions, and measurable results. Narrative arc structure targeting recruiters/hiring managers with 5 code snippets, architecture diagram, and quality metrics.
 **Key Changes**:
 - Created `docs/CASE_STUDY.md` (~1,050 words, 168 lines)
@@ -39,7 +58,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-16 — T-F01: README Screenshots & Visual Showcase
 
-**Plan**: [docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md](../../archive/plans/2026-02-16_t-f01-readme-screenshots.md)
+**Plan**: [docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md](../archive/plans/2026-02-16_t-f01-readme-screenshots.md)
 **Summary**: Captured above-the-fold screenshots of all 5 themes using a reusable Playwright script and added a Theme Showcase section to README.md with vertical stack layout.
 **Key Changes**:
 - Created `scripts/capture-screenshots.mjs` — Playwright automation for theme screenshots
