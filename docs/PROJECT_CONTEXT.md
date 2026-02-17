@@ -2,13 +2,13 @@
 
 Accumulated knowledge, decisions, and patterns for CleanSpark.
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-17
 
 ---
 
 ## Overview
 
-CleanSpark is a multi-theme cleaning business MVP website serving as a developer portfolio piece. It demonstrates frontend architecture through 5 radically different design themes, built with Astro + TypeScript + Tailwind CSS.
+CleanSpark is a multi-theme cleaning business website serving as a developer portfolio piece. It demonstrates frontend architecture through 5 radically different design themes, built with Astro 5 + TypeScript (strict) + Tailwind CSS 4. Deployed on Vercel SSR with perfect Lighthouse scores (100/100/100/100) and 962 automated tests.
 
 ---
 
@@ -28,6 +28,15 @@ CleanSpark is a multi-theme cleaning business MVP website serving as a developer
 | 2026-02-09 | pnpm as package manager           | Fast, disk-efficient, strict dependencies                             | npm (slower), yarn (no advantage)                             |
 | 2026-02-09 | Vercel for deployment             | Free tier, Astro-native support, instant deploys                      | Netlify (also viable), GitHub Pages (limited)                 |
 | 2026-02-09 | 5 design themes                   | Maximum variety for portfolio impact                                  | 3 (minimum), 7 (diminishing returns)                          |
+| 2026-02-09 | src/data/ over src/content/         | Astro 5 convention for Content Layer API; avoids reserved directory    | src/content/ (Astro 4 convention, conflicts with new API)     |
+| 2026-02-09 | Glob loader for Markdown services   | Rich text descriptions with frontmatter; file loader for JSON others  | All JSON (less flexible), all Markdown (overkill for flat data) |
+| 2026-02-10 | Static import maps with `satisfies` | Compile-time completeness; adding theme without updating = build error | Dynamic import() (runtime overhead, no type safety)           |
+| 2026-02-10 | Thin page routes pattern            | Pages are data-fetching shells; zero presentation logic in routes     | Full page components (couples layout to routing)              |
+| 2026-02-11 | Inline styles for mobile menu       | Astro scoped styles conflict with JS-toggled CSS classes at runtime   | CSS class toggles (unreliable with Astro scoping)             |
+| 2026-02-12 | Scoped CSS class prefixes per theme | Prevents style leaking: .mn/.mf, .bn/.bf, .tn/.tf, .bbn/.bbf, .nn/.nf | Global classes (risk of cross-theme conflicts)              |
+| 2026-02-13 | SSR with @astrojs/vercel adapter    | Cookie-based theme switching requires server; output: 'server'        | Static output (can't read cookies server-side)                |
+| 2026-02-13 | Full page reload on theme switch    | Clean component tree swap; bypasses ClientRouter                      | View Transitions (theme swap is too radical for morph)        |
+| 2026-02-13 | astro:page-load re-initialization   | ClientRouter swaps DOM without full reload; islands lose listeners    | Single init (breaks after View Transitions navigation)        |
 
 ### Major Architectural Decisions
 
@@ -105,23 +114,28 @@ CleanSpark is a multi-theme cleaning business MVP website serving as a developer
 ```
 src/
 ├── components/
-│   ├── shared/           # Cross-theme (ThemeSwitcher, SEO, etc.)
-│   ├── minimal/          # Minimal Zen theme components
-│   ├── bold/             # Bold Spark theme components
-│   ├── trust/            # Trust Shield theme components
-│   ├── bubbly/           # Bubbly Clean theme components
-│   └── noir/             # Noir Luxe theme components
+│   ├── shared/           # ThemeSwitcher, SEO, BeforeAfterSlider
+│   ├── minimal/          # MinimalNav, MinimalFooter
+│   │   └── pages/        # MinimalHome, MinimalServices, etc.
+│   ├── bold/             # BoldNav, BoldFooter
+│   │   └── pages/        # BoldHome, BoldServices, etc.
+│   ├── trust/            # TrustNav, TrustFooter
+│   │   └── pages/        # TrustHome, TrustServices, etc.
+│   ├── bubbly/           # BubblyNav, BubblyFooter
+│   │   └── pages/        # BubblyHome, BubblyServices, etc.
+│   └── noir/             # NoirNav, NoirFooter
+│       └── pages/        # NoirHome, NoirServices, etc.
 ├── layouts/
-│   ├── minimal/          # Minimal Zen layouts
-│   ├── bold/             # Bold Spark layouts
-│   ├── trust/            # Trust Shield layouts
-│   ├── bubbly/           # Bubbly Clean layouts
-│   └── noir/             # Noir Luxe layouts
-├── content/              # Content Collections
-├── themes/               # Theme config (tokens, fonts, colors)
-├── lib/                  # Utilities (theme-store, theme-resolver)
-├── styles/               # Global CSS, Tailwind base
-└── pages/                # Routes (shared across themes)
+│   ├── BaseLayout.astro  # HTML shell, ClientRouter, head slot
+│   ├── minimal/          # MinimalLayout.astro
+│   ├── bold/             # BoldLayout.astro
+│   ├── trust/            # TrustLayout.astro
+│   ├── bubbly/           # BubblyLayout.astro
+│   └── noir/             # NoirLayout.astro
+├── data/                 # Content: services/, testimonials.json, etc.
+├── themes/               # Theme configs, types, registry
+├── lib/                  # Theme engine, validation, utilities
+└── pages/                # Thin route shells (6 pages)
 ```
 
 ### Code Style
@@ -167,15 +181,19 @@ src/
 
 | Issue | Impact | Remediation Plan | Priority |
 | ----- | ------ | ---------------- | -------- |
-
-_No technical debt yet — project not started._
+| Mobile menu uses inline styles instead of CSS classes | Low — works correctly, just less elegant | Investigate Astro `:global()` pseudo-function | Low |
+| Contact form init logic (~60 lines) duplicated across 5 themes | Medium — maintenance burden | Extract shared `initContactForm()` to `src/lib/contact-form.ts` | Medium |
+| Scroll-reveal script duplicated across 5 layouts | Medium — same pattern repeated | Extract shared `src/lib/scroll-reveal.ts` with options | Medium |
+| `var(--color-secondary)` WCAG AA contrast failures (4 occurrences fixed) | Low — all fixed, but pattern recurs | Create shared SectionLabel component with accessible defaults | Medium |
+| Button/form/field styles duplicated across all 5 themes | Low — cosmetic duplication | Extract shared utility components | Low |
+| Nav components add window/document listeners without View Transitions cleanup | Low — Astro replaces DOM | Add `astro:before-swap` cleanup array pattern | Low |
 
 ### Workarounds
 
 | Issue | Workaround | Permanent Fix Needed |
 | ----- | ---------- | -------------------- |
-
-_No workarounds yet._
+| Astro scoped styles don't apply to JS-toggled classes | Inline styles via JavaScript for mobile menu overlay | Astro `:global()` or CSS-only approach |
+| ClientRouter breaks interactive component initialization | `astro:page-load` event listener + double-init pattern | Standardized component lifecycle pattern |
 
 ---
 
@@ -183,13 +201,22 @@ _No workarounds yet._
 
 ### What Works Well
 
-_To be populated after implementation begins._
+- **Building Minimal Zen first** as the reference theme — established all patterns (page-resolver, scroll-reveal, mobile nav) that subsequent themes reused
+- **Compile-time theme resolution** with `satisfies` — catches missing theme registrations at build time, not runtime
+- **Cookie-based theme persistence** — zero FOUC, works perfectly with SSR middleware
+- **CSS-only decorative art** (shields, diamonds, bubbles, geometric shapes) — no external image dependencies, showcases CSS skills
+- **Proactive WCAG AA verification** — Bubbly Clean verified colors against contrast ratios before implementation; only theme to pass accessibility on first attempt
+- **E2E testing with Playwright** — found a real production bug (ThemeSwitcher event bubbling) that manual testing missed
+- **Scoped CSS class prefixes** — prevented cross-theme style leaking across all 5 themes
+- **Thin page routes** — adding a new theme requires zero changes to page files
 
 ### What to Avoid
 
-- Don't start with complex themes — build "Minimal Zen" first as the reference implementation
-- Don't optimize images before all themes are done — batch optimization at the end
-- Don't add JS interactivity until the static version is complete
+- Don't start with complex themes — build the simplest theme first as the reference implementation
+- Don't use `color: var(--color-secondary)` for text on light backgrounds — failed WCAG AA in 4 themes before pattern was recognized
+- Don't toggle CSS classes with JavaScript in Astro — scoped styles won't apply; use inline styles instead
+- Don't initialize interactive components immediately — use `astro:page-load` event for View Transitions compatibility
+- Don't use `querySelectorAll('[data-theme]')` without scoping — matches wrapper divs, not just buttons
 
 ### Insights
 
@@ -200,6 +227,24 @@ _To be populated after implementation begins._
 - 2026 design trend: warm neutrals over sterile white, typography as hero element
 - Astro usage grew to 18% among developers in 2025, surpassing many traditional static site generators
 - Page load time 1s→3s increases bounce probability by 32%
+
+**From implementation (2026-02-09 through 2026-02-13)**:
+
+- Astro 5 Content Layer API is a complete rewrite from v4 — loaders, new config location, `src/data/` convention
+- Tailwind v4 uses CSS-first config (`@theme` directives), not `tailwind.config.ts`
+- ESLint v9 uses flat config arrays, not `.eslintrc.cjs`
+- `@astrojs/vercel` adapter with `output: 'server'` required for cookie-based theme switching (static output can't read cookies server-side)
+- Self-hosted fonts via `@fontsource/*` perform better than Google Fonts CDN for Lighthouse scores
+- CSS `cubic-bezier(0.68, -0.55, 0.265, 1.55)` creates elastic bounce effect without JavaScript
+- IntersectionObserver-based scroll-reveal is more performant than scroll event listeners
+- Native `<details>`/`<summary>` elements work well for FAQ accordions — no JS needed
+
+**From testing (2026-02-13)**:
+
+- `page.waitForURL(regex)` is more reliable than `waitForLoadState('networkidle')` with ClientRouter
+- Setting theme cookie via `context.addCookies()` before navigation prevents FOUC in tests
+- axe-core integration found real accessibility issues that manual review missed
+- Parameterized `for (const theme of THEMES)` loops scale test coverage without duplication
 
 ---
 

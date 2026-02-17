@@ -2,7 +2,7 @@
 
 Historical documents that are no longer actively used but preserved for reference.
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-17
 
 ---
 
@@ -28,6 +28,20 @@ See: [plans/README.md](plans/README.md)
 
 | Plan | Original Task | Archived Date |
 | ---- | ------------- | ------------- |
+| [2026-02-09_content-collections.md](plans/2026-02-09_content-collections.md) | T-002: Content Collections & Schemas | 2026-02-09 |
+| [2026-02-10_t-003-theme-engine.md](plans/2026-02-10_t-003-theme-engine.md) | T-003: Theme Engine Core | 2026-02-10 |
+| [2026-02-10_t-004-page-routes.md](plans/2026-02-10_t-004-page-routes.md) | T-004: Page Routes & Base Structure | 2026-02-10 |
+| [2026-02-11_t-005-minimal-zen.md](plans/2026-02-11_t-005-minimal-zen.md) | T-005: Minimal Zen Theme | 2026-02-11 |
+| [2026-02-11_t-006-bold-spark.md](plans/2026-02-11_t-006-bold-spark.md) | T-006: Bold Spark Theme | 2026-02-11 |
+| [2026-02-11_t-011a-lighthouse-audit.md](plans/2026-02-11_t-011a-lighthouse-audit.md) | T-011a: Lighthouse Audit | 2026-02-11 |
+| [2026-02-12_t-007-trust-shield.md](plans/2026-02-12_t-007-trust-shield.md) | T-007: Trust Shield Theme | 2026-02-12 |
+| [2026-02-12_t-008-bubbly-clean.md](plans/2026-02-12_t-008-bubbly-clean.md) | T-008: Bubbly Clean Theme | 2026-02-12 |
+| [2026-02-13_t-009-noir-luxe.md](plans/2026-02-13_t-009-noir-luxe.md) | T-009: Noir Luxe Theme | 2026-02-13 |
+| [2026-02-13_t-011-testing-quality.md](plans/2026-02-13_t-011-testing-quality.md) | T-011: Testing & Quality | 2026-02-13 |
+| [2026-02-13_t-012-deployment-launch.md](plans/2026-02-13_t-012-deployment-launch.md) | T-012: Deployment & Launch | 2026-02-13 |
+| [2026-02-16_t-f01-readme-screenshots.md](plans/2026-02-16_t-f01-readme-screenshots.md) | T-F01: README Screenshots | 2026-02-16 |
+| [2026-02-16_t-f02-portfolio-case-study.md](plans/2026-02-16_t-f02-portfolio-case-study.md) | T-F02: Portfolio Case Study | 2026-02-16 |
+| [2026-02-17_t-f03-og-social-images.md](plans/2026-02-17_t-f03-og-social-images.md) | T-F03: OG/Social Share Images | 2026-02-17 |
 
 ### Deprecated Documentation
 

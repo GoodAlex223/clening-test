@@ -14,7 +14,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-17 — T-F03: OG/Social Share Images
 
-**Plan**: [docs/archive/plans/2026-02-17_t-f03-og-social-images.md](../../archive/plans/2026-02-17_t-f03-og-social-images.md)
+**Plan**: [docs/archive/plans/2026-02-17_t-f03-og-social-images.md](../archive/plans/2026-02-17_t-f03-og-social-images.md)
 **Summary**: Added theme-specific Open Graph images (1200x630px) for social media sharing. SEO component auto-resolves OG image from active theme with proper dimensions and alt text. Extended capture script to generate both README screenshots and OG images.
 **Key Changes**:
 - Created `src/lib/og-image.ts` — `getOgImageUrl()` utility with theme validation and fallback
@@ -27,7 +27,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-16 — T-F02: Portfolio Case Study
 
-**Plan**: [docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md](../../archive/plans/2026-02-16_t-f02-portfolio-case-study.md)
+**Plan**: [docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md](../archive/plans/2026-02-16_t-f02-portfolio-case-study.md)
 **Summary**: Wrote a professional portfolio case study documenting CleanSpark's architecture, design decisions, and measurable results. Narrative arc structure targeting recruiters/hiring managers with 5 code snippets, architecture diagram, and quality metrics.
 **Key Changes**:
 - Created `docs/CASE_STUDY.md` (~1,050 words, 168 lines)
@@ -39,7 +39,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-16 — T-F01: README Screenshots & Visual Showcase
 
-**Plan**: [docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md](../../archive/plans/2026-02-16_t-f01-readme-screenshots.md)
+**Plan**: [docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md](../archive/plans/2026-02-16_t-f01-readme-screenshots.md)
 **Summary**: Captured above-the-fold screenshots of all 5 themes using a reusable Playwright script and added a Theme Showcase section to README.md with vertical stack layout.
 **Key Changes**:
 - Created `scripts/capture-screenshots.mjs` — Playwright automation for theme screenshots

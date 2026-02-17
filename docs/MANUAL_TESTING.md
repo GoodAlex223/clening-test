@@ -2,7 +2,7 @@
 
 Manual testing scenarios and checklists for CleanSpark.
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-17
 
 ---
 
@@ -83,9 +83,9 @@ Manual testing scenarios and checklists for CleanSpark.
 
 | Step | Action                       | Expected Result                               |
 | ---- | ---------------------------- | --------------------------------------------- |
-| 1    | Run Lighthouse on Home       | Performance 90+, Accessibility 90+            |
-| 2    | Run Lighthouse on Services   | Performance 90+                               |
-| 3    | Run Lighthouse on Gallery    | Performance 85+ (images)                      |
+| 1    | Run Lighthouse on Home       | Performance 100, Accessibility 100            |
+| 2    | Run Lighthouse on Services   | Performance 100                               |
+| 3    | Run Lighthouse on Gallery    | Performance 100                               |
 | 4    | Check JS bundle size         | <100KB total                                  |
 | 5    | Test with JS disabled        | All content visible (progressive enhancement) |
 | 6    | Check First Contentful Paint | <1s on fast 3G                                |
@@ -119,7 +119,7 @@ Use before marking any theme as "done":
 - [ ] No console errors
 - [ ] No layout overflow or broken elements
 - [ ] Hover states and animations work
-- [ ] Lighthouse 90+ on Home page
+- [ ] Lighthouse 100 on Home page
 - [ ] No TypeScript errors
 
 ### Pre-Release Checklist

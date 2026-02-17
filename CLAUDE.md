@@ -52,7 +52,7 @@ pnpm test             # All tests
   - ThemeSwitcher component updates cookie and reloads page (no FOUC)
 - **Islands Architecture**: Static HTML by default, `client:load` only for ThemeSwitcher, contact form, gallery filter, mobile nav
 - **Pages**: 6 routes — Home, Services, About, Pricing, Gallery, Contact
-- **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/content/`, `src/lib/`, `public/images/og/`, `public/images/screenshots/`
+- **File structure**: `src/components/{theme}/`, `src/components/{theme}/pages/`, `src/layouts/{theme}/`, `src/themes/`, `src/data/`, `src/lib/`, `public/images/og/`, `public/images/screenshots/`
 - **SEO & Social Sharing**: Theme-aware Open Graph images (1200×630 PNG) via `getOgImageUrl()` in SEO component; static images at `public/images/og/{theme}-og.png`; automated generation via `scripts/capture-screenshots.mjs`
 - **Testing Infrastructure**:
   - **Unit tests** (Vitest): 78 tests across theme-store, theme-configs, theme-css-vars, contact-validation

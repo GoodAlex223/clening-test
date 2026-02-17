@@ -2,55 +2,58 @@
 
 Project-specific configuration. Universal rules are in [CLAUDE.md](CLAUDE.md).
 
-**Last Updated**: 2026-02-09
+**Last Updated**: 2026-02-17
 
 ---
 
 ## Project Overview
 
-**CleanSpark** — A cleaning business MVP website built as a developer portfolio piece. Features 5 radically different design themes (layout, UX, animations, typography) with a real-time theme switcher. Demonstrates frontend architecture skills, multi-theme systems, responsive design, and modern web development patterns.
+**CleanSpark** — A multi-theme cleaning business MVP website built as a developer portfolio piece. Features 5 radically different design themes with real-time switching. Built with Astro 5.x + TypeScript + Tailwind CSS 4.x.
 
-**Purpose**: Dual-purpose — functional cleaning business website AND developer skills showcase.
+**Live Demo**: [cleanspark-virid.vercel.app](https://cleanspark-virid.vercel.app)
+**Purpose**: Portfolio showcase demonstrating frontend architecture, multi-theme systems, production-quality code, and SSR deployment.
+**Performance**: Perfect Lighthouse scores (100/100/100/100 mobile and desktop).
+**Testing**: 962 automated tests (78 unit + 884 E2E across 4 browsers).
 
 ### Tech Stack
 
-| Component       | Technology                            |
-| --------------- | ------------------------------------- |
-| Language        | TypeScript 5.x                        |
-| Framework       | Astro 5.x                             |
-| Styling         | Tailwind CSS 4.x                      |
-| Animations      | CSS animations + View Transitions API |
-| Icons           | Lucide Icons (via astro-icon)         |
-| Deployment      | Vercel (static)                       |
-| Package Manager | pnpm                                  |
-| Linting         | ESLint + Prettier                     |
-| Testing         | Playwright (E2E) + Vitest (unit)      |
+| Component       | Technology                                                |
+| --------------- | --------------------------------------------------------- |
+| Language        | TypeScript 5.x (strict mode)                              |
+| Framework       | Astro 5.x (SSR, islands architecture)                     |
+| Styling         | Tailwind CSS 4.x (CSS-first config via @tailwindcss/vite) |
+| Animations      | CSS animations + View Transitions (ClientRouter)          |
+| Icons           | Inline SVG (no icon library)                              |
+| Deployment      | Vercel (SSR, serverless, @astrojs/vercel adapter)         |
+| Package Manager | pnpm                                                      |
+| Linting         | ESLint v9 (flat config) + Prettier                        |
+| Testing         | Playwright (E2E, 4 browsers) + Vitest (unit)              |
 
 ### Why Astro
 
 - **Not in portfolio yet** — complements existing Next.js, Django, vanilla JS projects
 - **Purpose-built** for content/marketing sites — perfect match for cleaning business
 - **Islands architecture** — demonstrates understanding of modern performance patterns
-- **Multi-framework capable** — can embed React/Svelte components inside Astro pages
-- **Static-first** — 40% faster loads, 90% less JS than React frameworks
-- **Built-in View Transitions** — smooth page transitions without JS frameworks
+- **SSR with cookie-based theme switching** — server reads theme before render (no FOUC)
+- **View Transitions (ClientRouter)** — SPA-mode navigation without full page reloads
+- **Built-in Content Collections** — type-safe content with Zod schemas
 
 ---
 
 ## Project Structure
 
-| Component   | Location           | Purpose                                            |
-| ----------- | ------------------ | -------------------------------------------------- |
-| Entry Point | `src/pages/`       | Astro pages (file-based routing)                   |
-| Layouts     | `src/layouts/`     | 5 theme layout systems                             |
-| Components  | `src/components/`  | Shared + theme-specific components                 |
-| Themes      | `src/themes/`      | Theme configuration, tokens, styles                |
-| Content     | `src/content/`     | Content Collections (services, testimonials, etc.) |
-| Assets      | `src/assets/`      | Images, fonts, icons                               |
-| Styles      | `src/styles/`      | Global styles, Tailwind config                     |
-| Public      | `public/`          | Static assets (favicon, robots.txt)                |
-| Tests       | `tests/`           | E2E and unit tests                                 |
-| Config      | `astro.config.mjs` | Astro configuration                                |
+| Component   | Location           | Purpose                                                  |
+| ----------- | ------------------ | -------------------------------------------------------- |
+| Entry Point | `src/pages/`       | Astro page routes (thin data-fetching shells)            |
+| Layouts     | `src/layouts/`     | BaseLayout + 5 theme layouts (`{theme}/`)                |
+| Components  | `src/components/`  | Shared (SEO, ThemeSwitcher, BeforeAfterSlider) + per-theme |
+| Themes      | `src/themes/`      | Theme design tokens (colors, fonts, spacing)             |
+| Content     | `src/data/`        | Content Collections (services, testimonials, etc.)       |
+| Library     | `src/lib/`         | Theme engine, validation, utilities                      |
+| Public      | `public/`          | Static assets, OG images, screenshots, gallery           |
+| Tests       | `tests/`           | Unit (`unit/`) and E2E (`e2e/`) tests                    |
+| Scripts     | `scripts/`         | Automation (screenshot capture)                          |
+| Config      | `astro.config.mjs` | Astro configuration (SSR, Vercel adapter)                |
 
 ---
 
@@ -145,29 +148,32 @@ pnpm test
 
 ### Naming Conventions
 
-| Element          | Convention                          | Example                               |
-| ---------------- | ----------------------------------- | ------------------------------------- |
-| Components       | PascalCase                          | `HeroSection.astro`                   |
-| Theme components | `{Theme}{Component}`                | `MinimalHero.astro`, `BoldHero.astro` |
-| Layouts          | `{Theme}Layout.astro`               | `MinimalLayout.astro`                 |
-| CSS classes      | Tailwind utilities + BEM for custom | `theme-minimal__hero`                 |
-| Pages            | kebab-case                          | `services.astro`                      |
-| Content files    | kebab-case                          | `deep-cleaning.md`                    |
-| Theme tokens     | camelCase in config                 | `primaryColor`, `headingFont`         |
+| Element          | Convention                         | Example                                       |
+| ---------------- | ---------------------------------- | --------------------------------------------- |
+| Components       | PascalCase .astro                  | `ThemeSwitcher.astro`                         |
+| Theme components | `{Theme}{Component}`               | `MinimalNav.astro`, `BoldFooter.astro`        |
+| Page components  | `{Theme}{Page}.astro` in `pages/`  | `MinimalContact.astro`, `BoldHome.astro`      |
+| Layouts          | `{Theme}Layout.astro`              | `MinimalLayout.astro`                         |
+| CSS classes      | Tailwind utilities + scoped prefix | `.mn`/`.mf` (Minimal), `.bn`/`.bf` (Bold)    |
+| Pages            | kebab-case                         | `services.astro`                              |
+| Content files    | kebab-case .md or .json            | `deep-cleaning.md`, `testimonials.json`       |
+| Theme IDs        | lowercase single word              | `minimal`, `bold`, `trust`, `bubbly`, `noir`  |
+| Utilities        | camelCase .ts                      | `theme-store.ts`, `contact-validation.ts`     |
 
 ### Code Patterns
 
-- **Theme isolation**: Each theme's components live in `src/components/{theme}/`
-- **Content separation**: Business content in Content Collections, design in components
-- **Progressive enhancement**: Core content works without JS, interactivity added via islands
+- **Theme isolation**: Each theme's components live in `src/components/{theme}/` with page components in `pages/` subdirectory
+- **Content separation**: Business content in Content Collections (`src/data/`), design in components
+- **Progressive enhancement**: Core content works without JS; `client:load` only for ThemeSwitcher, contact form, gallery filter, mobile nav
 - **Mobile-first**: All styles written mobile-first with Tailwind breakpoints
+- **Static resolvers**: Layout and page components mapped at build time via `satisfies` operator (compile-time completeness checking)
+- **View Transitions**: `ClientRouter` for SPA navigation; interactive islands use `astro:page-load` event for re-initialization
 
 ### Error Handling
 
-- Graceful fallback to "Minimal Zen" theme if selected theme fails to load
-- 404 page styled per active theme
-- Contact form shows inline validation errors
-- Image loading with blur-up placeholders
+- Graceful fallback to "Minimal Zen" theme if cookie contains invalid theme ID
+- Contact form shows inline Zod validation errors per field on blur/submit
+- Theme resolver enforced at compile time via TypeScript `satisfies`
 
 ---
 
@@ -181,10 +187,9 @@ pnpm test
 
 ### Configuration
 
-| Variable               | Purpose            | Location |
-| ---------------------- | ------------------ | -------- |
-| `PUBLIC_SITE_URL`      | Base URL for SEO   | `.env`   |
-| `PUBLIC_DEFAULT_THEME` | Default theme name | `.env`   |
+| Variable          | Purpose          | Location |
+| ----------------- | ---------------- | -------- |
+| `PUBLIC_SITE_URL` | Base URL for SEO | `.env`   |
 
 ---
 
