@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Live Demo**: [cleanspark-virid.vercel.app](https://cleanspark-virid.vercel.app)
 **Tech stack**: Astro SSR (Vercel), TypeScript (strict), Tailwind CSS, pnpm, Vitest, Playwright
 **Purpose**: Portfolio showcase demonstrating frontend architecture, multi-theme systems, production-quality code, and SSR deployment
+**Status**: Feature-complete and in development freeze — no active development; BACKLOG.md frozen for reference only
 **Performance**: Perfect Lighthouse scores (100/100/100/100 mobile and desktop)
 **Testing**: Vitest unit tests + Playwright E2E across 4 browsers (Chrome, Firefox, WebKit, Mobile Chrome)
 
@@ -41,7 +42,7 @@ pnpm test             # All tests
 
 - **Multi-theme system**: 5 complete layout systems (all implemented: Minimal Zen, Bold Spark, Trust Shield, Bubbly Clean, Noir Luxe) — full layout swap via layout resolver, not CSS-only theming
 - **Deployment**: Vercel serverless with `@astrojs/vercel` adapter, SSR mode (`output: 'server'`), production URL: https://cleanspark-virid.vercel.app
-- **Content Collections**: Astro Content Collections with Zod schemas for services, testimonials, team, gallery, pricing
+- **Content Layer API**: Astro 5 Content Layer API with Zod schemas for services, testimonials, team, gallery, pricing
 - **Theme Engine**:
   - Theme configs in `src/themes/{theme}.ts` (colors, fonts, spacing) exported via `src/themes/index.ts`
   - Middleware reads `cleanspark_theme` cookie, stores ThemeId in `Astro.locals.theme`
@@ -77,7 +78,7 @@ pnpm test             # All tests
 - Components: PascalCase `.astro` files, theme-prefixed (`MinimalHero.astro`, `MinimalNav.astro`)
 - Page components: `{Theme}{Page}.astro` in `src/components/{theme}/pages/` (e.g., `MinimalContact.astro`)
 - Layouts: `{Theme}Layout.astro` per theme, inject CSS vars via `buildThemeCssVars()`
-- Content: kebab-case `.md` or `.json` in Content Collections
+- Content: kebab-case `.md` or `.json` in Content Layer API collections
 - TypeScript: Strict mode, no `any`, prefer `interface` over `type`
 - Styling: Tailwind utilities (mobile-first), avoid `@apply` except theme base styles; scoped `<style>` blocks for component-specific styles
 - Theme IDs: lowercase single word (`minimal`, `bold`, `trust`, `bubbly`, `noir`)
@@ -98,7 +99,7 @@ pnpm test             # All tests
 ## Detected Patterns
 
 - **Theme isolation**: Each theme's components and layouts are fully independent; page components organized in `src/components/{theme}/pages/`
-- **Content-design separation**: Structured business content (services, pricing, team, testimonials, gallery) stored in Content Collections; some page-specific content (about page story/values, pricing FAQ) currently inline
+- **Content-design separation**: Structured business content (services, pricing, team, testimonials, gallery) stored in Content Layer API collections; some page-specific content (about page story/values, pricing FAQ) currently inline
 - **Progressive enhancement**: Core content works without JS; JS enhances UX (mobile nav, gallery filter, contact form validation, stats counters)
 - **Cookie-based state**: Theme persisted in cookie for server-side reading (no FOUC)
 - **Type-safe theme system**: ThemeId union type guards invalid themes, ThemeConfig interface ensures consistency across all 5 themes
@@ -144,6 +145,6 @@ pnpm test             # All tests
 
 - **MCP setup**: Copy `.mcp.json.example` to `.mcp.json` and set `MEMORY_FILE_PATH` to your local memory file path. Configured servers: memory, context7, playwright.
 - **Detailed docs**: See [PROJECT.md](PROJECT.md) for full tech stack, [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for system design, [docs/CASE_STUDY.md](docs/CASE_STUDY.md) for portfolio case study, [docs/planning/TODO.md](docs/planning/TODO.md) for task list.
-- **Theme design specs**: See [docs/planning/plans/2026-02-09_theme-designs.md](docs/planning/plans/2026-02-09_theme-designs.md) for detailed color, typography, and layout specifications per theme.
+- **Theme design specs**: See [docs/archive/plans/2026-02-09_theme-designs.md](docs/archive/plans/2026-02-09_theme-designs.md) for detailed color, typography, and layout specifications per theme.
 
 <!-- END MANUAL -->

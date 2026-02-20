@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-17
+**Last Updated**: 2026-02-20
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -49,7 +49,7 @@ Completed tasks with implementation details and learnings.
 **Plan**: [docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md](../archive/plans/2026-02-16_t-f02-portfolio-case-study.md)
 **Summary**: Wrote a professional portfolio case study documenting CleanSpark's architecture, design decisions, and measurable results. Narrative arc structure targeting recruiters/hiring managers with 5 code snippets, architecture diagram, and quality metrics.
 **Key Changes**:
-- Created `docs/CASE_STUDY.md` (~1,050 words, 168 lines)
+- Created `docs/CASE_STUDY.md` (~1,050 words, 162 lines)
 - Added case study link to README.md Documentation section
 - Structure: Challenge → Architecture → Theme Engine Deep Dive → Quality → Decisions → Learnings
 **Spawned Tasks**: 3 items added to BACKLOG.md (interactive case study page, SVG diagrams, metrics dashboard)
@@ -70,7 +70,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-09 — Project Planning & Documentation
 
-**Plan**: [plans/2026-02-09_project-scaffolding.md](plans/2026-02-09_project-scaffolding.md), [plans/2026-02-09_theme-designs.md](plans/2026-02-09_theme-designs.md)
+**Plan**: [docs/archive/plans/2026-02-09_project-scaffolding.md](../archive/plans/2026-02-09_project-scaffolding.md), [docs/archive/plans/2026-02-09_theme-designs.md](../archive/plans/2026-02-09_theme-designs.md)
 **Summary**: Complete project planning — tech stack selection, architecture design, 5 theme specifications, task breakdown, milestone definitions, and all documentation structure.
 
 **Key Changes**:
@@ -87,7 +87,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-09 — T-001: Project Scaffolding
 
-**Plan**: [plans/2026-02-09_project-scaffolding.md](plans/2026-02-09_project-scaffolding.md)
+**Plan**: [docs/archive/plans/2026-02-09_project-scaffolding.md](../archive/plans/2026-02-09_project-scaffolding.md)
 **Summary**: Scaffolded Astro 5.17.1 project with Tailwind CSS 4.x, ESLint v9, TypeScript strict mode, Prettier, Vitest, and Playwright. Full directory structure for 5 themes and 6 content collections.
 
 **Key Changes**:
