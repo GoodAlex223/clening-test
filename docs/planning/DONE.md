@@ -12,6 +12,20 @@ Completed tasks with implementation details and learnings.
 
 ## 2026-02 (February)
 
+### 2026-02-20 — T-F05: BACKLOG Triage & Freeze Label
+
+**Plan**: No separate plan file (documentation triage task)
+**Summary**: Triaged all 60+ backlog items against the actual codebase. Removed 12 completed items, consolidated 6 duplicate groups, categorized remaining into Post-Freeze Priority (14 high-value items) and Deferred Indefinitely (30+ nice-to-have items). Added freeze notice banner. Also fixed 6 documentation bugs discovered during triage.
+**Key Changes**:
+- BACKLOG.md: Complete restructure with freeze notice, value-based categorization (336 → 154 lines)
+- CLAUDE.md: Fixed "Content Collections" → "Content Layer API" (3 occurrences), added freeze status, updated plan path
+- CASE_STUDY.md: Fixed GitHub repository URL to match actual remote
+- DONE.md: Fixed T-001 plan links to archived paths, corrected CASE_STUDY line count
+- Archived 2 unarchived plan files (T-001 scaffolding, theme-designs) to docs/archive/plans/
+**Spawned Tasks**: 0 new items (triage-only task)
+
+---
+
 ### 2026-02-17 — T-F04: ROADMAP & Documentation Audit
 
 **Plan**: No separate plan file (documentation-only task)
