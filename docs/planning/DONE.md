@@ -2,7 +2,7 @@
 
 Completed tasks with implementation details and learnings.
 
-**Last Updated**: 2026-02-20
+**Last Updated**: 2026-02-21
 
 **Purpose**: Historical record of completed work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -11,6 +11,19 @@ Completed tasks with implementation details and learnings.
 ---
 
 ## 2026-02 (February)
+
+### 2026-02-21 — T-F06: v1.0.0 Release Tag
+
+**Plan**: [docs/archive/plans/2026-02-21_t-f06-release-tag-v1.md](../archive/plans/2026-02-21_t-f06-release-tag-v1.md)
+**Summary**: Created official v1.0.0 release marking CleanSpark as feature-complete. Ran automated Playwright smoke test against production (30/30 pages, 5/5 theme switchers), bumped package.json version, created annotated git tag, and published GitHub Release with professional portfolio-style release notes including architecture highlights, quality metrics, and full changelog.
+**Key Changes**:
+- Bumped `package.json` version from `0.0.1` to `1.0.0`
+- Created annotated git tag `v1.0.0` on main
+- Published GitHub Release: https://github.com/GoodAlex223/clening-test/releases/tag/v1.0.0
+- Release notes include: quality metrics table, 5-theme comparison, architecture deep dive with code snippets, full T-001 through T-F05 changelog, tech stack table
+**Spawned Tasks**: 2 items added to BACKLOG.md (automated release pipeline, semver enforcement)
+
+---
 
 ### 2026-02-20 — T-F05: BACKLOG Triage & Freeze Label
 

@@ -16,18 +16,7 @@ Active tasks and backlog for CleanSpark.
 
 <!-- Currently active tasks. Limit to 1-3 at a time. -->
 
-### T-F06: v1.0.0 Release Tag (Feb 21)
-
-**Priority**: High | **Origin**: ROADMAP v1.0
-**Goal**: Create an official v1.0.0 release marking the project as complete.
-
-- [x] Final smoke test on production (https://cleanspark-virid.vercel.app)
-- [x] Verify all 5 themes load and switch correctly (5/5 ThemeSwitcher pass)
-- [x] Verify all 6 pages render on each theme (30/30 pass)
-- [x] Bump package.json version 0.0.1 → 1.0.0
-- [ ] Create annotated git tag `v1.0.0`
-- [ ] Create GitHub Release with changelog summary (T-001 through T-012 highlights)
-- [ ] Link to live demo and case study in release notes
+_No tasks currently in progress._
 
 ---
 

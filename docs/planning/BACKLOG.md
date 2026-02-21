@@ -25,6 +25,8 @@ High-value items worth implementing if development resumes. These improve portfo
 - [ ] **`@astrojs/sitemap` integration** — Auto-generated sitemap + dynamic robots.txt update *(from T-001)*
 - [ ] **OG image validation in CI** — Build step to verify all 5 OG images exist and meet 1200×630 dimensions *(from T-F03)*
 - [ ] **Automated documentation drift detection** — CI step or script that checks key documentation claims (file paths, feature lists, config files) against the actual codebase *(from T-F04)*
+- [ ] **Automated release pipeline** — GitHub Actions workflow to auto-create releases on tag push, including changelog generation from conventional commits *(from T-F06)*
+- [ ] **Semantic versioning enforcement** — CI check that validates `package.json` version matches the latest git tag *(from T-F06)*
 
 ### Code Quality & DRY
 

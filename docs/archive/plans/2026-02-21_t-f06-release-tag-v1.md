@@ -1,6 +1,6 @@
 # T-F06: v1.0.0 Release Tag
 
-**Status**: In Progress
+**Status**: Complete
 **Created**: 2026-02-21
 **Priority**: High | **Origin**: ROADMAP v1.0
 **Goal**: Create an official v1.0.0 release marking the project as feature-complete.
@@ -37,9 +37,9 @@ CleanSpark has completed all development tasks (T-001 through T-012) and freeze-
 - [x] `package.json` version set to `1.0.0`
 - [x] Build passes with version bump
 - [x] PR created and reviewed
-- [ ] PR merged to main
-- [ ] Annotated tag `v1.0.0` created on main
-- [ ] GitHub Release created with changelog, live demo link, case study link
+- [x] PR merged to main
+- [x] Annotated tag `v1.0.0` created on main
+- [x] GitHub Release created with changelog, live demo link, case study link
 
 ## 5. Future Improvements
 
@@ -61,16 +61,43 @@ CleanSpark has completed all development tasks (T-001 through T-012) and freeze-
 - Found no existing git tags — this is the first
 - Found package.json version at 0.0.1
 
-#### [2026-02-21 23:30] — PHASE: Smoke Test Complete
-- 30/30 theme/page combinations pass on production (HTTP 200, [data-theme] present)
-- 5/5 ThemeSwitcher instances work (5 buttons, correct active theme)
-- No failures detected
+#### [2026-02-21 23:30] — PHASE: Sub-Item Complete — Smoke Test
+- **Sub-item**: Production smoke test
+- **Results obtained**: 30/30 theme/page pass (HTTP 200, [data-theme] present), 5/5 ThemeSwitcher pass
+- **Lessons learned**: Existing test helpers use localhost cookie domain; standalone script needed for production
+- **Problems encountered**: None
+- **Improvements identified**: Could add production smoke test to CI pipeline
+- **Technical debt noted**: None
 
-#### [2026-02-21 23:32] — PHASE: Version Bump
-- `package.json` version bumped from `0.0.1` to `1.0.0`
-- Build verified: `pnpm build` passes
-- Committed on feature branch `feature/t-f06-release-tag-v1`
+#### [2026-02-21 23:32] — PHASE: Sub-Item Complete — Version Bump
+- **Sub-item**: package.json version bump
+- **Results obtained**: Version set to 1.0.0, build passes
+- **Lessons learned**: Simple change, no side effects
+- **Problems encountered**: None
+- **Improvements identified**: None
 
-#### [2026-02-21 23:33] — PHASE: PR Created
-- PR #18 created: https://github.com/GoodAlex223/clening-test/pull/18
-- Awaiting user review before merge
+#### [2026-02-21 23:33] — PHASE: Sub-Item Complete — PR
+- **Sub-item**: PR creation and merge
+- **Results obtained**: PR #18 created, code review passed, merged to main
+- **Lessons learned**: None
+- **Problems encountered**: None
+- **Improvements identified**: None
+
+#### [2026-02-21 23:45] — PHASE: Sub-Item Complete — Tag and Release
+- **Sub-item**: Git tag and GitHub Release
+- **Results obtained**: Annotated v1.0.0 tag pushed, GitHub Release created with full release notes
+- **Lessons learned**: Heredoc with single quotes in release notes body causes bash parsing issues; write to temp file instead
+- **Problems encountered**: Bash heredoc quote conflict — resolved by writing notes to file, using --notes-file flag
+- **Improvements identified**: Keep release notes template as a file for reuse
+
+#### [2026-02-21 23:50] — PHASE: Complete
+- Final approach: Automated smoke test → version bump → PR → merge → tag → release
+- Tests passing: N/A (no code changes, only version bump)
+- User approval: Received
+
+#### [2026-02-21 23:50] — PHASE: Task Completion Documentation
+- **Step 1 EXTRACT**: 2 improvements → BACKLOG.md
+- **Step 2 ARCHIVE**: Plan moved to docs/archive/plans/
+- **Step 3 TRANSITION**: Task moved TODO.md → DONE.md
+- **Step 4 COMMIT**: Documentation commit
+- **Step 5 MEMORY**: Session entity created
