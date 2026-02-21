@@ -2,7 +2,7 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-17
+**Last Updated**: 2026-02-20
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
@@ -23,19 +23,6 @@ _No tasks currently in progress._
 ## Planned
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
-
-### T-F05: BACKLOG Triage & Freeze Label (Feb 20)
-
-**Priority**: Medium | **Origin**: Freeze process
-**Goal**: Review all backlog items, categorize them for post-freeze, and mark the backlog as frozen.
-
-- [ ] Review all 60+ backlog items for relevance
-- [ ] Mark items that are no longer applicable (code has changed, already addressed, etc.)
-- [ ] Categorize remaining items: "Post-Freeze Priority" vs "Deferred Indefinitely"
-- [ ] Add freeze notice at top of BACKLOG.md with freeze date
-- [ ] Update BACKLOG.md "Last Updated" date
-
----
 
 ### T-F06: v1.0.0 Release Tag (Feb 21)
 

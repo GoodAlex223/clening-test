@@ -1,6 +1,6 @@
 # CleanSpark: Multi-Theme Architecture Case Study
 
-**Live Demo**: [cleanspark-virid.vercel.app](https://cleanspark-virid.vercel.app) | **Stack**: Astro 5, TypeScript, Tailwind CSS 4 | **Source**: [GitHub](https://github.com/GoodAlex223/cleaning)
+**Live Demo**: [cleanspark-virid.vercel.app](https://cleanspark-virid.vercel.app) | **Stack**: Astro 5, TypeScript, Tailwind CSS 4 | **Source**: [GitHub](https://github.com/GoodAlex223/clening-test)
 
 | Metric | Value |
 |--------|-------|

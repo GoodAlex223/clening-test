@@ -2,313 +2,143 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-17
+**Last Updated**: 2026-02-20
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
 **Completed work**: See [DONE.md](DONE.md)
 **Strategic direction**: See [ROADMAP.md](ROADMAP.md)
 
----
-
-### 2026-02-16 From: T-F02 Portfolio Case Study
-**Origin**: docs/archive/plans/2026-02-16_t-f02-portfolio-case-study.md
-
-- [ ] Interactive case study page — convert CASE_STUDY.md to a live `/case-study` route with theme-aware styling
-- [ ] Architecture diagram images — replace ASCII art with SVG/Mermaid diagrams for better GitHub/presentation rendering
-- [ ] Metrics dashboard section — add visual metrics comparison (Lighthouse scores, test growth) to case study
+> **FROZEN** as of 2026-02-20. This project is in development freeze.
+> No new items will be added. Existing items are categorized for reference
+> if development resumes in the future.
 
 ---
 
-### 2026-02-16 From: T-F01 README Screenshots
-**Origin**: docs/archive/plans/2026-02-16_t-f01-readme-screenshots.md
+## Post-Freeze Priority
 
-- [ ] WebP format with PNG fallback — ~60% size reduction for screenshot images (~519KB to ~200KB)
-- [ ] Additional page screenshots (Services, Gallery) — show layout variety beyond home hero
-- [ ] Mobile viewport screenshots (375x812) — showcase responsive design in README
+High-value items worth implementing if development resumes. These improve portfolio presentation, production readiness, or code quality significantly.
+
+### Infrastructure & DevOps
+
+- [ ] **GitHub Actions CI/CD + Lighthouse** — Add CI workflow with linting, type checking, build verification on PRs; include Lighthouse step to fail if scores drop below 90 *(consolidated from T-002, T-011a, T-012)*
+- [ ] **`@astrojs/sitemap` integration** — Auto-generated sitemap + dynamic robots.txt update *(from T-001)*
+- [ ] **OG image validation in CI** — Build step to verify all 5 OG images exist and meet 1200×630 dimensions *(from T-F03)*
+- [ ] **Automated documentation drift detection** — CI step or script that checks key documentation claims (file paths, feature lists, config files) against the actual codebase *(from T-F04)*
+
+### Code Quality & DRY
+
+- [ ] **Shared contact form utility** — Extract `initContactForm()` (~60 lines, duplicated 5x) to `src/lib/contact-form.ts` with config parameter; eliminates ~300 lines of duplication *(from T-010)*
+- [ ] **Shared scroll-reveal utility** — Extract IntersectionObserver script + CSS (~20 lines JS + ~45 lines CSS, duplicated 5x) to `src/lib/scroll-reveal.ts` accepting options (threshold, rootMargin, translateY, timing); eliminates ~100 lines *(from T-010)*
+- [ ] **Shared SectionLabel component + contrast fix** — `.section-label` styles duplicated across Bold, Bubbly, Noir themes; `var(--color-secondary)` failed WCAG AA contrast 4 times (Minimal, Bold, Trust, Bubbly); shared component with accessible defaults would prevent recurrence *(consolidated from T-006, T-007, T-008)*
+- [ ] **Shared button/form/field styles** — `.btn`, `.field`, `.form` duplicated across all 5 themes; extract shared base styles *(consolidated from T-005, T-006, T-007)*
+
+### Content & Features
+
+- [ ] **Contact form backend** — Create `/api/contact` endpoint (email service or serverless function); currently client-side only confirmation *(consolidated from T-004, T-005, T-008)*
+- [ ] **Astro `<Image>` optimization** — Replace plain `<img>` tags with Astro Image component for responsive sizes and WebP/AVIF; add `width`/`height` attributes to gallery images for CLS improvement *(consolidated from T-002, T-005, T-011a)*
+- [ ] **About/FAQ content to Content Layer API** — Move hardcoded about page content (story, values, stats) and pricing FAQ (duplicated across 5 themes) to Content Layer API collections *(consolidated from T-004, T-005)*
+- [ ] **Per-page OG images** — Generate 30 images (5 themes × 6 pages) for page-specific social previews *(from T-F03)*
+
+### Testing
+
+- [ ] **Content schema unit tests** — Validate sample data against Zod schemas programmatically, test edge cases *(from T-002)*
+- [ ] **Visual regression testing** — Add Playwright screenshot comparison tests to catch visual regressions across themes *(from T-011)*
 
 ---
 
-## Feature Ideas
+## Deferred Indefinitely
 
-### Content & Pages
+Nice-to-have items. Low priority for a frozen portfolio piece — kept for reference.
 
-| Idea                | Description                                        | Value                                      | Added      |
-| ------------------- | -------------------------------------------------- | ------------------------------------------ | ---------- |
-| Blog section        | Add a blog/tips page with cleaning advice articles | SEO boost, content marketing demo          | 2026-02-09 |
-| FAQ page            | Dedicated FAQ with accordion UI per theme          | Reduces contact form load, good UX pattern | 2026-02-09 |
-| Service area pages  | Individual pages per neighborhood/city served      | Local SEO, demonstrates dynamic routing    | 2026-02-09 |
-| Booking integration | Embed Calendly or custom booking widget            | Real-world functionality demo              | 2026-02-09 |
-| Live chat widget    | Floating chat button (mock or real)                | Shows integration skills                   | 2026-02-09 |
+### Feature Ideas
+
+| Idea | Description | Value | Origin |
+|------|-------------|-------|--------|
+| Blog section | Blog/tips page with cleaning advice articles | SEO boost, content marketing demo | 2026-02-09 |
+| FAQ page | Dedicated FAQ with accordion UI per theme | Reduces contact form load | 2026-02-09 |
+| Service area pages | Individual pages per neighborhood/city | Local SEO, dynamic routing demo | 2026-02-09 |
+| Booking integration | Embed Calendly or custom booking widget | Real-world functionality demo | 2026-02-09 |
+| Live chat widget | Floating chat button (mock or real) | Shows integration skills | 2026-02-09 |
+| Interactive case study page | Convert CASE_STUDY.md to live `/case-study` route | Theme-aware styling | T-F02 |
+| Architecture diagram images | Replace ASCII art with SVG/Mermaid diagrams | Better GitHub rendering | T-F02 |
+| Metrics dashboard section | Visual metrics comparison in case study | Data visualization | T-F02 |
 
 ### Design & UX
 
-| Idea                      | Description                               | Value                              | Added      |
-| ------------------------- | ----------------------------------------- | ---------------------------------- | ---------- |
-| Dark mode per theme       | Add dark/light toggle within each theme   | Accessibility, popular feature     | 2026-02-09 |
-| Animated page loader      | Custom loading animation per theme        | Polish, attention to detail        | 2026-02-09 |
-| Scroll progress indicator | Progress bar showing page scroll position | UX enhancement, micro-interaction  | 2026-02-09 |
-| Parallax hero backgrounds | Depth effect on hero section images       | Visual impact for Bold Spark theme | 2026-02-09 |
-| Cursor effects            | Custom cursor styling per theme           | Premium feel, especially Noir Luxe | 2026-02-09 |
-| Skeleton loading screens  | Themed skeleton placeholders during load  | Professional loading UX            | 2026-02-09 |
+| Idea | Description | Value | Origin |
+|------|-------------|-------|--------|
+| Dark mode per theme | Dark/light toggle within each theme | Accessibility, popular feature | 2026-02-09 |
+| Animated page loader | Custom loading animation per theme | Polish, attention to detail | 2026-02-09 |
+| Scroll progress indicator | Progress bar showing page scroll position | Micro-interaction | 2026-02-09 |
+| Parallax hero backgrounds | Depth effect on hero section images | Visual impact for Bold Spark | 2026-02-09 |
+| Cursor effects | Custom cursor styling per theme | Premium feel, especially Noir | 2026-02-09 |
+| Skeleton loading screens | Themed skeleton placeholders during load | Professional loading UX | 2026-02-09 |
 
 ### Technical
 
-| Idea                  | Description                                  | Value                              | Added      |
-| --------------------- | -------------------------------------------- | ---------------------------------- | ---------- |
-| CMS integration       | Add Decap CMS or similar for content editing | Shows CMS integration skills       | 2026-02-09 |
-| i18n (multi-language) | Add Spanish/French versions                  | Demonstrates i18n in Astro         | 2026-02-09 |
-| PWA support           | Service worker, offline mode, install prompt | Progressive Web App skills         | 2026-02-09 |
-| RSS feed              | Auto-generated RSS for blog (if added)       | Standard feature for content sites | 2026-02-09 |
-| Sitemap generation    | Auto-generate XML sitemap                    | SEO essential                      | 2026-02-09 |
-| Web Vitals monitoring | Real-time Core Web Vitals dashboard          | Performance awareness              | 2026-02-09 |
-
----
-
-## Enhancements
-
-Improvements to existing functionality.
-
-### Post-MVP Theme Enhancements
-
-| Enhancement          | Theme        | Description                               | Added      |
-| -------------------- | ------------ | ----------------------------------------- | ---------- |
-| 3D card effects      | Bold Spark   | CSS 3D transforms on service cards        | 2026-02-09 |
-| Morphing transitions | All          | Animate between theme layouts smoothly    | 2026-02-09 |
-| Typed text animation | Minimal Zen  | TypeWriter effect on hero headline        | 2026-02-09 |
-| Particle background  | Noir Luxe    | Subtle particle.js-style background       | 2026-02-09 |
-| SVG illustrations    | Bubbly Clean | Custom SVG cleaning illustrations         | 2026-02-09 |
-| Testimonial carousel | All          | Animated testimonial slider with autoplay | 2026-02-09 |
-
----
-
-## Technical Debt
-
-Known issues that should be addressed eventually.
-
-| Item                                                  | Impact                                     | Effort | Added      |
-| ----------------------------------------------------- | ------------------------------------------ | ------ | ---------- |
-| Mobile menu uses inline styles instead of CSS classes | Low — works correctly, just less elegant   | Low    | 2026-02-11 |
-| ThemeSwitcher `client:load` warning in dev server     | None — cosmetic only, doesn't affect build | Low    | 2026-02-11 |
-
----
-
-## Research Topics
-
-Areas requiring investigation before implementation.
-
-| Topic                        | Question                                       | Why Important                          | Added      |
-| ---------------------------- | ---------------------------------------------- | -------------------------------------- | ---------- |
-| Astro View Transitions       | Best patterns for multi-layout transitions?    | Core UX for theme switching            | 2026-02-09 |
-| Font subsetting              | How to subset Google Fonts for Astro?          | Performance — fonts are heaviest asset | 2026-02-09 |
-| Image optimization           | Astro Image vs sharp vs manual optimization?   | Performance critical for gallery page  | 2026-02-09 |
-| Cookie vs localStorage       | SSR implications of cookie-based theme store?  | Architecture decision validation       | 2026-02-09 |
-| Playwright visual regression | How to do screenshot comparison in Playwright? | Ensure themes don't break each other   | 2026-02-09 |
-
----
-
-## Spawned Improvements
-
-<!-- Items generated from completed task reviews. Keep origin for traceability. -->
-
-### 2026-02-09 From: T-001 Project Scaffolding
-
-**Origin**: docs/planning/plans/2026-02-09_project-scaffolding.md
-
-- [ ] Add `@astrojs/sitemap` integration for auto-generated sitemap and update robots.txt dynamically
-- [ ] Configure Vitest path alias resolution to mirror tsconfig.json aliases for unit tests
-- [ ] Add `.editorconfig` for cross-editor consistency (tabs/spaces, line endings)
-- [ ] Consider adding Husky + lint-staged for pre-commit hooks (referenced in PROJECT.md but not configured)
-
-### 2026-02-09 From: T-001 Code Review
-
-**Origin**: PR #1 code review
-
-- [ ] Update scaffolding plan table (Step 1.3) to reflect actual config files — table references `tailwind.config.ts` and `.eslintrc.cjs` but implementation uses CSS-first Tailwind v4 and `eslint.config.js`
-- [ ] Document Tailwind v4 CSS-first `@theme` approach for multi-theme system — plan assumes traditional config file but v4 uses CSS directives instead
-
-### 2026-02-09 From: T-002 Content Collections
-
-**Origin**: docs/archive/plans/2026-02-09_content-collections.md
-
-- [ ] Add content schema unit tests (Vitest) — validate sample data against Zod schemas programmatically, test edge cases like empty arrays and boundary ratings
-- [ ] Add image optimization pipeline — integrate Astro `<Image>` with sharp for responsive sizes and WebP/AVIF when real photos replace placeholder paths
-
-### 2026-02-09 From: T-002 Code Review
-
-**Origin**: PR #2 code review
-
-- [ ] Fix DONE.md relative path pattern for T-001 entry — same `../../archive/` bug exists in the T-001 plan link (should be `../archive/`)
-- [ ] Add CI/CD workflow (GitHub Actions) — no checks configured yet; add linting, type checking, and build verification on PRs
-
-### 2026-02-10 From: T-004 Page Routes & Base Structure
-
-**Origin**: docs/archive/plans/2026-02-10_t-004-page-routes.md
-
-- [ ] Add gallery filter URL state persistence — persist active filter in URL search params for shareable filtered views
-- [ ] Create `/api/contact` endpoint — contact form currently shows client-side confirmation only, needs backend (email service or serverless)
-- [ ] Extract FAQ content to Content Collection — pricing page FAQ is hardcoded, could be a JSON collection if FAQ grows
-
-### 2026-02-10 From: T-004 Code Review
-
-**Origin**: PR #4 code review
-
-- [ ] Move hardcoded about page content to Content Collections — company story, values, and stats are inline in about.astro instead of in collections
-- [ ] Clean up BaseLayout dead props — title/description props and fallback rendering path are unused after SEO slot migration; remove or document as intentional backwards-compat
-
-### 2026-02-10 From: T-003 Theme Engine Core
-
-**Origin**: docs/archive/plans/2026-02-10_t-003-theme-engine.md
-
-- [ ] Add unit tests for theme-store.ts — test cookie parsing edge cases (malformed cookies, missing values, empty strings)
-- [ ] Add unit tests for isValidThemeId() — verify type guard with valid/invalid inputs
-- [ ] Add E2E test for theme switching roundtrip — select theme, verify cookie, reload, verify correct layout
-- [ ] Enhance ThemeSwitcher keyboard navigation — add arrow-key navigation between theme options for a11y
-- [ ] Integrate View Transitions with theme switch — smooth cross-fade instead of hard reload (after T-010)
-
-### 2026-02-11 From: T-005 Minimal Zen Theme
-
-**Origin**: docs/archive/plans/2026-02-11_t-005-minimal-zen.md
-
-- [ ] Investigate Astro `:global()` pseudo-function for JS-toggled CSS modifiers — find CSS-only solution to replace inline styles for mobile menu overlay
-- [ ] Extract shared button/form/field styles into utility components — `.btn`, `.field`, `.form` duplicated across MinimalContact, MinimalPricing, MinimalHome
-- [ ] Add contact form API endpoint — currently client-side only confirmation, needs backend (email service or serverless function)
-- [ ] Integrate Astro `<Image>` component — gallery and team use placeholder paths, need responsive sizes and WebP/AVIF when real assets available
-
-### 2026-02-11 From: T-005 Code Review
-
-**Origin**: PR #5 code review
-
-- [ ] Extract hardcoded page content to Content Collections — about story/values, pricing FAQ, CTA headlines are inline in Minimal theme components instead of collections (violates content-design separation pattern)
-- [ ] Add null coalescing for `btn.textContent` in MinimalContact.astro — use `?? 'Send Message'` fallback for strict TypeScript safety
-
-### 2026-02-11 From: T-011a Lighthouse Audit
-
-**Origin**: docs/archive/plans/2026-02-11_t-011a-lighthouse-audit.md
-
-- [ ] Add text-accent token to theme configs — distinguish decorative accent (backgrounds, borders) from text-accent (readable on white/surface) to prevent contrast failures
-- [ ] Add `width`/`height` attributes to gallery images — prevent layout shift, improve CLS score
-- [ ] Automate Lighthouse in CI — GitHub Actions step to run Lighthouse on PRs, fail if scores drop below 90
-- [ ] Replace SVG placeholders with real photos — integrate Astro `<Image>` for responsive sizes and WebP/AVIF
-
-### 2026-02-11 From: T-006 Bold Spark Theme
-
-**Origin**: docs/planning/plans/2026-02-11_t-006-bold-spark.md
-
-- [ ] Extract shared bold button/form styles — `.btn`, `.field`, `.form` duplicated across BoldContact, BoldPricing, BoldHome (same pattern as Minimal Zen debt)
-- [ ] Add real parallax scroll effect to Bold hero — currently IntersectionObserver reveal only; true parallax (different scroll speeds) could enhance hero section
-- [ ] Optimize font loading for Space Grotesk and DM Sans — consider `font-display: swap` and subsetting for faster LCP
-
-### 2026-02-12 From: T-006 Code Review
-
-**Origin**: PR #6 code review
-
-- [ ] Create shared SectionLabel component or utility class — section labels (`color: var(--color-secondary)`) failed WCAG AA contrast in Bold theme, same pattern fixed before in Minimal (commit 7c837f7); a shared component with accessible defaults would prevent recurrence in Trust, Bubbly, Noir themes
-
-### 2026-02-12 From: T-007 Trust Shield Theme
-
-**Origin**: docs/archive/plans/2026-02-12_t-007-trust-shield.md
-
-- [ ] Extract shared button/form/field styles into utility components — `.btn`, `.field`, `.form` duplicated across Trust, Bold, and Minimal themes (growing debt)
-- [ ] Optimize Merriweather + Source Sans 3 font loading — consider `font-display: swap` and subsetting for faster LCP
-- [ ] Add mobile nav link stagger animation on close — Trust nav currently instant hide, Bold has stagger effect
-
-### 2026-02-12 From: T-007 Code Review
-
-**Origin**: PR #7 code review
-
-- [ ] Recurring `var(--color-secondary)` contrast failure — same WCAG AA issue hit for third time (Minimal, Bold, Trust); reinforces need for shared SectionLabel component (see T-006 Code Review item above) or a lint rule to catch `color: var(--color-secondary)` on light backgrounds
-- [ ] Standardize stats counter script location across themes — Bold places it in layout, Trust places it in page component; establish convention for shared interactive scripts
-
-### 2026-02-12 From: T-008 Bubbly Clean Theme
-
-**Origin**: docs/archive/plans/2026-02-12_t-008-bubbly-clean.md
-
-- [ ] Shared wave divider component — Wave SVG patterns are duplicated across all page components; a `<WaveDivider color={} />` could reduce duplication across all themes
-- [ ] Shared section-label utility — `.section-label` styles repeated in every page component's scoped `<style>`; extract to shared CSS file or global style
-- [ ] Interactive before/after slider — Gallery currently shows static side-by-side images; a draggable slider would be more engaging (tracked in T-010)
-- [ ] Animated bubble component — Floating bubble decorations duplicated between Home and About; extract a `<BubbleDecoration />` component
-- [ ] Contact form backend — Form currently uses client-side mock submission; needs real backend integration (tracked in T-010)
-
-### 2026-02-13 From: T-008 Code Review
-
-**Origin**: PR #8 code review
-
-- [ ] Recurring `var(--color-secondary)` contrast failure (4th occurrence) — Bubbly nav logo accent and contact social hover both used cyan on light backgrounds, same WCAG AA issue previously hit in Minimal, Bold, and Trust themes; strongly reinforces need for shared SectionLabel component or automated contrast lint rule (see T-006/T-007 Code Review items)
-- [ ] Update CLAUDE.md scoped class prefix documentation — Detected Patterns section lists `.mn`/`.mf`, `.bn`/`.bf`, `.tn`/`.tf` but missing Bubbly's `.bbn`/`.bbf` prefixes
-
-### 2026-02-13 From: T-009 Noir Luxe Theme
-
-**Origin**: docs/archive/plans/2026-02-13_t-009-noir-luxe.md
-
-- [ ] Extract shared `#2a2a2a` border color to theme config — This literal appears in every Noir component; adding `--color-border-subtle` to ThemeConfig would centralize it and make future palette changes easier
-- [ ] Shared NoirPageHeader component — Page header (title + subtitle) markup and styles are identical across all 5 sub-pages; a `<NoirPageHeader>` component could eliminate ~20 lines per page
-
-### 2026-02-13 From: T-009 Code Review
-
-**Origin**: PR #9 code review
-
-- [ ] Update CLAUDE.md scoped class prefix documentation — Detected Patterns section is missing Noir's `.nn`/`.nf` prefixes (same issue as Bubbly's `.bbn`/`.bbf` noted in T-008 code review; both should be added together)
-
-### 2026-02-13 From: T-010 Interactive Features
-
-**Origin**: T-010 code review (quality review phase)
-
-- [ ] Extract shared `initContactForm()` to `src/lib/contact-form.ts` — Contact form initialization logic (~60 lines) is duplicated across all 5 Contact page components with only CSS class prefixes differing; extracting to a shared utility with a config parameter would eliminate ~300 lines of duplication
-- [ ] Extract shared scroll-reveal to `src/lib/scroll-reveal.ts` — Scroll-reveal IntersectionObserver script and CSS (~20 lines JS + ~45 lines CSS) duplicated across all 5 Layout files with only minor timing/distance differences; a shared utility accepting options would reduce ~100 lines of duplication
-- [ ] Add `astro:before-swap` cleanup for document-level event listeners — Nav components and contact forms add `keydown`/`scroll` listeners to `document`/`window` that are not cleaned up on page transition; while low practical impact (Astro replaces DOM), proper cleanup prevents theoretical memory leaks during long sessions
-
-### 2026-02-13 From: T-010 Code Review
-
-**Origin**: PR #10 code review
-
-- [ ] Extend `astro:before-swap` cleanup to Nav component listeners — PR #10 fix (a039879) addressed BeforeAfterSlider and scroll-spy cleanup, but each Nav component still adds `window` scroll listener (frosted glass) and `document` keydown listener (Escape key) without removal on View Transitions swap; apply same cleanup array pattern used in BeforeAfterSlider
-- [ ] Establish listener cleanup convention for new interactive components — document the `astro:before-swap` + cleanup array pattern (from BeforeAfterSlider fix) as a project convention so future interactive features follow the same approach
-
-### 2026-02-13 From: T-012 Deployment & Launch
-
-**Origin**: docs/planning/plans/2026-02-13_t-012-deployment-launch.md
-
-- [x] Add README screenshots of all 5 themes — Capture and embed screenshots showing each theme's distinct visual identity for portfolio presentation (completed in T-F01)
-- [x] Write portfolio case study — Document design decisions, architecture choices, and technical challenges (completed in T-F02)
-- [x] Generate social share / OG images per theme — Theme-specific Open Graph images for better social media sharing (completed in T-F03)
-- [ ] Add Lighthouse CI to GitHub Actions — Automated performance regression testing on PRs (fail if scores drop below 90)
-- [ ] Configure custom domain — Set up custom domain when available
-
-### 2026-02-13 From: T-011 Testing & Quality
-
-**Origin**: docs/archive/plans/2026-02-13_t-011-testing-quality.md
-
-- [ ] Extract test timeout constants — Hardcoded timeout values (3000ms, 10000ms) scattered across E2E tests should be centralized in constants.ts for environment-specific tuning (CI vs local)
-- [ ] Shared page test factory — The 6 page spec files have near-identical structure (page identifier, title, a11y audit per theme); a factory function could eliminate ~200 lines of boilerplate
-- [ ] Better error messages in test helpers — Helper functions (openMobileMenu, clickThemeButton, getAppliedPrimaryColor) lack contextual error handling; unclear failures in CI
-- [ ] Visual regression testing — Add Playwright screenshot comparison tests to catch visual regressions across themes (research topic already in BACKLOG)
-
-### 2026-02-17 From: T-F03 OG/Social Share Images
-**Origin**: docs/archive/plans/2026-02-17_t-f03-og-social-images.md
-
-- [ ] Per-page OG images — Generate 30 images (5 themes x 6 pages) for page-specific social previews instead of homepage-only
-- [ ] WebP OG images with PNG fallback — Reduce file sizes ~60% while maintaining compatibility with older social platform crawlers
-- [ ] OG image validation in CI — Add build step to verify all 5 OG images exist and meet 1200x630 dimensions
-
-### 2026-02-17 From: T-F04 Code Review
-**Origin**: PR #16 code review
-
-- [ ] Update CLAUDE.md "Content Collections" naming to "Content Layer API" — Architecture section correctly uses `src/data/` path but still calls the system "Astro Content Collections with Zod schemas" instead of "Astro 5 Content Layer API"; Detected Patterns section also retains "30 theme/page combinations" after Testing Infrastructure section removed the count
-
-### 2026-02-17 From: T-F04 ROADMAP & Documentation Audit
-**Origin**: T-F04 documentation audit (no separate plan file)
-
-- [ ] Automated documentation drift detection — add a CI step or script that checks key documentation claims (file paths, feature lists, config files) against the actual codebase to catch stale docs earlier; this audit found 15+ factual errors (wrong file paths, removed tools, outdated config references)
-- [ ] Clean up resolved Research Topics in BACKLOG.md — several items (Astro View Transitions, cookie vs localStorage, font subsetting) were already resolved during implementation but never removed from the Research Topics section
-- [ ] Remove completed `[x]` items from BACKLOG.md spawned improvements — T-012 section has 3 completed items still in the backlog; they should be archived or removed during triage
-
-### 2026-02-16 From: T-F02 Code Review
-**Origin**: PR #14 code review
-
-- [ ] Fix GitHub repository URL in CASE_STUDY.md — references `/cleaning` but actual repo name is `clening-test`; broken link for anyone clicking through
-- [ ] Fix CASE_STUDY.md line count in DONE.md — claims 168 lines but actual file is 161 lines
-- [ ] Fix "auto-updated by memory-updater" claim in archived plan — CLAUDE.md changes were manual edits, not automated; misleading provenance
+| Idea | Description | Value | Origin |
+|------|-------------|-------|--------|
+| CMS integration | Add Decap CMS or similar | Shows CMS skills | 2026-02-09 |
+| i18n (multi-language) | Add Spanish/French versions | Demonstrates i18n in Astro | 2026-02-09 |
+| PWA support | Service worker, offline mode, install | Progressive Web App skills | 2026-02-09 |
+| RSS feed | Auto-generated RSS for blog (if added) | Standard content site feature | 2026-02-09 |
+| Web Vitals monitoring | Real-time Core Web Vitals dashboard | Performance awareness | 2026-02-09 |
+| Custom domain | Set up custom domain when available | Production polish | T-012 |
+| WebP OG images with PNG fallback | ~60% file size reduction for OG images | Performance | T-F03 |
+
+### Theme Enhancements
+
+| Enhancement | Theme | Description | Origin |
+|-------------|-------|-------------|--------|
+| 3D card effects | Bold Spark | CSS 3D transforms on service cards | 2026-02-09 |
+| Morphing transitions | All | Animate between theme layouts smoothly | 2026-02-09 |
+| Typed text animation | Minimal Zen | TypeWriter effect on hero headline | 2026-02-09 |
+| Particle background | Noir Luxe | Subtle particle.js-style background | 2026-02-09 |
+| SVG illustrations | Bubbly Clean | Custom SVG cleaning illustrations | 2026-02-09 |
+| Testimonial carousel | All | Animated testimonial slider with autoplay | 2026-02-09 |
+| Real parallax scroll | Bold Spark | True parallax (different scroll speeds) on hero | T-006 |
+| View Transitions theme switch | All | Smooth cross-fade instead of hard reload (architectural constraint: requires all 5 theme CSS loaded simultaneously) | T-003 |
+
+### Minor Polish & Tech Debt
+
+| Item | Impact | Origin |
+|------|--------|--------|
+| Mobile menu uses inline styles instead of CSS classes | Low — works correctly, just less elegant | T-005 |
+| ThemeSwitcher arrow-key navigation | Low — Tab navigation works, roving tabindex would be ideal | T-003 |
+| Shared wave divider component | Low — SVG duplicated across 7 Bubbly files | T-008 |
+| Shared animated bubble component | Low — bubble decorations duplicated in Bubbly Home/About | T-008 |
+| Noir `#2a2a2a` border color to theme config | Low — hardcoded in 13 CSS rules across 5 Noir files | T-009 |
+| Shared NoirPageHeader component | Low — identical header markup in 5 Noir sub-pages | T-009 |
+| `.editorconfig` for cross-editor consistency | Low — tabs/spaces, line endings | T-001 |
+| Husky + lint-staged pre-commit hooks | Low — referenced in PROJECT.md but not configured | T-001 |
+| Gallery filter URL state persistence | Low — filter state not in URL, not shareable | T-004 |
+| BaseLayout dead props cleanup | Low — title/description props may be unused after SEO slot | T-004 |
+| Test timeout constants centralization | Low — hardcoded 3000ms/10000ms scattered in E2E tests | T-011 |
+| Shared page test factory | Low — 6 near-identical page specs could share factory | T-011 |
+| Better error messages in test helpers | Low — unclear failures in CI | T-011 |
+| Font loading optimization | Low — `font-display: swap` and subsetting for LCP | T-006, T-007 |
+| Nav listener cleanup on View Transitions | Low — scroll/keydown listeners not cleaned up on swap | T-010 |
+| Listener cleanup convention documentation | Low — document `astro:before-swap` pattern as convention | T-010 |
+| `astro:before-swap` cleanup for nav components | Low — applied to BeforeAfterSlider but not nav components | T-010 |
+| Investigate `:global()` for JS-toggled CSS | Low — CSS-only solution for mobile menu overlay | T-005 |
+| Add null coalescing for `btn.textContent` in MinimalContact | Low — strict TypeScript safety improvement | T-005 |
+| Standardize stats counter script location across themes | Low — Bold in layout, Trust in page component | T-007 |
+| Add text-accent token to theme configs | Low — distinguish decorative accent from text-usable accent to prevent future contrast failures | T-011a |
+| Update scaffolding plan table to reflect actual configs | Low — archived plan references tailwind.config.ts, .eslintrc.cjs | T-001 |
+| Document Tailwind v4 CSS-first `@theme` approach | Low — plan assumes traditional config file | T-001 |
+| WebP format with PNG fallback for screenshots | Low — ~60% size reduction (~519KB to ~200KB) | T-F01 |
+| Additional page screenshots (Services, Gallery) | Low — README only shows home hero | T-F01 |
+| Mobile viewport screenshots (375x812) | Low — showcase responsive design in README | T-F01 |
+| Extract test timeout constants | Low — magic numbers in E2E tests | T-011 |
+
+### Research Topics (Unresolved)
+
+| Topic | Question | Why Important | Origin |
+|-------|----------|---------------|--------|
+| Font subsetting | How to subset Google Fonts for Astro? | Performance — fonts are heaviest asset | 2026-02-09 |
+| Image optimization | Astro Image vs sharp vs manual optimization? | Performance critical for gallery page | 2026-02-09 |
+| Playwright visual regression | How to do screenshot comparison in Playwright? | Ensure themes don't break each other | 2026-02-09 |
 
 ---
 
@@ -316,20 +146,9 @@ Areas requiring investigation before implementation.
 
 Ideas considered but decided against. Keep reasoning for future reference.
 
-| Idea                        | Reason for Rejection                                                | Date       |
-| --------------------------- | ------------------------------------------------------------------- | ---------- |
-| React SPA                   | Already have Next.js in portfolio, no SEO benefits for content site | 2026-02-09 |
-| WordPress                   | Not a developer skills showcase, limits custom architecture         | 2026-02-09 |
+| Idea | Reason for Rejection | Date |
+|------|---------------------|------|
+| React SPA | Already have Next.js in portfolio, no SEO benefits for content site | 2026-02-09 |
+| WordPress | Not a developer skills showcase, limits custom architecture | 2026-02-09 |
 | Server-side theme switching | Adds SSR complexity, cookie + page reload is simpler and sufficient | 2026-02-09 |
-| Separate repos per theme    | Fragments the project, harder to demonstrate architecture skills    | 2026-02-09 |
-
----
-
-## Promotion Criteria
-
-Move items to [TODO.md](TODO.md) when:
-
-- Aligns with current [ROADMAP.md](ROADMAP.md) phase
-- Value clearly exceeds effort
-- Dependencies are resolved
-- Capacity exists to complete
+| Separate repos per theme | Fragments the project, harder to demonstrate architecture skills | 2026-02-09 |
