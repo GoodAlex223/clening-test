@@ -100,6 +100,16 @@ Nice-to-have items. Low priority for a frozen portfolio piece — kept for refer
 | Real parallax scroll | Bold Spark | True parallax (different scroll speeds) on hero | T-006 |
 | View Transitions theme switch | All | Smooth cross-fade instead of hard reload (architectural constraint: requires all 5 theme CSS loaded simultaneously) | T-003 |
 
+### Documentation Bugs (from T-F05 Code Review)
+
+| Item | Impact | Origin |
+|------|--------|--------|
+| DONE.md CASE_STUDY.md line count says 162, actual is 161 | Low — off-by-one in T-F02 completion entry | T-F05 CR |
+| DONE.md T-F05 entry claims docs/README.md and archive/README.md were updated — neither was modified | Low — copy-paste from T-F04 | T-F05 CR |
+| docs/README.md has 2 broken links to `planning/plans/2026-02-09_theme-designs.md` after archival move | Medium — broken navigation links | T-F05 CR |
+| CLAUDE.md still says "30 theme/page combinations" in Detected Patterns after Testing Infrastructure removed the count | Low — stale count reference | T-F05 CR |
+| "Fix auto-updated by memory-updater claim" backlog item dropped without resolution | Low — misleading provenance in archived plan | T-F05 CR |
+
 ### Minor Polish & Tech Debt
 
 | Item | Impact | Origin |
