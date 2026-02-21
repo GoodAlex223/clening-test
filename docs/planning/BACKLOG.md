@@ -2,7 +2,7 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-20
+**Last Updated**: 2026-02-22
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -99,6 +99,13 @@ Nice-to-have items. Low priority for a frozen portfolio piece — kept for refer
 | Testimonial carousel | All | Animated testimonial slider with autoplay | 2026-02-09 |
 | Real parallax scroll | Bold Spark | True parallax (different scroll speeds) on hero | T-006 |
 | View Transitions theme switch | All | Smooth cross-fade instead of hard reload (architectural constraint: requires all 5 theme CSS loaded simultaneously) | T-003 |
+
+### Process Improvements (from T-F06 Code Review)
+
+| Item | Impact | Origin |
+|------|--------|--------|
+| Commit message on `baca26a` claims T-F07 removed from Planned but T-F07 is still present in TODO.md | Low — misleading git history, no functional impact | T-F06 CR |
+| Plan execution log entries ("Smoke Test Complete", "Version Bump") lack mandatory Sub-Item Complete format (Results, Lessons, Problems, Improvements, Tech Debt, Related Changes) | Low — plan is still in-progress, can be corrected before archival | T-F06 CR |
 
 ### Documentation Bugs (from T-F05 Code Review)
 
