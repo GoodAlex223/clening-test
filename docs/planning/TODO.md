@@ -2,7 +2,7 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-20
+**Last Updated**: 2026-02-21
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
@@ -16,25 +16,24 @@ Active tasks and backlog for CleanSpark.
 
 <!-- Currently active tasks. Limit to 1-3 at a time. -->
 
-_No tasks currently in progress._
+### T-F06: v1.0.0 Release Tag (Feb 21)
+
+**Priority**: High | **Origin**: ROADMAP v1.0
+**Goal**: Create an official v1.0.0 release marking the project as complete.
+
+- [x] Final smoke test on production (https://cleanspark-virid.vercel.app)
+- [x] Verify all 5 themes load and switch correctly (5/5 ThemeSwitcher pass)
+- [x] Verify all 6 pages render on each theme (30/30 pass)
+- [x] Bump package.json version 0.0.1 → 1.0.0
+- [ ] Create annotated git tag `v1.0.0`
+- [ ] Create GitHub Release with changelog summary (T-001 through T-012 highlights)
+- [ ] Link to live demo and case study in release notes
 
 ---
 
 ## Planned
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
-
-### T-F06: v1.0.0 Release Tag (Feb 21)
-
-**Priority**: High | **Origin**: ROADMAP v1.0
-**Goal**: Create an official v1.0.0 release marking the project as complete.
-
-- [ ] Final smoke test on production (https://cleanspark-virid.vercel.app)
-- [ ] Verify all 5 themes load and switch correctly
-- [ ] Verify all 6 pages render on each theme
-- [ ] Create annotated git tag `v1.0.0`
-- [ ] Create GitHub Release with changelog summary (T-001 through T-012 highlights)
-- [ ] Link to live demo and case study in release notes
 
 ---
 
