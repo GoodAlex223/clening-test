@@ -127,7 +127,7 @@ pnpm test             # All tests
 - **Cookie-first theme testing**: `setThemeCookie()` helper sets theme cookie before navigation to avoid FOUC in tests; uses `context.addCookies()` for first-request cookie delivery
 - **ClientRouter navigation handling**: Astro's `<ClientRouter />` intercepts link clicks for SPA-mode navigation; tests use `page.waitForURL(regex)` instead of `waitForLoadState('networkidle')` for deterministic navigation waits
 - **Parameterized theme tests**: Use `for (const theme of THEMES)` loops to test all 5 themes with identical assertions; scales test coverage without duplication
-- **Accessibility-first testing**: axe-core scans run on all 30 theme/page combinations; WCAG 2.1 AA violations fail tests (excludes design-level color-contrast issues tracked in BACKLOG)
+- **Accessibility-first testing**: axe-core scans run across all theme/page combinations; WCAG 2.1 AA violations fail tests (excludes design-level color-contrast issues tracked in BACKLOG)
 - **Scoped selector pattern**: `.theme-switcher` prefix scopes ThemeSwitcher queries to first instance; prevents conflicts when multiple islands exist (desktop + mobile nav)
 - **Cross-browser test architecture**: Playwright config defines 4 browser projects (Desktop Chrome, Mobile Chrome, Firefox, WebKit); single test suite runs against all browsers
 - **Production bug discovery via testing**: Theme switching bug found during E2E test development — `querySelectorAll('[data-theme]')` matched both buttons and wrapper div, causing event bubbling; fixed with scoped selector `.theme-switcher button[data-theme]`
