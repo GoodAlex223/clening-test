@@ -2,7 +2,7 @@
 
 Historical documents that are no longer actively used but preserved for reference.
 
-**Last Updated**: 2026-02-17
+**Last Updated**: 2026-02-23
 
 ---
 
@@ -28,6 +28,8 @@ See: [plans/README.md](plans/README.md)
 
 | Plan | Original Task | Archived Date |
 | ---- | ------------- | ------------- |
+| [2026-02-09_project-scaffolding.md](plans/2026-02-09_project-scaffolding.md) | T-001: Project Scaffolding | 2026-02-20 |
+| [2026-02-09_theme-designs.md](plans/2026-02-09_theme-designs.md) | Theme Design Specifications | 2026-02-20 |
 | [2026-02-09_content-collections.md](plans/2026-02-09_content-collections.md) | T-002: Content Collections & Schemas | 2026-02-09 |
 | [2026-02-10_t-003-theme-engine.md](plans/2026-02-10_t-003-theme-engine.md) | T-003: Theme Engine Core | 2026-02-10 |
 | [2026-02-10_t-004-page-routes.md](plans/2026-02-10_t-004-page-routes.md) | T-004: Page Routes & Base Structure | 2026-02-10 |
@@ -42,6 +44,7 @@ See: [plans/README.md](plans/README.md)
 | [2026-02-16_t-f01-readme-screenshots.md](plans/2026-02-16_t-f01-readme-screenshots.md) | T-F01: README Screenshots | 2026-02-16 |
 | [2026-02-16_t-f02-portfolio-case-study.md](plans/2026-02-16_t-f02-portfolio-case-study.md) | T-F02: Portfolio Case Study | 2026-02-16 |
 | [2026-02-17_t-f03-og-social-images.md](plans/2026-02-17_t-f03-og-social-images.md) | T-F03: OG/Social Share Images | 2026-02-17 |
+| [2026-02-21_t-f06-release-tag-v1.md](plans/2026-02-21_t-f06-release-tag-v1.md) | T-F06: v1.0.0 Release Tag | 2026-02-21 |
 
 ### Deprecated Documentation
 

@@ -2,13 +2,16 @@
 
 Active tasks and backlog for CleanSpark.
 
-**Last Updated**: 2026-02-21
+**Last Updated**: 2026-02-23
 
 **Purpose**: Tracks PLANNED and IN-PROGRESS tasks only.
 **Completed tasks**: Move to [DONE.md](DONE.md)
 **Unprioritized ideas**: See [BACKLOG.md](BACKLOG.md)
 
-**Week Focus (Feb 16–22)**: Project Development Freeze — finalize portfolio presentation, lock documentation, tag v1.0.0 release.
+> **FROZEN** as of 2026-02-23. No new development.
+> Project is feature-complete at v1.0.0.
+> See [DONE.md](DONE.md) for completed work history.
+> See [BACKLOG.md](BACKLOG.md) for deferred ideas (also frozen).
 
 ---
 
@@ -16,7 +19,7 @@ Active tasks and backlog for CleanSpark.
 
 <!-- Currently active tasks. Limit to 1-3 at a time. -->
 
-_No tasks currently in progress._
+_No tasks — project is frozen._
 
 ---
 
@@ -24,18 +27,7 @@ _No tasks currently in progress._
 
 <!-- Defined tasks ready to start. Ordered by priority. -->
 
----
-
-### T-F07: Project Freeze Finalization (Feb 22)
-
-**Priority**: High | **Origin**: Freeze process
-**Goal**: Final wrap-up — commit all freeze-week changes, update planning docs, save session.
-
-- [ ] Move all completed freeze tasks (T-F01–T-F06) from TODO.md to DONE.md
-- [ ] Verify no uncommitted changes remain
-- [ ] Final commit with all freeze-week documentation
-- [ ] Add "FROZEN" notice to TODO.md — no new development after this date
-- [ ] Save final session to memory with freeze status
+_No tasks — project is frozen._
 
 ---
 
@@ -49,8 +41,7 @@ _No blocked tasks._
 
 ## Notes
 
-- **Freeze scope**: No new features, no refactoring, no tech debt fixes this week
-- **Focus**: Documentation, screenshots, release tagging, portfolio presentation
-- Tasks ordered by suggested date but can be reordered as needed
-- When a task is done: remove from here, add to [DONE.md](DONE.md)
-- Significant tasks should have a plan in `plans/`
+- **Project frozen** on 2026-02-23 after completing all planned work (T-001 through T-F07)
+- **v1.0.0** released with perfect Lighthouse scores (100/100/100/100)
+- **Live demo**: [cleanspark-virid.vercel.app](https://cleanspark-virid.vercel.app)
+- If development resumes, check [BACKLOG.md](BACKLOG.md) Post-Freeze Priority section first

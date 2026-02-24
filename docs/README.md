@@ -2,7 +2,7 @@
 
 Central index for all CleanSpark project documentation.
 
-**Last Updated**: 2026-02-17
+**Last Updated**: 2026-02-23
 
 ---
 
@@ -17,7 +17,7 @@ Central index for all CleanSpark project documentation.
 | Read the portfolio case study   | [CASE_STUDY.md](CASE_STUDY.md)                                                          |
 | Understand the architecture     | [ARCHITECTURE.md](ARCHITECTURE.md)                                                       |
 | Find project patterns/decisions | [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)                                                 |
-| See design theme specifications | [planning/plans/2026-02-09_theme-designs.md](planning/plans/2026-02-09_theme-designs.md) |
+| See design theme specifications | [archive/plans/2026-02-09_theme-designs.md](archive/plans/2026-02-09_theme-designs.md) |
 | See Claude Code rules           | [../CLAUDE.md](../CLAUDE.md)                                                             |
 | See project-specific config     | [../PROJECT.md](../PROJECT.md)                                                           |
 
@@ -30,7 +30,7 @@ Central index for all CleanSpark project documentation.
 | Document                                         | Purpose                                         | Last Updated |
 | ------------------------------------------------ | ------------------------------------------------ | ------------ |
 | [planning/README.md](planning/README.md)         | Planning overview                                | 2026-02-09   |
-| [planning/TODO.md](planning/TODO.md)             | Freeze-week tasks (T-F04–T-F07)                  | 2026-02-17   |
+| [planning/TODO.md](planning/TODO.md)             | Task tracker (frozen — all tasks complete)        | 2026-02-23   |
 | [planning/DONE.md](planning/DONE.md)             | Completed tasks history                          | 2026-02-17   |
 | [planning/BACKLOG.md](planning/BACKLOG.md)       | 60+ unprioritized ideas and spawned improvements | 2026-02-17   |
 | [planning/ROADMAP.md](planning/ROADMAP.md)       | 4-phase roadmap (v0.1–v1.0, all complete)        | 2026-02-17   |
@@ -57,14 +57,7 @@ Central index for all CleanSpark project documentation.
 
 _No active plans — all tasks complete or in freeze-week scope._
 
-### Reference Plans (Not Archived)
-
-| Plan                                                                    | Task                | Status    | Created    |
-| ----------------------------------------------------------------------- | ------------------- | --------- | ---------- |
-| [Project Scaffolding](planning/plans/2026-02-09_project-scaffolding.md) | T-001 through T-005 | Reference | 2026-02-09 |
-| [Theme Designs](planning/plans/2026-02-09_theme-designs.md)             | T-005 through T-009 | Reference | 2026-02-09 |
-
-### Archived Plans (14)
+### Archived Plans (17)
 
 See [archive/README.md](archive/README.md) for all completed implementation plans.
 
@@ -81,19 +74,17 @@ docs/
 ├── MANUAL_TESTING.md      # 7 test scenarios, 2 checklists
 ├── planning/              # Task management & strategy
 │   ├── README.md          # Planning guide
-│   ├── TODO.md            # Freeze-week tasks
+│   ├── TODO.md            # Task tracker (frozen)
 │   ├── DONE.md            # Completed tasks history
 │   ├── BACKLOG.md         # 60+ unprioritized ideas
 │   ├── ROADMAP.md         # 4-phase roadmap (all complete)
 │   ├── GOALS.md           # 3 objectives (all achieved)
 │   ├── MILESTONES.md      # 6 milestones (all complete)
-│   └── plans/             # Reference implementation plans
-│       ├── README.md
-│       ├── 2026-02-09_project-scaffolding.md
-│       └── 2026-02-09_theme-designs.md
+│   └── plans/             # Plan working directory
+│       └── README.md
 └── archive/               # Historical documents
     ├── README.md          # Archive index
-    └── plans/             # 14 completed plans
+    └── plans/             # 17 archived plans
         ├── README.md
         ├── 2026-02-09_content-collections.md
         ├── 2026-02-10_t-003-theme-engine.md
