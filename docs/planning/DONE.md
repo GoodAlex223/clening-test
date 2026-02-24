@@ -14,7 +14,7 @@ Completed tasks with implementation details and learnings.
 
 ### 2026-02-23 — T-F07: Project Freeze Finalization
 
-**Plan**: No separate plan file (documentation cleanup task)
+**Plan**: [docs/planning/plans/2026-02-23_t-f07-project-freeze-finalization.md](plans/2026-02-23_t-f07-project-freeze-finalization.md)
 **Summary**: Final wrap-up of the development freeze week. Verified all freeze tasks (T-F01 through T-F06) are in DONE.md, cleaned up stray files (debug scripts, Windows artifacts, test output), updated .gitignore for Claude Code settings, added FROZEN banner to TODO.md, and confirmed v1.0.0 tag and GitHub Release are in place.
 **Key Changes**:
 - Added FROZEN notice to TODO.md — no new development after this date

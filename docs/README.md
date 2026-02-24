@@ -30,7 +30,7 @@ Central index for all CleanSpark project documentation.
 | Document                                         | Purpose                                         | Last Updated |
 | ------------------------------------------------ | ------------------------------------------------ | ------------ |
 | [planning/README.md](planning/README.md)         | Planning overview                                | 2026-02-09   |
-| [planning/TODO.md](planning/TODO.md)             | Freeze-week tasks (T-F04–T-F07)                  | 2026-02-17   |
+| [planning/TODO.md](planning/TODO.md)             | Task tracker (frozen — all tasks complete)        | 2026-02-23   |
 | [planning/DONE.md](planning/DONE.md)             | Completed tasks history                          | 2026-02-17   |
 | [planning/BACKLOG.md](planning/BACKLOG.md)       | 60+ unprioritized ideas and spawned improvements | 2026-02-17   |
 | [planning/ROADMAP.md](planning/ROADMAP.md)       | 4-phase roadmap (v0.1–v1.0, all complete)        | 2026-02-17   |
@@ -74,7 +74,7 @@ docs/
 ├── MANUAL_TESTING.md      # 7 test scenarios, 2 checklists
 ├── planning/              # Task management & strategy
 │   ├── README.md          # Planning guide
-│   ├── TODO.md            # Freeze-week tasks
+│   ├── TODO.md            # Task tracker (frozen)
 │   ├── DONE.md            # Completed tasks history
 │   ├── BACKLOG.md         # 60+ unprioritized ideas
 │   ├── ROADMAP.md         # 4-phase roadmap (all complete)
