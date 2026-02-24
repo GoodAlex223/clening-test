@@ -2,7 +2,7 @@
 
 Ideas and tasks not yet prioritized for active development.
 
-**Last Updated**: 2026-02-23
+**Last Updated**: 2026-02-24
 
 **Purpose**: Holding area for unprioritized ideas and future work.
 **Active tasks**: See [TODO.md](TODO.md)
@@ -24,7 +24,7 @@ High-value items worth implementing if development resumes. These improve portfo
 - [ ] **GitHub Actions CI/CD + Lighthouse** — Add CI workflow with linting, type checking, build verification on PRs; include Lighthouse step to fail if scores drop below 90 *(consolidated from T-002, T-011a, T-012)*
 - [ ] **`@astrojs/sitemap` integration** — Auto-generated sitemap + dynamic robots.txt update *(from T-001)*
 - [ ] **OG image validation in CI** — Build step to verify all 5 OG images exist and meet 1200×630 dimensions *(from T-F03)*
-- [ ] **Automated documentation drift detection** — CI step or script that checks key documentation claims (file paths, feature lists, config files) against the actual codebase *(from T-F04)*
+- [ ] **Automated documentation drift detection** — CI step or script that checks key documentation claims (file paths, feature lists, config files) against the actual codebase; should also verify docs/README.md index table dates and descriptions match actual file headers *(from T-F04, T-F07 CR)*
 - [ ] **Automated release pipeline** — GitHub Actions workflow to auto-create releases on tag push, including changelog generation from conventional commits *(from T-F06)*
 - [ ] **Semantic versioning enforcement** — CI check that validates `package.json` version matches the latest git tag *(from T-F06)*
 
@@ -106,8 +106,8 @@ Nice-to-have items. Low priority for a frozen portfolio piece — kept for refer
 
 | Item | Impact | Origin |
 |------|--------|--------|
-| Commit message on `baca26a` claims T-F07 removed from Planned but T-F07 is still present in TODO.md | Low — misleading git history, no functional impact | T-F06 CR |
-| Plan execution log entries ("Smoke Test Complete", "Version Bump") lack mandatory Sub-Item Complete format (Results, Lessons, Problems, Improvements, Tech Debt, Related Changes) | Low — plan is still in-progress, can be corrected before archival | T-F06 CR |
+| ~~Commit message on `baca26a` claims T-F07 removed from Planned but T-F07 is still present in TODO.md~~ | ~~Low — resolved: T-F07 removed from TODO.md in T-F07~~ | T-F06 CR |
+| ~~Plan execution log entries ("Smoke Test Complete", "Version Bump") lack mandatory Sub-Item Complete format~~ | ~~Low — resolved: T-F06 plan corrected before archival~~ | T-F06 CR |
 
 ### Documentation Bugs (from T-F05 Code Review)
 
